@@ -3,5 +3,6 @@
  * @module components
  */
 
-export { Button } from './button/index.js';
-export { Input } from './input/index.js';
+// Form Components
+export { Button } from './form/button/index.js';
+export { Input } from './form/input/index.js';

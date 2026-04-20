@@ -1,65 +1,242 @@
-# Svelte library
+# Alus
 
-Everything you need to build a Svelte library, powered by [`sv`](https://npmjs.com/package/sv).
+> **Unstyled, accessible Svelte 5 components** with full keyboard navigation and WCAG 2.1 AA compliance
 
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Svelte 5](https://img.shields.io/badge/Svelte-5.55-orange)](https://svelte.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue)](https://www.typescriptlang.org/)
+[![npm package](https://img.shields.io/badge/npm-alus-critical)](https://www.npmjs.com/package/alus)
 
-## Creating a project
+Alus provides a set of primitive UI components that are:
+- **Unstyled** - Complete styling freedom with Tailwind CSS or any CSS framework
+- **Accessible** - WCAG 2.1 AA compliant with proper ARIA attributes
+- **Keyboard-friendly** - Full keyboard navigation support
+- **Type-safe** - Built with TypeScript
+- **Svelte 5 Native** - Uses runes mode (`$props`, `$derived`, `$state`)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Installation
 
-```sh
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+```bash
+npm install alus
+# or
+pnpm add alus
+# or
+yarn add alus
 ```
 
-To recreate this project with the same configuration:
+## Quick Start
 
-```sh
-# recreate this project
-pnpm dlx sv@0.15.1 create --template library --types ts --install pnpm alus
+```svelte
+<script lang="ts">
+	import { Button, Input } from 'alus';
+
+	let name = $state('');
+</script>
+
+<Input
+	bind:value={name}
+	placeholder="Enter your name"
+	aria-label="Name input"
+/>
+
+<Button onclick={() => alert(`Hello ${name}!`)}>
+	Submit
+</Button>
 ```
 
-## Developing
+## Available Components
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### Form Components ✅
+- **Button** - Accessible button with ARIA support and toggle states
+- **Input** - Text input with validation, error states, and accessibility
 
-```sh
-npm run dev
+## Features
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+### ♿ Accessibility First
+- WCAG 2.1 AA compliant out of the box
+- Proper ARIA attributes (aria-label, aria-describedby, aria-invalid, etc.)
+- Screen reader support with semantic HTML
+- Keyboard navigation with visible focus indicators
+- Live regions for dynamic content announcements
+
+### 🎨 Complete Styling Control
+- No default styles or colors
+- Works seamlessly with Tailwind CSS
+- Easy to theme with CSS variables
+- Responsive and mobile-friendly
+
+### 🔷 Svelte 5 Runes Mode
+- Modern reactive syntax with `$props`, `$derived`, `$state`
+- Better TypeScript support
+- Improved performance
+- Future-proof Svelte architecture
+
+### 📦 Type Safety
+- Full TypeScript support
+- Type-safe props and events
+- IntelliSense in IDEs
+
+## Styling with Tailwind CSS
+
+```svelte
+<script lang="ts">
+	import { Button } from 'alus';
+</script>
+
+<Button
+	class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+	aria-label="Submit form"
+>
+	Submit
+</Button>
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+## Form Validation Example
 
-## Building
+```svelte
+<script lang="ts">
+	import { Input } from 'alus';
 
-To build your library:
+	let email = $state('');
+	let emailError = $derived.by(() => {
+		if (email && !email.includes('@')) {
+			return 'Please enter a valid email';
+		}
+		return '';
+	});
+</script>
 
-```sh
-npm pack
+<label for="email">Email</label>
+<Input
+	id="email"
+	name="email"
+	type="email"
+	bind:value={email}
+	aria-invalid={!!emailError}
+	aria-describedby={emailError ? 'email-error' : undefined}
+	class={emailError ? 'border-red-500' : 'border-gray-300'}
+/>
+{#if emailError}
+	<p id="email-error" class="text-red-500" role="alert">
+		{emailError}
+	</p>
+{/if}
 ```
 
-To create a production version of your showcase app:
+## Component API
 
-```sh
-npm run build
+### Button
+
+```svelte
+<Button
+	type="button"
+	disabled={false}
+	aria-pressed={undefined}
+	class=""
+	onclick={() => {}}
+>
+	Button content
+</Button>
 ```
 
-You can preview the production build with `npm run preview`.
+**Props:**
+- `type?: 'button' | 'submit' | 'reset'` - Button type (default: 'button')
+- `disabled?: boolean` - Disabled state
+- `aria-pressed?: boolean` - Toggle button state
+- `class?: string` - CSS classes for styling
+- All standard HTML button attributes
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+### Input
 
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```sh
-npm publish
+```svelte
+<Input
+	type="text"
+	value={''}
+	autocomplete="off"
+	inputmode="text"
+	aria-invalid={false}
+	aria-label={undefined}
+	aria-describedby={undefined}
+	class=""
+	oninput={(e) => {}}
+/>
 ```
+
+**Props:**
+- `type?: HTMLInputTypeAttribute` - Input type (default: 'text')
+- `value?: string` - Input value (use `bind:value` for two-way binding)
+- `autocomplete?: string` - Autocomplete attribute
+- `inputmode?: string` - Input mode for mobile keyboards
+- `aria-invalid?: boolean` - Invalid state for validation
+- `aria-label?: string` - Accessibility label
+- `aria-describedby?: string` - ID of describing element
+- `class?: string` - CSS classes for styling
+- All standard HTML input attributes
+
+## Accessibility Features
+
+Each component includes:
+- ✅ Semantic HTML elements
+- ✅ ARIA attributes and roles
+- ✅ Keyboard navigation support
+- ✅ Focus management
+- ✅ Screen reader announcements
+- ✅ Error and validation states
+- ✅ Visible focus indicators
+
+## Browser Support
+
+- Chrome/Edge (latest)
+- Firefox (latest)
+- Safari (latest)
+- Mobile browsers (iOS Safari, Chrome Mobile)
+
+## Contributing
+
+Contributions are welcome! Please see our [contributing guidelines](../../CONTRIBUTING.md) for details.
+
+## Development
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+
+# Run type checking
+pnpm check
+
+# Build library
+pnpm build
+
+# Run tests
+pnpm test
+```
+
+## License
+
+MIT
+
+## Repository
+
+- **GitHub**: https://github.com/Hanivan/alus
+- **Issues**: https://github.com/Hanivan/alus/issues
+- **Documentation**: https://github.com/Hanivan/alus#readme
+
+## Acknowledgments
+
+Built with:
+- [Svelte 5](https://svelte.dev/) - Cybernetically enhanced web apps
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Floating UI](https://floating-ui.com/) - Positioning engine for overlays
+- [Runed](https://runed.dev/) - Svelte 5 utilities library
+
+## Related Projects
+
+- [Showcase App](https://github.com/Hanivan/alus) - Live demo of all Alus components
+- [Contributing](https://github.com/Hanivan/alus/blob/main/CONTRIBUTING.md) - How to contribute
+
+---
+
+**Note**: This library is in active development. APIs may change before v1.0 release.

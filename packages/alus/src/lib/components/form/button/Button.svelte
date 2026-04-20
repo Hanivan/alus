@@ -4,7 +4,7 @@
 		interactiveStateAttrs,
 		widgetAttrs,
 		mergeAttrs
-	} from '../../utils/a11y/index.js';
+	} from '../../../utils/a11y/index.js';
 	import type {
 		ButtonType,
 		FormEncType,
@@ -13,7 +13,7 @@
 		AriaBoolean,
 		AriaTristate,
 		AriaHaspopup
-	} from '../../types/index.js';
+	} from '../../../types/index.js';
 
 	interface Props {
 		onclick?: (event: MouseEvent) => void;
