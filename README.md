@@ -141,26 +141,6 @@ pnpm format           # Format code with Prettier
 - **Button** - Accessible button with ARIA support and toggle states
 - **Input** - Text input with validation, error states, and accessibility
 
-### 🚧 Planned Components
-
-See [Component Roadmap](docs/todos/ui-components-roadmap.md) for the full list:
-
-**Sprint 0** - Instant Wins
-- VisuallyHidden, FocusTrap, Portal
-- Badge, Tag, Divider
-- Avatar
-
-**Sprint 1** - Form Foundation
-- Checkbox, Radio, RadioGroup
-- Select, Textarea
-- Label, Fieldset, Form
-
-**Sprint 2** - Form Extensions + Feedback
-- Switch, Slider, FileInput, SearchInput
-- Alert, Progress, Spinner, Skeleton
-
-And more! Check the roadmap for details.
-
 ## 🎨 Styling with Tailwind CSS
 
 Alus components are unstyled and designed to work with Tailwind CSS:
