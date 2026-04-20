@@ -1,89 +1,39 @@
 <script lang="ts">
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
-	import Navbar from '$components/Navbar.svelte';
-	import Footer from '$components/Footer.svelte';
 
-	const navLinks = [
-		{ label: 'Home', href: '/' },
-		{ label: 'About', href: '/about' },
-		{ label: 'Components', href: '/components' },
-		{ label: 'Docs', href: '/docs' }
-	];
-
-	const footerSections = [
-		{
-			title: 'Product',
-			links: [
-				{ label: 'Features', href: '/features' },
-				{ label: 'Pricing', href: '/pricing' },
-				{ label: 'Changelog', href: '/changelog' }
-			]
-		},
-		{
-			title: 'Resources',
-			links: [
-				{ label: 'Documentation', href: '/docs' },
-				{ label: 'Examples', href: '/examples' },
-				{ label: 'Blog', href: '/blog' }
-			]
-		},
-		{
-			title: 'Company',
-			links: [
-				{ label: 'About', href: '/about' },
-				{ label: 'Careers', href: '/careers' },
-				{ label: 'Contact', href: '/contact' }
-			]
-		}
-	];
-
-	const currentYear = new Date().getFullYear();
 	let { children } = $props();
 </script>
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
 
-<div class="min-h-screen flex flex-col">
-	<Navbar
-		links={navLinks}
-		class="flex items-center justify-between gap-4 px-4 py-4 border-b border-gray-200 bg-white dark:bg-gray-900 dark:border-gray-800"
-	>
-		{#snippet brand()}
-			<a href="/" class="flex items-center gap-2 font-bold text-xl text-gray-900 dark:text-white">
-				<img src={favicon} alt="Logo" class="w-8 h-8" />
-				<span>Alus</span>
+<div class="min-h-screen bg-(--paper-white) paper-texture">
+	<!-- Minimal Header -->
+	<header class="border-b border-(--indigo-dye)/10 bg-white/50 backdrop-blur-sm">
+		<div class="max-w-6xl mx-auto px-6 py-4">
+			<a href="/" class="inline-flex items-center gap-3 group">
+				<div class="w-10 h-10 rounded-full bg-(--indigo-dye) flex items-center justify-center group-hover:bg-(--vermilion) transition-colors duration-300">
+					<span class="text-white font-display font-bold text-xl">阿</span>
+				</div>
+				<div>
+					<h1 class="font-display text-2xl font-semibold text-(--ink)">Alus</h1>
+					<p class="text-xs text-(--bamboo) tracking-widest">ACCESSIBLE COMPONENTS</p>
+				</div>
 			</a>
-		{/snippet}
+		</div>
+	</header>
 
-		{#snippet actions()}
-			<div class="flex items-center gap-4">
-				<button
-					class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
-				>
-					Sign In
-				</button>
-				<button
-					class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors"
-				>
-					Get Started
-				</button>
-			</div>
-		{/snippet}
-	</Navbar>
-
-	<main class="flex-1">
+	<main class="max-w-6xl mx-auto px-6 py-12">
 		{@render children()}
 	</main>
 
-	<Footer
-		sections={footerSections}
-		copyright={`&copy; ${currentYear} Alus UI. All rights reserved.`}
-		class="border-t border-gray-200 bg-gray-50 dark:bg-gray-900 dark:border-gray-800 mt-auto"
-	>
-		{#snippet additional()}
-			<a href="/privacy" class="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Privacy Policy</a>
-			<a href="/terms" class="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Terms of Service</a>
-		{/snippet}
-	</Footer>
+	<!-- Minimal Footer -->
+	<footer class="mt-20 border-t border-(--indigo-dye)/10 py-8">
+		<div class="max-w-6xl mx-auto px-6 text-center">
+			<div class="hanko-seal mb-4">至</div>
+			<p class="text-sm text-(--charcoal)/70">
+				Handcrafted with precision · Svelte 5 · Accessibility First
+			</p>
+		</div>
+	</footer>
 </div>

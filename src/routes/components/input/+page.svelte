@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Input } from 'alus';
-	import { Envelope, ArrowLeft, Warning, CheckCircle, Info } from 'phosphor-svelte';
 
 	let name = $state('');
 	let email = $state('');
@@ -29,45 +28,45 @@
 </script>
 
 <svelte:head>
-	<title>Input Component - Alus</title>
-	<meta
-		name="description"
-		content="Text input component with validation, error states, and accessibility features"
-	/>
+	<title>Input · Alus Components</title>
+	<meta name="description" content="Text input component with validation, error states, and accessibility features" />
 </svelte:head>
 
-<!-- Back navigation -->
 <a
 	href="/"
-	class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold mb-6"
+	class="inline-flex items-center gap-2 text-[var(--indigo-dye)] hover:text-[var(--vermilion)] transition-colors duration-300 mb-8"
 >
-	<ArrowLeft size={20} />
-	<span>Back to Components</span>
+	<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+		<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+	</svg>
+	<span class="font-medium">Back to Components</span>
 </a>
 
-<!-- Main content -->
-<main class="max-w-4xl mx-auto px-8 py-12">
+<main>
 	<!-- Header -->
-	<header class="mb-12">
-		<div class="flex items-center gap-3 mb-4">
-			<Envelope class="text-purple-600" size={40} weight="fill" />
-			<h1 class="text-4xl font-bold text-gray-900">Input Component</h1>
+	<header class="mb-16">
+		<div class="flex items-center gap-6 mb-6">
+			<div class="hanko-seal">入</div>
+			<div>
+				<h1 class="font-display text-5xl md:text-6xl text-[var(--ink)] mb-2">Input</h1>
+				<p class="text-[var(--bamboo)] tracking-widest">入力</p>
+			</div>
 		</div>
-		<p class="text-xl text-gray-600 leading-relaxed">
-			An accessible text input component with validation, error states, and keyboard
-			navigation support.
+		<p class="text-xl text-[var(--charcoal)]/70 max-w-2xl">
+			An accessible text input with validation, error states, and keyboard navigation support.
 		</p>
 	</header>
 
 	<!-- Basic Input -->
-	<section aria-labelledby="basic-heading" class="mb-12">
-		<h2 id="basic-heading" class="text-2xl font-bold text-gray-900 mb-6">
-			Basic Input
+	<section class="mb-16">
+		<h2 class="font-display text-2xl text-[var(--ink)] mb-8">
+			<span>Basic Input</span>
+			<span class="text-[var(--bamboo)] text-lg ml-2">基本入力</span>
 		</h2>
 
-		<div class="p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
+		<div class="japanese-border p-8 bg-white/50 backdrop-blur-sm">
 			<div>
-				<label for="basic-input" class="block text-sm font-semibold text-gray-700 mb-2">
+				<label for="basic-input" class="block text-sm font-medium text-[var(--ink)] mb-2">
 					Name
 				</label>
 				<Input
@@ -76,7 +75,7 @@
 					type='text'
 					autocomplete='name'
 					placeholder="Enter your name"
-					class="border border-gray-300 rounded px-3 py-2 text-base outline-none transition-border focus:border-blue-500 focus:ring-2 focus:ring-blue-200 w-full"
+					class="border-2 border-[var(--indigo-dye)]/20 rounded px-4 py-3 w-full focus:border-[var(--indigo-dye)] focus:outline-none transition-colors"
 					bind:value={name}
 					aria-label="Your name"
 				/>
@@ -85,219 +84,213 @@
 	</section>
 
 	<!-- Input with Validation -->
-	<section aria-labelledby="validation-heading" class="mb-12">
-		<h2 id="validation-heading" class="text-2xl font-bold text-gray-900 mb-6">
-			Input with Validation
+	<section class="mb-16">
+		<h2 class="font-display text-2xl text-[var(--ink)] mb-8">
+			<span>With Validation</span>
+			<span class="text-[var(--bamboo)] text-lg ml-2">検証</span>
 		</h2>
 
-		<div class="p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
-			<div class="space-y-6">
-				<!-- Name input -->
-				<div>
-					<label for="name-input" class="block text-sm font-semibold text-gray-700 mb-2">
-						Name <span class="text-red-500" aria-label="required">*</span>
-					</label>
-					<Input
-						id="name-input"
-						name="name"
-						type='text'
-						autocomplete='name'
-						placeholder="Enter your full name"
-						class="border {nameError ? 'border-red-300' : 'border-gray-300'} rounded px-3 py-2 text-base outline-none transition-border focus:border-blue-500 focus:ring-2 focus:ring-blue-200 w-full"
-						bind:value={name}
-						aria-label="Your name"
-						aria-describedby="name-help name-error"
-						aria-invalid={!!nameError}
-						required
-					/>
-					<p id="name-help" class="mt-2 text-sm text-gray-500">
-						Enter your full name for personalized greeting
+		<div class="japanese-border p-8 bg-white/50 backdrop-blur-sm space-y-8">
+			<!-- Name input -->
+			<div>
+				<label for="name-input" class="block text-sm font-medium text-[var(--ink)] mb-2">
+					Name <span class="text-[var(--vermilion)]" aria-label="required">*</span>
+				</label>
+				<Input
+					id="name-input"
+					name="name"
+					type='text'
+					autocomplete='name'
+					placeholder="Enter your full name"
+					class="border-2 {
+						nameError ? 'border-[var(--vermilion)]' : 'border-[var(--indigo-dye)]/20'
+					} rounded px-4 py-3 w-full focus:border-[var(--indigo-dye)] focus:outline-none transition-colors"
+					bind:value={name}
+					aria-label="Your name"
+					aria-describedby="name-help name-error"
+					aria-invalid={!!nameError}
+					required
+				/>
+				<p id="name-help" class="mt-2 text-sm text-[var(--charcoal)]/60">
+					Enter your full name for personalized greeting
+				</p>
+				{#if nameError}
+					<p
+						id="name-error"
+						class="mt-2 text-sm text-[var(--vermilion)] flex items-center gap-2"
+						role="alert"
+						aria-live="assertive"
+					>
+						<span>⚠</span>
+						<span>{nameError}</span>
 					</p>
-					{#if nameError}
-						<p
-							id="name-error"
-							class="mt-2 text-sm text-red-600 flex items-center gap-1"
-							role="alert"
-							aria-live="assertive"
-						>
-							<Warning size={16} />
-							<span>{nameError}</span>
-						</p>
-					{/if}
-					{#if name && !nameError}
-						<p
-							class="mt-2 text-sm text-green-600 flex items-center gap-1"
-							role="status"
-							aria-live="polite"
-						>
-							<CheckCircle size={16} />
-							<span>Hello, {name}!</span>
-						</p>
-					{/if}
-				</div>
+				{/if}
+				{#if name && !nameError}
+					<p
+						class="mt-2 text-sm text-[var(--matcha)] flex items-center gap-2"
+						role="status"
+						aria-live="polite"
+					>
+						<span>✓</span>
+						<span>Hello, {name}!</span>
+					</p>
+				{/if}
+			</div>
 
-				<!-- Email input -->
-				<div>
-					<label for="email-input" class="block text-sm font-semibold text-gray-700 mb-2">
-						Email Address <span class="text-red-500" aria-label="required">*</span>
-					</label>
-					<Input
-						id="email-input"
-						name="email"
-						type='email'
-						autocomplete='email'
-						inputmode='email'
-						placeholder="you@example.com"
-						class="border {emailError ? 'border-red-300' : 'border-gray-300'} rounded px-3 py-2 text-base outline-none transition-border focus:border-blue-500 focus:ring-2 focus:ring-blue-200 w-full"
-						bind:value={email}
-						aria-label="Email address"
-						aria-describedby="email-help email-error"
-						aria-invalid={!!emailError}
-						required
-					/>
-					<p id="email-help" class="mt-2 text-sm text-gray-500">
-						We'll never share your email with anyone else
+			<!-- Email input -->
+			<div>
+				<label for="email-input" class="block text-sm font-medium text-[var(--ink)] mb-2">
+					Email Address <span class="text-[var(--vermilion)]" aria-label="required">*</span>
+				</label>
+				<Input
+					id="email-input"
+					name="email"
+					type='email'
+					autocomplete='email'
+					inputmode='email'
+					placeholder="you@example.com"
+					class="border-2 {
+						emailError ? 'border-[var(--vermilion)]' : 'border-[var(--indigo-dye)]/20'
+					} rounded px-4 py-3 w-full focus:border-[var(--indigo-dye)] focus:outline-none transition-colors"
+					bind:value={email}
+					aria-label="Email address"
+					aria-describedby="email-help email-error"
+					aria-invalid={!!emailError}
+					required
+				/>
+				<p id="email-help" class="mt-2 text-sm text-[var(--charcoal)]/60">
+					We'll never share your email with anyone else
+				</p>
+				{#if emailError}
+					<p
+						id="email-error"
+						class="mt-2 text-sm text-[var(--vermilion)] flex items-center gap-2"
+						role="alert"
+						aria-live="assertive"
+					>
+						<span>⚠</span>
+						<span>{emailError}</span>
 					</p>
-					{#if emailError}
-						<p
-							id="email-error"
-							class="mt-2 text-sm text-red-600 flex items-center gap-1"
-							role="alert"
-							aria-live="assertive"
-						>
-							<Warning size={16} />
-							<span>{emailError}</span>
-						</p>
-					{/if}
-				</div>
+				{/if}
+			</div>
 
-				<!-- Password input -->
-				<div>
-					<label for="password-input" class="block text-sm font-semibold text-gray-700 mb-2">
-						Password <span class="text-red-500" aria-label="required">*</span>
-					</label>
-					<Input
-						id="password-input"
-						name="password"
-						type='password'
-						autocomplete='new-password'
-						placeholder="Enter a secure password"
-						class="border {passwordError ? 'border-red-300' : 'border-gray-300'} rounded px-3 py-2 text-base outline-none transition-border focus:border-blue-500 focus:ring-2 focus:ring-blue-200 w-full"
-						bind:value={password}
-						aria-label="Password"
-						aria-describedby="password-help password-error"
-						aria-invalid={!!passwordError}
-						required
-					/>
-					<p id="password-help" class="mt-2 text-sm text-gray-500">
-						Must be at least 8 characters long
+			<!-- Password input -->
+			<div>
+				<label for="password-input" class="block text-sm font-medium text-[var(--ink)] mb-2">
+					Password <span class="text-[var(--vermilion)]" aria-label="required">*</span>
+				</label>
+				<Input
+					id="password-input"
+					name="password"
+					type='password'
+					autocomplete='new-password'
+					placeholder="Enter a secure password"
+					class="border-2 {
+						passwordError ? 'border-[var(--vermilion)]' : 'border-[var(--indigo-dye)]/20'
+					} rounded px-4 py-3 w-full focus:border-[var(--indigo-dye)] focus:outline-none transition-colors"
+					bind:value={password}
+					aria-label="Password"
+					aria-describedby="password-help password-error"
+					aria-invalid={!!passwordError}
+					required
+				/>
+				<p id="password-help" class="mt-2 text-sm text-[var(--charcoal)]/60">
+					Must be at least 8 characters long
+				</p>
+				{#if passwordError}
+					<p
+						id="password-error"
+						class="mt-2 text-sm text-[var(--vermilion)] flex items-center gap-2"
+						role="alert"
+						aria-live="assertive"
+					>
+						<span>⚠</span>
+						<span>{passwordError}</span>
 					</p>
-					{#if passwordError}
-						<p
-							id="password-error"
-							class="mt-2 text-sm text-red-600 flex items-center gap-1"
-							role="alert"
-							aria-live="assertive"
-						>
-							<Warning size={16} />
-							<span>{passwordError}</span>
-						</p>
-					{/if}
-					{#if password && !passwordError}
-						<p
-							class="mt-2 text-sm text-green-600 flex items-center gap-1"
-							role="status"
-							aria-live="polite"
-						>
-							<CheckCircle size={16} />
-							<span>Password strength: Good</span>
-						</p>
-					{/if}
-				</div>
+				{/if}
+				{#if password && !passwordError}
+					<p
+						class="mt-2 text-sm text-[var(--matcha)] flex items-center gap-2"
+						role="status"
+						aria-live="polite"
+					>
+						<span>✓</span>
+						<span>Password strength: Good</span>
+					</p>
+				{/if}
 			</div>
 		</div>
 	</section>
 
 	<!-- Input Types -->
-	<section aria-labelledby="types-heading" class="mb-12">
-		<h2 id="types-heading" class="text-2xl font-bold text-gray-900 mb-6">
-			Common Input Types
+	<section class="mb-16">
+		<h2 class="font-display text-2xl text-[var(--ink)] mb-8">
+			<span>Input Types</span>
+			<span class="text-[var(--bamboo)] text-lg ml-2">入力タイプ</span>
 		</h2>
 
-		<div class="p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
+		<div class="japanese-border p-8 bg-white/50 backdrop-blur-sm">
 			<div class="grid md:grid-cols-2 gap-6">
 				<div>
-					<label for="text-example" class="block text-sm font-semibold text-gray-700 mb-2">
-						Text
-					</label>
+					<label for="text-example" class="block text-sm font-medium text-[var(--ink)] mb-2">Text</label>
 					<Input
 						id="text-example"
 						type='text'
 						placeholder="Text input"
-						class="border border-gray-300 rounded px-3 py-2 w-full"
+						class="border-2 border-[var(--indigo-dye)]/20 rounded px-4 py-3 w-full focus:border-[var(--indigo-dye)] focus:outline-none transition-colors"
 					/>
 				</div>
 
 				<div>
-					<label for="email-example" class="block text-sm font-semibold text-gray-700 mb-2">
-						Email
-					</label>
+					<label for="email-example" class="block text-sm font-medium text-[var(--ink)] mb-2">Email</label>
 					<Input
 						id="email-example"
 						type='email'
 						inputmode='email'
 						placeholder="you@example.com"
-						class="border border-gray-300 rounded px-3 py-2 w-full"
+						class="border-2 border-[var(--indigo-dye)]/20 rounded px-4 py-3 w-full focus:border-[var(--indigo-dye)] focus:outline-none transition-colors"
 					/>
 				</div>
 
 				<div>
-					<label for="password-example" class="block text-sm font-semibold text-gray-700 mb-2">
-						Password
-					</label>
+					<label for="password-example" class="block text-sm font-medium text-[var(--ink)] mb-2">Password</label>
 					<Input
 						id="password-example"
 						type='password'
 						placeholder="••••••••"
-						class="border border-gray-300 rounded px-3 py-2 w-full"
+						class="border-2 border-[var(--indigo-dye)]/20 rounded px-4 py-3 w-full focus:border-[var(--indigo-dye)] focus:outline-none transition-colors"
 					/>
 				</div>
 
 				<div>
-					<label for="url-example" class="block text-sm font-semibold text-gray-700 mb-2">
-						URL
-					</label>
+					<label for="url-example" class="block text-sm font-medium text-[var(--ink)] mb-2">URL</label>
 					<Input
 						id="url-example"
 						type='url'
 						inputmode='url'
 						placeholder="https://example.com"
-						class="border border-gray-300 rounded px-3 py-2 w-full"
+						class="border-2 border-[var(--indigo-dye)]/20 rounded px-4 py-3 w-full focus:border-[var(--indigo-dye)] focus:outline-none transition-colors"
 					/>
 				</div>
 
 				<div>
-					<label for="tel-example" class="block text-sm font-semibold text-gray-700 mb-2">
-						Phone
-					</label>
+					<label for="tel-example" class="block text-sm font-medium text-[var(--ink)] mb-2">Phone</label>
 					<Input
 						id="tel-example"
 						type='tel'
 						inputmode='tel'
 						placeholder="+1 (555) 000-0000"
-						class="border border-gray-300 rounded px-3 py-2 w-full"
+						class="border-2 border-[var(--indigo-dye)]/20 rounded px-4 py-3 w-full focus:border-[var(--indigo-dye)] focus:outline-none transition-colors"
 					/>
 				</div>
 
 				<div>
-					<label for="search-example" class="block text-sm font-semibold text-gray-700 mb-2">
-						Search
-					</label>
+					<label for="search-example" class="block text-sm font-medium text-[var(--ink)] mb-2">Search</label>
 					<Input
 						id="search-example"
 						type='search'
 						placeholder="Search..."
-						class="border border-gray-300 rounded px-3 py-2 w-full"
+						class="border-2 border-[var(--indigo-dye)]/20 rounded px-4 py-3 w-full focus:border-[var(--indigo-dye)] focus:outline-none transition-colors"
 					/>
 				</div>
 			</div>
@@ -305,180 +298,113 @@
 	</section>
 
 	<!-- Props Reference -->
-	<section aria-labelledby="props-heading" class="mb-12">
-		<h2 id="props-heading" class="text-2xl font-bold text-gray-900 mb-6">
-			Props Reference
+	<section class="mb-16">
+		<h2 class="font-display text-2xl text-[var(--ink)] mb-8">
+			<span>Props</span>
+			<span class="text-[var(--bamboo)] text-lg ml-2">プロパティ</span>
 		</h2>
 
-		<div class="p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
-			<div class="overflow-x-auto">
-				<table class="w-full text-left">
-					<thead>
-						<tr class="border-b border-gray-200">
-							<th class="py-3 px-4 font-semibold text-gray-900">Prop</th>
-							<th class="py-3 px-4 font-semibold text-gray-900">Type</th>
-							<th class="py-3 px-4 font-semibold text-gray-900">Default</th>
-							<th class="py-3 px-4 font-semibold text-gray-900">Description</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class="border-b border-gray-100">
-							<td class="py-3 px-4">
-								<code class="text-sm bg-gray-100 px-2 py-1 rounded">type</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-600">
-								<code class="text-sm">HTMLInputTypeAttribute</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-600">
-								<code class="text-sm">'text'</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-700">Input type</td>
-						</tr>
-						<tr class="border-b border-gray-100">
-							<td class="py-3 px-4">
-								<code class="text-sm bg-gray-100 px-2 py-1 rounded">value</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-600">
-								<code class="text-sm">string</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-600">
-								<code class="text-sm">''</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-700">Input value (use bind:value)</td>
-						</tr>
-						<tr class="border-b border-gray-100">
-							<td class="py-3 px-4">
-								<code class="text-sm bg-gray-100 px-2 py-1 rounded">autocomplete</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-600">
-								<code class="text-sm">string</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-600">
-								<code class="text-sm">'off'</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-700">Autocomplete attribute</td>
-						</tr>
-						<tr class="border-b border-gray-100">
-							<td class="py-3 px-4">
-								<code class="text-sm bg-gray-100 px-2 py-1 rounded">inputmode</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-600">
-								<code class="text-sm">string</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-600">
-								<code class="text-sm">'text'</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-700">Mobile keyboard mode</td>
-						</tr>
-						<tr class="border-b border-gray-100">
-							<td class="py-3 px-4">
-								<code class="text-sm bg-gray-100 px-2 py-1 rounded">aria-invalid</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-600">
-								<code class="text-sm">boolean</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-600">
-								<code class="text-sm">false</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-700">Invalid state for validation</td>
-						</tr>
-						<tr class="border-b border-gray-100">
-							<td class="py-3 px-4">
-								<code class="text-sm bg-gray-100 px-2 py-1 rounded">aria-label</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-600">
-								<code class="text-sm">string</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-600">
-								<code class="text-sm">undefined</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-700">Accessibility label</td>
-						</tr>
-						<tr class="border-b border-gray-100">
-							<td class="py-3 px-4">
-								<code class="text-sm bg-gray-100 px-2 py-1 rounded">aria-describedby</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-600">
-								<code class="text-sm">string</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-600">
-								<code class="text-sm">undefined</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-700">ID of describing element</td>
-						</tr>
-						<tr>
-							<td class="py-3 px-4">
-								<code class="text-sm bg-gray-100 px-2 py-1 rounded">class</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-600">
-								<code class="text-sm">string</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-600">
-								<code class="text-sm">''</code>
-							</td>
-							<td class="py-3 px-4 text-sm text-gray-700">CSS classes for styling</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<p class="text-sm text-gray-600 mt-4">
-				Accepts all standard HTML input attributes.
-			</p>
+		<div class="japanese-border p-8 bg-white/50 backdrop-blur-sm overflow-x-auto">
+			<table class="w-full text-left">
+				<thead>
+					<tr class="border-b border-[var(--indigo-dye)]/20">
+						<th class="py-3 px-4 font-semibold text-[var(--ink)]">Prop</th>
+						<th class="py-3 px-4 font-semibold text-[var(--ink)]">Type</th>
+						<th class="py-3 px-4 font-semibold text-[var(--ink)]">Default</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="border-b border-[var(--indigo-dye)]/10">
+						<td class="py-3 px-4"><code class="text-sm bg-[var(--cream)] px-2 py-1 rounded">type</code></td>
+						<td class="py-3 px-4 text-sm text-[var(--charcoal)]/70"><code class="text-sm">HTMLInputTypeAttribute</code></td>
+						<td class="py-3 px-4 text-sm text-[var(--charcoal)]/70"><code class="text-sm">'text'</code></td>
+					</tr>
+					<tr class="border-b border-[var(--indigo-dye)]/10">
+						<td class="py-3 px-4"><code class="text-sm bg-[var(--cream)] px-2 py-1 rounded">value</code></td>
+						<td class="py-3 px-4 text-sm text-[var(--charcoal)]/70"><code class="text-sm">string</code></td>
+						<td class="py-3 px-4 text-sm text-[var(--charcoal)]/70"><code class="text-sm">''</code></td>
+					</tr>
+					<tr class="border-b border-[var(--indigo-dye)]/10">
+						<td class="py-3 px-4"><code class="text-sm bg-[var(--cream)] px-2 py-1 rounded">autocomplete</code></td>
+						<td class="py-3 px-4 text-sm text-[var(--charcoal)]/70"><code class="text-sm">string</code></td>
+						<td class="py-3 px-4 text-sm text-[var(--charcoal)]/70"><code class="text-sm">'off'</code></td>
+					</tr>
+					<tr class="border-b border-[var(--indigo-dye)]/10">
+						<td class="py-3 px-4"><code class="text-sm bg-[var(--cream)] px-2 py-1 rounded">inputmode</code></td>
+						<td class="py-3 px-4 text-sm text-[var(--charcoal)]/70"><code class="text-sm">string</code></td>
+						<td class="py-3 px-4 text-sm text-[var(--charcoal)]/70"><code class="text-sm">'text'</code></td>
+					</tr>
+					<tr class="border-b border-[var(--indigo-dye)]/10">
+						<td class="py-3 px-4"><code class="text-sm bg-[var(--cream)] px-2 py-1 rounded">aria-invalid</code></td>
+						<td class="py-3 px-4 text-sm text-[var(--charcoal)]/70"><code class="text-sm">boolean</code></td>
+						<td class="py-3 px-4 text-sm text-[var(--charcoal)]/70"><code class="text-sm">false</code></td>
+					</tr>
+					<tr class="border-b border-[var(--indigo-dye)]/10">
+						<td class="py-3 px-4"><code class="text-sm bg-[var(--cream)] px-2 py-1 rounded">aria-label</code></td>
+						<td class="py-3 px-4 text-sm text-[var(--charcoal)]/70"><code class="text-sm">string</code></td>
+						<td class="py-3 px-4 text-sm text-[var(--charcoal)]/70"><code class="text-sm">undefined</code></td>
+					</tr>
+					<tr>
+						<td class="py-3 px-4"><code class="text-sm bg-[var(--cream)] px-2 py-1 rounded">class</code></td>
+						<td class="py-3 px-4 text-sm text-[var(--charcoal)]/70"><code class="text-sm">string</code></td>
+						<td class="py-3 px-4 text-sm text-[var(--charcoal)]/70"><code class="text-sm">''</code></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</section>
 
 	<!-- Accessibility -->
-	<section aria-labelledby="a11y-heading" class="mb-12">
-		<h2 id="a11y-heading" class="text-2xl font-bold text-gray-900 mb-6">
-			Accessibility Features
+	<section class="mb-16">
+		<h2 class="font-display text-2xl text-[var(--ink)] mb-8">
+			<span>Accessibility</span>
+			<span class="text-[var(--bamboo)] text-lg ml-2">アクセシビリティ</span>
 		</h2>
 
-		<div class="p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
-			<ul class="space-y-3" role="list">
+		<div class="japanese-border p-8 bg-gradient-to-br from-white to-[var(--cream)]">
+			<ul class="space-y-4">
 				<li class="flex items-start gap-3">
-					<CheckCircle class="text-green-600 shrink-0 mt-0.5" size={20} />
-					<span class="text-gray-700"><strong>Semantic HTML:</strong> Uses native <code class="bg-gray-100 px-1 rounded">&lt;input&gt;</code> element</span>
+					<span class="text-[var(--matcha)] mt-0.5">✓</span>
+					<span class="text-[var(--charcoal)]/80">Semantic HTML with native <code class="bg-[var(--cream)] px-1 rounded">&lt;input&gt;</code> element</span>
 				</li>
 				<li class="flex items-start gap-3">
-					<CheckCircle class="text-green-600 shrink-0 mt-0.5" size={20} />
-					<span class="text-gray-700"><strong>ARIA Support:</strong> aria-label, aria-describedby, aria-invalid for error states</span>
+					<span class="text-[var(--matcha)] mt-0.5">✓</span>
+					<span class="text-[var(--charcoal)]/80">ARIA attributes for labels, descriptions, and error states</span>
 				</li>
 				<li class="flex items-start gap-3">
-					<CheckCircle class="text-green-600 shrink-0 mt-0.5" size={20} />
-					<span class="text-gray-700"><strong>Form Validation:</strong> Proper error announcements with role="alert"</span>
+					<span class="text-[var(--matcha)] mt-0.5">✓</span>
+					<span class="text-[var(--charcoal)]/80">Form validation with proper error announcements</span>
 				</li>
 				<li class="flex items-start gap-3">
-					<CheckCircle class="text-green-600 shrink-0 mt-0.5" size={20} />
-					<span class="text-gray-700"><strong>Label Association:</strong> Works with <code class="bg-gray-100 px-1 rounded">&lt;label&gt;</code> for implicit labeling</span>
+					<span class="text-[var(--matcha)] mt-0.5">✓</span>
+					<span class="text-[var(--charcoal)]/80">Works with <code class="bg-[var(--cream)] px-1 rounded">&lt;label&gt;</code> for implicit labeling</span>
 				</li>
 				<li class="flex items-start gap-3">
-					<CheckCircle class="text-green-600 shrink-0 mt-0.5" size={20} />
-					<span class="text-gray-700"><strong>Keyboard Navigation:</strong> Full keyboard support with visible focus</span>
+					<span class="text-[var(--matcha)] mt-0.5">✓</span>
+					<span class="text-[var(--charcoal)]/80">Full keyboard support with visible focus indicators</span>
 				</li>
 				<li class="flex items-start gap-3">
-					<CheckCircle class="text-green-600 shrink-0 mt-0.5" size={20} />
-					<span class="text-gray-700"><strong>Screen Reader:</strong> Proper input type, role, and state announcements</span>
+					<span class="text-[var(--matcha)] mt-0.5">✓</span>
+					<span class="text-[var(--charcoal)]/80">Screen reader support with proper input types and roles</span>
 				</li>
 				<li class="flex items-start gap-3">
-					<CheckCircle class="text-green-600 shrink-0 mt-0.5" size={20} />
-					<span class="text-gray-700"><strong>Mobile Support:</strong> inputmode attribute for appropriate keyboards</span>
+					<span class="text-[var(--matcha)] mt-0.5">✓</span>
+					<span class="text-[var(--charcoal)]/80">Mobile support with inputmode for appropriate keyboards</span>
 				</li>
 			</ul>
 		</div>
 	</section>
 
-	<!-- Testing -->
-	<section aria-labelledby="testing-heading" class="mb-12">
-		<h2 id="testing-heading" class="text-2xl font-bold text-gray-900 mb-6">
-			Keyboard Testing
+	<!-- Keyboard Testing -->
+	<section>
+		<h2 class="font-display text-2xl text-[var(--ink)] mb-8">
+			<span>Keyboard Testing</span>
+			<span class="text-[var(--bamboo)] text-lg ml-2">キーボードテスト</span>
 		</h2>
 
-		<div class="p-6 bg-blue-50 border border-blue-200 rounded-lg">
-			<h3 class="font-semibold text-blue-900 mb-3 flex items-center gap-2">
-				<Info class="text-blue-600" size={20} />
-				Test keyboard navigation:
-			</h3>
-			<ol class="list-decimal list-inside space-y-2 text-blue-800">
+		<div class="japanese-border p-8 bg-[var(--indigo-dye)]/5">
+			<h3 class="font-semibold text-[var(--ink)] mb-4">Test keyboard navigation:</h3>
+			<ol class="list-decimal list-inside space-y-2 text-[var(--charcoal)]/80">
 				<li>Tab to focus on any input</li>
 				<li>Type to enter text</li>
 				<li>Check error messages appear with invalid data</li>

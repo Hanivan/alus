@@ -1,6 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap');
+
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+/* Japanese Creative Color Palette */
+:root {
+	--indigo-dye: #1e3a5f;
+	--vermilion: #e85d4e;
+	--matcha: #7a9b56;
+	--cherry-blossom: #f8c3cd;
+	--cream: #faf8f5;
+	--charcoal: #2d2d2d;
+	--ink: #1a1a1a;
+	--paper-white: #fcfbf9;
+	--bamboo: #8b7355;
+	--muted-gold: #c9a959;
+}
+
+/* Base Styles */
+body {
+	font-family: 'Zen Kaku Gothic New', sans-serif;
+	background-color: var(--paper-white);
+	color: var(--charcoal);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Display Typography */
+.font-display {
+	font-family: 'Cormorant Garamond', serif;
+}
+
+/* Paper Texture Overlay */
+.paper-texture {
+	position: relative;
+}
+
+.paper-texture::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+	opacity: 0.03;
+	pointer-events: none;
+	z-index: 1;
+}
+
+/* Traditional Japanese Patterns */
+.seigaiha-pattern {
+	background-image: url("data:image/svg+xml,%3Csvg width='80' height='40' viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40a19.96 19.96 0 0 1 5.9-14.11 20.17 20.17 0 0 1 19.44-5.2A20 20 0 0 1 20.2 40H0zM65.03.16A20.1 20.1 0 0 1 40 0a20.1 20.1 0 0 1 0 40h20V0zM80 40H40a20 20 0 0 1-14.11-5.9A19.96 19.96 0 0 1 40 0a19.96 19.96 0 0 1 19.89 19.89h20V40zM40 0a20 20 0 0 0-20 20h20V0z' fill='%231e3a5f' fill-opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* Vertical Text */
+.vertical-text {
+	writing-mode: vertical-rl;
+	text-orientation: mixed;
+}
+
+/* Decorative Border - Japanese Style */
+.japanese-border {
+	position: relative;
+	border: 2px solid var(--indigo-dye);
+}
+
+.japanese-border::before,
+.japanese-border::after {
+	content: '';
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	background-color: var(--vermilion);
+}
+
+.japanese-border::before {
+	top: -2px;
+	left: -2px;
+}
+
+.japanese-border::after {
+	bottom: -2px;
+	right: -2px;
+}
+
+/* Hanko Seal Effect */
+.hanko-seal {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.5rem;
+	border: 3px solid var(--vermilion);
+	border-radius: 50%;
+	color: var(--vermilion);
+	font-family: 'Cormorant Garamond', serif;
+	font-weight: 600;
+	font-size: 0.75rem;
+	aspect-ratio: 1;
+	transform: rotate(-5deg);
+}
 
 /* Accessibility utilities */
 .sr-only {
@@ -29,11 +127,43 @@
 
 /* Focus visible styles for better keyboard navigation */
 *:focus-visible {
-	outline: 2px solid #3b82f6;
+	outline: 2px solid var(--indigo-dye);
 	outline-offset: 2px;
 }
 
 /* Remove default outline but keep for keyboard navigation */
 *:focus:not(:focus-visible) {
 	outline: none;
+}
+
+/* Animation - Fade In Up */
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.animate-fade-in-up {
+	animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animation-delay-100 {
+	animation-delay: 0.1s;
+}
+
+.animation-delay-200 {
+	animation-delay: 0.2s;
+}
+
+.animation-delay-300 {
+	animation-delay: 0.3s;
+}
+
+.animation-delay-400 {
+	animation-delay: 0.4s;
 }
