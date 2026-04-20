@@ -5,3 +5,6 @@
 
 // Export all accessibility utilities
 export * from './a11y/index.js';
+
+// Export all form utilities
+export * from './form/index.js';

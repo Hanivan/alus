@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { labelAttrs, validationAttrs, mergeAttrs } from '../../../utils/a11y/index.js';
+	import { labelAttrs, validationAttrs, mergeAttrs } from '$utils/a11y/index.js';
 	import type {
 		InputType,
 		InputMode,
 		AutocompleteValue,
 		AriaBoolean
-	} from '../../../types/index.js';
+	} from '$types/index.js';
 
 	interface Props {
 		type?: InputType;

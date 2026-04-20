@@ -4,7 +4,7 @@
 		interactiveStateAttrs,
 		widgetAttrs,
 		mergeAttrs
-	} from '../../../utils/a11y/index.js';
+	} from '$utils/a11y/index.js';
 	import type {
 		ButtonType,
 		FormEncType,
@@ -13,7 +13,7 @@
 		AriaBoolean,
 		AriaTristate,
 		AriaHaspopup
-	} from '../../../types/index.js';
+	} from '$types/index.js';
 
 	interface Props {
 		onclick?: (event: MouseEvent) => void;
@@ -21,6 +21,7 @@
 		class?: string;
 		type?: ButtonType;
 		disabled?: boolean;
+		id?: string;
 		// Accessibility attributes
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
@@ -47,6 +48,7 @@
 		class: className = '',
 		type = 'button',
 		disabled = false,
+		id,
 		'aria-label': ariaLabel,
 		'aria-labelledby': ariaLabelledby,
 		'aria-describedby': ariaDescribedby,
@@ -82,6 +84,7 @@
 <button
 	{type}
 	{disabled}
+	{id}
 	{name}
 	{value}
 	{form}

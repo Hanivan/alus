@@ -9,7 +9,7 @@ import type {
 	AriaHaspopup,
 	AriaLive,
 	AriaOrientation
-} from '../types.js';
+} from '$types/index.js';
 
 /**
  * Builds ARIA attributes object from a partial record, filtering out undefined values

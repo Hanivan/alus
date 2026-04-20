@@ -20,6 +20,18 @@
 			description: 'Text input with validation, error states, and accessibility',
 			href: '/components/input',
 			kanji: '入力'
+		},
+		{
+			title: 'Checkbox',
+			description: 'Checkbox with indeterminate state and proper ARIA support',
+			href: '/components/checkbox',
+			kanji: 'チェック'
+		},
+		{
+			title: 'Radio',
+			description: 'Radio button with keyboard navigation and accessibility',
+			href: '/components/radio',
+			kanji: '選択'
 		}
 	];
 
