@@ -46,32 +46,32 @@ yarn add alus
 
 ## Available Components
 
-### Form Components ✅
+### Form Components (^_^)b
 - **Button** - Accessible button with ARIA support and toggle states
 - **Input** - Text input with validation, error states, and accessibility
 
 ## Features
 
-### ♿ Accessibility First
+### (°_°) Accessibility First
 - WCAG 2.1 AA compliant out of the box
 - Proper ARIA attributes (aria-label, aria-describedby, aria-invalid, etc.)
 - Screen reader support with semantic HTML
 - Keyboard navigation with visible focus indicators
 - Live regions for dynamic content announcements
 
-### 🎨 Complete Styling Control
+### (☆^_☆) Complete Styling Control
 - No default styles or colors
 - Works seamlessly with Tailwind CSS
 - Easy to theme with CSS variables
 - Responsive and mobile-friendly
 
-### 🔷 Svelte 5 Runes Mode
+### (☆^O^☆) Svelte 5 Runes Mode
 - Modern reactive syntax with `$props`, `$derived`, `$state`
 - Better TypeScript support
 - Improved performance
 - Future-proof Svelte architecture
 
-### 📦 Type Safety
+### (^_^) Type Safety
 - Full TypeScript support
 - Type-safe props and events
 - IntelliSense in IDEs
@@ -176,13 +176,13 @@ yarn add alus
 ## Accessibility Features
 
 Each component includes:
-- ✅ Semantic HTML elements
-- ✅ ARIA attributes and roles
-- ✅ Keyboard navigation support
-- ✅ Focus management
-- ✅ Screen reader announcements
-- ✅ Error and validation states
-- ✅ Visible focus indicators
+- (^_^) Semantic HTML elements
+- (^_^) ARIA attributes and roles
+- (^_^) Keyboard navigation support
+- (^_^) Focus management
+- (^_^) Screen reader announcements
+- (^_^) Error and validation states
+- (^_^) Visible focus indicators
 
 ## Browser Support
 
@@ -210,7 +210,7 @@ pnpm check
 # Build library
 pnpm build
 
-# Run tests
+# Run tests (Vitest)
 pnpm test
 ```
 

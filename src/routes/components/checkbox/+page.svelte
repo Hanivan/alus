@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { CaretLeft, Check } from 'phosphor-svelte';
 	import { Checkbox } from 'alus';
 
 	let acceptedTerms = $state(false);
@@ -47,9 +48,7 @@
 	href="/"
 	class="inline-flex items-center gap-2 text-(--indigo-dye) hover:text-(--vermilion) transition-colors duration-300 mb-8"
 >
-	<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-		<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-	</svg>
+	<CaretLeft class="w-5 h-5" />
 	<span class="font-medium">Back to Components</span>
 </a>
 
@@ -296,23 +295,23 @@
 		<div class="japanese-border p-8 bg-linear-to-br from-white to-(--cream)">
 			<ul class="space-y-4">
 				<li class="flex items-start gap-3">
-					<span class="text-(--matcha) mt-0.5">✓</span>
+					<span class="text-(--matcha) mt-0.5"><Check class="w-4 h-4" /></span>
 					<span class="text-(--charcoal)/80">Semantic HTML with native <code class="bg-(--cream) px-1 rounded">&lt;input type="checkbox"&gt;</code> element</span>
 				</li>
 				<li class="flex items-start gap-3">
-					<span class="text-(--matcha) mt-0.5">✓</span>
+					<span class="text-(--matcha) mt-0.5"><Check class="w-4 h-4" /></span>
 					<span class="text-(--charcoal)/80">Full ARIA support (aria-label, aria-labelledby, aria-describedby)</span>
 				</li>
 				<li class="flex items-start gap-3">
-					<span class="text-(--matcha) mt-0.5">✓</span>
+					<span class="text-(--matcha) mt-0.5"><Check class="w-4 h-4" /></span>
 					<span class="text-(--charcoal)/80">Keyboard navigation with Space key</span>
 				</li>
 				<li class="flex items-start gap-3">
-					<span class="text-(--matcha) mt-0.5">✓</span>
+					<span class="text-(--matcha) mt-0.5"><Check class="w-4 h-4" /></span>
 					<span class="text-(--charcoal)/80">Proper label association for screen readers</span>
 				</li>
 				<li class="flex items-start gap-3">
-					<span class="text-(--matcha) mt-0.5">✓</span>
+					<span class="text-(--matcha) mt-0.5"><Check class="w-4 h-4" /></span>
 					<span class="text-(--charcoal)/80">Indeterminate state support for "select all" patterns</span>
 				</li>
 			</ul>

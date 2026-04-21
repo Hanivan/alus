@@ -6,22 +6,22 @@
 [![Svelte 5](https://img.shields.io/badge/Svelte-5.55-orange)](https://svelte.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue)](https://www.typescriptlang.org/)
 
-## 🎯 What is Alus?
+## (☆^O^☆) What is Alus?
 
 Alus is a monorepo containing:
-- **📦 Component Library** (`packages/alus`) - Unstyled, accessible UI components
-- **🎨 Showcase App** (`/`) - Live demo and documentation site
+- **(^_^) Component Library** (`packages/alus`) - Unstyled, accessible UI components
+- **(^_^) Showcase App** (`/`) - Live demo and documentation site
 
 ### Features
 
-- ♿ **Accessible** - WCAG 2.1 AA compliant out of the box
-- ⌨️ **Keyboard-Friendly** - Full keyboard navigation support
-- 🎨 **Unstyled** - Complete styling freedom with Tailwind CSS
-- 🔷 **Svelte 5 Native** - Built with runes mode (`$props`, `$derived`, `$state`)
-- 📝 **Type-Safe** - Full TypeScript support
-- 🌳 **Tree-Shakeable** - Import only what you need
+- (°_°) **Accessible** - WCAG 2.1 AA compliant out of the box
+- (・_・) **Keyboard-Friendly** - Full keyboard navigation support
+- (☆^_☆) **Unstyled** - Complete styling freedom with Tailwind CSS
+- (☆^O^☆) **Svelte 5 Native** - Built with runes mode (`$props`, `$derived`, `$state`)
+- (^_^) **Type-Safe** - Full TypeScript support
+- (^_^)b **Tree-Shakeable** - Import only what you need
 
-## 🚀 Quick Start
+## \(^o^)/ Quick Start
 
 ### Installation
 
@@ -52,7 +52,7 @@ pnpm add alus
 </Button>
 ```
 
-## 📁 Project Structure
+## (>_>) Project Structure
 
 ```
 alus-svelte/
@@ -83,7 +83,7 @@ alus-svelte/
 └── README.md                    # This file
 ```
 
-## 🛠️ Development
+## (・_・) Development
 
 ### Prerequisites
 
@@ -124,9 +124,8 @@ cd packages/alus
 pnpm build            # Build library for publishing
 
 # Testing
-pnpm test             # Run all tests
-pnpm test:unit        # Run unit tests
-pnpm test:e2e         # Run E2E tests (Playwright)
+pnpm test             # Run Vitest tests
+pnpm test:unit        # Run unit tests (alias for test)
 
 # Code Quality
 pnpm check            # Type checking with svelte-check
@@ -134,14 +133,14 @@ pnpm lint             # Lint with Prettier + ESLint
 pnpm format           # Format code with Prettier
 ```
 
-## 📦 Available Components
+## (^_^) Available Components
 
-### ✅ Currently Available
+### (^_^)b Currently Available
 
 - **Button** - Accessible button with ARIA support and toggle states
 - **Input** - Text input with validation, error states, and accessibility
 
-## 🎨 Styling with Tailwind CSS
+## (☆^_☆) Styling with Tailwind CSS
 
 Alus components are unstyled and designed to work with Tailwind CSS:
 
@@ -170,27 +169,27 @@ Alus components are unstyled and designed to work with Tailwind CSS:
 </Button>
 ```
 
-## ♿ Accessibility Features
+## (°_°) Accessibility Features
 
 Every Alus component includes:
 
-- ✅ Semantic HTML elements
-- ✅ ARIA attributes and roles
-- ✅ Keyboard navigation support
-- ✅ Focus management
-- ✅ Screen reader announcements
-- ✅ Error and validation states
-- ✅ Visible focus indicators
+- (^_^) Semantic HTML elements
+- (^_^) ARIA attributes and roles
+- (^_^) Keyboard navigation support
+- (^_^) Focus management
+- (^_^) Screen reader announcements
+- (^_^) Error and validation states
+- (^_^) Visible focus indicators
 
 WCAG 2.1 AA compliant out of the box.
 
-## 📚 Documentation
+## (・_・) Documentation
 
 - [Component Library README](packages/alus/README.md) - Detailed component API
 - [Component Roadmap](docs/todos/ui-components-roadmap.md) - See what's coming next
 - [Showcase App](http://localhost:5173) - Live demo of all components
 
-## 🤝 Contributing
+## (^_^)b Contributing
 
 Contributions are welcome! Please see our [contributing guidelines](CONTRIBUTING.md) for details.
 
@@ -214,14 +213,11 @@ Contributions are welcome! Please see our [contributing guidelines](CONTRIBUTING
 
 See [Component Development](CLAUDE.md) for detailed guidelines.
 
-## 🧪 Testing
+## (・_・) Testing
 
 ```bash
-# Unit tests (Vitest)
-pnpm test:unit
-
-# E2E tests (Playwright)
-pnpm test:e2e
+# Run tests (Vitest)
+pnpm test
 
 # Type checking
 pnpm check
@@ -230,7 +226,7 @@ pnpm check
 pnpm lint
 ```
 
-## 📦 Publishing
+## (>_<) Publishing
 
 The `alus` package is published to npm from `packages/alus/`.
 
@@ -241,7 +237,7 @@ pnpm test
 npm publish
 ```
 
-## 🌐 Browser Support
+## (O_O) Browser Support
 
 - Chrome/Edge (latest)
 - Firefox (latest)
@@ -252,7 +248,7 @@ npm publish
 
 MIT
 
-## 🙏 Acknowledgments
+## (♡˙︶˙♡) Acknowledgments
 
 Built with:
 - [Svelte 5](https://svelte.dev/) - Cybernetically enhanced web apps
@@ -262,7 +258,7 @@ Built with:
 - [Runed](https://runed.dev/) - Svelte 5 utilities library
 - [Phosphor Icons](https://phosphoricons.com/) - Icon library
 
-## 🔗 Links
+## (º_º) Links
 
 - [GitHub Repository](https://github.com/Hanivan/alus)
 - [npm Package](https://www.npmjs.com/package/alus)
@@ -274,4 +270,4 @@ Built with:
 
 **Note**: This library is in active development. APIs may change before v1.0 release.
 
-⭐ If you like this project, please consider giving it a star on GitHub!
+(^_^)b If you like this project, please consider giving it a star on GitHub!

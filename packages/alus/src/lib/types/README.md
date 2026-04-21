@@ -2,7 +2,7 @@
 
 ## Using Constants Instead of Magic Strings
 
-### ❌ Before (Magic Strings)
+### (x_x) Before (Magic Strings)
 
 ```svelte
 <Button
@@ -19,7 +19,7 @@
 />
 ```
 
-### ✅ After (Type-safe Constants)
+### (^_^) After (Type-safe Constants)
 
 ```svelte
 <script>
@@ -261,12 +261,12 @@
 
 ## Benefits of Using Constants
 
-✅ **Type Safety**: Autocomplete helps you find the right value
-✅ **No Typos**: Can't misspell a constant value
-✅ **Refactoring**: Change values in one place
-✅ **Discoverability**: IDE shows all available options
-✅ **Documentation**: Constants serve as inline documentation
-✅ **Consistency**: Same values throughout your app
+(^_^) **Type Safety**: Autocomplete helps you find the right value
+(^_^) **No Typos**: Can't misspell a constant value
+(^_^) **Refactoring**: Change values in one place
+(^_^) **Discoverability**: IDE shows all available options
+(^_^) **Documentation**: Constants serve as inline documentation
+(^_^) **Consistency**: Same values throughout your app
 
 ## Exported Types
 

@@ -320,8 +320,8 @@ element.addEventListener('keydown', (e) => {
 
 ## Benefits
 
-✅ **DRY**: Don't repeat ARIA logic across components
-✅ **Type-safe**: Full TypeScript support with proper types
-✅ **Composable**: Mix and match utilities for complex patterns
-✅ **Tested**: Follows WCAG 2.1 AA standards
-✅ **Maintainable**: Centralized accessibility logic
+(^_^) **DRY**: Don't repeat ARIA logic across components
+(^_^) **Type-safe**: Full TypeScript support with proper types
+(^_^) **Composable**: Mix and match utilities for complex patterns
+(^_^) **Tested**: Follows WCAG 2.1 AA standards
+(^_^) **Maintainable**: Centralized accessibility logic

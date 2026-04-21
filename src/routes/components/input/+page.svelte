@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { CaretLeft, Warning, Check } from 'phosphor-svelte';
 	import { Input } from 'alus';
 
 	// Basic Input section
@@ -43,9 +44,7 @@
 	href="/"
 	class="mb-8 inline-flex items-center gap-2 text-(--indigo-dye) transition-colors duration-300 hover:text-(--vermilion)"
 >
-	<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-		<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-	</svg>
+	<CaretLeft class="h-5 w-5" />
 	<span class="font-medium">Back to Components</span>
 </a>
 
@@ -126,7 +125,7 @@
 						role="alert"
 						aria-live="assertive"
 					>
-						<span>⚠</span>
+						<Warning class="w-4 h-4" />
 						<span>{nameError}</span>
 					</p>
 				{/if}
@@ -136,7 +135,7 @@
 						role="status"
 						aria-live="polite"
 					>
-						<span>✓</span>
+						<Check class="w-4 h-4" />
 						<span>Hello, {name}!</span>
 					</p>
 				{/if}
@@ -173,7 +172,7 @@
 						role="alert"
 						aria-live="assertive"
 					>
-						<span>⚠</span>
+						<Warning class="w-4 h-4" />
 						<span>{emailError}</span>
 					</p>
 				{/if}
@@ -209,7 +208,7 @@
 						role="alert"
 						aria-live="assertive"
 					>
-						<span>⚠</span>
+						<Warning class="w-4 h-4" />
 						<span>{passwordError}</span>
 					</p>
 				{/if}
@@ -219,7 +218,7 @@
 						role="status"
 						aria-live="polite"
 					>
-						<span>✓</span>
+						<Check class="w-4 h-4" />
 						<span>Password strength: Good</span>
 					</p>
 				{/if}

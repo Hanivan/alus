@@ -19,7 +19,7 @@ The Alus library provides **unstyled, accessible UI primitives** that:
 - Follow WCAG 2.1 AA accessibility standards
 - Are keyboard navigable with visible focus indicators
 
-#### Current Components ✅
+#### Current Components (^_^)b
 - **Button** - Basic button with full ARIA support, toggle states
 - **Input** - Text input with validation, error states, and accessibility
 
@@ -38,7 +38,7 @@ See `docs/todos/ui-components-roadmap.md` for the complete roadmap including:
 - **Language**: TypeScript
 - **Package Manager**: pnpm (workspace monorepo)
 - **Framework**: SvelteKit (root), Svelte Package (alus library)
-- **Add-ons**: prettier, eslint, vitest, playwright, tailwindcss, sveltekit-adapter, mcp
+- **Add-ons**: prettier, eslint, vitest, tailwindcss, sveltekit-adapter, mcp
 - **Deployment**: Netlify adapter
 - **Styling**: Tailwind CSS v4 with @tailwindcss/vite
 
@@ -103,14 +103,8 @@ pnpm prepack          # Create distributable package
 ### Testing
 
 ```bash
-# Unit tests (Vitest)
-pnpm test:unit        # Run unit tests only
-
-# All tests
-pnpm test             # Run unit + E2E tests
-
-# E2E tests (Playwright)
-pnpm test:e2e         # Run Playwright end-to-end tests
+# Run tests (Vitest)
+pnpm test             # Run all tests
 ```
 
 ### Code Quality
@@ -207,7 +201,7 @@ When adding new components to the Alus library:
 - `@tailwindcss/vite` ^4.2.2 - Tailwind Vite plugin
 - `vitest` ^4.1.3 - Unit testing framework
 - `@vitest/browser-playwright` ^4.1.3 - Browser testing for Vitest
-- `playwright` ^1.59.1 - E2E testing framework
+- `vitest-browser-svelte` ^2.1.0 - Svelte utilities for Vitest browser testing
 - `typescript` ^6.0.2 - TypeScript compiler
 - `eslint` + `prettier` - Code quality tools
 - `@sveltejs/adapter-netlify` ^6.0.4 - Netlify deployment adapter

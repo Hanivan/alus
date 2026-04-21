@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { CaretRight } from 'phosphor-svelte';
+
 	let hoverCard = $state<string | null>(null);
 
 	interface ComponentCard {
@@ -151,9 +153,7 @@
 						<!-- Arrow Indicator -->
 						<div class="flex items-center gap-2 text-(--indigo-dye) group-hover:text-(--vermilion) transition-colors duration-300">
 							<span class="text-sm font-medium">Explore</span>
-							<svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-							</svg>
+							<CaretRight class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
 						</div>
 					</div>
 				</a>

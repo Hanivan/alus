@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing to Alus! This document provides guidelines and instructions for contributing to the project.
 
-## 🚀 Getting Started
+## \(^o^)/ Getting Started
 
 ### Prerequisites
 
@@ -29,7 +29,7 @@ Thank you for your interest in contributing to Alus! This document provides guid
    ```
    This starts both the library watcher and showcase application.
 
-## 📋 Development Workflow
+## (・_・) Development Workflow
 
 ### 1. Choose What to Work On
 
@@ -87,12 +87,12 @@ git checkout -b fix/issue-description
 #### Component Requirements
 
 All components must be:
-- ✅ **Unstyled** - No default colors, spacing, or styling assumptions
-- ✅ **Accessible** - WCAG 2.1 AA compliant with proper ARIA
-- ✅ **Type-safe** - Full TypeScript support
-- ✅ **Keyboard-friendly** - Complete keyboard navigation
-- ✅ **Screen reader support** - Proper labels and announcements
-- ✅ **Svelte 5 runes** - Use `$props`, `$derived`, `$state`
+- (^_^) **Unstyled** - No default colors, spacing, or styling assumptions
+- (^_^) **Accessible** - WCAG 2.1 AA compliant with proper ARIA
+- (^_^) **Type-safe** - Full TypeScript support
+- (^_^) **Keyboard-friendly** - Complete keyboard navigation
+- (^_^) **Screen reader support** - Proper labels and announcements
+- (^_^) **Svelte 5 runes** - Use `$props`, `$derived`, `$state`
 
 ### 4. Test Your Changes
 
@@ -100,7 +100,7 @@ All components must be:
 # Type checking
 pnpm check
 
-# Run tests
+# Run tests (Vitest)
 pnpm test
 
 # Linting
@@ -129,7 +129,7 @@ git commit -m "docs: update README with new examples"
    - Screenshots for UI changes
    - Usage examples
 
-## 📝 Coding Standards
+## (・_・) Coding Standards
 
 ### TypeScript
 
@@ -199,7 +199,9 @@ Every component must include:
 - Write clear, self-documenting code
 - Add comments for complex logic
 
-## 🧪 Testing
+## (・_・) Testing
+
+The project uses Vitest for unit testing with browser testing support via `@vitest/browser-playwright`.
 
 ### Unit Tests
 
@@ -208,7 +210,7 @@ Create tests alongside components:
 ```typescript
 // YourComponent.svelte.spec.ts
 import { describe, it, expect } from 'vitest';
-import { render } from '@testing-library/svelte';
+import { render } from 'vitest-browser-svelte';
 import YourComponent from './YourComponent.svelte';
 
 describe('YourComponent', () => {
@@ -219,20 +221,18 @@ describe('YourComponent', () => {
 });
 ```
 
-### Accessibility Tests
+### Browser Tests
 
 Test keyboard navigation and screen reader support:
 
 ```typescript
-it('handles keyboard interaction', () => {
+import { page } from 'vitest/browser';
+
+it('handles keyboard interaction', async () => {
 	const { getByRole } = render(YourComponent);
 	const button = getByRole('button');
 
-	button.focus();
-	expect(document.activeElement).toBe(button);
-
-	// Test keyboard interaction
-	fireEvent.keyDown(button, { key: 'Enter' });
+	await page.element(button).click();
 	// Assert behavior
 });
 ```
@@ -267,7 +267,7 @@ Each component should have:
 -->
 ```
 
-## 🎨 Design Principles
+## (☆^_☆) Design Principles
 
 ### Unstyled Philosophy
 
@@ -284,7 +284,7 @@ Each component should have:
 - **Error handling** - Clear error messages and states
 - **WCAG 2.1 AA** - Meet accessibility standards
 
-## 🐛 Reporting Issues
+## (x_x) Reporting Issues
 
 When reporting bugs:
 
@@ -294,7 +294,7 @@ When reporting bugs:
 4. **Describe expected vs actual** behavior
 5. **Include environment info** - Browser, OS, Svelte version
 
-## 💬 Discussion
+## (º_º) Discussion
 
 For questions and discussions:
 
@@ -302,7 +302,7 @@ For questions and discussions:
 - Join our community chat (if available)
 - Check existing documentation first
 
-## 📜 Code of Conduct
+## (ಠ_ಠ) Code of Conduct
 
 Be respectful, inclusive, and constructive:
 - Respect differing opinions
@@ -310,16 +310,16 @@ Be respectful, inclusive, and constructive:
 - Accept feedback gracefully
 - Focus on what's best for the community
 
-## 🎉 Recognition
+## \(^_^)/ Recognition
 
 Contributors will be:
 - Listed in contributors section
 - Credited in release notes
 - Acknowledged in significant contributions
 
-Thank you for contributing to Alus! 🙏
+Thank you for contributing to Alus! (♡˙︶˙♡)
 
-## 📚 Additional Resources
+## (・_・) Additional Resources
 
 - [Svelte 5 Documentation](https://svelte.dev/docs)
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { CaretLeft } from 'phosphor-svelte';
 	import { Button } from 'alus';
 
 	let subscribed = $state(false);
@@ -14,9 +15,7 @@
 	href="/"
 	class="inline-flex items-center gap-2 text-(--indigo-dye) hover:text-(--vermilion) transition-colors duration-300 mb-8"
 >
-	<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-		<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-	</svg>
+	<CaretLeft class="w-5 h-5" />
 	<span class="font-medium">Back to Components</span>
 </a>
 
