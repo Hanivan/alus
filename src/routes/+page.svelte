@@ -34,6 +34,30 @@
 			description: 'Radio button with keyboard navigation and accessibility',
 			href: '/components/radio',
 			kanji: '選択'
+		},
+		{
+			title: 'Badge',
+			description: 'Status indicator with ARIA live regions and variant support',
+			href: '/components/badge',
+			kanji: '章'
+		},
+		{
+			title: 'Tag',
+			description: 'Removable tag with dismiss button and keyboard support',
+			href: '/components/tag',
+			kanji: '標'
+		},
+		{
+			title: 'Divider',
+			description: 'Visual separator with horizontal and vertical orientations',
+			href: '/components/divider',
+			kanji: '線'
+		},
+		{
+			title: 'Avatar',
+			description: 'User avatar with image fallback to initials or placeholder',
+			href: '/components/avatar',
+			kanji: '顔'
 		}
 	];
 

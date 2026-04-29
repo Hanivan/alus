@@ -22,6 +22,9 @@ The Alus library provides **unstyled, accessible UI primitives** that:
 #### Current Components (^_^)b
 - **Button** - Basic button with full ARIA support, toggle states
 - **Input** - Text input with validation, error states, and accessibility
+- **Checkbox** - Checkbox with indeterminate state and ARIA support
+- **Radio** - Radio button with keyboard navigation and accessibility
+- **Badge** - Status indicator with ARIA live regions and variant support
 
 #### Planned Components 🚧
 See `docs/todos/ui-components-roadmap.md` for the complete roadmap including:
@@ -132,8 +135,15 @@ pnpm check:watch      # Watch mode for type checking
 
 ### Library Package (`packages/alus/`)
 - `src/lib/components/` - Core component library
-  - `button/Button.svelte` - Unstyled accessible button component
-  - `input/Input.svelte` - Unstyled accessible input component
+  - `form/button/Button.svelte` - Unstyled accessible button component
+  - `form/input/Input.svelte` - Unstyled accessible input component
+  - `form/checkbox/Checkbox.svelte` - Unstyled accessible checkbox component
+  - `form/radio/Radio.svelte` - Unstyled accessible radio component
+  - `feedback/badge/Badge.svelte` - Unstyled accessible badge component
+  - `feedback/tag/Tag.svelte` - Unstyled accessible tag component
+  - `display/divider/Divider.svelte` - Unstyled accessible divider component
+  - `feedback/tag/Tag.svelte` - Unstyled accessible tag component
+  - `display/divider/Divider.svelte` - Unstyled accessible divider component
 - `src/lib/utils/a11y/` - Accessibility utilities
   - `aria.ts` - ARIA attribute utilities
   - `focus.ts` - Focus management utilities
@@ -154,36 +164,121 @@ $types → src/lib/types
 
 ## Component Development Guidelines
 
-When adding new components to the Alus library:
+### Directory Structure (MANDATORY)
 
-1. **Location**: Create in `packages/alus/src/lib/components/{category}/{ComponentName}.svelte`
-2. **Export**: Add to `packages/alus/src/lib/components/index.ts`
-3. **Accessibility**: Must include proper ARIA attributes (use utils in `src/lib/utils/a11y/`)
-4. **Unstyled**: No default styling - only structure and behavior
-5. **TypeScript**: Full type safety with proper prop definitions
-6. **Runes Mode**: Use Svelte 5 runes (`$props`, `$derived`, `$state`)
-7. **Documentation**: Add usage examples in showcase app
-8. **Testing**: Add unit tests in `src/lib/vitest-examples/` pattern
+Every component MUST follow this exact directory structure (use `.ts` for exports, NOT `.js`):
+
+```
+packages/alus/src/lib/components/{category}/{component-lowercase}/
+├── ComponentName.svelte    # Component implementation
+└── index.ts                # Export file (.ts, NOT .js)
+```
+
+Example (Button):
+```
+packages/alus/src/lib/components/form/button/
+├── Button.svelte
+└── index.ts
+```
+
+The `index.ts` file must use this exact format:
+```ts
+export { default as ComponentName } from './ComponentName.svelte';
+```
+
+### Component Creation Steps
+
+1. **Directory**: `packages/alus/src/lib/components/{category}/{component-lowercase}/`
+2. **Component**: `{component-lowercase}/ComponentName.svelte`
+3. **Export (TypeScript)**: `{component-lowercase}/index.ts` — MUST use `.ts`, NOT `.js`
+4. **Re-export**: Add to `packages/alus/src/lib/components/index.ts`
+5. **Accessibility (REQUIRED)**: Must use ARIA helper utilities - see below
+6. **Unstyled**: No default styling
+7. **TypeScript**: Full type safety
+8. **Runes Mode**: Svelte 5 only (`$props`, `$derived`, `$state`)
+9. **Documentation**: Add demo in `src/routes/components/{component}/+page.svelte`
 
 ### Component Template
 ```svelte
 <script lang="ts">
-	import type { HTMLAttributes } from 'svelte/elements';
-	import { generateId } from '$utils/a11y';
+	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import type { AriaLive } from '$types/index.js';
 
 	interface Props {
-		// Add props here
+		children?: import('svelte').Snippet;
+		class?: string;
+		// Accessibility attributes
+		'aria-label'?: string;
+		'aria-labelledby'?: string;
+		'aria-describedby'?: string;
 	}
-	let { 
-		// destructure props
+
+	let {
+		children,
+		class: className = '',
+		'aria-label': ariaLabel,
+		'aria-labelledby': ariaLabelledby,
+		'aria-describedby': ariaDescribedby
 	}: Props = $props();
 
-	// Use $derived, $state, etc. as needed
+	// Build ARIA attributes using reusable utilities
+	let ariaAttrs: Record<string, string> = $derived(
+		mergeAttrs(
+			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby })
+		)
+	);
 </script>
 
 <!-- Unstyled, semantic HTML with proper ARIA -->
-<div></div>
+<span {...ariaAttrs}>
+	{#if children}
+		{@render children()}
+	{/if}
+</span>
 ```
+
+---
+
+## Accessibility Requirements
+
+**Every component MUST use the ARIA helper utilities** - no manual ARIA attribute construction.
+
+### ARIA Helper Utilities (`src/lib/utils/a11y/aria.ts`)
+
+| Utility | Purpose | Example |
+|---------|---------|---------|
+| `labelAttrs()` | Label/description associations | `labelAttrs({ label, labelledby, describedby })` |
+| `validationAttrs()` | Form validation states | `validationAttrs({ invalid, required, errormessage })` |
+| `interactiveStateAttrs()` | Interactive element states | `interactiveStateAttrs({ disabled, pressed, expanded, checked })` |
+| `widgetAttrs()` | Complex widget attributes | `widgetAttrs({ controls, haspopup, live, orientation })` |
+| `mergeAttrs()` | Combine multiple ARIA objects | `mergeAttrs(labelAttrs(...), interactiveStateAttrs(...))` |
+
+### Pattern for All Components
+
+```svelte
+<script lang="ts">
+	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+
+	let ariaAttrs: Record<string, string> = $derived(
+		mergeAttrs(
+			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby }),
+			interactiveStateAttrs({ disabled, pressed }),
+			widgetAttrs({ controls, haspopup, live })
+		)
+	);
+</script>
+
+<element {...ariaAttrs}>...</element>
+```
+
+### WCAG 2.1 AA Requirements
+
+- **Semantic HTML**: Use native elements (`<button>`, `<input>`, `<span>`) with proper roles
+- **Keyboard Navigation**: All interactive elements must be keyboard accessible
+- **Focus Indicators**: Visible focus states for keyboard users
+- **Screen Reader Support**: Proper `aria-label`, `aria-describedby`, `aria-live` usage
+- **Color Contrast**: Ensure sufficient contrast when styled (consumer responsibility)
+- **Error Identification**: Form validation must use `aria-invalid` and `aria-errormessage`
 
 ---
 
