@@ -138,6 +138,38 @@ body {
 	outline: none;
 }
 
+/* Default accent color for form controls */
+input,
+textarea,
+select,
+[type='radio'],
+[type='checkbox'],
+[type='range'] {
+	accent-color: var(--vermilion);
+}
+
+/* @tailwindcss/forms uses `color` to tint the SVG check on radio/checkbox */
+[type='radio']:checked,
+[type='checkbox']:checked {
+	color: var(--vermilion);
+	background-color: var(--vermilion);
+}
+
+/* Disable stock browser focus ring on form controls — apps style their own */
+input:focus,
+input:focus-visible,
+textarea:focus,
+textarea:focus-visible,
+select:focus,
+select:focus-visible,
+[role='listbox']:focus,
+[role='listbox']:focus-visible,
+[role='option']:focus,
+[role='option']:focus-visible {
+	outline: none;
+	box-shadow: none;
+}
+
 /* Animation - Fade In Up */
 @keyframes fadeInUp {
 	from {

@@ -76,6 +76,36 @@
 			description: 'Trap keyboard focus within a container for modals and dialogs',
 			href: '/components/focus-trap',
 			kanji: '罠'
+		},
+		{
+			title: 'Textarea',
+			description: 'Multi-line text input with validation and accessibility',
+			href: '/components/textarea',
+			kanji: '文'
+		},
+		{
+			title: 'Select',
+			description: 'Native dropdown select with single/multiple selection',
+			href: '/components/select',
+			kanji: '択'
+		},
+		{
+			title: 'Fieldset',
+			description: 'Group related form fields with legend and accessibility',
+			href: '/components/fieldset',
+			kanji: '組'
+		},
+		{
+			title: 'RadioGroup',
+			description: 'Radio button group with shared name context and orientation',
+			href: '/components/radio-group',
+			kanji: '群'
+		},
+		{
+			title: 'Form',
+			description: 'Form wrapper with submit handling and ARIA labels',
+			href: '/components/form',
+			kanji: '式'
 		}
 	];
 

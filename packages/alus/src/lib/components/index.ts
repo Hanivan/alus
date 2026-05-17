@@ -8,6 +8,21 @@ export { Button } from './form/button/index.js';
 export { Input } from './form/input/index.js';
 export { Checkbox } from './form/checkbox/index.js';
 export { Radio } from './form/radio/index.js';
+export { Textarea } from './form/textarea/index.js';
+export {
+	Select,
+	SelectTrigger,
+	SelectContent,
+	SelectOption,
+	getSelectContext,
+	setSelectContext
+} from './form/select/index.js';
+export type { SelectContext, SelectOptionEntry } from './form/select/index.js';
+export { Fieldset } from './form/fieldset/index.js';
+export { RadioGroup, getRadioGroup, setRadioGroup } from './form/radio-group/index.js';
+export type { RadioGroupContext } from './form/radio-group/index.js';
+export { Form } from './form/form/index.js';
+export { FieldError } from './form/field-error/index.js';
 
 // Feedback Components
 export { Badge } from './feedback/badge/index.js';
