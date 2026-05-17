@@ -7,13 +7,7 @@
 		linkClass?: string;
 	}
 
-	let {
-		children,
-		href,
-		current = false,
-		class: className = '',
-		linkClass = ''
-	}: Props = $props();
+	let { children, href, current = false, class: className = '', linkClass = '' }: Props = $props();
 </script>
 
 <li class={className}>

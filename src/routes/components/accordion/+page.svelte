@@ -48,9 +48,7 @@
 						>
 							{#snippet children({ open })}
 								<span class="font-medium">{item.q}</span>
-								<Plus
-									class="h-4 w-4 transition-transform {open ? 'rotate-45' : ''}"
-								/>
+								<Plus class="h-4 w-4 transition-transform {open ? 'rotate-45' : ''}" />
 							{/snippet}
 						</AccordionTrigger>
 						<AccordionContent class="pb-4 text-(--charcoal)/70">

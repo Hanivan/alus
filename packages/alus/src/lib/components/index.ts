@@ -55,11 +55,7 @@ export type {
 	AccordionItemContext,
 	AccordionType
 } from './navigation/accordion/index.js';
-export {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbSeparator
-} from './navigation/breadcrumb/index.js';
+export { Breadcrumb, BreadcrumbItem, BreadcrumbSeparator } from './navigation/breadcrumb/index.js';
 export { Pagination } from './navigation/pagination/index.js';
 export { Link } from './navigation/link/index.js';
 export {

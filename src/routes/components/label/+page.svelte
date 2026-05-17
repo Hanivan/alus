@@ -36,9 +36,7 @@
 		</h2>
 
 		<div class="japanese-border space-y-3 bg-white/50 p-8 backdrop-blur-sm">
-			<Label for="username" class="block text-sm font-medium text-(--charcoal)">
-				Username
-			</Label>
+			<Label for="username" class="block text-sm font-medium text-(--charcoal)">Username</Label>
 			<Input
 				id="username"
 				class="w-full border border-(--indigo-dye)/20 bg-white p-2 focus:border-(--vermilion)"
@@ -53,9 +51,7 @@
 		</h2>
 
 		<div class="japanese-border space-y-3 bg-white/50 p-8 backdrop-blur-sm">
-			<Label for="email" required class="block text-sm font-medium text-(--charcoal)">
-				Email
-			</Label>
+			<Label for="email" required class="block text-sm font-medium text-(--charcoal)">Email</Label>
 			<Input
 				id="email"
 				type="email"

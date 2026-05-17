@@ -47,12 +47,7 @@
 		onOpenChange?: (open: boolean) => void;
 	}
 
-	let {
-		children,
-		open = $bindable(false),
-		disabled = false,
-		onOpenChange
-	}: Props = $props();
+	let { children, open = $bindable(false), disabled = false, onOpenChange }: Props = $props();
 
 	let highlighted = $state<HTMLElement | null>(null);
 	let triggerEl = $state<HTMLElement | null>(null);

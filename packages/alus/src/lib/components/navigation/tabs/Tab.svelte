@@ -24,9 +24,7 @@
 	function queryTriggers(target: HTMLElement): HTMLElement[] {
 		const list = target.closest(`[${TAB_LIST_ATTR}="${ctx.baseId}"]`);
 		if (!list) return [];
-		return Array.from(
-			list.querySelectorAll<HTMLElement>(`[${TAB_ATTR}]:not([disabled])`)
-		);
+		return Array.from(list.querySelectorAll<HTMLElement>(`[${TAB_ATTR}]:not([disabled])`));
 	}
 
 	function onKeydown(e: KeyboardEvent) {

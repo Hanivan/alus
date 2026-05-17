@@ -42,10 +42,7 @@
 					Home
 				</BreadcrumbItem>
 				<BreadcrumbSeparator class="text-(--charcoal)/30">/</BreadcrumbSeparator>
-				<BreadcrumbItem
-					href="/components"
-					linkClass="text-(--indigo-dye) hover:text-(--vermilion)"
-				>
+				<BreadcrumbItem href="/components" linkClass="text-(--indigo-dye) hover:text-(--vermilion)">
 					Components
 				</BreadcrumbItem>
 				<BreadcrumbSeparator class="text-(--charcoal)/30">/</BreadcrumbSeparator>
@@ -72,10 +69,7 @@
 				<BreadcrumbSeparator class="text-(--charcoal)/30">
 					<CaretRight class="h-3 w-3" />
 				</BreadcrumbSeparator>
-				<BreadcrumbItem
-					href="/docs"
-					linkClass="text-(--indigo-dye) hover:text-(--vermilion)"
-				>
+				<BreadcrumbItem href="/docs" linkClass="text-(--indigo-dye) hover:text-(--vermilion)">
 					Docs
 				</BreadcrumbItem>
 				<BreadcrumbSeparator class="text-(--charcoal)/30">

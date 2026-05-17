@@ -53,14 +53,7 @@
 					<Label for="bright">Brightness</Label>
 					<span class="font-mono text-sm text-(--charcoal)/70">{brightness}%</span>
 				</div>
-				<Slider
-					id="bright"
-					bind:value={brightness}
-					min={0}
-					max={100}
-					step={5}
-					class="w-full"
-				/>
+				<Slider id="bright" bind:value={brightness} min={0} max={100} step={5} class="w-full" />
 			</div>
 		</div>
 	</section>

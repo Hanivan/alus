@@ -35,9 +35,7 @@
 		onclick
 	}: Props = $props();
 
-	let isExternal = $derived(
-		external ?? (typeof href === 'string' && /^https?:\/\//i.test(href))
-	);
+	let isExternal = $derived(external ?? (typeof href === 'string' && /^https?:\/\//i.test(href)));
 
 	let computedTarget = $derived(target ?? (isExternal ? '_blank' : undefined));
 	let computedRel = $derived(rel ?? (isExternal ? 'noopener noreferrer' : undefined));
