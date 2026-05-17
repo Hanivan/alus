@@ -25,6 +25,52 @@ export { Form } from './form/form/index.js';
 export { FieldError } from './form/field-error/index.js';
 export { Label } from './form/label/index.js';
 export { Switch } from './form/switch/index.js';
+export { Slider } from './form/slider/index.js';
+export { FileInput } from './form/file-input/index.js';
+export { SearchInput } from './form/search-input/index.js';
+export { NumberInput } from './form/number-input/index.js';
+
+// Navigation Components
+export {
+	Tabs,
+	TabList,
+	Tab,
+	TabPanel,
+	getTabsContext,
+	setTabsContext
+} from './navigation/tabs/index.js';
+export type { TabsContext } from './navigation/tabs/index.js';
+export {
+	Accordion,
+	AccordionItem,
+	AccordionTrigger,
+	AccordionContent,
+	getAccordionRoot,
+	setAccordionRoot,
+	getAccordionItem,
+	setAccordionItem
+} from './navigation/accordion/index.js';
+export type {
+	AccordionRootContext,
+	AccordionItemContext,
+	AccordionType
+} from './navigation/accordion/index.js';
+export {
+	Breadcrumb,
+	BreadcrumbItem,
+	BreadcrumbSeparator
+} from './navigation/breadcrumb/index.js';
+export { Pagination } from './navigation/pagination/index.js';
+export { Link } from './navigation/link/index.js';
+export {
+	Menu,
+	MenuTrigger,
+	MenuContent,
+	MenuItem,
+	getMenuContext,
+	setMenuContext
+} from './navigation/menu/index.js';
+export type { MenuContext, MenuItemEntry } from './navigation/menu/index.js';
 
 // Feedback Components
 export { Badge } from './feedback/badge/index.js';

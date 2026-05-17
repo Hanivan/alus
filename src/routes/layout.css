@@ -155,6 +155,40 @@ select,
 	background-color: var(--vermilion);
 }
 
+/* Strip stock number input spinners */
+[type='number'] {
+	appearance: textfield;
+	-moz-appearance: textfield;
+	border: 0;
+	background: transparent;
+	outline: none;
+}
+
+[type='number']::-webkit-outer-spin-button,
+[type='number']::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	appearance: none;
+	margin: 0;
+}
+
+/* Strip stock search input chrome — border, cancel "x", decoration */
+[type='search'] {
+	appearance: none;
+	-webkit-appearance: none;
+	border: 0;
+	background: transparent;
+	outline: none;
+}
+
+[type='search']::-webkit-search-decoration,
+[type='search']::-webkit-search-cancel-button,
+[type='search']::-webkit-search-results-button,
+[type='search']::-webkit-search-results-decoration {
+	-webkit-appearance: none;
+	appearance: none;
+	display: none;
+}
+
 /* Disable stock browser focus ring on form controls — apps style their own */
 input:focus,
 input:focus-visible,

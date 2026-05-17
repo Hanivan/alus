@@ -142,6 +142,66 @@
 			description: 'Notification banner with variants and dismiss',
 			href: '/components/alert',
 			kanji: '報'
+		},
+		{
+			title: 'Slider',
+			description: 'Range slider with min/max/step and accessible keyboard control',
+			href: '/components/slider',
+			kanji: '滑'
+		},
+		{
+			title: 'FileInput',
+			description: 'File upload with custom trigger snippet and ARIA validation',
+			href: '/components/file-input',
+			kanji: '档'
+		},
+		{
+			title: 'SearchInput',
+			description: 'Search input with clear button and role=search',
+			href: '/components/search-input',
+			kanji: '探'
+		},
+		{
+			title: 'NumberInput',
+			description: 'Number input with increment/decrement controls and min/max',
+			href: '/components/number-input',
+			kanji: '数'
+		},
+		{
+			title: 'Tabs',
+			description: 'Compound tabs with roving tabindex and keyboard navigation',
+			href: '/components/tabs',
+			kanji: '段'
+		},
+		{
+			title: 'Accordion',
+			description: 'Collapsible sections with single/multiple modes',
+			href: '/components/accordion',
+			kanji: '畳'
+		},
+		{
+			title: 'Breadcrumb',
+			description: 'Breadcrumb trail with aria-current and custom separator',
+			href: '/components/breadcrumb',
+			kanji: '路'
+		},
+		{
+			title: 'Pagination',
+			description: 'Headless pagination with ellipsis and page state',
+			href: '/components/pagination',
+			kanji: '頁'
+		},
+		{
+			title: 'Link',
+			description: 'Anchor with external detection and aria-current',
+			href: '/components/link',
+			kanji: '繋'
+		},
+		{
+			title: 'Menu',
+			description: 'Compound dropdown menu with portal + floating-ui positioning',
+			href: '/components/menu',
+			kanji: '献'
 		}
 	];
 
