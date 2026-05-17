@@ -5,38 +5,29 @@
 ### (x_x) Before (Magic Strings)
 
 ```svelte
-<Button
-  type="button"
-  formenctype="application/x-www-form-urlencoded"
-  formmethod="post"
-/>
+<Button type="button" formenctype="application/x-www-form-urlencoded" formmethod="post" />
 
-<Input
-  type="email"
-  autocomplete="email"
-  inputmode="email"
-  aria-expanded="true"
-/>
+<Input type="email" autocomplete="email" inputmode="email" aria-expanded="true" />
 ```
 
-### (^_^) After (Type-safe Constants)
+### (^\_^) After (Type-safe Constants)
 
 ```svelte
 <script>
-  import { Button, Input, CONSTANTS } from 'alus';
+	import { Button, Input, CONSTANTS } from 'alus';
 </script>
 
 <Button
-  type={CONSTANTS.BUTTON_TYPE.BUTTON}
-  formenctype={CONSTANTS.FORM_ENCTYPE.URLENCODED}
-  formmethod={CONSTANTS.FORM_METHOD.POST}
+	type={CONSTANTS.BUTTON_TYPE.BUTTON}
+	formenctype={CONSTANTS.FORM_ENCTYPE.URLENCODED}
+	formmethod={CONSTANTS.FORM_METHOD.POST}
 />
 
 <Input
-  type={CONSTANTS.INPUT_TYPE.EMAIL}
-  autocomplete={CONSTANTS.AUTOCOMPLETE.EMAIL}
-  inputmode={CONSTANTS.INPUT_MODE.EMAIL}
-  aria-expanded={CONSTANTS.ARIA_BOOLEAN.TRUE}
+	type={CONSTANTS.INPUT_TYPE.EMAIL}
+	autocomplete={CONSTANTS.AUTOCOMPLETE.EMAIL}
+	inputmode={CONSTANTS.INPUT_MODE.EMAIL}
+	aria-expanded={CONSTANTS.ARIA_BOOLEAN.TRUE}
 />
 ```
 
@@ -46,22 +37,22 @@
 
 ```svelte
 <script>
-  import { Input, CONSTANTS } from 'alus';
-  import { generateId, labelAttrs } from 'alus/a11y';
+	import { Input, CONSTANTS } from 'alus';
+	import { generateId, labelAttrs } from 'alus/a11y';
 
-  const labelId = generateId('label');
-  let email = $state('');
+	const labelId = generateId('label');
+	let email = $state('');
 </script>
 
 <Input
-  id="email"
-  bind:value={email}
-  type={CONSTANTS.INPUT_TYPE.EMAIL}
-  autocomplete={CONSTANTS.AUTOCOMPLETE.EMAIL}
-  inputmode={CONSTANTS.INPUT_MODE.EMAIL}
-  placeholder="you@example.com"
-  {...labelAttrs({ labelledby: labelId })}
-  required
+	id="email"
+	bind:value={email}
+	type={CONSTANTS.INPUT_TYPE.EMAIL}
+	autocomplete={CONSTANTS.AUTOCOMPLETE.EMAIL}
+	inputmode={CONSTANTS.INPUT_MODE.EMAIL}
+	placeholder="you@example.com"
+	{...labelAttrs({ labelledby: labelId })}
+	required
 />
 <label id={labelId} for="email">Email Address</label>
 ```
@@ -70,21 +61,21 @@
 
 ```svelte
 <script>
-  import { Input, CONSTANTS } from 'alus';
-  import { generateId, labelAttrs } from 'alus/a11y';
+	import { Input, CONSTANTS } from 'alus';
+	import { generateId, labelAttrs } from 'alus/a11y';
 
-  const labelId = generateId('label');
-  let password = $state('');
+	const labelId = generateId('label');
+	let password = $state('');
 </script>
 
 <Input
-  id="password"
-  bind:value={password}
-  type={CONSTANTS.INPUT_TYPE.PASSWORD}
-  autocomplete={CONSTANTS.AUTOCOMPLETE.NEW_PASSWORD}
-  placeholder="Enter password"
-  {...labelAttrs({ labelledby: labelId })}
-  required
+	id="password"
+	bind:value={password}
+	type={CONSTANTS.INPUT_TYPE.PASSWORD}
+	autocomplete={CONSTANTS.AUTOCOMPLETE.NEW_PASSWORD}
+	placeholder="Enter password"
+	{...labelAttrs({ labelledby: labelId })}
+	required
 />
 <label id={labelId} for="password">Password</label>
 ```
@@ -93,21 +84,21 @@
 
 ```svelte
 <script>
-  import { Input, CONSTANTS } from 'alus';
-  import { generateId, labelAttrs } from 'alus/a11y';
+	import { Input, CONSTANTS } from 'alus';
+	import { generateId, labelAttrs } from 'alus/a11y';
 
-  const labelId = generateId('label');
-  let phone = $state('');
+	const labelId = generateId('label');
+	let phone = $state('');
 </script>
 
 <Input
-  id="phone"
-  bind:value={phone}
-  type={CONSTANTS.INPUT_TYPE.TEL}
-  autocomplete={CONSTANTS.AUTOCOMPLETE.PHONE}
-  inputmode={CONSTANTS.INPUT_MODE.TEL}
-  placeholder="+1 (555) 123-4567"
-  {...labelAttrs({ labelledby: labelId })}
+	id="phone"
+	bind:value={phone}
+	type={CONSTANTS.INPUT_TYPE.TEL}
+	autocomplete={CONSTANTS.AUTOCOMPLETE.PHONE}
+	inputmode={CONSTANTS.INPUT_MODE.TEL}
+	placeholder="+1 (555) 123-4567"
+	{...labelAttrs({ labelledby: labelId })}
 />
 <label id={labelId} for="phone">Phone Number</label>
 ```
@@ -116,40 +107,40 @@
 
 ```svelte
 <script>
-  import { Input, CONSTANTS } from 'alus';
-  import { generateId, labelAttrs } from 'alus/a11y';
+	import { Input, CONSTANTS } from 'alus';
+	import { generateId, labelAttrs } from 'alus/a11y';
 
-  const firstNameId = generateId('label');
-  const lastNameId = generateId('label');
+	const firstNameId = generateId('label');
+	const lastNameId = generateId('label');
 
-  let firstName = $state('');
-  let lastName = $state('');
+	let firstName = $state('');
+	let lastName = $state('');
 </script>
 
 <div class="name-fields">
-  <div>
-    <Input
-      id="first-name"
-      bind:value={firstName}
-      type={CONSTANTS.INPUT_TYPE.TEXT}
-      autocomplete={CONSTANTS.AUTOCOMPLETE.FIRST_NAME}
-      placeholder="John"
-      {...labelAttrs({ labelledby: firstNameId })}
-    />
-    <label id={firstNameId} for="first-name">First Name</label>
-  </div>
+	<div>
+		<Input
+			id="first-name"
+			bind:value={firstName}
+			type={CONSTANTS.INPUT_TYPE.TEXT}
+			autocomplete={CONSTANTS.AUTOCOMPLETE.FIRST_NAME}
+			placeholder="John"
+			{...labelAttrs({ labelledby: firstNameId })}
+		/>
+		<label id={firstNameId} for="first-name">First Name</label>
+	</div>
 
-  <div>
-    <Input
-      id="last-name"
-      bind:value={lastName}
-      type={CONSTANTS.INPUT_TYPE.TEXT}
-      autocomplete={CONSTANTS.AUTOCOMPLETE.LAST_NAME}
-      placeholder="Doe"
-      {...labelAttrs({ labelledby: lastNameId })}
-    />
-    <label id={lastNameId} for="last-name">Last Name</label>
-  </div>
+	<div>
+		<Input
+			id="last-name"
+			bind:value={lastName}
+			type={CONSTANTS.INPUT_TYPE.TEXT}
+			autocomplete={CONSTANTS.AUTOCOMPLETE.LAST_NAME}
+			placeholder="Doe"
+			{...labelAttrs({ labelledby: lastNameId })}
+		/>
+		<label id={lastNameId} for="last-name">Last Name</label>
+	</div>
 </div>
 ```
 
@@ -157,15 +148,15 @@
 
 ```svelte
 <script>
-  import { Button, CONSTANTS } from 'alus';
+	import { Button, CONSTANTS } from 'alus';
 </script>
 
 <Button
-  type={CONSTANTS.BUTTON_TYPE.SUBMIT}
-  formenctype={CONSTANTS.FORM_ENCTYPE.MULTIPART}
-  formmethod={CONSTANTS.FORM_METHOD.POST}
+	type={CONSTANTS.BUTTON_TYPE.SUBMIT}
+	formenctype={CONSTANTS.FORM_ENCTYPE.MULTIPART}
+	formmethod={CONSTANTS.FORM_METHOD.POST}
 >
-  Upload File
+	Upload File
 </Button>
 ```
 
@@ -173,22 +164,22 @@
 
 ```svelte
 <script>
-  import { Button, CONSTANTS } from 'alus';
-  import { interactiveStateAttrs } from 'alus/a11y';
+	import { Button, CONSTANTS } from 'alus';
+	import { interactiveStateAttrs } from 'alus/a11y';
 
-  let isPressed = $state(false);
+	let isPressed = $state(false);
 </script>
 
 <Button
-  onclick={() => isPressed = !isPressed}
-  aria-label="Toggle mute"
-  {...interactiveStateAttrs({ pressed: isPressed })}
+	onclick={() => (isPressed = !isPressed)}
+	aria-label="Toggle mute"
+	{...interactiveStateAttrs({ pressed: isPressed })}
 >
-  {#if isPressed}
-    Muted
-  {:else}
-    Unmuted
-  {/if}
+	{#if isPressed}
+		Muted
+	{:else}
+		Unmuted
+	{/if}
 </Button>
 ```
 
@@ -230,32 +221,32 @@
 
 ```svelte
 <script>
-  import { Input, CONSTANTS } from 'alus';
-  import { labelAttrs, widgetAttrs } from 'alus/a11y';
+	import { Input, CONSTANTS } from 'alus';
+	import { labelAttrs, widgetAttrs } from 'alus/a11y';
 
-  let searchQuery = $state('');
-  let results = $state([]);
+	let searchQuery = $state('');
+	let results = $state([]);
 </script>
 
 <Input
-  id="search"
-  bind:value={searchQuery}
-  type={CONSTANTS.INPUT_TYPE.SEARCH}
-  inputmode={CONSTANTS.INPUT_MODE.SEARCH}
-  placeholder="Search..."
-  {...labelAttrs({ label: 'Search products' })}
-  {...widgetAttrs({
-    live: CONSTANTS.ARIA_LIVE.POLITE,
-    controls: 'search-results'
-  })}
+	id="search"
+	bind:value={searchQuery}
+	type={CONSTANTS.INPUT_TYPE.SEARCH}
+	inputmode={CONSTANTS.INPUT_MODE.SEARCH}
+	placeholder="Search..."
+	{...labelAttrs({ label: 'Search products' })}
+	{...widgetAttrs({
+		live: CONSTANTS.ARIA_LIVE.POLITE,
+		controls: 'search-results'
+	})}
 />
 
 {#if results.length > 0}
-  <ul id="search-results" role="listbox" aria-label="Search results">
-    {#each results as result}
-      <li role="option">{result.name}</li>
-    {/each}
-  </ul>
+	<ul id="search-results" role="listbox" aria-label="Search results">
+		{#each results as result}
+			<li role="option">{result.name}</li>
+		{/each}
+	</ul>
 {/if}
 ```
 
@@ -274,23 +265,23 @@ You can also import and use the types directly:
 
 ```ts
 import type {
-  InputType,
-  InputMode,
-  AutocompleteValue,
-  ButtonType,
-  FormEncType,
-  FormMethod,
-  FormTarget,
-  AriaBoolean,
-  AriaTristate,
-  AriaHaspopup,
-  AriaLive,
-  AriaOrientation
+	InputType,
+	InputMode,
+	AutocompleteValue,
+	ButtonType,
+	FormEncType,
+	FormMethod,
+	FormTarget,
+	AriaBoolean,
+	AriaTristate,
+	AriaHaspopup,
+	AriaLive,
+	AriaOrientation
 } from 'alus';
 
 // Use in your own components
 function createInput(type: InputType) {
-  return { type };
+	return { type };
 }
 ```
 
@@ -301,8 +292,8 @@ import type { FormFieldConfig, LabelConfig, ValidationConfig } from 'alus';
 
 // Extend for your custom components
 interface MyCustomFieldConfig extends FormFieldConfig {
-  customProp: string;
-  labelConfig: LabelConfig;
-  validationConfig: ValidationConfig;
+	customProp: string;
+	labelConfig: LabelConfig;
+	validationConfig: ValidationConfig;
 }
 ```

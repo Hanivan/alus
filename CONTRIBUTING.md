@@ -13,12 +13,14 @@ Thank you for your interest in contributing to Alus! This document provides guid
 ### Setup Development Environment
 
 1. **Fork and clone the repository**
+
    ```bash
    git clone https://github.com/Hanivan/alus.git
    cd alus-svelte
    ```
 
 2. **Install dependencies**
+
    ```bash
    pnpm install
    ```
@@ -29,7 +31,7 @@ Thank you for your interest in contributing to Alus! This document provides guid
    ```
    This starts both the library watcher and showcase application.
 
-## (・_・) Development Workflow
+## (・\_・) Development Workflow
 
 ### 1. Choose What to Work On
 
@@ -50,6 +52,7 @@ git checkout -b fix/issue-description
 #### Adding a New Component
 
 1. **Create component structure** in `packages/alus/src/lib/components/`
+
    ```
    components/
    └── form/          # or feedback/, navigation/, etc.
@@ -59,6 +62,7 @@ git checkout -b fix/issue-description
    ```
 
 2. **Follow component template**
+
    ```svelte
    <script lang="ts">
    	import type { HTMLAttributes } from 'svelte/elements';
@@ -72,7 +76,7 @@ git checkout -b fix/issue-description
    </script>
 
    <!-- Unstyled, semantic HTML -->
-  <div class={className} {...rest}>
+   <div class={className} {...rest}>
    	<!-- Your content -->
    </div>
    ```
@@ -87,12 +91,13 @@ git checkout -b fix/issue-description
 #### Component Requirements
 
 All components must be:
-- (^_^) **Unstyled** - No default colors, spacing, or styling assumptions
-- (^_^) **Accessible** - WCAG 2.1 AA compliant with proper ARIA
-- (^_^) **Type-safe** - Full TypeScript support
-- (^_^) **Keyboard-friendly** - Complete keyboard navigation
-- (^_^) **Screen reader support** - Proper labels and announcements
-- (^_^) **Svelte 5 runes** - Use `$props`, `$derived`, `$state`
+
+- (^\_^) **Unstyled** - No default colors, spacing, or styling assumptions
+- (^\_^) **Accessible** - WCAG 2.1 AA compliant with proper ARIA
+- (^\_^) **Type-safe** - Full TypeScript support
+- (^\_^) **Keyboard-friendly** - Complete keyboard navigation
+- (^\_^) **Screen reader support** - Proper labels and announcements
+- (^\_^) **Svelte 5 runes** - Use `$props`, `$derived`, `$state`
 
 ### 4. Test Your Changes
 
@@ -129,7 +134,7 @@ git commit -m "docs: update README with new examples"
    - Screenshots for UI changes
    - Usage examples
 
-## (・_・) Coding Standards
+## (・\_・) Coding Standards
 
 ### TypeScript
 
@@ -199,7 +204,7 @@ Every component must include:
 - Write clear, self-documenting code
 - Add comments for complex logic
 
-## (・_・) Testing
+## (・\_・) Testing
 
 The project uses Vitest for unit testing with browser testing support via `@vitest/browser-playwright`.
 
@@ -267,7 +272,7 @@ Each component should have:
 -->
 ```
 
-## (☆^_☆) Design Principles
+## (☆^\_☆) Design Principles
 
 ### Unstyled Philosophy
 
@@ -305,21 +310,23 @@ For questions and discussions:
 ## (ಠ_ಠ) Code of Conduct
 
 Be respectful, inclusive, and constructive:
+
 - Respect differing opinions
 - Provide constructive feedback
 - Accept feedback gracefully
 - Focus on what's best for the community
 
-## \(^_^)/ Recognition
+## \(^\_^)/ Recognition
 
 Contributors will be:
+
 - Listed in contributors section
 - Credited in release notes
 - Acknowledged in significant contributions
 
 Thank you for contributing to Alus! (♡˙︶˙♡)
 
-## (・_・) Additional Resources
+## (・\_・) Additional Resources
 
 - [Svelte 5 Documentation](https://svelte.dev/docs)
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)

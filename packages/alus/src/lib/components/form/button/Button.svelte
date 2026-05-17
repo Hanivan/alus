@@ -1,10 +1,5 @@
 <script lang="ts">
-	import {
-		labelAttrs,
-		interactiveStateAttrs,
-		widgetAttrs,
-		mergeAttrs
-	} from '$utils/a11y/index.js';
+	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 	import type {
 		ButtonType,
 		FormEncType,
@@ -94,8 +89,8 @@
 	{formnovalidate}
 	{formtarget}
 	class={className}
-	onclick={onclick}
-	tabindex={tabindex}
+	{onclick}
+	{tabindex}
 	{...ariaAttrs}
 >
 	{#if children}

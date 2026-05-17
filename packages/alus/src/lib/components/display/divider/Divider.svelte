@@ -17,10 +17,7 @@
 
 	// Build ARIA attributes using reusable utilities
 	let ariaAttrs: Record<string, string> = $derived(
-		mergeAttrs(
-			labelAttrs({ label: ariaLabel }),
-			interactiveStateAttrs({})
-		)
+		mergeAttrs(labelAttrs({ label: ariaLabel }), interactiveStateAttrs({}))
 	);
 </script>
 

@@ -9,17 +9,18 @@
 ## (☆^O^☆) What is Alus?
 
 Alus is a monorepo containing:
-- **(^_^) Component Library** (`packages/alus`) - Unstyled, accessible UI components
-- **(^_^) Showcase App** (`/`) - Live demo and documentation site
+
+- **(^\_^) Component Library** (`packages/alus`) - Unstyled, accessible UI components
+- **(^\_^) Showcase App** (`/`) - Live demo and documentation site
 
 ### Features
 
 - (°_°) **Accessible** - WCAG 2.1 AA compliant out of the box
-- (・_・) **Keyboard-Friendly** - Full keyboard navigation support
-- (☆^_☆) **Unstyled** - Complete styling freedom with Tailwind CSS
+- (・\_・) **Keyboard-Friendly** - Full keyboard navigation support
+- (☆^\_☆) **Unstyled** - Complete styling freedom with Tailwind CSS
 - (☆^O^☆) **Svelte 5 Native** - Built with runes mode (`$props`, `$derived`, `$state`)
-- (^_^) **Type-Safe** - Full TypeScript support
-- (^_^)b **Tree-Shakeable** - Import only what you need
+- (^\_^) **Type-Safe** - Full TypeScript support
+- (^\_^)b **Tree-Shakeable** - Import only what you need
 
 ## \(^o^)/ Quick Start
 
@@ -41,18 +42,12 @@ pnpm add alus
 	let name = $state('');
 </script>
 
-<Input
-	bind:value={name}
-	placeholder="Enter your name"
-	aria-label="Name input"
-/>
+<Input bind:value={name} placeholder="Enter your name" aria-label="Name input" />
 
-<Button onclick={() => alert(`Hello ${name}!`)}>
-	Submit
-</Button>
+<Button onclick={() => alert(`Hello ${name}!`)}>Submit</Button>
 ```
 
-## (>_>) Project Structure
+## (>\_>) Project Structure
 
 ```
 alus-svelte/
@@ -83,7 +78,7 @@ alus-svelte/
 └── README.md                    # This file
 ```
 
-## (・_・) Development
+## (・\_・) Development
 
 ### Prerequisites
 
@@ -105,6 +100,7 @@ pnpm dev
 ```
 
 This starts:
+
 - **Library watcher** - Watches for changes in `packages/alus`
 - **Showcase app** - Runs on `http://localhost:5173`
 
@@ -133,14 +129,14 @@ pnpm lint             # Lint with Prettier + ESLint
 pnpm format           # Format code with Prettier
 ```
 
-## (^_^) Available Components
+## (^\_^) Available Components
 
-### (^_^)b Currently Available
+### (^\_^)b Currently Available
 
 - **Button** - Accessible button with ARIA support and toggle states
 - **Input** - Text input with validation, error states, and accessibility
 
-## (☆^_☆) Styling with Tailwind CSS
+## (☆^\_☆) Styling with Tailwind CSS
 
 Alus components are unstyled and designed to work with Tailwind CSS:
 
@@ -150,20 +146,15 @@ Alus components are unstyled and designed to work with Tailwind CSS:
 </script>
 
 <!-- Primary button -->
-<Button
-	class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-	aria-label="Submit form"
->
+<Button class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700" aria-label="Submit form">
 	Submit
 </Button>
 
 <!-- Toggle button -->
 <Button
-	class="px-4 py-2 rounded {active
-		? 'bg-green-600 text-white'
-		: 'bg-gray-200 text-gray-700'}"
+	class="rounded px-4 py-2 {active ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700'}"
 	aria-pressed={active}
-	onclick={() => active = !active}
+	onclick={() => (active = !active)}
 >
 	{active ? 'Active' : 'Inactive'}
 </Button>
@@ -173,23 +164,23 @@ Alus components are unstyled and designed to work with Tailwind CSS:
 
 Every Alus component includes:
 
-- (^_^) Semantic HTML elements
-- (^_^) ARIA attributes and roles
-- (^_^) Keyboard navigation support
-- (^_^) Focus management
-- (^_^) Screen reader announcements
-- (^_^) Error and validation states
-- (^_^) Visible focus indicators
+- (^\_^) Semantic HTML elements
+- (^\_^) ARIA attributes and roles
+- (^\_^) Keyboard navigation support
+- (^\_^) Focus management
+- (^\_^) Screen reader announcements
+- (^\_^) Error and validation states
+- (^\_^) Visible focus indicators
 
 WCAG 2.1 AA compliant out of the box.
 
-## (・_・) Documentation
+## (・\_・) Documentation
 
 - [Component Library README](packages/alus/README.md) - Detailed component API
 - [Component Roadmap](docs/todos/ui-components-roadmap.md) - See what's coming next
 - [Showcase App](http://localhost:5173) - Live demo of all components
 
-## (^_^)b Contributing
+## (^\_^)b Contributing
 
 Contributions are welcome! Please see our [contributing guidelines](CONTRIBUTING.md) for details.
 
@@ -213,7 +204,7 @@ Contributions are welcome! Please see our [contributing guidelines](CONTRIBUTING
 
 See [Component Development](CLAUDE.md) for detailed guidelines.
 
-## (・_・) Testing
+## (・\_・) Testing
 
 ```bash
 # Run tests (Vitest)
@@ -226,7 +217,7 @@ pnpm check
 pnpm lint
 ```
 
-## (>_<) Publishing
+## (>\_<) Publishing
 
 The `alus` package is published to npm from `packages/alus/`.
 
@@ -251,6 +242,7 @@ MIT
 ## (♡˙︶˙♡) Acknowledgments
 
 Built with:
+
 - [Svelte 5](https://svelte.dev/) - Cybernetically enhanced web apps
 - [SvelteKit](https://kit.svelte.dev/) - Web framework for Svelte
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
@@ -270,4 +262,4 @@ Built with:
 
 **Note**: This library is in active development. APIs may change before v1.0 release.
 
-(^_^)b If you like this project, please consider giving it a star on GitHub!
+(^\_^)b If you like this project, please consider giving it a star on GitHub!

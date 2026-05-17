@@ -6,11 +6,11 @@ Reusable accessibility utilities for WCAG compliance and ARIA attributes.
 
 ```ts
 import {
-  labelAttrs,
-  validationAttrs,
-  interactiveStateAttrs,
-  widgetAttrs,
-  mergeAttrs
+	labelAttrs,
+	validationAttrs,
+	interactiveStateAttrs,
+	widgetAttrs,
+	mergeAttrs
 } from 'alus/a11y';
 ```
 
@@ -22,25 +22,22 @@ Creates ARIA attributes for labeling and describing elements.
 
 ```svelte
 <script>
-  import { Input, labelAttrs } from 'alus';
+	import { Input, labelAttrs } from 'alus';
 </script>
 
 <!-- Using aria-label -->
 <Input {...labelAttrs({ label: 'Email address' })} />
 
 <!-- Using aria-labelledby -->
-<Input
-  id="email"
-  {...labelAttrs({ labelledby: 'email-label' })}
-/>
+<Input id="email" {...labelAttrs({ labelledby: 'email-label' })} />
 <label id="email-label" for="email">Email</label>
 
 <!-- Using aria-describedby -->
 <Input
-  {...labelAttrs({
-    label: 'Password',
-    describedby: 'password-help'
-  })}
+	{...labelAttrs({
+		label: 'Password',
+		describedby: 'password-help'
+	})}
 />
 <p id="password-help">Must be at least 8 characters</p>
 ```
@@ -51,20 +48,20 @@ Creates ARIA attributes for form validation states.
 
 ```svelte
 <script>
-  import { Input, validationAttrs } from 'alus';
-  let email = $state('');
-  let error = $state('');
+	import { Input, validationAttrs } from 'alus';
+	let email = $state('');
+	let error = $state('');
 </script>
 
 <Input
-  bind:value={email}
-  {...validationAttrs({
-    invalid: !!error,
-    errormessage: 'email-error'
-  })}
+	bind:value={email}
+	{...validationAttrs({
+		invalid: !!error,
+		errormessage: 'email-error'
+	})}
 />
 {#if error}
-  <p id="email-error" role="alert">{error}</p>
+	<p id="email-error" role="alert">{error}</p>
 {/if}
 ```
 
@@ -74,25 +71,17 @@ Creates ARIA attributes for interactive element states.
 
 ```svelte
 <script>
-  import { Button, interactiveStateAttrs } from 'alus';
-  let pressed = $state(false);
-  let expanded = $state(false);
+	import { Button, interactiveStateAttrs } from 'alus';
+	let pressed = $state(false);
+	let expanded = $state(false);
 </script>
 
 <!-- Toggle button -->
-<Button
-  onclick={() => pressed = !pressed}
-  {...interactiveStateAttrs({ pressed })}
->
-  Toggle
-</Button>
+<Button onclick={() => (pressed = !pressed)} {...interactiveStateAttrs({ pressed })}>Toggle</Button>
 
 <!-- Expandable button -->
-<Button
-  onclick={() => expanded = !expanded}
-  {...interactiveStateAttrs({ expanded })}
->
-  {expanded ? 'Collapse' : 'Expand'}
+<Button onclick={() => (expanded = !expanded)} {...interactiveStateAttrs({ expanded })}>
+	{expanded ? 'Collapse' : 'Expand'}
 </Button>
 ```
 
@@ -102,16 +91,19 @@ Creates ARIA attributes for complex widgets and roles.
 
 ```svelte
 <script>
-  import { widgetAttrs } from 'alus';
-  let value = $state(50);
+	import { widgetAttrs } from 'alus';
+	let value = $state(50);
 </script>
 
-<div role="slider" {...widgetAttrs({
-  valuenow: value,
-  valuemin: 0,
-  valuemax: 100
-})}>
-  Slider
+<div
+	role="slider"
+	{...widgetAttrs({
+		valuenow: value,
+		valuemin: 0,
+		valuemax: 100
+	})}
+>
+	Slider
 </div>
 ```
 
@@ -121,16 +113,11 @@ Combines multiple ARIA attribute objects into one.
 
 ```svelte
 <script>
-  import { mergeAttrs, labelAttrs, interactiveStateAttrs } from 'alus';
+	import { mergeAttrs, labelAttrs, interactiveStateAttrs } from 'alus';
 </script>
 
-<button
-  {...mergeAttrs(
-    labelAttrs({ label: 'Menu' }),
-    interactiveStateAttrs({ expanded: true })
-  )}
->
-  Menu
+<button {...mergeAttrs(labelAttrs({ label: 'Menu' }), interactiveStateAttrs({ expanded: true }))}>
+	Menu
 </button>
 ```
 
@@ -151,7 +138,7 @@ focus.focusLast(dialogElement);
 
 // Check if element is focusable
 if (focus.isFocusable(element)) {
-  element.focus();
+	element.focus();
 }
 ```
 
@@ -161,24 +148,24 @@ if (focus.isFocusable(element)) {
 import { keyboard } from 'alus/a11y';
 
 element.addEventListener('keydown', (e) => {
-  // Check for activation keys (Enter/Space)
-  if (keyboard.isActivationKey(e)) {
-    // Activate button
-  }
+	// Check for activation keys (Enter/Space)
+	if (keyboard.isActivationKey(e)) {
+		// Activate button
+	}
 
-  // Check for Escape
-  if (keyboard.isEscape(e)) {
-    // Close modal/menu
-  }
+	// Check for Escape
+	if (keyboard.isEscape(e)) {
+		// Close modal/menu
+	}
 
-  // Check for arrow keys
-  if (keyboard.isArrow(e)) {
-    const direction = keyboard.getArrowDirection(e);
-    // Handle arrow navigation
-  }
+	// Check for arrow keys
+	if (keyboard.isArrow(e)) {
+		const direction = keyboard.getArrowDirection(e);
+		// Handle arrow navigation
+	}
 
-  // Prevent default Space key scrolling
-  keyboard.preventActivation(e);
+	// Prevent default Space key scrolling
+	keyboard.preventActivation(e);
 });
 ```
 
@@ -186,19 +173,19 @@ element.addEventListener('keydown', (e) => {
 
 ```svelte
 <script>
-  import { generateId } from 'alus/a11y';
+	import { generateId } from 'alus/a11y';
 
-  const labelId = generateId('label');
-  const errorId = generateId('error');
-  const descriptionId = generateId('desc');
+	const labelId = generateId('label');
+	const errorId = generateId('error');
+	const descriptionId = generateId('desc');
 </script>
 
 <Input
-  {...labelAttrs({
-    labelledby: labelId,
-    describedby: descriptionId
-  })}
-  {...validationAttrs({ errormessage: errorId })}
+	{...labelAttrs({
+		labelledby: labelId,
+		describedby: descriptionId
+	})}
+	{...validationAttrs({ errormessage: errorId })}
 />
 <label id={labelId}>Email</label>
 <p id={descriptionId}>Enter your email address</p>
@@ -211,46 +198,44 @@ element.addEventListener('keydown', (e) => {
 
 ```svelte
 <script>
-  import { Input, labelAttrs, validationAttrs, generateId } from 'alus';
+	import { Input, labelAttrs, validationAttrs, generateId } from 'alus';
 
-  let value = $state('');
-  let error = $state('');
+	let value = $state('');
+	let error = $state('');
 
-  const labelId = generateId('label');
-  const errorId = generateId('error');
-  const helpId = generateId('help');
+	const labelId = generateId('label');
+	const errorId = generateId('error');
+	const helpId = generateId('help');
 </script>
 
 <div class="form-field">
-  <label id={labelId} for="email">Email Address</label>
+	<label id={labelId} for="email">Email Address</label>
 
-  <Input
-    id="email"
-    bind:value={value}
-    placeholder="you@example.com"
-    {...labelAttrs({
-      labelledby: labelId,
-      describedby: `${helpId} ${errorId}`
-    })}
-    {...validationAttrs({
-      invalid: !!error,
-      required: true,
-      errormessage: errorId
-    })}
-    required
-    autocomplete="email"
-    inputmode="email"
-  />
+	<Input
+		id="email"
+		bind:value
+		placeholder="you@example.com"
+		{...labelAttrs({
+			labelledby: labelId,
+			describedby: `${helpId} ${errorId}`
+		})}
+		{...validationAttrs({
+			invalid: !!error,
+			required: true,
+			errormessage: errorId
+		})}
+		required
+		autocomplete="email"
+		inputmode="email"
+	/>
 
-  <p id={helpId} class="help-text">
-    We'll never share your email with anyone else.
-  </p>
+	<p id={helpId} class="help-text">We'll never share your email with anyone else.</p>
 
-  {#if error}
-    <p id={errorId} class="error" role="alert" aria-live="polite">
-      {error}
-    </p>
-  {/if}
+	{#if error}
+		<p id={errorId} class="error" role="alert" aria-live="polite">
+			{error}
+		</p>
+	{/if}
 </div>
 ```
 
@@ -258,21 +243,21 @@ element.addEventListener('keydown', (e) => {
 
 ```svelte
 <script>
-  import { Button, interactiveStateAttrs } from 'alus';
+	import { Button, interactiveStateAttrs } from 'alus';
 
-  let isPressed = $state(false);
+	let isPressed = $state(false);
 </script>
 
 <Button
-  onclick={() => isPressed = !isPressed}
-  aria-label="Toggle mute"
-  {...interactiveStateAttrs({ pressed: isPressed })}
+	onclick={() => (isPressed = !isPressed)}
+	aria-label="Toggle mute"
+	{...interactiveStateAttrs({ pressed: isPressed })}
 >
-  {#if isPressed}
-    Muted
-  {:else}
-    Unmuted
-  {/if}
+	{#if isPressed}
+		Muted
+	{:else}
+		Unmuted
+	{/if}
 </Button>
 ```
 
@@ -280,41 +265,41 @@ element.addEventListener('keydown', (e) => {
 
 ```svelte
 <script>
-  import {
-    Button,
-    widgetAttrs,
-    labelAttrs,
-    interactiveStateAttrs,
-    mergeAttrs,
-    generateId
-  } from 'alus';
+	import {
+		Button,
+		widgetAttrs,
+		labelAttrs,
+		interactiveStateAttrs,
+		mergeAttrs,
+		generateId
+	} from 'alus';
 
-  let isOpen = $state(false);
-  const menuId = generateId('menu');
+	let isOpen = $state(false);
+	const menuId = generateId('menu');
 </script>
 
 <div class="dropdown">
-  <Button
-    {...mergeAttrs(
-      labelAttrs({ label: 'Options menu' }),
-      interactiveStateAttrs({ expanded: isOpen }),
-      widgetAttrs({
-        haspopup: 'menu',
-        controls: menuId
-      })
-    )}
-    onclick={() => isOpen = !isOpen}
-  >
-    Options
-  </Button>
+	<Button
+		{...mergeAttrs(
+			labelAttrs({ label: 'Options menu' }),
+			interactiveStateAttrs({ expanded: isOpen }),
+			widgetAttrs({
+				haspopup: 'menu',
+				controls: menuId
+			})
+		)}
+		onclick={() => (isOpen = !isOpen)}
+	>
+		Options
+	</Button>
 
-  {#if isOpen}
-    <ul id={menuId} role="menu">
-      <li role="menuitem">Option 1</li>
-      <li role="menuitem">Option 2</li>
-      <li role="menuitem">Option 3</li>
-    </ul>
-  {/if}
+	{#if isOpen}
+		<ul id={menuId} role="menu">
+			<li role="menuitem">Option 1</li>
+			<li role="menuitem">Option 2</li>
+			<li role="menuitem">Option 3</li>
+		</ul>
+	{/if}
 </div>
 ```
 
@@ -324,4 +309,4 @@ element.addEventListener('keydown', (e) => {
 (^_^) **Type-safe**: Full TypeScript support with proper types
 (^_^) **Composable**: Mix and match utilities for complex patterns
 (^_^) **Tested**: Follows WCAG 2.1 AA standards
-(^_^) **Maintainable**: Centralized accessibility logic
+(^\_^) **Maintainable**: Centralized accessibility logic

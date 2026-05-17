@@ -12,6 +12,7 @@ This is a **pnpm workspace** with two main packages:
 ### Component Library Philosophy
 
 The Alus library provides **unstyled, accessible UI primitives** that:
+
 - Have no default styling (complete styling freedom with Tailwind CSS)
 - Include proper ARIA attributes and semantic HTML
 - Use Svelte 5 runes mode exclusively
@@ -19,7 +20,8 @@ The Alus library provides **unstyled, accessible UI primitives** that:
 - Follow WCAG 2.1 AA accessibility standards
 - Are keyboard navigable with visible focus indicators
 
-#### Current Components (^_^)b
+#### Current Components (^\_^)b
+
 - **Button** - Basic button with full ARIA support, toggle states
 - **Input** - Text input with validation, error states, and accessibility
 - **Checkbox** - Checkbox with indeterminate state and ARIA support
@@ -27,7 +29,9 @@ The Alus library provides **unstyled, accessible UI primitives** that:
 - **Badge** - Status indicator with ARIA live regions and variant support
 
 #### Planned Components 🚧
+
 See `docs/todos/ui-components-roadmap.md` for the complete roadmap including:
+
 - Form: Checkbox, Radio, Select, Textarea, Switch, Slider, etc.
 - Feedback: Alert, Toast, Progress, Badge, Tag, etc.
 - Navigation: Tabs, Accordion, Breadcrumb, Menu, etc.
@@ -85,6 +89,7 @@ pnpm dev:showcase     # Only start the showcase app
 ```
 
 For library development:
+
 ```bash
 cd packages/alus
 pnpm dev              # Watch mode for library package
@@ -127,6 +132,7 @@ pnpm check:watch      # Watch mode for type checking
 ## Key Files & Their Purposes
 
 ### Root Application (`/`)
+
 - `vite.config.ts` - Vite config with Tailwind CSS Vite plugin, Vitest config for client/server tests
 - `svelte.config.js` - SvelteKit config with Netlify adapter, path aliases ($components, $utils, $types)
 - `src/routes/+page.svelte` - Main showcase page demonstrating all components
@@ -134,6 +140,7 @@ pnpm check:watch      # Watch mode for type checking
 - `src/lib/components/` - Showcase-specific components (Navbar, Footer)
 
 ### Library Package (`packages/alus/`)
+
 - `src/lib/components/` - Core component library
   - `form/button/Button.svelte` - Unstyled accessible button component
   - `form/input/Input.svelte` - Unstyled accessible input component
@@ -154,6 +161,7 @@ pnpm check:watch      # Watch mode for type checking
 - `vite.config.ts` - Build configuration for library
 
 ### Path Aliases (configured in svelte.config.js)
+
 ```typescript
 $components → src/lib/components
 $utils → src/lib/utils
@@ -175,6 +183,7 @@ packages/alus/src/lib/components/{category}/{component-lowercase}/
 ```
 
 Example (Button):
+
 ```
 packages/alus/src/lib/components/form/button/
 ├── Button.svelte
@@ -182,6 +191,7 @@ packages/alus/src/lib/components/form/button/
 ```
 
 The `index.ts` file must use this exact format:
+
 ```ts
 export { default as ComponentName } from './ComponentName.svelte';
 ```
@@ -199,6 +209,7 @@ export { default as ComponentName } from './ComponentName.svelte';
 9. **Documentation**: Add demo in `src/routes/components/{component}/+page.svelte`
 
 ### Component Template
+
 ```svelte
 <script lang="ts">
 	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
@@ -245,13 +256,13 @@ export { default as ComponentName } from './ComponentName.svelte';
 
 ### ARIA Helper Utilities (`src/lib/utils/a11y/aria.ts`)
 
-| Utility | Purpose | Example |
-|---------|---------|---------|
-| `labelAttrs()` | Label/description associations | `labelAttrs({ label, labelledby, describedby })` |
-| `validationAttrs()` | Form validation states | `validationAttrs({ invalid, required, errormessage })` |
-| `interactiveStateAttrs()` | Interactive element states | `interactiveStateAttrs({ disabled, pressed, expanded, checked })` |
-| `widgetAttrs()` | Complex widget attributes | `widgetAttrs({ controls, haspopup, live, orientation })` |
-| `mergeAttrs()` | Combine multiple ARIA objects | `mergeAttrs(labelAttrs(...), interactiveStateAttrs(...))` |
+| Utility                   | Purpose                        | Example                                                           |
+| ------------------------- | ------------------------------ | ----------------------------------------------------------------- |
+| `labelAttrs()`            | Label/description associations | `labelAttrs({ label, labelledby, describedby })`                  |
+| `validationAttrs()`       | Form validation states         | `validationAttrs({ invalid, required, errormessage })`            |
+| `interactiveStateAttrs()` | Interactive element states     | `interactiveStateAttrs({ disabled, pressed, expanded, checked })` |
+| `widgetAttrs()`           | Complex widget attributes      | `widgetAttrs({ controls, haspopup, live, orientation })`          |
+| `mergeAttrs()`            | Combine multiple ARIA objects  | `mergeAttrs(labelAttrs(...), interactiveStateAttrs(...))`         |
 
 ### Pattern for All Components
 
@@ -285,6 +296,7 @@ export { default as ComponentName } from './ComponentName.svelte';
 ## Dependencies
 
 ### Production Dependencies
+
 - `svelte` ^5.55.2 - Svelte 5 with runes mode
 - `@sveltejs/kit` ^2.57.0 - SvelteKit framework
 - `phosphor-svelte` ^3.1.0 - Icon library
@@ -292,6 +304,7 @@ export { default as ComponentName } from './ComponentName.svelte';
 - `runed` ^0.37.1 - Svelte 5 utilities library
 
 ### Development Dependencies
+
 - `tailwindcss` ^4.2.2 - Utility-first CSS framework
 - `@tailwindcss/vite` ^4.2.2 - Tailwind Vite plugin
 - `vitest` ^4.1.3 - Unit testing framework

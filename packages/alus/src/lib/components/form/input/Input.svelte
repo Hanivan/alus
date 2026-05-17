@@ -1,11 +1,6 @@
 <script lang="ts">
 	import { labelAttrs, validationAttrs, mergeAttrs } from '$utils/a11y/index.js';
-	import type {
-		InputType,
-		InputMode,
-		AutocompleteValue,
-		AriaBoolean
-	} from '$types/index.js';
+	import type { InputType, InputMode, AutocompleteValue, AriaBoolean } from '$types/index.js';
 
 	interface Props {
 		type?: InputType;
@@ -80,7 +75,9 @@
 			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby }),
 			validationAttrs({
 				invalid: ariaInvalid === 'false' ? false : ariaInvalid === 'true' ? true : ariaInvalid,
-				required: (ariaRequired === 'false' ? false : ariaRequired === 'true' ? true : ariaRequired) ?? required,
+				required:
+					(ariaRequired === 'false' ? false : ariaRequired === 'true' ? true : ariaRequired) ??
+					required,
 				errormessage: ariaErrormessage
 			})
 		)
@@ -111,6 +108,6 @@
 	{onblur}
 	{onkeydown}
 	{onkeyup}
-	tabindex={tabindex}
+	{tabindex}
 	{...ariaAttrs}
 />

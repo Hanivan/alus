@@ -89,7 +89,12 @@ export function focusLast(container: HTMLElement): void {
  * Checks if an element can receive focus
  */
 export function isFocusable(element: HTMLElement): boolean {
-	if (element instanceof HTMLButtonElement || element instanceof HTMLInputElement || element instanceof HTMLSelectElement || element instanceof HTMLTextAreaElement) {
+	if (
+		element instanceof HTMLButtonElement ||
+		element instanceof HTMLInputElement ||
+		element instanceof HTMLSelectElement ||
+		element instanceof HTMLTextAreaElement
+	) {
 		return !element.disabled && element.tabIndex >= 0;
 	}
 

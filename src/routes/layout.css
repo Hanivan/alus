@@ -59,28 +59,30 @@ body {
 }
 
 /* Decorative Border - Japanese Style */
-.japanese-border {
-	position: relative;
-	border: 2px solid var(--indigo-dye);
-}
+@layer components {
+	.japanese-border {
+		position: relative;
+		border: 2px solid var(--indigo-dye);
+	}
 
-.japanese-border::before,
-.japanese-border::after {
-	content: '';
-	position: absolute;
-	width: 8px;
-	height: 8px;
-	background-color: var(--vermilion);
-}
+	.japanese-border::before,
+	.japanese-border::after {
+		content: '';
+		position: absolute;
+		width: 8px;
+		height: 8px;
+		background-color: var(--vermilion);
+	}
 
-.japanese-border::before {
-	top: -2px;
-	left: -2px;
-}
+	.japanese-border::before {
+		top: -2px;
+		left: -2px;
+	}
 
-.japanese-border::after {
-	bottom: -2px;
-	right: -2px;
+	.japanese-border::after {
+		bottom: -2px;
+		right: -2px;
+	}
 }
 
 /* Hanko Seal Effect */

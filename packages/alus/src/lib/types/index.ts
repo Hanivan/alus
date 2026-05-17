@@ -65,7 +65,15 @@ export type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url'
  * HTML inputmode attribute values
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode
  */
-export type InputMode = 'none' | 'text' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search';
+export type InputMode =
+	| 'none'
+	| 'text'
+	| 'tel'
+	| 'url'
+	| 'email'
+	| 'numeric'
+	| 'decimal'
+	| 'search';
 
 /**
  * HTML button types
@@ -142,7 +150,9 @@ export type NormalizedAriaBoolean<T> = T extends 'true' | 'false' ? boolean : T;
 /**
  * Helper to normalize ARIA tristate values
  */
-export type NormalizedAriaTristate<T> = T extends 'true' | 'false' | 'mixed' ? boolean | 'mixed' : T;
+export type NormalizedAriaTristate<T> = T extends 'true' | 'false' | 'mixed'
+	? boolean | 'mixed'
+	: T;
 
 /**
  * Utility constants for common values

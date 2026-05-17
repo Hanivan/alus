@@ -8,6 +8,7 @@
 [![npm package](https://img.shields.io/badge/npm-alus-critical)](https://www.npmjs.com/package/alus)
 
 Alus provides a set of primitive UI components that are:
+
 - **Unstyled** - Complete styling freedom with Tailwind CSS or any CSS framework
 - **Accessible** - WCAG 2.1 AA compliant with proper ARIA attributes
 - **Keyboard-friendly** - Full keyboard navigation support
@@ -33,45 +34,44 @@ yarn add alus
 	let name = $state('');
 </script>
 
-<Input
-	bind:value={name}
-	placeholder="Enter your name"
-	aria-label="Name input"
-/>
+<Input bind:value={name} placeholder="Enter your name" aria-label="Name input" />
 
-<Button onclick={() => alert(`Hello ${name}!`)}>
-	Submit
-</Button>
+<Button onclick={() => alert(`Hello ${name}!`)}>Submit</Button>
 ```
 
 ## Available Components
 
-### Form Components (^_^)b
+### Form Components (^\_^)b
+
 - **Button** - Accessible button with ARIA support and toggle states
 - **Input** - Text input with validation, error states, and accessibility
 
 ## Features
 
 ### (°_°) Accessibility First
+
 - WCAG 2.1 AA compliant out of the box
 - Proper ARIA attributes (aria-label, aria-describedby, aria-invalid, etc.)
 - Screen reader support with semantic HTML
 - Keyboard navigation with visible focus indicators
 - Live regions for dynamic content announcements
 
-### (☆^_☆) Complete Styling Control
+### (☆^\_☆) Complete Styling Control
+
 - No default styles or colors
 - Works seamlessly with Tailwind CSS
 - Easy to theme with CSS variables
 - Responsive and mobile-friendly
 
 ### (☆^O^☆) Svelte 5 Runes Mode
+
 - Modern reactive syntax with `$props`, `$derived`, `$state`
 - Better TypeScript support
 - Improved performance
 - Future-proof Svelte architecture
 
-### (^_^) Type Safety
+### (^\_^) Type Safety
+
 - Full TypeScript support
 - Type-safe props and events
 - IntelliSense in IDEs
@@ -83,10 +83,7 @@ yarn add alus
 	import { Button } from 'alus';
 </script>
 
-<Button
-	class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-	aria-label="Submit form"
->
+<Button class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700" aria-label="Submit form">
 	Submit
 </Button>
 ```
@@ -128,18 +125,13 @@ yarn add alus
 ### Button
 
 ```svelte
-<Button
-	type="button"
-	disabled={false}
-	aria-pressed={undefined}
-	class=""
-	onclick={() => {}}
->
+<Button type="button" disabled={false} aria-pressed={undefined} class="" onclick={() => {}}>
 	Button content
 </Button>
 ```
 
 **Props:**
+
 - `type?: 'button' | 'submit' | 'reset'` - Button type (default: 'button')
 - `disabled?: boolean` - Disabled state
 - `aria-pressed?: boolean` - Toggle button state
@@ -163,6 +155,7 @@ yarn add alus
 ```
 
 **Props:**
+
 - `type?: HTMLInputTypeAttribute` - Input type (default: 'text')
 - `value?: string` - Input value (use `bind:value` for two-way binding)
 - `autocomplete?: string` - Autocomplete attribute
@@ -176,13 +169,14 @@ yarn add alus
 ## Accessibility Features
 
 Each component includes:
-- (^_^) Semantic HTML elements
-- (^_^) ARIA attributes and roles
-- (^_^) Keyboard navigation support
-- (^_^) Focus management
-- (^_^) Screen reader announcements
-- (^_^) Error and validation states
-- (^_^) Visible focus indicators
+
+- (^\_^) Semantic HTML elements
+- (^\_^) ARIA attributes and roles
+- (^\_^) Keyboard navigation support
+- (^\_^) Focus management
+- (^\_^) Screen reader announcements
+- (^\_^) Error and validation states
+- (^\_^) Visible focus indicators
 
 ## Browser Support
 
@@ -227,6 +221,7 @@ MIT
 ## Acknowledgments
 
 Built with:
+
 - [Svelte 5](https://svelte.dev/) - Cybernetically enhanced web apps
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 - [Floating UI](https://floating-ui.com/) - Positioning engine for overlays

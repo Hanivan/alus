@@ -41,50 +41,54 @@
 
 <svelte:head>
 	<title>Checkbox · Alus Components</title>
-	<meta name="description" content="Accessible checkbox component with indeterminate state and ARIA support" />
+	<meta
+		name="description"
+		content="Accessible checkbox component with indeterminate state and ARIA support"
+	/>
 </svelte:head>
 
 <a
 	href="/"
-	class="inline-flex items-center gap-2 text-(--indigo-dye) hover:text-(--vermilion) transition-colors duration-300 mb-8"
+	class="mb-8 inline-flex items-center gap-2 text-(--indigo-dye) transition-colors duration-300 hover:text-(--vermilion)"
 >
-	<CaretLeft class="w-5 h-5" />
+	<CaretLeft class="h-5 w-5" />
 	<span class="font-medium">Back to Components</span>
 </a>
 
 <main>
 	<!-- Header -->
 	<header class="mb-16">
-		<div class="flex items-center gap-6 mb-6">
+		<div class="mb-6 flex items-center gap-6">
 			<div class="hanko-seal">✓</div>
 			<div>
-				<h1 class="font-display text-5xl md:text-6xl text-(--ink) mb-2">Checkbox</h1>
-				<p class="text-(--bamboo) tracking-widest">チェックボックス</p>
+				<h1 class="font-display mb-2 text-5xl text-(--ink) md:text-6xl">Checkbox</h1>
+				<p class="tracking-widest text-(--bamboo)">チェックボックス</p>
 			</div>
 		</div>
-		<p class="text-xl text-(--charcoal)/70 max-w-2xl">
-			An accessible checkbox component with indeterminate state, proper ARIA support, and keyboard navigation.
+		<p class="max-w-2xl text-xl text-(--charcoal)/70">
+			An accessible checkbox component with indeterminate state, proper ARIA support, and keyboard
+			navigation.
 		</p>
 	</header>
 
 	<!-- Basic Checkboxes -->
 	<section class="mb-16">
-		<h2 class="font-display text-2xl text-(--ink) mb-8">
+		<h2 class="font-display mb-8 text-2xl text-(--ink)">
 			<span>Basic Checkboxes</span>
-			<span class="text-(--bamboo) text-lg ml-2">基本チェックボックス</span>
+			<span class="ml-2 text-lg text-(--bamboo)">基本チェックボックス</span>
 		</h2>
 
-		<div class="japanese-border p-8 bg-white/50 backdrop-blur-sm space-y-4">
+		<div class="japanese-border space-y-4 bg-white/50 p-8 backdrop-blur-sm">
 			<div class="flex items-center gap-3">
 				<Checkbox
 					bind:checked={acceptedTerms}
-					class="w-5 h-5 accent-(--indigo-dye)"
+					class="h-5 w-5 accent-(--indigo-dye)"
 					id="terms"
 					aria-label="Accept terms and conditions"
 				/>
 				<label
 					for="terms"
-					class="text-(--charcoal) cursor-pointer select-none hover:text-(--indigo-dye) transition-colors duration-200"
+					class="cursor-pointer text-(--charcoal) transition-colors duration-200 select-none hover:text-(--indigo-dye)"
 				>
 					I accept the terms and conditions
 				</label>
@@ -93,13 +97,13 @@
 			<div class="flex items-center gap-3">
 				<Checkbox
 					bind:checked={newsletter}
-					class="w-5 h-5 accent-(--indigo-dye)"
+					class="h-5 w-5 accent-(--indigo-dye)"
 					id="newsletter"
 					aria-label="Subscribe to newsletter"
 				/>
 				<label
 					for="newsletter"
-					class="text-(--charcoal) cursor-pointer select-none hover:text-(--indigo-dye) transition-colors duration-200"
+					class="cursor-pointer text-(--charcoal) transition-colors duration-200 select-none hover:text-(--indigo-dye)"
 				>
 					Subscribe to our newsletter
 				</label>
@@ -108,13 +112,13 @@
 			<div class="flex items-center gap-3">
 				<Checkbox
 					bind:checked={notifications}
-					class="w-5 h-5 accent-(--indigo-dye)"
+					class="h-5 w-5 accent-(--indigo-dye)"
 					id="notifications"
 					aria-label="Enable notifications"
 				/>
 				<label
 					for="notifications"
-					class="text-(--charcoal) cursor-pointer select-none hover:text-(--indigo-dye) transition-colors duration-200"
+					class="cursor-pointer text-(--charcoal) transition-colors duration-200 select-none hover:text-(--indigo-dye)"
 				>
 					Enable push notifications
 				</label>
@@ -124,73 +128,72 @@
 
 	<!-- Indeterminate State -->
 	<section class="mb-16">
-		<h2 class="font-display text-2xl text-(--ink) mb-8">
+		<h2 class="font-display mb-8 text-2xl text-(--ink)">
 			<span>Indeterminate State</span>
-			<span class="text-(--bamboo) text-lg ml-2">不確定状態</span>
+			<span class="ml-2 text-lg text-(--bamboo)">不確定状態</span>
 		</h2>
 
-		<div class="japanese-border p-8 bg-white/50 backdrop-blur-sm space-y-4">
-			<div class="flex items-center gap-3 mb-4">
+		<div class="japanese-border space-y-4 bg-white/50 p-8 backdrop-blur-sm">
+			<div class="mb-4 flex items-center gap-3">
 				<Checkbox
 					bind:checked={selectAll}
 					indeterminate={someItemsChecked}
 					onchange={toggleAll}
-					class="w-5 h-5 accent-(--indigo-dye)"
+					class="h-5 w-5 accent-(--indigo-dye)"
 					id="selectAll"
 					aria-label="Select all items"
 				/>
 				<label
 					for="selectAll"
-					class="font-medium text-(--ink) cursor-pointer select-none hover:text-(--vermilion) transition-colors duration-200"
+					class="cursor-pointer font-medium text-(--ink) transition-colors duration-200 select-none hover:text-(--vermilion)"
 				>
 					Select All
 				</label>
 			</div>
 
-			<div class="pl-8 space-y-3 border-l-2 border-(--indigo-dye)/10">
+			<div class="space-y-3 border-l-2 border-(--indigo-dye)/10 pl-8">
 				<div class="flex items-center gap-3">
 					<Checkbox
 						bind:checked={item1}
-						class="w-5 h-5 accent-(--indigo-dye)"
+						class="h-5 w-5 accent-(--indigo-dye)"
 						id="item1"
 						aria-label="Select item 1"
 					/>
 					<label
 						for="item1"
-						class="text-(--charcoal) cursor-pointer select-none hover:text-(--indigo-dye) transition-colors duration-200"
-					>Item 1</label>
+						class="cursor-pointer text-(--charcoal) transition-colors duration-200 select-none hover:text-(--indigo-dye)"
+						>Item 1</label
+					>
 				</div>
 				<div class="flex items-center gap-3">
 					<Checkbox
 						bind:checked={item2}
-						class="w-5 h-5 accent-(--indigo-dye)"
+						class="h-5 w-5 accent-(--indigo-dye)"
 						id="item2"
 						aria-label="Select item 2"
 					/>
 					<label
 						for="item2"
-						class="text-(--charcoal) cursor-pointer select-none hover:text-(--indigo-dye) transition-colors duration-200"
-					>Item 2</label>
+						class="cursor-pointer text-(--charcoal) transition-colors duration-200 select-none hover:text-(--indigo-dye)"
+						>Item 2</label
+					>
 				</div>
 				<div class="flex items-center gap-3">
 					<Checkbox
 						bind:checked={item3}
-						class="w-5 h-5 accent-(--indigo-dye)"
+						class="h-5 w-5 accent-(--indigo-dye)"
 						id="item3"
 						aria-label="Select item 3"
 					/>
 					<label
 						for="item3"
-						class="text-(--charcoal) cursor-pointer select-none hover:text-(--indigo-dye) transition-colors duration-200"
-					>Item 3</label>
+						class="cursor-pointer text-(--charcoal) transition-colors duration-200 select-none hover:text-(--indigo-dye)"
+						>Item 3</label
+					>
 				</div>
 			</div>
 
-			<div
-				role="status"
-				aria-live="polite"
-				class="mt-4 text-sm text-(--charcoal)/60"
-			>
+			<div role="status" aria-live="polite" class="mt-4 text-sm text-(--charcoal)/60">
 				Selected: {allItemsChecked ? 'All' : someItemsChecked ? 'Some' : 'None'}
 			</div>
 		</div>
@@ -198,24 +201,21 @@
 
 	<!-- Disabled State -->
 	<section class="mb-16">
-		<h2 class="font-display text-2xl text-(--ink) mb-8">
+		<h2 class="font-display mb-8 text-2xl text-(--ink)">
 			<span>Disabled State</span>
-			<span class="text-(--bamboo) text-lg ml-2">無効状態</span>
+			<span class="ml-2 text-lg text-(--bamboo)">無効状態</span>
 		</h2>
 
-		<div class="japanese-border p-8 bg-white/50 backdrop-blur-sm space-y-4">
+		<div class="japanese-border space-y-4 bg-white/50 p-8 backdrop-blur-sm">
 			<div class="flex items-center gap-3 opacity-50">
 				<Checkbox
 					checked={true}
 					disabled
-					class="w-5 h-5 accent-(--indigo-dye)"
+					class="h-5 w-5 accent-(--indigo-dye)"
 					id="disabled-checked"
 					aria-label="Disabled checked checkbox"
 				/>
-				<label
-					for="disabled-checked"
-					class="text-(--charcoal) cursor-pointer select-none"
-				>
+				<label for="disabled-checked" class="cursor-pointer text-(--charcoal) select-none">
 					Disabled (Checked)
 				</label>
 			</div>
@@ -224,14 +224,11 @@
 				<Checkbox
 					checked={false}
 					disabled
-					class="w-5 h-5 accent-(--indigo-dye)"
+					class="h-5 w-5 accent-(--indigo-dye)"
 					id="disabled-unchecked"
 					aria-label="Disabled unchecked checkbox"
 				/>
-				<label
-					for="disabled-unchecked"
-					class="text-(--charcoal) cursor-pointer select-none"
-				>
+				<label for="disabled-unchecked" class="cursor-pointer text-(--charcoal) select-none">
 					Disabled (Unchecked)
 				</label>
 			</div>
@@ -240,45 +237,73 @@
 
 	<!-- Props Reference -->
 	<section class="mb-16">
-		<h2 class="font-display text-2xl text-(--ink) mb-8">
+		<h2 class="font-display mb-8 text-2xl text-(--ink)">
 			<span>Props</span>
-			<span class="text-(--bamboo) text-lg ml-2">プロパティ</span>
+			<span class="ml-2 text-lg text-(--bamboo)">プロパティ</span>
 		</h2>
 
-		<div class="japanese-border p-8 bg-white/50 backdrop-blur-sm overflow-x-auto">
+		<div class="japanese-border overflow-x-auto bg-white/50 p-8 backdrop-blur-sm">
 			<table class="w-full text-left">
 				<thead>
 					<tr class="border-b border-(--indigo-dye)/20">
-						<th class="py-3 px-4 font-semibold text-(--ink)">Prop</th>
-						<th class="py-3 px-4 font-semibold text-(--ink)">Type</th>
-						<th class="py-3 px-4 font-semibold text-(--ink)">Default</th>
+						<th class="px-4 py-3 font-semibold text-(--ink)">Prop</th>
+						<th class="px-4 py-3 font-semibold text-(--ink)">Type</th>
+						<th class="px-4 py-3 font-semibold text-(--ink)">Default</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr class="border-b border-(--indigo-dye)/10">
-						<td class="py-3 px-4"><code class="text-sm bg-(--cream) px-2 py-1 rounded">checked</code></td>
-						<td class="py-3 px-4 text-sm text-(--charcoal)/70"><code class="text-sm">boolean</code></td>
-						<td class="py-3 px-4 text-sm text-(--charcoal)/70"><code class="text-sm">false</code></td>
+						<td class="px-4 py-3"
+							><code class="rounded bg-(--cream) px-2 py-1 text-sm">checked</code></td
+						>
+						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
+							><code class="text-sm">boolean</code></td
+						>
+						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
+							><code class="text-sm">false</code></td
+						>
 					</tr>
 					<tr class="border-b border-(--indigo-dye)/10">
-						<td class="py-3 px-4"><code class="text-sm bg-(--cream) px-2 py-1 rounded">disabled</code></td>
-						<td class="py-3 px-4 text-sm text-(--charcoal)/70"><code class="text-sm">boolean</code></td>
-						<td class="py-3 px-4 text-sm text-(--charcoal)/70"><code class="text-sm">false</code></td>
+						<td class="px-4 py-3"
+							><code class="rounded bg-(--cream) px-2 py-1 text-sm">disabled</code></td
+						>
+						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
+							><code class="text-sm">boolean</code></td
+						>
+						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
+							><code class="text-sm">false</code></td
+						>
 					</tr>
 					<tr class="border-b border-(--indigo-dye)/10">
-						<td class="py-3 px-4"><code class="text-sm bg-(--cream) px-2 py-1 rounded">indeterminate</code></td>
-						<td class="py-3 px-4 text-sm text-(--charcoal)/70"><code class="text-sm">boolean</code></td>
-						<td class="py-3 px-4 text-sm text-(--charcoal)/70"><code class="text-sm">false</code></td>
+						<td class="px-4 py-3"
+							><code class="rounded bg-(--cream) px-2 py-1 text-sm">indeterminate</code></td
+						>
+						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
+							><code class="text-sm">boolean</code></td
+						>
+						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
+							><code class="text-sm">false</code></td
+						>
 					</tr>
 					<tr class="border-b border-(--indigo-dye)/10">
-						<td class="py-3 px-4"><code class="text-sm bg-(--cream) px-2 py-1 rounded">required</code></td>
-						<td class="py-3 px-4 text-sm text-(--charcoal)/70"><code class="text-sm">boolean</code></td>
-						<td class="py-3 px-4 text-sm text-(--charcoal)/70"><code class="text-sm">false</code></td>
+						<td class="px-4 py-3"
+							><code class="rounded bg-(--cream) px-2 py-1 text-sm">required</code></td
+						>
+						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
+							><code class="text-sm">boolean</code></td
+						>
+						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
+							><code class="text-sm">false</code></td
+						>
 					</tr>
 					<tr>
-						<td class="py-3 px-4"><code class="text-sm bg-(--cream) px-2 py-1 rounded">class</code></td>
-						<td class="py-3 px-4 text-sm text-(--charcoal)/70"><code class="text-sm">string</code></td>
-						<td class="py-3 px-4 text-sm text-(--charcoal)/70"><code class="text-sm">''</code></td>
+						<td class="px-4 py-3"
+							><code class="rounded bg-(--cream) px-2 py-1 text-sm">class</code></td
+						>
+						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
+							><code class="text-sm">string</code></td
+						>
+						<td class="px-4 py-3 text-sm text-(--charcoal)/70"><code class="text-sm">''</code></td>
 					</tr>
 				</tbody>
 			</table>
@@ -287,32 +312,40 @@
 
 	<!-- Accessibility -->
 	<section class="mb-16">
-		<h2 class="font-display text-2xl text-(--ink) mb-8">
+		<h2 class="font-display mb-8 text-2xl text-(--ink)">
 			<span>Accessibility</span>
-			<span class="text-(--bamboo) text-lg ml-2">アクセシビリティ</span>
+			<span class="ml-2 text-lg text-(--bamboo)">アクセシビリティ</span>
 		</h2>
 
-		<div class="japanese-border p-8 bg-linear-to-br from-white to-(--cream)">
+		<div class="japanese-border bg-linear-to-br from-white to-(--cream) p-8">
 			<ul class="space-y-4">
 				<li class="flex items-start gap-3">
-					<span class="text-(--matcha) mt-0.5"><Check class="w-4 h-4" /></span>
-					<span class="text-(--charcoal)/80">Semantic HTML with native <code class="bg-(--cream) px-1 rounded">&lt;input type="checkbox"&gt;</code> element</span>
+					<span class="mt-0.5 text-(--matcha)"><Check class="h-4 w-4" /></span>
+					<span class="text-(--charcoal)/80"
+						>Semantic HTML with native <code class="rounded bg-(--cream) px-1"
+							>&lt;input type="checkbox"&gt;</code
+						> element</span
+					>
 				</li>
 				<li class="flex items-start gap-3">
-					<span class="text-(--matcha) mt-0.5"><Check class="w-4 h-4" /></span>
-					<span class="text-(--charcoal)/80">Full ARIA support (aria-label, aria-labelledby, aria-describedby)</span>
+					<span class="mt-0.5 text-(--matcha)"><Check class="h-4 w-4" /></span>
+					<span class="text-(--charcoal)/80"
+						>Full ARIA support (aria-label, aria-labelledby, aria-describedby)</span
+					>
 				</li>
 				<li class="flex items-start gap-3">
-					<span class="text-(--matcha) mt-0.5"><Check class="w-4 h-4" /></span>
+					<span class="mt-0.5 text-(--matcha)"><Check class="h-4 w-4" /></span>
 					<span class="text-(--charcoal)/80">Keyboard navigation with Space key</span>
 				</li>
 				<li class="flex items-start gap-3">
-					<span class="text-(--matcha) mt-0.5"><Check class="w-4 h-4" /></span>
+					<span class="mt-0.5 text-(--matcha)"><Check class="h-4 w-4" /></span>
 					<span class="text-(--charcoal)/80">Proper label association for screen readers</span>
 				</li>
 				<li class="flex items-start gap-3">
-					<span class="text-(--matcha) mt-0.5"><Check class="w-4 h-4" /></span>
-					<span class="text-(--charcoal)/80">Indeterminate state support for "select all" patterns</span>
+					<span class="mt-0.5 text-(--matcha)"><Check class="h-4 w-4" /></span>
+					<span class="text-(--charcoal)/80"
+						>Indeterminate state support for "select all" patterns</span
+					>
 				</li>
 			</ul>
 		</div>
@@ -320,16 +353,18 @@
 
 	<!-- Keyboard Testing -->
 	<section>
-		<h2 class="font-display text-2xl text-(--ink) mb-8">
+		<h2 class="font-display mb-8 text-2xl text-(--ink)">
 			<span>Keyboard Testing</span>
-			<span class="text-(--bamboo) text-lg ml-2">キーボードテスト</span>
+			<span class="ml-2 text-lg text-(--bamboo)">キーボードテスト</span>
 		</h2>
 
-		<div class="japanese-border p-8 bg-(--indigo-dye)/5">
-			<h3 class="font-semibold text-(--ink) mb-4">Test keyboard navigation:</h3>
-			<ol class="list-decimal list-inside space-y-2 text-(--charcoal)/80">
+		<div class="japanese-border bg-(--indigo-dye)/5 p-8">
+			<h3 class="mb-4 font-semibold text-(--ink)">Test keyboard navigation:</h3>
+			<ol class="list-inside list-decimal space-y-2 text-(--charcoal)/80">
 				<li>Tab to focus on any checkbox</li>
-				<li>Press <kbd class="px-2 py-1 bg-white rounded text-sm font-mono">Space</kbd> to toggle</li>
+				<li>
+					Press <kbd class="rounded bg-white px-2 py-1 font-mono text-sm">Space</kbd> to toggle
+				</li>
 				<li>Verify screen reader announces state changes</li>
 			</ol>
 		</div>

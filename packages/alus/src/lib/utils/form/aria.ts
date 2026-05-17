@@ -25,10 +25,7 @@ export interface FieldProps {
  * @param errorId - Error element ID
  * @returns Space-separated IDs for aria-describedby
  */
-function buildDescribedBy(
-	descriptionId?: string,
-	errorId?: string
-): string | undefined {
+function buildDescribedBy(descriptionId?: string, errorId?: string): string | undefined {
 	const ids: string[] = [];
 	if (descriptionId) ids.push(descriptionId);
 	if (errorId) ids.push(errorId);
@@ -58,7 +55,10 @@ function buildDescribedBy(
 export function getFieldAriaAttrs(props: FieldProps): Record<string, string> {
 	return buildAriaAttrs({
 		'aria-label': props.label,
-		'aria-describedby': buildDescribedBy(props.descriptionId || props.description, props.errorId || props.error),
+		'aria-describedby': buildDescribedBy(
+			props.descriptionId || props.description,
+			props.errorId || props.error
+		),
 		'aria-invalid': props.invalid || hasError(props.error),
 		'aria-required': props.required
 	});
@@ -98,4 +98,4 @@ export const fieldRoles = {
 /**
  * Type for ARIA field roles
  */
-export type FieldRole = typeof fieldRoles[keyof typeof fieldRoles];
+export type FieldRole = (typeof fieldRoles)[keyof typeof fieldRoles];

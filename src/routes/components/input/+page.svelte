@@ -125,7 +125,7 @@
 						role="alert"
 						aria-live="assertive"
 					>
-						<Warning class="w-4 h-4" />
+						<Warning class="h-4 w-4" />
 						<span>{nameError}</span>
 					</p>
 				{/if}
@@ -135,7 +135,7 @@
 						role="status"
 						aria-live="polite"
 					>
-						<Check class="w-4 h-4" />
+						<Check class="h-4 w-4" />
 						<span>Hello, {name}!</span>
 					</p>
 				{/if}
@@ -172,7 +172,7 @@
 						role="alert"
 						aria-live="assertive"
 					>
-						<Warning class="w-4 h-4" />
+						<Warning class="h-4 w-4" />
 						<span>{emailError}</span>
 					</p>
 				{/if}
@@ -208,7 +208,7 @@
 						role="alert"
 						aria-live="assertive"
 					>
-						<Warning class="w-4 h-4" />
+						<Warning class="h-4 w-4" />
 						<span>{passwordError}</span>
 					</p>
 				{/if}
@@ -218,7 +218,7 @@
 						role="status"
 						aria-live="polite"
 					>
-						<Check class="w-4 h-4" />
+						<Check class="h-4 w-4" />
 						<span>Password strength: Good</span>
 					</p>
 				{/if}
@@ -342,9 +342,7 @@
 						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
 							><code class="text-sm">string</code></td
 						>
-						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
-							><code class="text-sm">''</code></td
-						>
+						<td class="px-4 py-3 text-sm text-(--charcoal)/70"><code class="text-sm">''</code></td>
 					</tr>
 					<tr class="border-b border-(--indigo-dye)/10">
 						<td class="px-4 py-3"
@@ -397,9 +395,7 @@
 						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
 							><code class="text-sm">string</code></td
 						>
-						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
-							><code class="text-sm">''</code></td
-						>
+						<td class="px-4 py-3 text-sm text-(--charcoal)/70"><code class="text-sm">''</code></td>
 					</tr>
 				</tbody>
 			</table>
@@ -418,9 +414,7 @@
 				<li class="flex items-start gap-3">
 					<span class="mt-0.5 text-(--matcha)">✓</span>
 					<span class="text-(--charcoal)/80"
-						>Semantic HTML with native <code class="rounded bg-(--cream) px-1"
-							>&lt;input&gt;</code
-						> element</span
+						>Semantic HTML with native <code class="rounded bg-(--cream) px-1">&lt;input&gt;</code> element</span
 					>
 				</li>
 				<li class="flex items-start gap-3">
@@ -431,15 +425,12 @@
 				</li>
 				<li class="flex items-start gap-3">
 					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						>Form validation with proper error announcements</span
-					>
+					<span class="text-(--charcoal)/80">Form validation with proper error announcements</span>
 				</li>
 				<li class="flex items-start gap-3">
 					<span class="mt-0.5 text-(--matcha)">✓</span>
 					<span class="text-(--charcoal)/80"
-						>Works with <code class="rounded bg-(--cream) px-1">&lt;label&gt;</code> for implicit
-						labeling</span
+						>Works with <code class="rounded bg-(--cream) px-1">&lt;label&gt;</code> for implicit labeling</span
 					>
 				</li>
 				<li class="flex items-start gap-3">
