@@ -106,6 +106,42 @@
 			description: 'Form wrapper with submit handling and ARIA labels',
 			href: '/components/form',
 			kanji: '式'
+		},
+		{
+			title: 'Label',
+			description: 'Form label with for-association and required indicator',
+			href: '/components/label',
+			kanji: '札'
+		},
+		{
+			title: 'Switch',
+			description: 'Toggle switch with role=switch and keyboard support',
+			href: '/components/switch',
+			kanji: '切'
+		},
+		{
+			title: 'Spinner',
+			description: 'Loading spinner with ARIA live region',
+			href: '/components/spinner',
+			kanji: '回'
+		},
+		{
+			title: 'Skeleton',
+			description: 'Loading placeholder for content blocks',
+			href: '/components/skeleton',
+			kanji: '骨'
+		},
+		{
+			title: 'Progress',
+			description: 'Progress bar with value/indeterminate states',
+			href: '/components/progress',
+			kanji: '進'
+		},
+		{
+			title: 'Alert',
+			description: 'Notification banner with variants and dismiss',
+			href: '/components/alert',
+			kanji: '報'
 		}
 	];
 

@@ -23,10 +23,16 @@ export { RadioGroup, getRadioGroup, setRadioGroup } from './form/radio-group/ind
 export type { RadioGroupContext } from './form/radio-group/index.js';
 export { Form } from './form/form/index.js';
 export { FieldError } from './form/field-error/index.js';
+export { Label } from './form/label/index.js';
+export { Switch } from './form/switch/index.js';
 
 // Feedback Components
 export { Badge } from './feedback/badge/index.js';
 export { Tag } from './feedback/tag/index.js';
+export { Spinner } from './feedback/spinner/index.js';
+export { Skeleton } from './feedback/skeleton/index.js';
+export { Progress } from './feedback/progress/index.js';
+export { Alert } from './feedback/alert/index.js';
 
 // Display Components
 export { Divider } from './display/divider/index.js';
