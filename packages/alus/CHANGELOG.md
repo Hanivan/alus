@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.3](https://github.com/Hanivan/alus/compare/v0.1.2...v0.1.3) (2026-05-18)
+
+### Refactors
+
+* Integrate untrack for improved reactivity in components ([0cae61e](https://github.com/Hanivan/alus/commit/0cae61e697f8b9610093721e01679548d9929be9))
+
 ## [0.1.2](https://github.com/Hanivan/alus/compare/v0.1.1...v0.1.2) (2026-05-18)
 
 ### Documentation
