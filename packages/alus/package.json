@@ -1,6 +1,6 @@
 {
 	"name": "alus-ui",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Unstyled, accessible Svelte 5 components with full keyboard navigation and WCAG 2.1 AA compliance",
 	"license": "MIT",
 	"type": "module",
