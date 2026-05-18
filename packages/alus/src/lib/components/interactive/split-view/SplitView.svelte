@@ -29,6 +29,8 @@
 </script>
 
 <script lang="ts">
+	import { labelAttrs } from '$utils/a11y/index.js';
+
 	interface Props {
 		children?: import('svelte').Snippet;
 		size?: number;
@@ -90,8 +92,7 @@
 	data-orientation={orientation}
 	data-dragging={dragging || undefined}
 	data-disabled={disabled || undefined}
-	aria-label={ariaLabel}
-	aria-labelledby={ariaLabelledby}
+	{...labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby })}
 >
 	{#if children}{@render children()}{/if}
 </div>

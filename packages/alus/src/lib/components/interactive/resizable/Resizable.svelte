@@ -1,4 +1,11 @@
 <script lang="ts">
+	import {
+		labelAttrs,
+		interactiveStateAttrs,
+		widgetAttrs,
+		mergeAttrs
+	} from '$utils/a11y/index.js';
+
 	type Side = 'right' | 'bottom' | 'left' | 'top';
 
 	interface Props {
@@ -116,13 +123,6 @@
 	<div
 		role="separator"
 		tabindex={disabled ? -1 : 0}
-		aria-orientation={orientation}
-		aria-valuenow={size}
-		aria-valuemin={minSize}
-		aria-valuemax={Number.isFinite(maxSize) ? maxSize : undefined}
-		aria-label={ariaLabel}
-		aria-labelledby={ariaLabelledby}
-		aria-disabled={disabled || undefined}
 		data-dragging={dragging || undefined}
 		data-side={side}
 		class={handleClass}
@@ -131,5 +131,15 @@
 		onpointerup={onPointerUp}
 		onpointercancel={onPointerUp}
 		onkeydown={onKeydown}
+		{...mergeAttrs(
+			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby }),
+			interactiveStateAttrs({ disabled }),
+			widgetAttrs({
+				orientation,
+				valuenow: size,
+				valuemin: minSize,
+				valuemax: Number.isFinite(maxSize) ? maxSize : undefined
+			})
+		)}
 	></div>
 </div>

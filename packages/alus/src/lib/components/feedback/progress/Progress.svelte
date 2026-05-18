@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { labelAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	interface Props {
 		children?: import('svelte').Snippet<[{ percent: number; indeterminate: boolean }]>;
@@ -35,7 +35,12 @@
 
 	let ariaAttrs: Record<string, string> = $derived(
 		mergeAttrs(
-			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby })
+			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby }),
+			widgetAttrs({
+				valuemin: min,
+				valuemax: max,
+				valuenow: indeterminate ? undefined : value
+			})
 		)
 	);
 </script>
@@ -44,9 +49,6 @@
 	{id}
 	role="progressbar"
 	class={className}
-	aria-valuemin={min}
-	aria-valuemax={max}
-	aria-valuenow={indeterminate ? undefined : value}
 	data-state={indeterminate ? 'indeterminate' : 'loading'}
 	{...ariaAttrs}
 >

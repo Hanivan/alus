@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getTabsContext, TAB_LIST_ATTR } from './context.js';
+	import { labelAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	interface Props {
 		children?: import('svelte').Snippet;
@@ -21,10 +22,11 @@
 
 <div
 	role="tablist"
-	aria-orientation={ctx.orientation()}
-	aria-label={ariaLabel}
-	aria-labelledby={ariaLabelledby}
 	class={className}
+	{...mergeAttrs(
+		labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby }),
+		widgetAttrs({ orientation: ctx.orientation() })
+	)}
 	{...listAttr}
 >
 	{#if children}{@render children()}{/if}

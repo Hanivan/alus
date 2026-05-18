@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import VisuallyHidden from '../../utility/visually-hidden/VisuallyHidden.svelte';
 
 	interface Props {
 		children?: import('svelte').Snippet;
@@ -55,4 +56,7 @@
 	<div data-infinite-sentinel aria-hidden="true" {@attach sentinelRef}>
 		{#if sentinel}{@render sentinel({ loading, done: !hasMore })}{/if}
 	</div>
+	<VisuallyHidden role="status" aria-live="polite">
+		{loading ? 'Loading more items.' : !hasMore ? 'All items loaded.' : ''}
+	</VisuallyHidden>
 </div>

@@ -10,6 +10,7 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
 	import { tick } from 'svelte';
+	import { useEventListener } from 'runed';
 	import { generateCounterId } from '$utils/a11y/id.js';
 	import Portal from '../../utility/portal/Portal.svelte';
 
@@ -143,19 +144,32 @@
 	const menuRef: Attachment<HTMLDivElement> = (node) => {
 		menuEl = node;
 		node.focus();
-
-		function onDown(e: PointerEvent) {
-			if (!node.contains(e.target as Node)) setOpen(false);
-		}
-		document.addEventListener('pointerdown', onDown, true);
-		window.addEventListener('resize', () => setOpen(false));
-		window.addEventListener('scroll', () => setOpen(false), true);
-
 		return () => {
 			menuEl = null;
-			document.removeEventListener('pointerdown', onDown, true);
 		};
 	};
+
+	useEventListener(
+		() => (open ? document : null),
+		'pointerdown',
+		(e) => {
+			if (menuEl && !menuEl.contains(e.target as Node)) setOpen(false);
+		},
+		{ capture: true }
+	);
+
+	useEventListener(
+		() => (open ? window : null),
+		'resize',
+		() => setOpen(false)
+	);
+
+	useEventListener(
+		() => (open ? window : null),
+		'scroll',
+		() => setOpen(false),
+		{ capture: true }
+	);
 
 	const triggerRef: Attachment<HTMLElement> = (node) => {
 		triggerEl = node;

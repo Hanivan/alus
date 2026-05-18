@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { getModalContext } from './Modal.svelte';
 
 	interface Props {
@@ -12,7 +11,7 @@
 
 	const ctx = getModalContext();
 
-	onMount(() => {
+	$effect(() => {
 		ctx.setHasTitle(true);
 		return () => ctx.setHasTitle(false);
 	});

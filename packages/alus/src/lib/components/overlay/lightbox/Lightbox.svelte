@@ -8,7 +8,8 @@
 
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
-	import { trap } from '$utils/a11y/index.js';
+	import { useEventListener } from 'runed';
+	import { trap, focusFirst } from '$utils/a11y/index.js';
 	import { generateCounterId } from '$utils/a11y/id.js';
 	import Portal from '../../utility/portal/Portal.svelte';
 
@@ -64,10 +65,23 @@
 	const hasPrev = $derived(loop || index > 0);
 	const hasNext = $derived(loop || index < total - 1);
 
+	let returnFocus: HTMLElement | null = null;
+
 	function setOpen(v: boolean) {
 		open = v;
 		onOpenChange?.(v);
 	}
+
+	$effect(() => {
+		if (open) {
+			const a = document.activeElement;
+			if (a instanceof HTMLElement && !returnFocus) returnFocus = a;
+		} else if (returnFocus) {
+			const el = returnFocus;
+			returnFocus = null;
+			queueMicrotask(() => el.focus());
+		}
+	});
 
 	function go(to: number) {
 		if (total === 0) return;
@@ -88,7 +102,14 @@
 
 	const ref: Attachment<HTMLDivElement> = (node) => {
 		const release = trap(node);
-		function onKey(e: KeyboardEvent) {
+		focusFirst(node);
+		return release;
+	};
+
+	useEventListener(
+		() => (open ? document : null),
+		'keydown',
+		(e) => {
 			if (closeOnEscape && e.key === 'Escape') {
 				e.preventDefault();
 				close();
@@ -100,12 +121,7 @@
 				next();
 			}
 		}
-		document.addEventListener('keydown', onKey);
-		return () => {
-			release();
-			document.removeEventListener('keydown', onKey);
-		};
-	};
+	);
 
 	function onBackdrop(e: MouseEvent) {
 		if (!closeOnOutsideClick) return;

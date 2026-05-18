@@ -1,6 +1,12 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
 	import { getSplitViewContext } from './SplitView.svelte';
+	import {
+		labelAttrs,
+		interactiveStateAttrs,
+		widgetAttrs,
+		mergeAttrs
+	} from '$utils/a11y/index.js';
 
 	interface Props {
 		class?: string;
@@ -100,14 +106,6 @@
 	{@attach attach}
 	role="separator"
 	tabindex={ctx.disabled() ? -1 : 0}
-	aria-orientation={ctx.orientation() === 'horizontal' ? 'vertical' : 'horizontal'}
-	aria-valuenow={Math.round(ctx.size())}
-	aria-valuemin={ctx.min()}
-	aria-valuemax={ctx.max()}
-	aria-controls={`${ctx.firstPaneId} ${ctx.secondPaneId}`}
-	aria-label={ariaLabel}
-	aria-labelledby={ariaLabelledby}
-	aria-disabled={ctx.disabled() || undefined}
 	data-dragging={ctx.dragging() || undefined}
 	data-orientation={ctx.orientation()}
 	class={className}
@@ -116,4 +114,15 @@
 	onpointerup={onPointerUp}
 	onpointercancel={onPointerUp}
 	onkeydown={onKeydown}
+	{...mergeAttrs(
+		labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby }),
+		interactiveStateAttrs({ disabled: ctx.disabled() }),
+		widgetAttrs({
+			orientation: ctx.orientation() === 'horizontal' ? 'vertical' : 'horizontal',
+			valuenow: Math.round(ctx.size()),
+			valuemin: ctx.min(),
+			valuemax: ctx.max(),
+			controls: `${ctx.firstPaneId} ${ctx.secondPaneId}`
+		})
+	)}
 ></div>

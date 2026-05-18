@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { labelAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	interface Props {
 		children?: import('svelte').Snippet;
@@ -18,10 +18,7 @@
 	}: Props = $props();
 
 	let ariaAttrs: Record<string, string> = $derived(
-		mergeAttrs(
-			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby }),
-			widgetAttrs({ orientation })
-		)
+		mergeAttrs(labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby }))
 	);
 </script>
 

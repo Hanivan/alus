@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { labelAttrs, validationAttrs, interactiveStateAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	interface Props {
 		children?: import('svelte').Snippet<[{ value: string; clear: () => void }]>;
@@ -41,7 +41,9 @@
 
 	let ariaAttrs: Record<string, string> = $derived(
 		mergeAttrs(
-			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby })
+			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby }),
+			interactiveStateAttrs({ disabled }),
+			validationAttrs({ required })
 		)
 	);
 
@@ -69,7 +71,7 @@
 			{...ariaAttrs}
 		/>
 		{#if value}
-			<button type="button" aria-label={clearLabel} onclick={clear} {disabled}>×</button>
+			<button type="button" {...labelAttrs({ label: clearLabel })} onclick={clear} {disabled}>×</button>
 		{/if}
 	</div>
 {/if}

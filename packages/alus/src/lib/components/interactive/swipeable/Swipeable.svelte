@@ -18,6 +18,7 @@
 		velocityThreshold?: number;
 		disabled?: boolean;
 		preventScroll?: boolean;
+		'aria-label'?: string;
 		onSwipe?: (direction: SwipeDirection) => void;
 		onSwipeStart?: (e: PointerEvent) => void;
 		onSwipeMove?: (info: SwipeInfo) => void;
@@ -35,6 +36,7 @@
 		velocityThreshold = 0.3,
 		disabled = false,
 		preventScroll = false,
+		'aria-label': ariaLabel = 'Swipeable region',
 		onSwipe,
 		onSwipeStart,
 		onSwipeMove,
@@ -108,17 +110,38 @@
 	function onPointerCancel(e: PointerEvent) {
 		finish(e, true);
 	}
+
+	function onKeydown(e: KeyboardEvent) {
+		if (disabled) return;
+		let dir: SwipeDirection | null = null;
+		if (e.key === 'ArrowLeft') dir = 'left';
+		else if (e.key === 'ArrowRight') dir = 'right';
+		else if (e.key === 'ArrowUp') dir = 'up';
+		else if (e.key === 'ArrowDown') dir = 'down';
+		if (!dir) return;
+		e.preventDefault();
+		onSwipe?.(dir);
+		if (dir === 'left') onSwipeLeft?.();
+		else if (dir === 'right') onSwipeRight?.();
+		else if (dir === 'up') onSwipeUp?.();
+		else if (dir === 'down') onSwipeDown?.();
+	}
 </script>
 
-<!-- svelte-ignore a11y_no_static_element_interactions -->
+<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div
 	class={className}
+	role="region"
+	aria-label={ariaLabel}
+	tabindex={disabled ? -1 : 0}
 	data-tracking={tracking || undefined}
 	data-disabled={disabled || undefined}
 	onpointerdown={onPointerDown}
 	onpointermove={onPointerMove}
 	onpointerup={onPointerUp}
 	onpointercancel={onPointerCancel}
+	onkeydown={onKeydown}
 >
 	{#if children}{@render children()}{/if}
 </div>

@@ -72,6 +72,48 @@
 		const n = normalizeHex(c) ?? c;
 		setHex(n);
 	}
+
+	let swatchListEl: HTMLDivElement | null = $state(null);
+	let swatchFocusIndex = $state(0);
+
+	function focusSwatch(i: number) {
+		queueMicrotask(() => {
+			const el = swatchListEl?.querySelectorAll<HTMLButtonElement>('[role="option"]')[i];
+			el?.focus();
+		});
+	}
+
+	function onSwatchKeydown(e: KeyboardEvent) {
+		if (!swatches || !swatches.length) return;
+		const n = swatches.length;
+		let target = -1;
+		switch (e.key) {
+			case 'ArrowRight':
+			case 'ArrowDown':
+				target = (swatchFocusIndex + 1) % n;
+				break;
+			case 'ArrowLeft':
+			case 'ArrowUp':
+				target = (swatchFocusIndex - 1 + n) % n;
+				break;
+			case 'Home':
+				target = 0;
+				break;
+			case 'End':
+				target = n - 1;
+				break;
+			case 'Enter':
+			case ' ':
+				e.preventDefault();
+				pick(swatches[swatchFocusIndex]);
+				return;
+		}
+		if (target >= 0) {
+			e.preventDefault();
+			swatchFocusIndex = target;
+			focusSwatch(target);
+		}
+	}
 </script>
 
 <div
@@ -104,18 +146,31 @@
 		/>
 	{/if}
 	{#if swatches && swatches.length}
-		<div class={swatchesClass} role="listbox" aria-label="Color swatches">
-			{#each swatches as c (c)}
+		<div
+			class={swatchesClass}
+			role="listbox"
+			tabindex="-1"
+			aria-label="Color swatches"
+			bind:this={swatchListEl}
+			onkeydown={onSwatchKeydown}
+		>
+			{#each swatches as c, i (c)}
+				{@const sel = c.toLowerCase() === value.toLowerCase()}
 				<button
 					type="button"
 					role="option"
-					aria-selected={c.toLowerCase() === value.toLowerCase()}
+					aria-selected={sel}
 					aria-label={c}
+					tabindex={i === swatchFocusIndex ? 0 : -1}
 					{disabled}
 					class={swatchClass}
 					style={`background:${c};`}
-					data-selected={c.toLowerCase() === value.toLowerCase() ? '' : undefined}
-					onclick={() => pick(c)}
+					data-selected={sel ? '' : undefined}
+					onclick={() => {
+						swatchFocusIndex = i;
+						pick(c);
+					}}
+					onfocus={() => (swatchFocusIndex = i)}
 				></button>
 			{/each}
 		</div>

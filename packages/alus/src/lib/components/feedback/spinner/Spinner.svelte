@@ -1,4 +1,6 @@
 <script lang="ts">
+	import VisuallyHidden from '../../utility/visually-hidden/VisuallyHidden.svelte';
+
 	interface Props {
 		class?: string;
 		label?: string;
@@ -8,5 +10,5 @@
 </script>
 
 <span role="status" aria-live="polite" class={className}>
-	<span class="sr-only">{label}</span>
+	<VisuallyHidden>{label}</VisuallyHidden>
 </span>

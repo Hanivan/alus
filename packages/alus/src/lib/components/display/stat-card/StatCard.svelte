@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { generateCounterId } from '$utils/a11y/id.js';
+	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	type Trend = 'up' | 'down' | 'flat';
 
@@ -51,15 +52,19 @@
 <div
 	role="group"
 	class={className}
-	aria-labelledby={labelId}
-	aria-describedby={ariaDescribedby ?? valueId}
-	aria-label={ariaLabel}
 	data-trend={trend}
+	{...mergeAttrs(
+		labelAttrs({
+			label: ariaLabel,
+			labelledby: labelId,
+			describedby: ariaDescribedby ?? valueId
+		})
+	)}
 >
 	{#if icon}{@render icon()}{/if}
 	<div>
 		<div id={labelId} class={labelClass}>{label}</div>
-		<div id={valueId} class={valueClass} aria-label={inferredLabel}>{value}</div>
+		<div id={valueId} class={valueClass} {...labelAttrs({ label: inferredLabel })}>{value}</div>
 		{#if change !== undefined}
 			{#if change_snippet}
 				{@render change_snippet({ trend: trend ?? 'flat', change })}

@@ -1,5 +1,10 @@
 <script lang="ts">
-	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import {
+		labelAttrs,
+		interactiveStateAttrs,
+		validationAttrs,
+		mergeAttrs
+	} from '$utils/a11y/index.js';
 
 	interface Props {
 		children?: import('svelte').Snippet<[{ checked: boolean }]>;
@@ -7,6 +12,8 @@
 		class?: string;
 		disabled?: boolean;
 		required?: boolean;
+		invalid?: boolean;
+		errormessage?: string;
 		name?: string;
 		id?: string;
 		value?: string;
@@ -22,6 +29,8 @@
 		class: className = '',
 		disabled = false,
 		required = false,
+		invalid = false,
+		errormessage,
 		name,
 		id,
 		value = 'on',
@@ -33,7 +42,9 @@
 
 	let ariaAttrs: Record<string, string> = $derived(
 		mergeAttrs(
-			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby })
+			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby }),
+			interactiveStateAttrs({ checked, disabled }),
+			validationAttrs({ invalid, required, errormessage })
 		)
 	);
 
@@ -57,8 +68,6 @@
 	role="switch"
 	{id}
 	class={className}
-	aria-checked={checked}
-	aria-required={required || undefined}
 	{disabled}
 	data-state={checked ? 'checked' : 'unchecked'}
 	onclick={toggle}

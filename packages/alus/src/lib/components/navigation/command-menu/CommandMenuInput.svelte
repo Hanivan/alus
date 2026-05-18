@@ -77,7 +77,7 @@
 	autocorrect="off"
 	spellcheck="false"
 	aria-label={ariaLabel}
-	aria-expanded="true"
+	aria-expanded={ctx.open() ? 'true' : 'false'}
 	aria-controls={ctx.listId}
 	aria-activedescendant={ctx.highlightedId() ?? undefined}
 	class={className}

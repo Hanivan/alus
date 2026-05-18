@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { getCardContext } from './Card.svelte';
 
 	interface Props {
@@ -11,7 +10,7 @@
 
 	const ctx = getCardContext();
 
-	onMount(() => {
+	$effect(() => {
 		ctx.setHasDescription(true);
 		return () => ctx.setHasDescription(false);
 	});

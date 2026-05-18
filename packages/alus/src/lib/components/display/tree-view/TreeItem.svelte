@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getTreeViewContext } from './TreeView.svelte';
 	import { getContext, setContext } from 'svelte';
+	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	const LEVEL_KEY = Symbol('alus:tree-item-level');
 
@@ -52,15 +53,19 @@
 	role="treeitem"
 	class={className}
 	data-tree-item-id={id}
-	aria-level={level}
-	aria-expanded={hasChildren ? expanded : undefined}
-	aria-selected={selected || undefined}
-	aria-disabled={disabled || undefined}
 	data-disabled={disabled || undefined}
 	data-selected={selected || undefined}
 	data-expanded={hasChildren ? expanded : undefined}
 	tabindex={tabIndex()}
 	onclick={onClick}
+	{...mergeAttrs(
+		interactiveStateAttrs({
+			expanded: hasChildren ? expanded : undefined,
+			selected: selected || undefined,
+			disabled
+		}),
+		widgetAttrs({ level })
+	)}
 >
 	{#if label}{@render label({ expanded, selected })}{/if}
 	{#if hasChildren}

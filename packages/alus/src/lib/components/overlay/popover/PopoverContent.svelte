@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
 	import { computePosition, autoUpdate, flip, shift, offset, size } from '@floating-ui/dom';
+	import { useEventListener } from 'runed';
 	import { trap, focusFirst } from '$utils/a11y/index.js';
 	import { getPopoverContext } from './Popover.svelte';
 	import Portal from '../../utility/portal/Portal.svelte';
@@ -78,32 +79,38 @@
 		if (trapFocus) releaseTrap = trap(node);
 		if (autoFocus) focusFirst(node);
 
-		function onPointerDown(e: PointerEvent) {
+		return () => {
+			cleanupAutoUpdate?.();
+			releaseTrap?.();
+			ctx.setContentEl(null);
+			if (restoreFocus) ctx.triggerEl.current?.focus();
+		};
+	};
+
+	useEventListener(
+		() => (ctx.open() ? document : null),
+		'pointerdown',
+		(e) => {
 			if (!closeOnOutsideClick) return;
+			const node = ctx.contentEl.current;
+			if (!node) return;
 			const t = e.target as Node;
 			if (node.contains(t) || ctx.triggerEl.current?.contains(t)) return;
 			ctx.setOpen(false);
-		}
+		},
+		{ capture: true }
+	);
 
-		function onKeydown(e: KeyboardEvent) {
+	useEventListener(
+		() => (ctx.open() ? document : null),
+		'keydown',
+		(e) => {
 			if (closeOnEscape && e.key === 'Escape') {
 				e.preventDefault();
 				ctx.setOpen(false);
 			}
 		}
-
-		document.addEventListener('pointerdown', onPointerDown, true);
-		document.addEventListener('keydown', onKeydown);
-
-		return () => {
-			cleanupAutoUpdate?.();
-			releaseTrap?.();
-			document.removeEventListener('pointerdown', onPointerDown, true);
-			document.removeEventListener('keydown', onKeydown);
-			ctx.setContentEl(null);
-			if (restoreFocus) ctx.triggerEl.current?.focus();
-		};
-	};
+	);
 </script>
 
 {#if ctx.open()}

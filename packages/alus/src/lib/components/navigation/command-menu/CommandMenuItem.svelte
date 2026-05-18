@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { generateCounterId } from '$utils/a11y/id.js';
+	import { interactiveStateAttrs } from '$utils/a11y/index.js';
 	import { getCommandMenuContext } from './CommandMenu.svelte';
 	import { getCommandMenuGroupContext } from './CommandMenuGroup.svelte';
 
@@ -29,7 +29,7 @@
 	const highlighted = $derived(ctx.highlightedId() === id);
 	const visible = $derived(ctx.filteredItems().some((i) => i.id === id));
 
-	onMount(() => {
+	$effect(() => {
 		const unregister = ctx.registerItem({ id, value, keywords, disabled, onSelect });
 		const untrack = group?.track(() => visible);
 		return () => {
@@ -55,13 +55,12 @@
 		{id}
 		role="option"
 		tabindex="-1"
-		aria-selected={highlighted}
-		aria-disabled={disabled || undefined}
 		data-highlighted={highlighted || undefined}
 		data-disabled={disabled || undefined}
 		class={className}
 		onclick={onClick}
 		onpointermove={onPointerMove}
+		{...interactiveStateAttrs({ selected: highlighted, disabled })}
 	>
 		{#if children}{@render children({ highlighted })}{/if}
 	</div>

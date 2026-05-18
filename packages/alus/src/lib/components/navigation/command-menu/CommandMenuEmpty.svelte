@@ -12,7 +12,7 @@
 </script>
 
 {#if empty}
-	<div role="presentation" class={className}>
+	<div role="status" aria-live="polite" class={className}>
 		{#if children}{@render children()}{/if}
 	</div>
 {/if}

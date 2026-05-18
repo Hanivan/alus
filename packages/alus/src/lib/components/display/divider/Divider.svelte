@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { labelAttrs, interactiveStateAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { labelAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	interface Props {
 		class?: string;
@@ -15,14 +15,13 @@
 		orientation = 'horizontal'
 	}: Props = $props();
 
-	// Build ARIA attributes using reusable utilities
 	let ariaAttrs: Record<string, string> = $derived(
-		mergeAttrs(labelAttrs({ label: ariaLabel }), interactiveStateAttrs({}))
+		mergeAttrs(labelAttrs({ label: ariaLabel }), widgetAttrs({ orientation: 'vertical' }))
 	);
 </script>
 
 {#if orientation === 'horizontal'}
 	<hr class={className} aria-hidden="true" />
 {:else}
-	<span class={className} role="separator" aria-orientation="vertical" {...ariaAttrs}></span>
+	<span class={className} role="separator" {...ariaAttrs}></span>
 {/if}

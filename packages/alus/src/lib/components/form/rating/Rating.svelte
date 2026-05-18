@@ -1,5 +1,11 @@
 <script lang="ts">
 	import { generateCounterId } from '$utils/a11y/id.js';
+	import {
+		labelAttrs,
+		interactiveStateAttrs,
+		widgetAttrs,
+		mergeAttrs
+	} from '$utils/a11y/index.js';
 
 	interface Props {
 		value?: number;
@@ -72,23 +78,30 @@
 		hovered = v;
 		onHoverChange?.(v ?? value);
 	}
+
+	const ariaAttrs = $derived(
+		mergeAttrs(
+			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby }),
+			interactiveStateAttrs({ disabled }),
+			widgetAttrs({
+				valuemin: 0,
+				valuemax: max,
+				valuenow: value,
+				valuetext: `${value} of ${max}`
+			})
+		)
+	);
 </script>
 
 <div
 	role="slider"
 	tabindex={disabled ? -1 : 0}
-	aria-valuemin={0}
-	aria-valuemax={max}
-	aria-valuenow={value}
-	aria-valuetext={`${value} of ${max}`}
-	aria-label={ariaLabel}
-	aria-labelledby={ariaLabelledby}
 	aria-readonly={readonly || undefined}
-	aria-disabled={disabled || undefined}
 	data-disabled={disabled || undefined}
 	data-readonly={readonly || undefined}
 	class={className}
 	onkeydown={onKeydown}
+	{...ariaAttrs}
 >
 	{#each Array(max) as _, i (i)}
 		{@const idx = i + 1}
@@ -96,7 +109,7 @@
 		<button
 			type="button"
 			tabindex="-1"
-			aria-label={`${idx} ${idx === 1 ? 'star' : 'stars'}`}
+			aria-hidden="true"
 			data-filled={filled || undefined}
 			disabled={disabled || readonly}
 			onclick={() => set(idx)}

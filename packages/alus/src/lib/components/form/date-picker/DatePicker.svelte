@@ -2,7 +2,9 @@
 	import type { Attachment } from 'svelte/attachments';
 	import { computePosition, autoUpdate, flip, shift, offset } from '@floating-ui/dom';
 	import { DateFormatter, getLocalTimeZone, today as iToday, type DateValue } from '@internationalized/date';
+	import { useEventListener } from 'runed';
 	import { generateCounterId } from '$utils/a11y/id.js';
+	import { trap, focusFirst } from '$utils/a11y/index.js';
 	import Portal from '../../utility/portal/Portal.svelte';
 	import Calendar from '../calendar/Calendar.svelte';
 
@@ -65,6 +67,7 @@
 	const popId = generateCounterId('datepicker-pop');
 
 	let triggerEl = $state<HTMLButtonElement | null>(null);
+	let popEl = $state<HTMLDivElement | null>(null);
 	let viewDate = $state<DateValue>(value ?? iToday(getLocalTimeZone()));
 	let view = $state<'days' | 'months' | 'years'>('days');
 
@@ -93,6 +96,7 @@
 	}
 
 	const popRef: Attachment<HTMLDivElement> = (node) => {
+		popEl = node;
 		let cleanup: (() => void) | undefined;
 		if (triggerEl) {
 			cleanup = autoUpdate(triggerEl, node, async () => {
@@ -104,25 +108,38 @@
 				Object.assign(node.style, { left: `${x}px`, top: `${y}px` });
 			});
 		}
-		function onDown(e: PointerEvent) {
+		const release = trap(node);
+		focusFirst(node);
+		return () => {
+			cleanup?.();
+			release();
+			popEl = null;
+		};
+	};
+
+	useEventListener(
+		() => (open ? document : null),
+		'pointerdown',
+		(e) => {
+			if (!popEl) return;
 			const t = e.target as Node;
-			if (node.contains(t) || triggerEl?.contains(t)) return;
+			if (popEl.contains(t) || triggerEl?.contains(t)) return;
 			open = false;
-		}
-		function onKey(e: KeyboardEvent) {
+			triggerEl?.focus();
+		},
+		{ capture: true }
+	);
+
+	useEventListener(
+		() => (open ? document : null),
+		'keydown',
+		(e) => {
 			if (e.key === 'Escape') {
 				open = false;
 				triggerEl?.focus();
 			}
 		}
-		document.addEventListener('pointerdown', onDown, true);
-		document.addEventListener('keydown', onKey);
-		return () => {
-			cleanup?.();
-			document.removeEventListener('pointerdown', onDown, true);
-			document.removeEventListener('keydown', onKey);
-		};
-	};
+	);
 
 	const triggerRef: Attachment<HTMLButtonElement> = (node) => {
 		triggerEl = node;
@@ -158,7 +175,9 @@
 			<div
 				id={popId}
 				role="dialog"
+				aria-modal="true"
 				aria-label={ariaLabel ?? 'Choose date'}
+				tabindex="-1"
 				class={popoverClass}
 				style="position:fixed; top:0; left:0;"
 				{@attach popRef}

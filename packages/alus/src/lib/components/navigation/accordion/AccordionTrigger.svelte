@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getAccordionRoot, getAccordionItem } from './context.js';
+	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	interface Props {
 		children?: import('svelte').Snippet<[{ open: boolean }]>;
@@ -52,13 +53,18 @@
 			triggers[triggers.length - 1]?.focus();
 		}
 	}
+
+	const ariaAttrs = $derived(
+		mergeAttrs(
+			interactiveStateAttrs({ expanded: open, disabled }),
+			widgetAttrs({ controls: item.contentId })
+		)
+	);
 </script>
 
 <button
 	id={item.triggerId}
 	type="button"
-	aria-expanded={open}
-	aria-controls={item.contentId}
 	data-state={open ? 'open' : 'closed'}
 	data-disabled={disabled || undefined}
 	data-accordion-trigger="true"
@@ -66,6 +72,7 @@
 	class={className}
 	onclick={activate}
 	onkeydown={onKeydown}
+	{...ariaAttrs}
 >
 	{#if children}{@render children({ open })}{/if}
 </button>

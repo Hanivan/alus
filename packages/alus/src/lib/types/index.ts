@@ -98,38 +98,30 @@ export type FormMethod = 'post' | 'get' | 'dialog';
  */
 export type FormTarget = '_blank' | '_self' | '_parent' | '_top' | string;
 
-/**
- * ARIA boolean values (can be string or boolean per ARIA spec)
- */
-export type AriaBoolean = boolean | 'true' | 'false';
+/** Source of truth for ARIA attribute value types */
+type AriaAttrs = import('svelte/elements').AriaAttributes;
+type AriaAttrValue<K extends keyof AriaAttrs> = NonNullable<AriaAttrs[K]>;
 
-/**
- * ARIA tristate values (for checkboxes, etc.)
- */
-export type AriaTristate = boolean | 'mixed' | 'true' | 'false';
+/** ARIA boolean values (can be string or boolean per ARIA spec) */
+export type AriaBoolean = AriaAttrValue<'aria-expanded'>;
 
-/**
- * ARIA haspopup values
- */
-export type AriaHaspopup =
-	| boolean
-	| 'false'
-	| 'true'
-	| 'menu'
-	| 'listbox'
-	| 'tree'
-	| 'grid'
-	| 'dialog';
+/** ARIA tristate values (for checkboxes, etc.) */
+export type AriaTristate = AriaAttrValue<'aria-pressed'>;
 
-/**
- * ARIA live region values
- */
-export type AriaLive = 'polite' | 'assertive' | 'off';
+/** ARIA haspopup values */
+export type AriaHaspopup = AriaAttrValue<'aria-haspopup'>;
 
-/**
- * ARIA orientation values
- */
-export type AriaOrientation = 'horizontal' | 'vertical';
+/** ARIA live region values */
+export type AriaLive = AriaAttrValue<'aria-live'>;
+
+/** ARIA current values */
+export type AriaCurrent = AriaAttrValue<'aria-current'>;
+
+/** ARIA relevant tokens */
+export type AriaRelevant = AriaAttrValue<'aria-relevant'>;
+
+/** ARIA orientation values */
+export type AriaOrientation = AriaAttrValue<'aria-orientation'>;
 
 /**
  * Common ID reference type
@@ -311,10 +303,14 @@ export interface InteractiveStateConfig {
 	expanded?: boolean;
 	/** Checkbox/switch checked state */
 	checked?: boolean | 'mixed';
+	/** Listbox/tab/option selected state */
+	selected?: AriaBoolean;
 	/** Disabled state */
 	disabled?: boolean;
 	/** Busy/loading state */
 	busy?: boolean;
+	/** Current item within container (nav/breadcrumb/stepper) */
+	current?: AriaCurrent;
 }
 
 /**

@@ -1,5 +1,11 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import {
+		labelAttrs,
+		interactiveStateAttrs,
+		widgetAttrs,
+		mergeAttrs
+	} from '$utils/a11y/index.js';
 
 	interface Props {
 		before: import('svelte').Snippet;
@@ -197,14 +203,6 @@
 	<div
 		role="slider"
 		tabindex={disabled ? -1 : 0}
-		aria-orientation={orientation}
-		aria-valuenow={Math.round(position)}
-		aria-valuemin={min}
-		aria-valuemax={max}
-		aria-valuetext={ariaValuetext}
-		aria-label={ariaLabel}
-		aria-labelledby={ariaLabelledby}
-		aria-disabled={disabled || undefined}
 		data-dragging={dragging || undefined}
 		data-orientation={orientation}
 		class={handleClass}
@@ -214,6 +212,17 @@
 		onpointerup={onPointerUp}
 		onpointercancel={onPointerUp}
 		onkeydown={onKeydown}
+		{...mergeAttrs(
+			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby }),
+			interactiveStateAttrs({ disabled }),
+			widgetAttrs({
+				orientation,
+				valuenow: Math.round(position),
+				valuemin: min,
+				valuemax: max,
+				valuetext: ariaValuetext
+			})
+		)}
 	>
 		{#if handle}
 			{@render handle({ position, dragging })}

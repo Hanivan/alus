@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
 	import { getMenuContext, type MenuItemEntry } from './Menu.svelte';
+	import { interactiveStateAttrs } from '$utils/a11y/index.js';
 
 	interface Props {
 		children?: import('svelte').Snippet<[{ highlighted: boolean }]>;
@@ -51,13 +52,13 @@
 <div
 	role="menuitem"
 	tabindex="-1"
-	aria-disabled={disabled || undefined}
 	data-highlighted={highlighted || undefined}
 	data-disabled={disabled || undefined}
 	class={className}
 	onclick={activate}
 	onpointerenter={onPointerEnter}
 	onkeydown={onKeydown}
+	{...interactiveStateAttrs({ disabled })}
 	{@attach itemRef}
 >
 	{#if children}{@render children({ highlighted })}{/if}

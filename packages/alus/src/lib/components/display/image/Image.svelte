@@ -7,6 +7,7 @@
 		decoding?: 'auto' | 'async' | 'sync';
 		width?: number | string;
 		height?: number | string;
+		decorative?: boolean;
 		fallback?: import('svelte').Snippet;
 		placeholder?: import('svelte').Snippet;
 		onLoad?: () => void;
@@ -21,6 +22,7 @@
 		decoding = 'async',
 		width,
 		height,
+		decorative = false,
 		fallback,
 		placeholder,
 		onLoad,
@@ -48,7 +50,8 @@
 	{/if}
 	<img
 		{src}
-		{alt}
+		alt={decorative ? '' : alt}
+		aria-hidden={decorative || undefined}
 		{loading}
 		{decoding}
 		{width}

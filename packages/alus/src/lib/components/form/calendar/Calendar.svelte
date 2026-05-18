@@ -32,6 +32,7 @@
 
 <script lang="ts">
 	import { generateCounterId } from '$utils/a11y/id.js';
+	import VisuallyHidden from '../../utility/visually-hidden/VisuallyHidden.svelte';
 
 	interface Props {
 		value?: DateValue | null;
@@ -341,7 +342,6 @@
 		{:else if view === 'months'}
 			<button
 				type="button"
-				aria-live="polite"
 				data-calendar-label
 				data-calendar-mode-trigger="years"
 				onclick={() => setMode('years')}
@@ -349,8 +349,9 @@
 				{headerLabel}
 			</button>
 		{:else}
-			<div aria-live="polite" data-calendar-label>{headerLabel}</div>
+			<div data-calendar-label>{headerLabel}</div>
 		{/if}
+		<VisuallyHidden aria-live="polite">{headerLabel}</VisuallyHidden>
 		<button
 			type="button"
 			aria-label={view === 'days'
@@ -404,30 +405,42 @@
 		</div>
 	{:else if view === 'months'}
 		<div role="grid" aria-label={`${ariaLabel} months`} class={gridClass} data-calendar-months>
-			{#each months as m (m.date.month)}
-				<button
-					type="button"
-					disabled={m.isDisabled}
-					data-current={m.isCurrent ? '' : undefined}
-					class={monthClass}
-					onclick={() => pickMonth(m.date)}
-				>
-					{m.label}
-				</button>
+			{#each Array.from({ length: 4 }, (_, r) => r) as r (r)}
+				<div role="row">
+					{#each months.slice(r * 3, r * 3 + 3) as m (m.date.month)}
+						<div role="gridcell">
+							<button
+								type="button"
+								disabled={m.isDisabled}
+								data-current={m.isCurrent ? '' : undefined}
+								class={monthClass}
+								onclick={() => pickMonth(m.date)}
+							>
+								{m.label}
+							</button>
+						</div>
+					{/each}
+				</div>
 			{/each}
 		</div>
 	{:else}
 		<div role="grid" aria-label={`${ariaLabel} years`} class={gridClass} data-calendar-years>
-			{#each years as y (y.date.year)}
-				<button
-					type="button"
-					disabled={y.isDisabled}
-					data-current={y.isCurrent ? '' : undefined}
-					class={yearClass}
-					onclick={() => pickYear(y.date)}
-				>
-					{y.label}
-				</button>
+			{#each Array.from({ length: 4 }, (_, r) => r) as r (r)}
+				<div role="row">
+					{#each years.slice(r * 3, r * 3 + 3) as y (y.date.year)}
+						<div role="gridcell">
+							<button
+								type="button"
+								disabled={y.isDisabled}
+								data-current={y.isCurrent ? '' : undefined}
+								class={yearClass}
+								onclick={() => pickYear(y.date)}
+							>
+								{y.label}
+							</button>
+						</div>
+					{/each}
+				</div>
 			{/each}
 		</div>
 	{/if}

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
 	import { getCommandMenuContext } from './CommandMenu.svelte';
+	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	interface Props {
 		children?: import('svelte').Snippet;
@@ -17,15 +18,21 @@
 		ctx.setTriggerEl(node);
 		return () => ctx.setTriggerEl(null);
 	};
+
+	const ariaAttrs = $derived(
+		mergeAttrs(
+			labelAttrs({ label: ariaLabel }),
+			interactiveStateAttrs({ expanded: ctx.open() }),
+			widgetAttrs({ haspopup: 'dialog' })
+		)
+	);
 </script>
 
 <button
 	type="button"
 	class={className}
-	aria-haspopup="dialog"
-	aria-expanded={ctx.open()}
-	aria-label={ariaLabel}
 	onclick={() => ctx.setOpen(!ctx.open())}
+	{...ariaAttrs}
 	{@attach triggerRef}
 >
 	{#if children}{@render children()}{/if}

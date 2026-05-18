@@ -70,7 +70,13 @@
 >
 	<div class={innerClass} style={`position:relative; height:${totalHeight}px;`}>
 		{#each slice as it, i (range.start + i)}
-			<div role="listitem" class={itemClass} style={rowStyle(i)}>
+			<div
+				role="listitem"
+				aria-setsize={items.length}
+				aria-posinset={range.start + i + 1}
+				class={itemClass}
+				style={rowStyle(i)}
+			>
 				{@render item({ item: it, index: range.start + i, style: rowStyle(i) })}
 			</div>
 		{/each}

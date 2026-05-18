@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-
 	type Mode = 'absolute' | 'relative' | 'both';
 	type Style = 'long' | 'short' | 'narrow';
 
@@ -31,7 +29,7 @@
 	let now = $state(Date.now());
 	const date = $derived(value instanceof Date ? value : new Date(value));
 
-	onMount(() => {
+	$effect(() => {
 		if (mode === 'absolute') return;
 		const id = setInterval(() => {
 			now = Date.now();

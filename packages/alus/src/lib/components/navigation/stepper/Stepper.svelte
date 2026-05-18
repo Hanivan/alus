@@ -8,6 +8,7 @@
 		setCurrent: (i: number) => void;
 		orientation: () => 'horizontal' | 'vertical';
 		linear: () => boolean;
+		total: () => number | undefined;
 	}
 
 	export function getStepperContext(): StepperContext {
@@ -28,6 +29,7 @@
 		children?: import('svelte').Snippet;
 		class?: string;
 		current?: number;
+		total?: number;
 		orientation?: 'horizontal' | 'vertical';
 		linear?: boolean;
 		onCurrentChange?: (i: number) => void;
@@ -39,6 +41,7 @@
 		children,
 		class: className = '',
 		current = $bindable(0),
+		total,
 		orientation = 'horizontal',
 		linear = true,
 		onCurrentChange,
@@ -53,7 +56,8 @@
 			onCurrentChange?.(i);
 		},
 		orientation: () => orientation,
-		linear: () => linear
+		linear: () => linear,
+		total: () => total
 	});
 
 	let ariaAttrs: Record<string, string> = $derived(

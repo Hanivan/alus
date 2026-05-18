@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
 	import { getPopoverContext } from './Popover.svelte';
+	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	interface Props {
 		children?: import('svelte').Snippet<[{ open: boolean }]>;
@@ -21,18 +22,23 @@
 		if (disabled || ctx.disabled()) return;
 		ctx.setOpen(!ctx.open());
 	}
+
+	const ariaAttrs = $derived(
+		mergeAttrs(
+			interactiveStateAttrs({ expanded: ctx.open(), disabled: disabled || ctx.disabled() }),
+			widgetAttrs({ controls: ctx.contentId, haspopup: 'dialog' })
+		)
+	);
 </script>
 
 <button
 	id={ctx.triggerId}
 	type="button"
-	aria-haspopup="dialog"
-	aria-expanded={ctx.open()}
-	aria-controls={ctx.contentId}
 	data-state={ctx.open() ? 'open' : 'closed'}
 	disabled={disabled || ctx.disabled()}
 	class={className}
 	onclick={toggle}
+	{...ariaAttrs}
 	{@attach triggerRef}
 >
 	{#if children}{@render children({ open: ctx.open() })}{/if}

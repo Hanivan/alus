@@ -31,6 +31,7 @@
 		placement?: Placement;
 		class?: string;
 		'aria-label'?: string;
+		live?: 'polite' | 'assertive';
 	}
 
 	let {
@@ -43,7 +44,8 @@
 		tabHidden,
 		placement = 'bottom-right',
 		class: className = '',
-		'aria-label': ariaLabel = 'Notifications'
+		'aria-label': ariaLabel = 'Notifications',
+		live = 'polite'
 	}: Props = $props();
 
 	const t = untrack(
@@ -60,6 +62,8 @@
 	<ol
 		role="region"
 		aria-label={ariaLabel}
+		aria-live={live}
+		aria-relevant="additions text"
 		class={className}
 		data-placement={placement}
 	>

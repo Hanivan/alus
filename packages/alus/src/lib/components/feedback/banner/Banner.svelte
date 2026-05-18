@@ -56,7 +56,7 @@
 {#if open}
 	<div
 		{role}
-		aria-live={live ?? (role === 'alert' ? 'assertive' : undefined)}
+		aria-live={live ?? (role === 'alert' ? 'assertive' : role === 'status' ? 'polite' : undefined)}
 		data-variant={variant}
 		class={className}
 		{style}

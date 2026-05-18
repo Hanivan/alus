@@ -279,12 +279,10 @@ export { default as ComponentName } from './ComponentName.svelte';
 ```svelte
 <script lang="ts">
 	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
-	import type { AriaLive } from '$types/index.js';
 
 	interface Props {
 		children?: import('svelte').Snippet;
 		class?: string;
-		// Accessibility attributes
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
 		'aria-describedby'?: string;
@@ -298,21 +296,40 @@ export { default as ComponentName } from './ComponentName.svelte';
 		'aria-describedby': ariaDescribedby
 	}: Props = $props();
 
-	// Build ARIA attributes using reusable utilities
-	let ariaAttrs: Record<string, string> = $derived(
+	const ariaAttrs = $derived(
 		mergeAttrs(
 			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby })
 		)
 	);
 </script>
 
-<!-- Unstyled, semantic HTML with proper ARIA -->
-<span {...ariaAttrs}>
-	{#if children}
-		{@render children()}
-	{/if}
+<span class={className} {...ariaAttrs}>
+	{#if children}{@render children()}{/if}
 </span>
 ```
+
+### Overlay listener pattern (Popover/Menu/Lightbox/etc.)
+
+```svelte
+<script lang="ts">
+	import { useEventListener } from 'runed';
+
+	let contentEl = $state<HTMLElement | null>(null);
+
+	useEventListener(
+		() => (open ? document : null),
+		'pointerdown',
+		(e) => {
+			if (!contentEl) return;
+			if (contentEl.contains(e.target as Node) || triggerEl?.contains(e.target as Node)) return;
+			setOpen(false);
+		},
+		{ capture: true }
+	);
+</script>
+```
+
+The getter target (`open ? document : null`) drives reactive attach/detach — no manual `addEventListener` / `removeEventListener` pair.
 
 ---
 
@@ -322,13 +339,16 @@ export { default as ComponentName } from './ComponentName.svelte';
 
 ### ARIA Helper Utilities (`src/lib/utils/a11y/aria.ts`)
 
-| Utility                   | Purpose                        | Example                                                           |
-| ------------------------- | ------------------------------ | ----------------------------------------------------------------- |
-| `labelAttrs()`            | Label/description associations | `labelAttrs({ label, labelledby, describedby })`                  |
-| `validationAttrs()`       | Form validation states         | `validationAttrs({ invalid, required, errormessage })`            |
-| `interactiveStateAttrs()` | Interactive element states     | `interactiveStateAttrs({ disabled, pressed, expanded, checked })` |
-| `widgetAttrs()`           | Complex widget attributes      | `widgetAttrs({ controls, haspopup, live, orientation })`          |
-| `mergeAttrs()`            | Combine multiple ARIA objects  | `mergeAttrs(labelAttrs(...), interactiveStateAttrs(...))`         |
+| Utility                   | Purpose                        | Example                                                                              |
+| ------------------------- | ------------------------------ | ------------------------------------------------------------------------------------ |
+| `labelAttrs()`            | Label/description associations | `labelAttrs({ label, labelledby, describedby })`                                     |
+| `validationAttrs()`       | Form validation states         | `validationAttrs({ invalid, required, errormessage })`                               |
+| `interactiveStateAttrs()` | Interactive element states     | `interactiveStateAttrs({ disabled, pressed, expanded, checked, selected, current })` |
+| `widgetAttrs()`           | Complex widget attributes      | `widgetAttrs({ controls, haspopup, live, orientation, valuemin, valuemax, valuenow, valuetext, posinset, setsize, level, activedescendant })` |
+| `mergeAttrs()`            | Combine multiple ARIA objects  | `mergeAttrs(labelAttrs(...), interactiveStateAttrs(...))`                            |
+| `trap(node)` / `focusFirst(node)` | Focus management (from `$utils/a11y/focus`) | Modal/Popover/Lightbox dialogs                                       |
+
+ARIA value types live in `$types/index.ts` and are derived from `svelte/elements` AriaAttributes — never redeclare literal unions. Pattern: `type AriaAttrValue<K> = NonNullable<AriaAttrs[K]>` → `AriaBoolean`, `AriaTristate`, `AriaHaspopup`, `AriaLive`, `AriaCurrent`, `AriaRelevant`, `AriaOrientation`.
 
 ### Pattern for All Components
 
@@ -387,9 +407,15 @@ export { default as ComponentName } from './ComponentName.svelte';
 
 - **Svelte 5 Only**: This project uses Svelte 5 runes mode exclusively - no legacy mode support
 - **Runes Mode**: All components use `$props`, `$derived`, `$state` runes instead of the old API
+- **No `onMount`/`onDestroy`**: Use `$effect(() => { ...; return cleanup; })` instead. `onMount` was purged repo-wide.
+- **No raw `addEventListener` on `document`/`window`**: Use `useEventListener` from `runed` with a gated target getter (`() => (open ? document : null)`) so attach/detach is reactive to open state. Listeners on a local node inside an `Attachment` may stay inline.
+- **VisuallyHidden over inline `sr-only` blocks**: Use `<VisuallyHidden>` (utility primitive) for screen-reader-only content — never inline `style="position:absolute;width:1px;…"` or Tailwind `sr-only`. The library must stay unstyled; inline CSS only allowed for functional positioning (floating-ui, slider mechanics, etc.).
+- **Tailwind**: Never use `!important` (no `!` prefix). For chrome strips on `[type='text'|email|…]`, rely on `@layer base` overrides — no escape hatches.
+- **Focus indicators**: Do not stack `outline` + `border` on form controls. Border-color is the single focus indicator; the global `*:focus-visible` outline is suppressed for inputs/checkboxes/radios.
+- **`--cream` background**: Never use `--cream` as a background for elements that contain white text (SubMenu incident). Prefer `--charcoal/10` or `--indigo-dye/10`.
 - **Unstyled Components**: The library provides structure and accessibility only - styling is left to the application
-- **Monorepo**: Changes to library components require `pnpm dev` in library package for hot reload
-- **Type Safety**: Always maintain proper TypeScript types for all components and props
-- **Accessibility First**: Every component must be WCAG 2.1 AA compliant with proper keyboard navigation
+- **Monorepo**: Changes to library components require `pnpm dev` in library package for hot reload. **Do not run `pnpm build`** — `svelte-package` watch handles HMR.
+- **Type Safety**: Always maintain proper TypeScript types for all components and props. ARIA value types come from `svelte/elements` (see `$types/index.ts`) — never re-author them.
+- **Accessibility First**: Every component must be WCAG 2.1 AA compliant with proper keyboard navigation. Roving tabindex for composite widgets; `aria-setsize`/`aria-posinset` for virtualized lists and stepper steps.
 
 ---

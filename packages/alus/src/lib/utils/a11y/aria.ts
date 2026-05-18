@@ -95,8 +95,10 @@ export function interactiveStateAttrs(options: InteractiveStateConfig = {}) {
 		'aria-pressed': options.pressed,
 		'aria-expanded': options.expanded,
 		'aria-checked': options.checked,
+		'aria-selected': options.selected,
 		'aria-disabled': options.disabled,
-		'aria-busy': options.busy
+		'aria-busy': options.busy,
+		'aria-current': options.current
 	});
 }
 

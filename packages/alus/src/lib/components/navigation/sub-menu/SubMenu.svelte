@@ -10,8 +10,10 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
 	import { computePosition, autoUpdate, flip, shift, offset } from '@floating-ui/dom';
+	import { useEventListener } from 'runed';
 	import { getMenuContext, type MenuItemEntry } from '../menu/Menu.svelte';
 	import { generateCounterId } from '$utils/a11y/id.js';
+	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 	import Portal from '../../utility/portal/Portal.svelte';
 
 	interface Props {
@@ -153,32 +155,37 @@
 				Object.assign(node.style, { left: `${x}px`, top: `${y}px` });
 			});
 		}
-		function onDown(e: PointerEvent) {
-			const t = e.target as Node;
-			if (node.contains(t) || triggerEl?.contains(t)) return;
-			closePanel();
-		}
-		document.addEventListener('pointerdown', onDown, true);
 		return () => {
 			cleanup?.();
-			document.removeEventListener('pointerdown', onDown, true);
 			panelEl = null;
 		};
 	};
+
+	useEventListener(
+		() => (open ? document : null),
+		'pointerdown',
+		(e) => {
+			if (!panelEl) return;
+			const t = e.target as Node;
+			if (panelEl.contains(t) || triggerEl?.contains(t)) return;
+			closePanel();
+		},
+		{ capture: true }
+	);
 </script>
 
 <div
 	role="menuitem"
-	aria-haspopup="menu"
-	aria-expanded={open}
-	aria-disabled={disabled || undefined}
-	aria-controls={subId}
 	tabindex="-1"
 	data-highlighted={parentHighlighted || undefined}
 	data-state={open ? 'open' : 'closed'}
 	class={className}
 	onpointerenter={onTriggerPointerEnter}
 	onkeydown={onTriggerKeydown}
+	{...mergeAttrs(
+		interactiveStateAttrs({ expanded: open, disabled }),
+		widgetAttrs({ controls: subId, haspopup: 'menu' })
+	)}
 	{@attach triggerRef}
 >
 	{#if children}

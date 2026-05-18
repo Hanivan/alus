@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getCommandMenuContext } from './CommandMenu.svelte';
+	import { labelAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	interface Props {
 		children?: import('svelte').Snippet;
@@ -14,8 +15,8 @@
 <div
 	role="listbox"
 	id={ctx.listId}
-	aria-label={ariaLabel}
 	class={className}
+	{...mergeAttrs(labelAttrs({ label: ariaLabel }), widgetAttrs({ orientation: 'vertical' }))}
 >
 	{#if children}{@render children()}{/if}
 </div>

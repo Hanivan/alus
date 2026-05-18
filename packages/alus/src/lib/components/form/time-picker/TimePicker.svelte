@@ -15,7 +15,12 @@
 </script>
 
 <script lang="ts">
-	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import {
+		labelAttrs,
+		validationAttrs,
+		interactiveStateAttrs,
+		mergeAttrs
+	} from '$utils/a11y/index.js';
 
 	interface Props {
 		value?: Time | null;
@@ -142,7 +147,9 @@
 
 	const ariaAttrs = $derived(
 		mergeAttrs(
-			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby })
+			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby }),
+			interactiveStateAttrs({ disabled }),
+			validationAttrs({ required })
 		)
 	);
 </script>
@@ -151,7 +158,6 @@
 	class={className}
 	role="group"
 	data-required={required || undefined}
-	aria-disabled={disabled || undefined}
 	{...ariaAttrs}
 >
 	<input
@@ -194,11 +200,13 @@
 	{#if hour12}
 		<button
 			type="button"
-			aria-label={`Toggle period, currently ${period}`}
-			aria-pressed={period === 'PM'}
 			class={periodClass}
 			{disabled}
 			onclick={togglePeriod}
+			{...mergeAttrs(
+				labelAttrs({ label: `Toggle period, currently ${period}` }),
+				interactiveStateAttrs({ pressed: period === 'PM' })
+			)}
 		>
 			{period}
 		</button>

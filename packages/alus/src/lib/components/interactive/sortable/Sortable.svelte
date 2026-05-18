@@ -1,5 +1,7 @@
 <script lang="ts" generics="T">
 	import { tick } from 'svelte';
+	import { labelAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import VisuallyHidden from '../../utility/visually-hidden/VisuallyHidden.svelte';
 
 	interface Props<U> {
 		items: U[];
@@ -40,6 +42,7 @@
 	let grabbedIndex = $state<number | null>(null);
 	let overIndex = $state<number | null>(null);
 	let listEl: HTMLElement | null = $state(null);
+	let announce = $state('');
 
 	function key(it: T, i: number): string {
 		return getKey ? getKey(it, i) : String(i);
@@ -51,6 +54,7 @@
 		const [moved] = next.splice(from, 1);
 		next.splice(to, 0, moved);
 		items = next;
+		announce = `Moved item from position ${from + 1} to ${to + 1} of ${next.length}.`;
 		onReorder?.(next);
 		return to;
 	}
@@ -160,11 +164,13 @@
 <ul
 	bind:this={listEl}
 	role="list"
-	aria-label={ariaLabel}
-	aria-labelledby={ariaLabelledby}
 	data-orientation={orientation}
 	class={className}
 	data-disabled={disabled || undefined}
+	{...mergeAttrs(
+		labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby }),
+		widgetAttrs({ orientation })
+	)}
 >
 	{#each items as it, i (key(it, i))}
 		{@render item({
@@ -193,3 +199,5 @@
 		})}
 	{/each}
 </ul>
+
+<VisuallyHidden aria-live="polite">{announce}</VisuallyHidden>

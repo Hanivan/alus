@@ -1,5 +1,11 @@
 <script lang="ts">
 	import { getStepperContext } from './Stepper.svelte';
+	import {
+		interactiveStateAttrs,
+		labelAttrs,
+		widgetAttrs,
+		mergeAttrs
+	} from '$utils/a11y/index.js';
 
 	interface Props {
 		index: number;
@@ -34,7 +40,10 @@
 	class={className}
 	data-status={status}
 	data-disabled={disabled || undefined}
-	aria-current={status === 'current' ? 'step' : undefined}
+	{...mergeAttrs(
+		interactiveStateAttrs({ current: status === 'current' ? 'step' : undefined }),
+		widgetAttrs({ posinset: index + 1, setsize: ctx.total() })
+	)}
 >
 	{#if clickable}
 		<button
@@ -42,12 +51,12 @@
 			class="contents text-left"
 			onclick={onClick}
 			onkeydown={onKeydown}
-			aria-label={`Step ${index + 1}`}
+			{...labelAttrs({ label: `Step ${index + 1}` })}
 		>
 			{#if children}{@render children({ status })}{/if}
 		</button>
 	{:else}
-		<span class="contents" aria-disabled={disabled || undefined}>
+		<span class="contents" {...interactiveStateAttrs({ disabled })}>
 			{#if children}{@render children({ status })}{/if}
 		</span>
 	{/if}

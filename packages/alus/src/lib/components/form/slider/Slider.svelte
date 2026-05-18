@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import {
+		labelAttrs,
+		validationAttrs,
+		widgetAttrs,
+		interactiveStateAttrs,
+		mergeAttrs
+	} from '$utils/a11y/index.js';
 
 	interface Props {
 		value?: number;
@@ -41,7 +47,16 @@
 
 	let ariaAttrs: Record<string, string> = $derived(
 		mergeAttrs(
-			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby })
+			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby }),
+			interactiveStateAttrs({ disabled }),
+			validationAttrs({ required }),
+			widgetAttrs({
+				orientation,
+				valuenow: value,
+				valuemin: min,
+				valuemax: max,
+				valuetext: ariaValuetext
+			})
 		)
 	);
 </script>
@@ -57,8 +72,6 @@
 	{required}
 	bind:value
 	class={className}
-	aria-orientation={orientation}
-	aria-valuetext={ariaValuetext}
 	{oninput}
 	{onchange}
 	{...ariaAttrs}

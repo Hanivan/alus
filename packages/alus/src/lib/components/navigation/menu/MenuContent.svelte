@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
 	import { computePosition, autoUpdate, flip, shift, offset, size } from '@floating-ui/dom';
+	import { useEventListener } from 'runed';
 	import { getMenuContext, type MenuItemEntry } from './Menu.svelte';
 	import Portal from '../../utility/portal/Portal.svelte';
 
@@ -61,14 +62,6 @@
 			});
 		}
 
-		function onPointerDown(e: PointerEvent) {
-			const t = e.target as Node;
-			if (node.contains(t) || ctx.triggerEl.current?.contains(t)) return;
-			ctx.setOpen(false);
-		}
-
-		document.addEventListener('pointerdown', onPointerDown, true);
-
 		queueMicrotask(() => {
 			const list = enabled();
 			const idx = ctx.lastActivatedIndex();
@@ -77,11 +70,23 @@
 
 		return () => {
 			cleanupAutoUpdate?.();
-			document.removeEventListener('pointerdown', onPointerDown, true);
 			ctx.setContentEl(null);
 			ctx.triggerEl.current?.focus();
 		};
 	};
+
+	useEventListener(
+		() => (ctx.open() ? document : null),
+		'pointerdown',
+		(e) => {
+			const node = ctx.contentEl.current;
+			if (!node) return;
+			const t = e.target as Node;
+			if (node.contains(t) || ctx.triggerEl.current?.contains(t)) return;
+			ctx.setOpen(false);
+		},
+		{ capture: true }
+	);
 
 	function move(dir: 1 | -1) {
 		const list = enabled();

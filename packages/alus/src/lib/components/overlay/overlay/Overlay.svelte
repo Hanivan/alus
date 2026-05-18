@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Attachment } from 'svelte/attachments';
+	import { useEventListener } from 'runed';
 	import Portal from '../../utility/portal/Portal.svelte';
 
 	interface Props {
@@ -29,16 +29,16 @@
 		onOpenChange?.(v);
 	}
 
-	const overlayRef: Attachment<HTMLDivElement> = () => {
-		function onKeydown(e: KeyboardEvent) {
+	useEventListener(
+		() => (open ? document : null),
+		'keydown',
+		(e) => {
 			if (closeOnEscape && e.key === 'Escape') {
 				e.preventDefault();
 				setOpen(false);
 			}
 		}
-		document.addEventListener('keydown', onKeydown);
-		return () => document.removeEventListener('keydown', onKeydown);
-	};
+	);
 
 	function onBackdropClick(e: MouseEvent) {
 		if (!closeOnOutsideClick) return;
@@ -54,7 +54,6 @@
 		{style}
 		data-overlay
 		onclick={onBackdropClick}
-		{@attach overlayRef}
 	>
 		{#if children}{@render children()}{/if}
 	</div>

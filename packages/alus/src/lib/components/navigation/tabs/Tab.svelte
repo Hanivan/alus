@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getTabsContext, TAB_LIST_ATTR, TAB_ATTR } from './context.js';
+	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	interface Props {
 		children?: import('svelte').Snippet<[{ selected: boolean }]>;
@@ -62,14 +63,19 @@
 	}
 
 	let tabAttr: Record<string, string> = $derived({ [TAB_ATTR]: value });
+
+	const ariaAttrs = $derived(
+		mergeAttrs(
+			interactiveStateAttrs({ selected, disabled }),
+			widgetAttrs({ controls: panelId })
+		)
+	);
 </script>
 
 <button
 	id={tabId}
 	type="button"
 	role="tab"
-	aria-selected={selected}
-	aria-controls={panelId}
 	tabindex={selected ? 0 : -1}
 	data-state={selected ? 'active' : 'inactive'}
 	data-disabled={disabled || undefined}
@@ -77,6 +83,7 @@
 	class={className}
 	onclick={activate}
 	onkeydown={onKeydown}
+	{...ariaAttrs}
 	{...tabAttr}
 >
 	{#if children}{@render children({ selected })}{/if}

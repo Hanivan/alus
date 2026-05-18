@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getSplitViewContext } from './SplitView.svelte';
+	import { labelAttrs } from '$utils/a11y/index.js';
 
 	interface Props {
 		children?: import('svelte').Snippet;
@@ -36,8 +37,7 @@
 	data-side={side}
 	class={className}
 	style={paneStyle}
-	aria-label={ariaLabel}
-	aria-labelledby={ariaLabelledby}
+	{...labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby })}
 >
 	{#if children}{@render children()}{/if}
 </div>

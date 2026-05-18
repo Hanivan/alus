@@ -9,7 +9,15 @@
 <script lang="ts" generics="T">
 	import type { Attachment } from 'svelte/attachments';
 	import { computePosition, autoUpdate, flip, shift, offset, size } from '@floating-ui/dom';
+	import { useEventListener } from 'runed';
 	import { generateCounterId } from '$utils/a11y/id.js';
+	import {
+		labelAttrs,
+		validationAttrs,
+		interactiveStateAttrs,
+		widgetAttrs,
+		mergeAttrs
+	} from '$utils/a11y/index.js';
 	import Portal from '../../utility/portal/Portal.svelte';
 
 	interface Props {
@@ -66,6 +74,7 @@
 	const optionId = (i: number) => `${listId}-opt-${i}`;
 
 	let inputEl = $state<HTMLInputElement | null>(null);
+	let listEl = $state<HTMLUListElement | null>(null);
 	let highlighted = $state(0);
 
 	const filtered = $derived.by(() => {
@@ -142,7 +151,8 @@
 	}
 
 	const listRef: Attachment<HTMLUListElement> = (node) => {
-		if (!inputEl) return;
+		listEl = node;
+		if (!inputEl) return () => (listEl = null);
 		const cleanup = autoUpdate(inputEl, node, async () => {
 			const { x, y } = await computePosition(inputEl as HTMLInputElement, node, {
 				placement: 'bottom-start',
@@ -163,18 +173,23 @@
 			Object.assign(node.style, { left: `${x}px`, top: `${y}px` });
 		});
 
-		function onDown(e: PointerEvent) {
-			const t = e.target as Node;
-			if (node.contains(t) || inputEl?.contains(t)) return;
-			open = false;
-		}
-		document.addEventListener('pointerdown', onDown, true);
-
 		return () => {
 			cleanup();
-			document.removeEventListener('pointerdown', onDown, true);
+			listEl = null;
 		};
 	};
+
+	useEventListener(
+		() => (open ? document : null),
+		'pointerdown',
+		(e) => {
+			if (!listEl) return;
+			const t = e.target as Node;
+			if (listEl.contains(t) || inputEl?.contains(t)) return;
+			open = false;
+		},
+		{ capture: true }
+	);
 
 	const inputRef: Attachment<HTMLInputElement> = (node) => {
 		inputEl = node;
@@ -184,6 +199,15 @@
 	};
 
 	const activeId = $derived(showList ? optionId(highlighted) : undefined);
+
+	const inputAriaAttrs = $derived(
+		mergeAttrs(
+			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby }),
+			interactiveStateAttrs({ expanded: open, disabled }),
+			validationAttrs({ required }),
+			widgetAttrs({ controls: listId, activedescendant: activeId })
+		)
+	);
 </script>
 
 <div class={className}>
@@ -196,16 +220,12 @@
 		{required}
 		{placeholder}
 		{value}
-		aria-label={ariaLabel}
-		aria-labelledby={ariaLabelledby}
 		aria-autocomplete="list"
-		aria-expanded={open}
-		aria-controls={listId}
-		aria-activedescendant={activeId}
 		class={inputClass}
 		oninput={onInputEvent}
 		onkeydown={onKeydown}
 		onfocus={onFocus}
+		{...inputAriaAttrs}
 		{@attach inputRef}
 	/>
 
@@ -223,10 +243,9 @@
 						<li
 							id={optionId(i)}
 							role="option"
-							aria-selected={i === highlighted}
-							aria-disabled={o.disabled || undefined}
 							data-highlighted={i === highlighted ? '' : undefined}
 							class={optionClass}
+							{...interactiveStateAttrs({ selected: i === highlighted, disabled: o.disabled })}
 							onmouseenter={() => (highlighted = i)}
 							onmousedown={(e) => {
 								e.preventDefault();

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { getCarouselContext } from './Carousel.svelte';
 
 	interface Props {
@@ -14,7 +13,7 @@
 	const ctx = getCarouselContext();
 	const active = $derived(ctx.index() === index);
 
-	onMount(() => {
+	$effect(() => {
 		const reg = ctx.registerSlide();
 		return reg.unregister;
 	});
