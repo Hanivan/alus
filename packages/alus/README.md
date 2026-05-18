@@ -236,7 +236,7 @@ pnpm release:major    # 0.1.0 → 1.0.0
 2. Bumps `package.json` version
 3. `after:bump` hook → `pnpm build` (regenerates `dist/`)
 4. Writes `CHANGELOG.md` from conventional commits since the last tag
-5. Commits `chore(release): alus-ui v<version>` and tags `alus-ui-v<version>`
+5. Commits `chore(release): v<version>` and tags `v<version>`
 6. Pushes commit + tag to `origin/main`
 7. Creates GitHub release with the changelog body
 8. Publishes to npm (`npm publish` runs `prepublishOnly` → build + test again)
@@ -258,7 +258,7 @@ Append `!` after the type (or include `BREAKING CHANGE:` in the body) for a majo
 
 ### Config
 
-Settings live in `packages/alus/.release-it.json`. Tag scheme is `alus-ui-v<version>` so future workspace packages can release independently.
+Settings live in `packages/alus/.release-it.json`. Tag scheme is `v<version>`.
 
 ## License
 

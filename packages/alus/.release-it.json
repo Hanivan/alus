@@ -1,16 +1,16 @@
 {
 	"$schema": "https://unpkg.com/release-it/schema/release-it.json",
 	"git": {
-		"commitMessage": "chore(release): alus-ui v${version}",
-		"tagName": "alus-ui-v${version}",
-		"tagAnnotation": "alus-ui v${version}",
+		"commitMessage": "chore(release): v${version}",
+		"tagName": "v${version}",
+		"tagAnnotation": "v${version}",
 		"requireCleanWorkingDir": true,
 		"requireBranch": "main",
 		"push": true
 	},
 	"github": {
 		"release": true,
-		"releaseName": "alus-ui v${version}",
+		"releaseName": "v${version}",
 		"autoGenerate": false
 	},
 	"npm": {
