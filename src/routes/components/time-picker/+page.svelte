@@ -1,10 +1,22 @@
 <script lang="ts">
-	import { CaretLeft } from 'phosphor-svelte';
+	import { CaretLeft, Lock, WarningCircle, CheckCircle } from 'phosphor-svelte';
 	import { TimePicker, type Time } from 'alus';
 
 	let t1 = $state<Time | null>({ hour: 9, minute: 30 });
 	let t2 = $state<Time | null>({ hour: 14, minute: 0 });
 	let t3 = $state<Time | null>({ hour: 23, minute: 59, second: 30 });
+
+	let locked = $state<Time | null>({ hour: 12, minute: 0 });
+
+	let appt = $state<Time | null>({ hour: 7, minute: 0 });
+	const businessOpen = 9;
+	const businessClose = 17;
+	const outOfHours = $derived(
+		!!appt && (appt.hour < businessOpen || appt.hour >= businessClose)
+	);
+
+	let required = $state<Time | null>(null);
+	let submitted = $state(false);
 </script>
 
 <svelte:head>
@@ -69,7 +81,7 @@
 	</section>
 
 	<section class="mb-16">
-		<h2 class="font-display mb-6 text-2xl text-(--ink)">With seconds</h2>
+		<h2 class="font-display mb-6 text-2xl text-(--ink)">With seconds (step=5)</h2>
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<TimePicker
 				bind:value={t3}
@@ -80,6 +92,91 @@
 				fieldClass="w-10 bg-transparent text-center text-sm outline-none focus:text-(--indigo-dye)"
 				separatorClass="text-(--charcoal)/40"
 			/>
+		</div>
+	</section>
+
+	<section class="mb-16">
+		<h2 class="font-display mb-6 text-2xl text-(--ink)">Disabled</h2>
+		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
+			<div class="inline-flex items-center gap-3">
+				<TimePicker
+					bind:value={locked}
+					disabled
+					aria-label="Locked time"
+					class="inline-flex items-center gap-1 rounded border border-(--charcoal)/15 bg-(--charcoal)/5 px-2 py-1.5 text-(--charcoal)/50"
+					fieldClass="w-10 bg-transparent text-center text-sm outline-none cursor-not-allowed"
+					separatorClass="text-(--charcoal)/30"
+				/>
+				<Lock class="h-4 w-4 text-(--charcoal)/40" />
+			</div>
+			<p class="mt-3 text-xs text-(--charcoal)/60">
+				ArrowUp/Down + typing are blocked. <code>aria-disabled</code> on group.
+			</p>
+		</div>
+	</section>
+
+	<section class="mb-16">
+		<h2 class="font-display mb-6 text-2xl text-(--ink)">Business hours validation (9:00 – 17:00)</h2>
+		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
+			<TimePicker
+				bind:value={appt}
+				aria-label="Appointment time"
+				aria-describedby="appt-help"
+				class="inline-flex items-center gap-1 rounded border bg-white px-2 py-1.5 text-(--ink) {outOfHours
+					? 'border-(--vermilion)/60'
+					: 'border-(--matcha)/40'}"
+				fieldClass="w-10 bg-transparent text-center text-sm outline-none focus:text-(--indigo-dye)"
+				separatorClass="text-(--charcoal)/40"
+			/>
+			<p
+				id="appt-help"
+				class="mt-3 inline-flex items-center gap-1.5 text-sm {outOfHours
+					? 'text-(--vermilion)'
+					: 'text-(--matcha)'}"
+			>
+				{#if outOfHours}
+					<WarningCircle class="h-4 w-4" />
+					Outside business hours (9:00 – 17:00).
+				{:else}
+					<CheckCircle class="h-4 w-4" />
+					Within business hours.
+				{/if}
+			</p>
+		</div>
+	</section>
+
+	<section class="mb-16">
+		<h2 class="font-display mb-6 text-2xl text-(--ink)">Required field</h2>
+		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
+			<form
+				onsubmit={(e) => {
+					e.preventDefault();
+					submitted = true;
+				}}
+				class="inline-flex flex-col items-start gap-3"
+			>
+				<TimePicker
+					bind:value={required}
+					required
+					aria-label="Departure time"
+					class="inline-flex items-center gap-1 rounded border border-(--charcoal)/20 bg-white px-2 py-1.5 text-(--ink) data-[required]:border-(--indigo-dye)/40"
+					fieldClass="w-10 bg-transparent text-center text-sm outline-none focus:text-(--indigo-dye)"
+					separatorClass="text-(--charcoal)/40"
+				/>
+				<button type="submit" class="rounded bg-(--indigo-dye) px-3 py-1.5 text-sm text-white">
+					Submit
+				</button>
+				{#if submitted}
+					<p class="text-sm text-(--matcha)">
+						Submitted: {required
+							? `${required.hour}:${String(required.minute).padStart(2, '0')}`
+							: '(empty)'}
+					</p>
+				{/if}
+			</form>
+			<p class="mt-3 text-xs text-(--charcoal)/60">
+				<code>data-required</code> hook lets you style required state without aria-required noise.
+			</p>
 		</div>
 	</section>
 </main>

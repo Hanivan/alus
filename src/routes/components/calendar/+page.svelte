@@ -5,7 +5,8 @@
 		type DateValue,
 		getLocalTimeZone,
 		today,
-		isSameDay
+		isSameDay,
+		CalendarDate
 	} from '@internationalized/date';
 
 	const tz = getLocalTimeZone();
@@ -21,6 +22,47 @@
 		const dow = js.getDay();
 		return dow === 0 || dow === 6;
 	}
+
+	const locales = [
+		{ id: 'en-US', label: 'English (US)' },
+		{ id: 'ja-JP', label: '日本語' },
+		{ id: 'ar-SA', label: 'العربية (RTL)' },
+		{ id: 'fr-FR', label: 'Français' },
+		{ id: 'de-DE', label: 'Deutsch' }
+	];
+	let locale = $state('en-US');
+	const isRTL = $derived(locale.startsWith('ar') || locale.startsWith('he'));
+
+	const holidays = [
+		new CalendarDate(now.year, 1, 1),
+		new CalendarDate(now.year, 5, 5),
+		new CalendarDate(now.year, 7, 4),
+		new CalendarDate(now.year, 12, 25)
+	];
+	let withHolidays = $state<DateValue | null>(null);
+
+	function isHoliday(d: DateValue) {
+		return holidays.some((h) => isSameDay(h, d));
+	}
+
+	let multiRange = $state<DateValue[]>([]);
+	function toggleRange(d: DateValue) {
+		const idx = multiRange.findIndex((x) => isSameDay(x, d));
+		if (idx >= 0) multiRange = multiRange.filter((_, i) => i !== idx);
+		else multiRange = [...multiRange, d];
+	}
+
+	const baseHeader =
+		'mb-3 flex items-center justify-between gap-1 [&_button]:rounded [&_button]:px-2 [&_button]:py-1 [&_button]:text-(--charcoal)/70 [&_button]:hover:bg-(--charcoal)/10 [&_[data-calendar-label]]:font-display [&_[data-calendar-label]]:flex-1 [&_[data-calendar-label]]:flex [&_[data-calendar-label]]:items-center [&_[data-calendar-label]]:justify-center [&_[data-calendar-label]]:gap-1';
+	const baseGrid =
+		'grid grid-cols-7 gap-0.5 [&>[role=row]]:contents [&[data-calendar-months]]:grid-cols-3 [&[data-calendar-years]]:grid-cols-3';
+	const baseWeekday =
+		'text-center text-xs uppercase tracking-wider text-(--charcoal)/50 py-1';
+	const baseDay =
+		'h-9 w-9 rounded text-sm text-(--ink) hover:bg-(--charcoal)/10 data-[out-month]:text-(--charcoal)/30 data-[today]:font-bold data-[today]:text-(--vermilion) data-[selected]:bg-(--indigo-dye) data-[selected]:text-white disabled:opacity-30 disabled:hover:bg-transparent';
+	const baseMonth =
+		'rounded px-2 py-3 text-sm text-(--ink) hover:bg-(--charcoal)/10 data-[current]:bg-(--indigo-dye) data-[current]:text-white disabled:opacity-30 disabled:hover:bg-transparent';
+	const baseYear = baseMonth;
 </script>
 
 <svelte:head>
@@ -58,17 +100,19 @@
 				bind:viewDate
 				{max}
 				class="inline-block rounded border border-(--charcoal)/15 bg-white p-3 text-sm text-(--ink)"
-				headerClass="mb-3 flex items-center justify-between gap-1 [&_button]:rounded [&_button]:px-2 [&_button]:py-1 [&_button]:text-(--charcoal)/70 [&_button]:hover:bg-(--cream) [&_[data-calendar-label]]:font-display [&_[data-calendar-label]]:flex-1 [&_[data-calendar-label]]:flex [&_[data-calendar-label]]:items-center [&_[data-calendar-label]]:justify-center [&_[data-calendar-label]]:gap-1"
-				gridClass="grid grid-cols-7 gap-0.5 [&>[role=row]]:contents [&[data-calendar-months]]:grid-cols-3 [&[data-calendar-years]]:grid-cols-3"
-				weekdayClass="text-center text-xs uppercase tracking-wider text-(--charcoal)/50 py-1"
-				dayClass="h-9 w-9 rounded text-sm text-(--ink) hover:bg-(--cream) data-[out-month]:text-(--charcoal)/30 data-[today]:font-bold data-[today]:text-(--vermilion) data-[selected]:bg-(--indigo-dye) data-[selected]:text-white disabled:opacity-30 disabled:hover:bg-transparent"
-				monthClass="rounded px-2 py-3 text-sm text-(--ink) hover:bg-(--cream) data-[current]:bg-(--indigo-dye) data-[current]:text-white disabled:opacity-30 disabled:hover:bg-transparent"
-				yearClass="rounded px-2 py-3 text-sm text-(--ink) hover:bg-(--cream) data-[current]:bg-(--indigo-dye) data-[current]:text-white disabled:opacity-30 disabled:hover:bg-transparent"
+				headerClass={baseHeader}
+				gridClass={baseGrid}
+				weekdayClass={baseWeekday}
+				dayClass={baseDay}
+				monthClass={baseMonth}
+				yearClass={baseYear}
 			/>
 			<p class="mt-4 text-sm text-(--charcoal)/60">
 				Selected:
 				<strong>
-					{value ? `${value.year}-${String(value.month).padStart(2, '0')}-${String(value.day).padStart(2, '0')}` : '—'}
+					{value
+						? `${value.year}-${String(value.month).padStart(2, '0')}-${String(value.day).padStart(2, '0')}`
+						: '—'}
 				</strong>
 			</p>
 		</div>
@@ -82,30 +126,120 @@
 				isDateDisabled={isWeekend}
 				weekStartsOn={1}
 				class="inline-block rounded border border-(--charcoal)/15 bg-white p-3 text-sm text-(--ink)"
-				headerClass="mb-3 flex items-center justify-between gap-1 [&_button]:rounded [&_button]:px-2 [&_button]:py-1 [&_button]:text-(--charcoal)/70 [&_button]:hover:bg-(--cream) [&_[data-calendar-label]]:font-display [&_[data-calendar-label]]:flex-1 [&_[data-calendar-label]]:flex [&_[data-calendar-label]]:items-center [&_[data-calendar-label]]:justify-center [&_[data-calendar-label]]:gap-1"
-				gridClass="grid grid-cols-7 gap-0.5 [&>[role=row]]:contents [&[data-calendar-months]]:grid-cols-3 [&[data-calendar-years]]:grid-cols-3"
-				weekdayClass="text-center text-xs uppercase tracking-wider text-(--charcoal)/50 py-1"
-				dayClass="h-9 w-9 rounded text-sm text-(--ink) hover:bg-(--cream) data-[out-month]:text-(--charcoal)/30 data-[today]:font-bold data-[today]:text-(--vermilion) data-[selected]:bg-(--indigo-dye) data-[selected]:text-white disabled:opacity-30 disabled:hover:bg-transparent"
-				monthClass="rounded px-2 py-3 text-sm text-(--ink) hover:bg-(--cream) data-[current]:bg-(--indigo-dye) data-[current]:text-white disabled:opacity-30 disabled:hover:bg-transparent"
-				yearClass="rounded px-2 py-3 text-sm text-(--ink) hover:bg-(--cream) data-[current]:bg-(--indigo-dye) data-[current]:text-white disabled:opacity-30 disabled:hover:bg-transparent"
+				headerClass={baseHeader}
+				gridClass={baseGrid}
+				weekdayClass={baseWeekday}
+				dayClass={baseDay}
+				monthClass={baseMonth}
+				yearClass={baseYear}
 			/>
 		</div>
 	</section>
 
 	<section class="mb-16">
-		<h2 class="font-display mb-6 text-2xl text-(--ink)">Japanese locale</h2>
+		<h2 class="font-display mb-6 text-2xl text-(--ink)">Locale switcher</h2>
+		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
+			<div class="mb-4 flex flex-wrap items-center gap-2">
+				{#each locales as l (l.id)}
+					<button
+						type="button"
+						onclick={() => (locale = l.id)}
+						class="rounded border px-2.5 py-1 text-xs {locale === l.id
+							? 'border-(--indigo-dye) bg-(--indigo-dye) text-white'
+							: 'border-(--charcoal)/20 text-(--ink) hover:bg-(--charcoal)/5'}"
+					>
+						{l.label}
+					</button>
+				{/each}
+			</div>
+			<div dir={isRTL ? 'rtl' : 'ltr'}>
+				<Calendar
+					value={null}
+					{locale}
+					class="inline-block rounded border border-(--charcoal)/15 bg-white p-3 text-sm text-(--ink)"
+					headerClass={baseHeader}
+					gridClass={baseGrid}
+					weekdayClass={baseWeekday}
+					dayClass={baseDay}
+					monthClass={baseMonth}
+					yearClass={baseYear}
+				/>
+			</div>
+			<p class="mt-3 text-xs text-(--charcoal)/60">
+				Weekday order + month/year labels follow the locale. RTL locales mirror layout via parent
+				<code>dir</code> attr.
+			</p>
+		</div>
+	</section>
+
+	<section class="mb-16">
+		<h2 class="font-display mb-6 text-2xl text-(--ink)">Custom day snippet (holidays)</h2>
+		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
+			<Calendar
+				bind:value={withHolidays}
+				class="inline-block rounded border border-(--charcoal)/15 bg-white p-3 text-sm text-(--ink)"
+				headerClass={baseHeader}
+				gridClass={baseGrid}
+				weekdayClass={baseWeekday}
+				dayClass={baseDay}
+				monthClass={baseMonth}
+				yearClass={baseYear}
+			>
+				{#snippet day({ day: d })}
+					<span class="relative inline-flex h-full w-full items-center justify-center">
+						{d.date.day}
+						{#if isHoliday(d.date) && d.inMonth}
+							<span
+								class="absolute right-0.5 top-0.5 h-1.5 w-1.5 rounded-full bg-(--vermilion)"
+								aria-label="Holiday"
+							></span>
+						{/if}
+					</span>
+				{/snippet}
+			</Calendar>
+			<p class="mt-3 text-xs text-(--charcoal)/60">
+				Red dot marks Jan 1, May 5, Jul 4, Dec 25 — rendered via the <code>day</code> snippet without
+				touching component internals.
+			</p>
+		</div>
+	</section>
+
+	<section class="mb-16">
+		<h2 class="font-display mb-6 text-2xl text-(--ink)">Multi-select (external state)</h2>
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<Calendar
 				value={null}
-				locale="ja-JP"
+				onSelect={toggleRange}
 				class="inline-block rounded border border-(--charcoal)/15 bg-white p-3 text-sm text-(--ink)"
-				headerClass="mb-3 flex items-center justify-between gap-1 [&_button]:rounded [&_button]:px-2 [&_button]:py-1 [&_button]:text-(--charcoal)/70 [&_button]:hover:bg-(--cream) [&_[data-calendar-label]]:font-display [&_[data-calendar-label]]:flex-1 [&_[data-calendar-label]]:flex [&_[data-calendar-label]]:items-center [&_[data-calendar-label]]:justify-center [&_[data-calendar-label]]:gap-1"
-				gridClass="grid grid-cols-7 gap-0.5 [&>[role=row]]:contents [&[data-calendar-months]]:grid-cols-3 [&[data-calendar-years]]:grid-cols-3"
-				weekdayClass="text-center text-xs uppercase tracking-wider text-(--charcoal)/50 py-1"
-				dayClass="h-9 w-9 rounded text-sm text-(--ink) hover:bg-(--cream) data-[out-month]:text-(--charcoal)/30 data-[today]:font-bold data-[today]:text-(--vermilion) data-[selected]:bg-(--indigo-dye) data-[selected]:text-white disabled:opacity-30 disabled:hover:bg-transparent"
-				monthClass="rounded px-2 py-3 text-sm text-(--ink) hover:bg-(--cream) data-[current]:bg-(--indigo-dye) data-[current]:text-white disabled:opacity-30 disabled:hover:bg-transparent"
-				yearClass="rounded px-2 py-3 text-sm text-(--ink) hover:bg-(--cream) data-[current]:bg-(--indigo-dye) data-[current]:text-white disabled:opacity-30 disabled:hover:bg-transparent"
-			/>
+				headerClass={baseHeader}
+				gridClass={baseGrid}
+				weekdayClass={baseWeekday}
+				dayClass={baseDay}
+				monthClass={baseMonth}
+				yearClass={baseYear}
+			>
+				{#snippet day({ day: d })}
+					<span
+						class="flex h-full w-full items-center justify-center rounded {multiRange.some((x) =>
+							isSameDay(x, d.date)
+						) && d.inMonth
+							? 'bg-(--matcha)/20 font-bold text-(--matcha)'
+							: ''}"
+					>
+						{d.date.day}
+					</span>
+				{/snippet}
+			</Calendar>
+			<p class="mt-3 text-sm text-(--charcoal)/60">
+				Selected: <strong>{multiRange.length}</strong> dates
+				{#if multiRange.length}
+					<button
+						type="button"
+						onclick={() => (multiRange = [])}
+						class="ml-2 text-xs text-(--vermilion) underline">clear</button
+					>
+				{/if}
+			</p>
 		</div>
 	</section>
 </main>

@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { CaretLeft } from 'phosphor-svelte';
+	import { CaretLeft, Lock, Drop } from 'phosphor-svelte';
 	import { ColorPicker } from 'alus';
 
 	let c1 = $state('#c84b31');
 	let c2 = $state('#005f73');
+	let c3 = $state('#3d2c8dcc');
+	let c4 = $state('#1f1f1f');
 
 	const palette = [
 		'#000000',
@@ -15,6 +17,25 @@
 		'#3d2c8d',
 		'#ffffff'
 	];
+
+	const seasonal = [
+		'#fad6d6',
+		'#f8a5b0',
+		'#a8d8b9',
+		'#c2e0e8',
+		'#fff2b3',
+		'#dec1a1',
+		'#6b5b95',
+		'#8b4513'
+	];
+
+	let raw = $state('not-a-color');
+	const normalized = $derived.by(() => {
+		const m = raw.replace(/^#/, '');
+		if (/^[0-9a-fA-F]{3}$/.test(m) || /^[0-9a-fA-F]{6}$/.test(m) || /^[0-9a-fA-F]{8}$/.test(m))
+			return '#' + m.toLowerCase();
+		return null;
+	});
 </script>
 
 <svelte:head>
@@ -77,6 +98,103 @@
 			<div class="mt-4 flex items-center gap-3">
 				<div class="h-12 w-12 rounded border border-(--charcoal)/15" style={`background:${c2};`}></div>
 				<code class="text-sm text-(--charcoal)/70">{c2}</code>
+			</div>
+		</div>
+	</section>
+
+	<section class="mb-16">
+		<h2 class="font-display mb-6 text-2xl text-(--ink)">Alpha (8-char hex)</h2>
+		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
+			<ColorPicker
+				bind:value={c3}
+				swatches={['#3d2c8d40', '#3d2c8d80', '#3d2c8dcc', '#3d2c8dff']}
+				aria-label="Alpha color"
+				class="inline-flex flex-wrap items-center gap-2 rounded border border-(--charcoal)/20 bg-white p-2"
+				nativeClass="h-8 w-10 cursor-pointer rounded border-none bg-transparent"
+				inputClass="w-32 rounded border border-(--charcoal)/15 px-2 py-1 text-sm text-(--ink) outline-none focus:border-(--indigo-dye)"
+				swatchesClass="flex items-center gap-1.5"
+				swatchClass="h-6 w-6 rounded border border-(--charcoal)/15 data-[selected]:ring-2 data-[selected]:ring-(--indigo-dye) data-[selected]:ring-offset-1"
+			/>
+			<div class="mt-4 flex items-center gap-3">
+				<div
+					class="h-12 w-12 rounded border border-(--charcoal)/15 bg-[length:8px_8px] bg-[linear-gradient(45deg,#ccc_25%,transparent_25%,transparent_75%,#ccc_75%),linear-gradient(45deg,#ccc_25%,transparent_25%,transparent_75%,#ccc_75%)] bg-[position:0_0,4px_4px]"
+				>
+					<div class="h-full w-full rounded" style={`background:${c3};`}></div>
+				</div>
+				<code class="text-sm text-(--charcoal)/70">{c3}</code>
+				<span class="text-xs text-(--charcoal)/50">— note the alpha pair (last 2 chars)</span>
+			</div>
+		</div>
+	</section>
+
+	<section class="mb-16">
+		<h2 class="font-display mb-6 text-2xl text-(--ink)">Hex normalization (3 / 6 / 8 char)</h2>
+		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
+			<label class="block text-sm text-(--charcoal)/70">
+				Try typing: <code>fa3</code>, <code>#FFAA00</code>, <code>1234abcd</code>, or junk
+				<input
+					type="text"
+					bind:value={raw}
+					class="mt-2 w-full max-w-md rounded border border-(--charcoal)/20 px-3 py-2 font-mono text-sm outline-none focus:border-(--indigo-dye)"
+				/>
+			</label>
+			<p class="mt-3 inline-flex items-center gap-2 text-sm">
+				<Drop class="h-4 w-4 {normalized ? 'text-(--matcha)' : 'text-(--vermilion)'}" />
+				{#if normalized}
+					<code class="text-(--matcha)">{normalized}</code>
+					<span
+						class="ml-2 inline-block h-5 w-5 rounded border border-(--charcoal)/15"
+						style={`background:${normalized};`}
+					></span>
+				{:else}
+					<span class="text-(--vermilion)">Not a valid hex.</span>
+				{/if}
+			</p>
+		</div>
+	</section>
+
+	<section class="mb-16">
+		<h2 class="font-display mb-6 text-2xl text-(--ink)">Disabled</h2>
+		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
+			<div class="inline-flex items-center gap-3">
+				<ColorPicker
+					bind:value={c4}
+					disabled
+					aria-label="Locked color"
+					class="inline-flex items-center gap-2 rounded border border-(--charcoal)/15 bg-(--charcoal)/5 p-2"
+					nativeClass="h-8 w-10 rounded border-none bg-transparent cursor-not-allowed opacity-50"
+					inputClass="w-28 rounded border border-(--charcoal)/15 bg-transparent px-2 py-1 text-sm text-(--charcoal)/50 cursor-not-allowed"
+				/>
+				<Lock class="h-4 w-4 text-(--charcoal)/40" />
+			</div>
+		</div>
+	</section>
+
+	<section class="mb-16">
+		<h2 class="font-display mb-6 text-2xl text-(--ink)">Hide input / hide native</h2>
+		<div class="japanese-border space-y-4 bg-white/50 p-8 backdrop-blur-sm">
+			<div>
+				<p class="mb-2 text-xs text-(--charcoal)/60">Swatch-only (no input, no native picker):</p>
+				<ColorPicker
+					value="#84a98c"
+					swatches={seasonal}
+					showInput={false}
+					showNative={false}
+					aria-label="Seasonal palette"
+					class="inline-flex flex-wrap items-center gap-2 rounded border border-(--charcoal)/20 bg-white p-2"
+					swatchesClass="flex flex-wrap items-center gap-1.5"
+					swatchClass="h-7 w-7 rounded border border-(--charcoal)/15 data-[selected]:ring-2 data-[selected]:ring-(--indigo-dye) data-[selected]:ring-offset-1"
+				/>
+			</div>
+			<div>
+				<p class="mb-2 text-xs text-(--charcoal)/60">Hex-only (no native):</p>
+				<ColorPicker
+					value="#d4a017"
+					showNative={false}
+					aria-label="Hex only"
+					class="inline-flex items-center gap-2 rounded border border-(--charcoal)/20 bg-white p-2"
+					inputClass="w-28 rounded border border-(--charcoal)/15 px-2 py-1 text-sm text-(--ink) outline-none focus:border-(--indigo-dye)"
+				/>
 			</div>
 		</div>
 	</section>

@@ -44,6 +44,8 @@
 		timeZone?: string;
 		disabled?: boolean;
 		isDateDisabled?: (date: DateValue) => boolean;
+		dayDataAttrs?: (day: CalendarDay) => Record<string, string | undefined>;
+		onDayHover?: (date: DateValue) => void;
 		class?: string;
 		headerClass?: string;
 		gridClass?: string;
@@ -68,6 +70,8 @@
 		timeZone = getLocalTimeZone(),
 		disabled = false,
 		isDateDisabled,
+		dayDataAttrs,
+		onDayHover,
 		class: className = '',
 		headerClass = '',
 		gridClass = '',
@@ -381,9 +385,11 @@
 								data-out-month={!cd.inMonth ? '' : undefined}
 								data-today={cd.isToday ? '' : undefined}
 								data-selected={cd.isSelected ? '' : undefined}
+								{...(dayDataAttrs?.(cd) ?? {})}
 								class={dayClass}
 								onclick={() => select(cd.date)}
 								onkeydown={(e) => onDayKey(e, cd.date)}
+								onpointerenter={() => onDayHover?.(cd.date)}
 							>
 								{#if day}
 									{@render day({ day: cd })}

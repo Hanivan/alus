@@ -522,6 +522,18 @@
 			kanji: '日'
 		},
 		{
+			title: 'DateRange',
+			description: 'Two-click range selection with hover preview and one or two month layout',
+			href: '/components/date-range',
+			kanji: '範'
+		},
+		{
+			title: 'DateRangePicker',
+			description: 'Button trigger + popover hosting a two-month DateRange',
+			href: '/components/date-range-picker',
+			kanji: '期'
+		},
+		{
 			title: 'TimePicker',
 			description: 'Hour/minute(/second) inputs with ArrowUp/Down stepping and AM/PM toggle',
 			href: '/components/time-picker',

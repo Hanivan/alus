@@ -20,23 +20,22 @@ The Alus library provides **unstyled, accessible UI primitives** that:
 - Follow WCAG 2.1 AA accessibility standards
 - Are keyboard navigable with visible focus indicators
 
-#### Current Components (^\_^)b
+#### Component Status (^\_^)b
 
-- **Button** - Basic button with full ARIA support, toggle states
-- **Input** - Text input with validation, error states, and accessibility
-- **Checkbox** - Checkbox with indeterminate state and ARIA support
-- **Radio** - Radio button with keyboard navigation and accessibility
-- **Badge** - Status indicator with ARIA live regions and variant support
+The roadmap in `docs/todos/ui-components-roadmap.md` is **complete** — every checked item has a source file, export, and demo route. The canonical list of shipped components lives in `packages/alus/src/lib/components/index.ts`. Categories covered:
 
-#### Planned Components 🚧
+- **Form**: Button, Input, Checkbox, Radio, RadioGroup, Select, Textarea, Switch, Slider, FileInput, SearchInput, NumberInput, Form, Fieldset, Label, FieldError, InputGroup, Rating, IconButton, ToggleButton, AutoComplete, Calendar, DatePicker, DateRange, DateRangePicker, TimePicker, ColorPicker
+- **Navigation**: Tabs, Accordion, Breadcrumb, Pagination, Link, ExternalLink, Navigation, Menu, SubMenu, Stepper, CommandMenu
+- **Feedback**: Badge, Tag, Spinner, Skeleton, Progress, Alert, Callout, Banner, InlineMessage, LiveRegion, NotificationBell, Toast (+ Toaster)
+- **Display**: Divider, Kbd, AspectRatio, Frame, Timestamp, CodeBlock, StatCard, Avatar, Card, Image, List, DataList, Table, TreeView, Timeline, Compare, Carousel
+- **Overlay**: Modal, Dialog, Drawer, Sheet, Tooltip, Popover, Dropdown, Overlay, Lightbox, ContextMenu
+- **Layout**: Stack, Flex, Grid, Container, Spacer, Columns
+- **Interactive**: Sortable, Swipeable, Resizable, SplitView, Draggable, Droppable, InfiniteScroll, VirtualList
+- **Utility**: VisuallyHidden, Portal, FocusTrap, ScreenReaderOnly, Conditional
 
-See `docs/todos/ui-components-roadmap.md` for the complete roadmap including:
+**Explicit N/A** (per roadmap): `Clone` (Svelte 5 lacks `cloneElement`), `RichTextEditor`/`DataGrid`/`Chart`/`VideoPlayer`/`AudioPlayer`/`MapView` (use external libs).
 
-- Form: Checkbox, Radio, Select, Textarea, Switch, Slider, etc.
-- Feedback: Alert, Toast, Progress, Badge, Tag, etc.
-- Navigation: Tabs, Accordion, Breadcrumb, Menu, etc.
-- Overlay: Modal, Dialog, Tooltip, Popover, etc.
-- Display: Card, Avatar, List, Table, etc.
+Date components use **`@internationalized/date`** for locale/timezone/non-Gregorian-calendar correctness.
 
 ---
 
@@ -47,7 +46,83 @@ See `docs/todos/ui-components-roadmap.md` for the complete roadmap including:
 - **Framework**: SvelteKit (root), Svelte Package (alus library)
 - **Add-ons**: prettier, eslint, vitest, tailwindcss, sveltekit-adapter, mcp
 - **Deployment**: Netlify adapter
-- **Styling**: Tailwind CSS v4 with @tailwindcss/vite
+- **Styling**: Tailwind CSS v4 with @tailwindcss/vite, `@tailwindcss/forms` + `@tailwindcss/typography` plugins
+
+---
+
+## Showcase Aesthetic
+
+The showcase app (`src/routes/`) uses a **Japanese Creative / 和モダン** web style — disciplined negative space, traditional craft motifs, and a restrained palette. The library itself stays unstyled; this aesthetic only lives in the showcase.
+
+### Palette (CSS custom properties in `src/routes/layout.css`)
+
+| Token | Hex | Use |
+| --- | --- | --- |
+| `--indigo-dye` | `#1e3a5f` | Primary borders, accents, selected state |
+| `--vermilion` | `#e85d4e` | Hanko seal, hover accents, danger |
+| `--matcha` | `#7a9b56` | Success state |
+| `--cherry-blossom` | `#f8c3cd` | Soft accent |
+| `--cream` | `#faf8f5` | Background tint *(reserved — avoid on white text)* |
+| `--charcoal` | `#2d2d2d` | Body text |
+| `--ink` | `#1a1a1a` | Headings |
+| `--paper-white` | `#fcfbf9` | Page background |
+| `--bamboo` | `#8b7355` | Subtitles, supporting text |
+| `--muted-gold` | `#c9a959` | Highlights |
+
+### Typography
+
+- **Display**: `Cormorant Garamond` via `.font-display` — headings, hanko, kanji decorations
+- **Body**: `Zen Kaku Gothic New` — paragraphs, UI text
+
+### Recurring building blocks
+
+- `.japanese-border` — 2px indigo-dye border with vermilion corner squares (top-left, bottom-right)
+- `.hanko-seal` — round vermilion seal, slight `rotate(-5deg)`, holds a kanji
+- `.seigaiha-pattern` — traditional wave pattern as background
+- `.vertical-text` — `writing-mode: vertical-rl` for kanji column headings
+- `.paper-texture::before` — SVG noise overlay for paper feel
+- `.animate-fade-in-up` (+ `animation-delay-{100..400}`) — staggered entry
+
+### Demo page template
+
+Every component demo at `src/routes/components/{component}/+page.svelte` follows this skeleton — keep it consistent when adding new demos:
+
+```svelte
+<a href="/" class="mb-8 inline-flex items-center gap-2 text-(--indigo-dye) hover:text-(--vermilion)">
+    <CaretLeft class="h-5 w-5" />
+    <span>Back to Components</span>
+</a>
+<main>
+    <header class="mb-16">
+        <div class="hanko-seal">{kanji}</div>          <!-- 1-char kanji -->
+        <h1 class="font-display text-5xl text-(--ink) md:text-6xl">ComponentName</h1>
+        <p class="tracking-widest text-(--bamboo)">{japanese-subtitle}</p>
+    </header>
+    <section class="mb-16">
+        <h2 class="font-display mb-6 text-2xl text-(--ink)">Section title</h2>
+        <div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
+            <!-- live example -->
+        </div>
+    </section>
+</main>
+```
+
+### Input styling convention
+
+Text-like inputs use **2px indigo-dye border** that intensifies on focus:
+
+```
+border-2 border-(--indigo-dye)/20 px-4 py-3 transition-colors focus:border-(--indigo-dye) focus:outline-none
+```
+
+The global `*:focus-visible` outline is suppressed for form controls (in `@layer base`) so border-color is the single focus indicator — never stack outline + border. `[type='text'|email|...]` chrome strips are inside `@layer base` so utility classes override them without `!important`.
+
+### Conventions
+
+- Always run the showcase through the components page (`src/routes/+page.svelte`) — every new component gets a card entry there.
+- **Do not use `--cream` as a background for elements containing white text** — readability issue (past incident with SubMenu open state). Prefer `--charcoal/10` or `--indigo-dye/10`.
+- Avoid emojis in demo text; the kanji + hanko fill that visual role.
+- Use `phosphor-svelte` for all icons — consistent stroke weight matches the aesthetic.
 
 ---
 
@@ -141,16 +216,7 @@ pnpm check:watch      # Watch mode for type checking
 
 ### Library Package (`packages/alus/`)
 
-- `src/lib/components/` - Core component library
-  - `form/button/Button.svelte` - Unstyled accessible button component
-  - `form/input/Input.svelte` - Unstyled accessible input component
-  - `form/checkbox/Checkbox.svelte` - Unstyled accessible checkbox component
-  - `form/radio/Radio.svelte` - Unstyled accessible radio component
-  - `feedback/badge/Badge.svelte` - Unstyled accessible badge component
-  - `feedback/tag/Tag.svelte` - Unstyled accessible tag component
-  - `display/divider/Divider.svelte` - Unstyled accessible divider component
-  - `feedback/tag/Tag.svelte` - Unstyled accessible tag component
-  - `display/divider/Divider.svelte` - Unstyled accessible divider component
+- `src/lib/components/` - Core component library, organised by category: `form/`, `navigation/`, `feedback/`, `display/`, `overlay/`, `layout/`, `interactive/`, `utility/`. Each component lives in its own folder `{category}/{component-lowercase}/{ComponentName.svelte, index.ts}`. The full export list is in `src/lib/components/index.ts`.
 - `src/lib/utils/a11y/` - Accessibility utilities
   - `aria.ts` - ARIA attribute utilities
   - `focus.ts` - Focus management utilities
@@ -302,6 +368,7 @@ export { default as ComponentName } from './ComponentName.svelte';
 - `phosphor-svelte` ^3.1.0 - Icon library
 - `@floating-ui/dom` ^1.7.6 - Positioning engine (for overlays)
 - `runed` ^0.37.1 - Svelte 5 utilities library
+- `@internationalized/date` - Locale/timezone-aware date math (Calendar, DatePicker, DateRange, DateRangePicker)
 
 ### Development Dependencies
 
