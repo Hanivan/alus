@@ -202,6 +202,42 @@
 			description: 'Compound dropdown menu with portal + floating-ui positioning',
 			href: '/components/menu',
 			kanji: '献'
+		},
+		{
+			title: 'Modal',
+			description: 'Modal dialog with backdrop, focus trap, and Escape close',
+			href: '/components/modal',
+			kanji: '壁'
+		},
+		{
+			title: 'Dialog',
+			description: 'Non-modal dialog variant — same anatomy as Modal',
+			href: '/components/dialog',
+			kanji: '話'
+		},
+		{
+			title: 'Drawer',
+			description: 'Side panel sliding from any edge with focus trap',
+			href: '/components/drawer',
+			kanji: '引'
+		},
+		{
+			title: 'Tooltip',
+			description: 'Hover/focus tooltip with floating-ui positioning',
+			href: '/components/tooltip',
+			kanji: '説'
+		},
+		{
+			title: 'Popover',
+			description: 'Click-toggled floating panel with outside-click close',
+			href: '/components/popover',
+			kanji: '泡'
+		},
+		{
+			title: 'Dropdown',
+			description: 'Button-triggered menu with keyboard navigation',
+			href: '/components/dropdown',
+			kanji: '下'
 		}
 	];
 

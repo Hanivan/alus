@@ -15,6 +15,8 @@
 		disabled: () => boolean;
 		highlighted: () => HTMLElement | null;
 		setHighlighted: (el: HTMLElement | null) => void;
+		lastActivatedEl: () => HTMLElement | null;
+		lastActivatedIndex: () => number;
 		triggerEl: { current: HTMLElement | null };
 		setTriggerEl: (el: HTMLElement | null) => void;
 		contentEl: { current: HTMLElement | null };
@@ -50,6 +52,8 @@
 	let { children, open = $bindable(false), disabled = false, onOpenChange }: Props = $props();
 
 	let highlighted = $state<HTMLElement | null>(null);
+	let lastActivated = $state<HTMLElement | null>(null);
+	let lastActivatedIndex = $state<number>(-1);
 	let triggerEl = $state<HTMLElement | null>(null);
 	let contentEl = $state<HTMLElement | null>(null);
 	let items = $state<MenuItemEntry[]>([]);
@@ -64,6 +68,9 @@
 
 	function activate(entry: MenuItemEntry) {
 		if (entry.disabled) return;
+		lastActivated = entry.el;
+		const enabled = items.filter((i) => !i.disabled);
+		lastActivatedIndex = enabled.findIndex((i) => i.el === entry.el);
 		entry.onSelect?.();
 		setOpen(false);
 	}
@@ -74,6 +81,8 @@
 		disabled: () => disabled,
 		highlighted: () => highlighted,
 		setHighlighted: (el) => (highlighted = el),
+		lastActivatedEl: () => lastActivated,
+		lastActivatedIndex: () => lastActivatedIndex,
 		triggerEl: {
 			get current() {
 				return triggerEl;

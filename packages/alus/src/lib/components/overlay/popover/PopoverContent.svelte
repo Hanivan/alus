@@ -1,15 +1,33 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
 	import { computePosition, autoUpdate, flip, shift, offset, size } from '@floating-ui/dom';
-	import { getMenuContext, type MenuItemEntry } from './Menu.svelte';
+	import { trap, focusFirst } from '$utils/a11y/index.js';
+	import { getPopoverContext } from './Popover.svelte';
 	import Portal from '../../utility/portal/Portal.svelte';
 
 	interface Props {
 		children?: import('svelte').Snippet;
 		class?: string;
-		placement?: 'top' | 'bottom' | 'top-start' | 'bottom-start' | 'top-end' | 'bottom-end';
+		placement?:
+			| 'top'
+			| 'bottom'
+			| 'left'
+			| 'right'
+			| 'top-start'
+			| 'top-end'
+			| 'bottom-start'
+			| 'bottom-end'
+			| 'left-start'
+			| 'left-end'
+			| 'right-start'
+			| 'right-end';
 		offset?: number;
 		sameWidth?: boolean;
+		closeOnEscape?: boolean;
+		closeOnOutsideClick?: boolean;
+		trapFocus?: boolean;
+		restoreFocus?: boolean;
+		autoFocus?: boolean;
 	}
 
 	let {
@@ -17,25 +35,21 @@
 		class: className = '',
 		placement = 'bottom-start',
 		offset: offsetPx = 4,
-		sameWidth = false
+		sameWidth = false,
+		closeOnEscape = true,
+		closeOnOutsideClick = true,
+		trapFocus = false,
+		restoreFocus = true,
+		autoFocus = false
 	}: Props = $props();
 
-	const ctx = getMenuContext();
-
-	function enabled(): MenuItemEntry[] {
-		return ctx.items().filter((i) => !i.disabled);
-	}
-
-	function focusItem(entry: MenuItemEntry | undefined) {
-		if (!entry) return;
-		ctx.setHighlighted(entry.el);
-		entry.el.focus();
-	}
+	const ctx = getPopoverContext();
 
 	const contentRef: Attachment<HTMLDivElement> = (node) => {
 		ctx.setContentEl(node);
 		const trigger = ctx.triggerEl.current;
 		let cleanupAutoUpdate: (() => void) | undefined;
+		let releaseTrap: (() => void) | undefined;
 
 		if (trigger) {
 			cleanupAutoUpdate = autoUpdate(trigger, node, async () => {
@@ -61,79 +75,46 @@
 			});
 		}
 
+		if (trapFocus) releaseTrap = trap(node);
+		if (autoFocus) focusFirst(node);
+
 		function onPointerDown(e: PointerEvent) {
+			if (!closeOnOutsideClick) return;
 			const t = e.target as Node;
 			if (node.contains(t) || ctx.triggerEl.current?.contains(t)) return;
 			ctx.setOpen(false);
 		}
 
-		document.addEventListener('pointerdown', onPointerDown, true);
+		function onKeydown(e: KeyboardEvent) {
+			if (closeOnEscape && e.key === 'Escape') {
+				e.preventDefault();
+				ctx.setOpen(false);
+			}
+		}
 
-		queueMicrotask(() => {
-			const list = enabled();
-			const idx = ctx.lastActivatedIndex();
-			focusItem(idx >= 0 && idx < list.length ? list[idx] : list[0]);
-		});
+		document.addEventListener('pointerdown', onPointerDown, true);
+		document.addEventListener('keydown', onKeydown);
 
 		return () => {
 			cleanupAutoUpdate?.();
+			releaseTrap?.();
 			document.removeEventListener('pointerdown', onPointerDown, true);
+			document.removeEventListener('keydown', onKeydown);
 			ctx.setContentEl(null);
-			ctx.triggerEl.current?.focus();
+			if (restoreFocus) ctx.triggerEl.current?.focus();
 		};
 	};
-
-	function move(dir: 1 | -1) {
-		const list = enabled();
-		if (!list.length) return;
-		const cur = list.findIndex((i) => i.el === ctx.highlighted());
-		let next: number;
-		if (cur === -1) next = dir === 1 ? 0 : list.length - 1;
-		else next = (cur + dir + list.length) % list.length;
-		focusItem(list[next]);
-	}
-
-	function onKeydown(e: KeyboardEvent) {
-		switch (e.key) {
-			case 'ArrowDown':
-				e.preventDefault();
-				move(1);
-				break;
-			case 'ArrowUp':
-				e.preventDefault();
-				move(-1);
-				break;
-			case 'Home': {
-				e.preventDefault();
-				focusItem(enabled()[0]);
-				break;
-			}
-			case 'End': {
-				e.preventDefault();
-				focusItem(enabled().at(-1));
-				break;
-			}
-			case 'Escape':
-				e.preventDefault();
-				ctx.setOpen(false);
-				break;
-			case 'Tab':
-				ctx.setOpen(false);
-				break;
-		}
-	}
 </script>
 
 {#if ctx.open()}
 	<Portal>
 		<div
 			id={ctx.contentId}
-			role="menu"
-			tabindex="-1"
+			role="dialog"
 			aria-labelledby={ctx.triggerId}
+			tabindex="-1"
 			class={className}
 			style="position:fixed; top:0; left:0;"
-			onkeydown={onKeydown}
 			{@attach contentRef}
 		>
 			{#if children}{@render children()}{/if}

@@ -80,6 +80,61 @@ export { Alert } from './feedback/alert/index.js';
 export { Divider } from './display/divider/index.js';
 export { Avatar } from './display/avatar/index.js';
 
+// Overlay Components
+export {
+	Modal,
+	ModalTrigger,
+	ModalContent,
+	ModalTitle,
+	ModalDescription,
+	ModalClose,
+	getModalContext,
+	setModalContext
+} from './overlay/modal/index.js';
+export type { ModalContext } from './overlay/modal/index.js';
+export {
+	Dialog,
+	DialogTrigger,
+	DialogContent,
+	DialogTitle,
+	DialogDescription,
+	DialogClose
+} from './overlay/dialog/index.js';
+export {
+	Drawer,
+	DrawerTrigger,
+	DrawerContent,
+	DrawerTitle,
+	DrawerDescription,
+	DrawerClose
+} from './overlay/drawer/index.js';
+export type { DrawerSide } from './overlay/drawer/index.js';
+export {
+	Tooltip,
+	TooltipTrigger,
+	TooltipContent,
+	getTooltipContext,
+	setTooltipContext
+} from './overlay/tooltip/index.js';
+export type { TooltipContext } from './overlay/tooltip/index.js';
+export {
+	Popover,
+	PopoverTrigger,
+	PopoverContent,
+	getPopoverContext,
+	setPopoverContext
+} from './overlay/popover/index.js';
+export type { PopoverContext } from './overlay/popover/index.js';
+export {
+	Dropdown,
+	DropdownTrigger,
+	DropdownContent,
+	DropdownItem,
+	getDropdownContext,
+	setDropdownContext
+} from './overlay/dropdown/index.js';
+export type { DropdownContext, DropdownItemEntry } from './overlay/dropdown/index.js';
+
 // Utility Components
 export { VisuallyHidden } from './utility/visually-hidden/index.js';
 export { Portal } from './utility/portal/index.js';
