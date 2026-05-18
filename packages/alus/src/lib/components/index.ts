@@ -99,6 +99,24 @@ export {
 	DataListTerm,
 	DataListDescription
 } from './display/data-list/index.js';
+export {
+	Table,
+	TableCaption,
+	TableHead,
+	TableBody,
+	TableFoot,
+	TableRow,
+	TableHeader,
+	TableCell
+} from './display/table/index.js';
+export {
+	TreeView,
+	TreeItem,
+	getTreeViewContext,
+	setTreeViewContext
+} from './display/tree-view/index.js';
+export type { TreeViewContext } from './display/tree-view/index.js';
+export { Timeline, TimelineItem } from './display/timeline/index.js';
 
 // Overlay Components
 export {

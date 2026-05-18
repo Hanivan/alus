@@ -274,6 +274,24 @@
 			description: 'Star rating with keyboard nav and aria-valuetext',
 			href: '/components/rating',
 			kanji: '星'
+		},
+		{
+			title: 'Table',
+			description: 'Semantic table with scope, aria-sort, caption, headers',
+			href: '/components/table',
+			kanji: '表'
+		},
+		{
+			title: 'TreeView',
+			description: 'Hierarchical tree with aria-expanded and keyboard nav',
+			href: '/components/tree-view',
+			kanji: '樹'
+		},
+		{
+			title: 'Timeline',
+			description: 'Vertical or horizontal timeline with markers and status',
+			href: '/components/timeline',
+			kanji: '時'
 		}
 	];
 
