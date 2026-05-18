@@ -52,30 +52,28 @@ pnpm add alus-ui
 ```
 alus-svelte/
 ├── packages/
-│   └── alus/                    # Component library (publishable)
-│       ├── src/
-│       │   ├── lib/
-│       │   │   ├── components/  # UI components
-│       │   │   │   └── form/    # Form components
-│       │   │   │       ├── button/
-│       │   │   │       └── input/
-│       │   │   ├── utils/      # Utility functions
-│       │   │   │   └── a11y/    # Accessibility utilities
-│       │   │   └── types/      # TypeScript types
-│       │   └── index.ts
+│   └── alus/                          # Component library, published as `alus-ui`
+│       ├── src/lib/
+│       │   ├── components/            # UI components, by category
+│       │   │   ├── form/              # Button, Input, Checkbox, Radio, …
+│       │   │   ├── navigation/        # Tabs, Menu, Stepper, Breadcrumb, …
+│       │   │   ├── feedback/          # Toast, Alert, Spinner, Progress, …
+│       │   │   ├── display/           # Card, Avatar, Table, Timeline, …
+│       │   │   ├── overlay/           # Modal, Drawer, Popover, Tooltip, …
+│       │   │   ├── layout/            # Stack, Flex, Grid, Container, …
+│       │   │   ├── interactive/       # Sortable, VirtualList, SplitView, …
+│       │   │   └── utility/           # VisuallyHidden, Portal, FocusTrap, …
+│       │   ├── utils/a11y/            # ARIA helpers, focus mgmt, IDs
+│       │   ├── utils/form/            # Form field helpers
+│       │   └── types/                 # TypeScript types
+│       ├── .release-it.json
 │       ├── package.json
 │       └── README.md
-├── src/                         # Showcase application
-│   ├── routes/
-│   │   └── +page.svelte         # Main demo page
-│   └── lib/
-│       └── components/          # Showcase-specific components
-├── docs/
-│   └── todos/
-│       └── ui-components-roadmap.md  # Component roadmap
-├── package.json                 # Root package.json
-├── pnpm-workspace.yaml          # Monorepo configuration
-└── README.md                    # This file
+├── src/routes/                        # Showcase app (SvelteKit)
+├── docs/todos/                        # Roadmap + a11y refactor plan
+├── package.json                       # Root workspace
+├── pnpm-workspace.yaml
+└── CLAUDE.md                          # Project conventions
 ```
 
 ## (・\_・) Development
@@ -131,10 +129,18 @@ pnpm format           # Format code with Prettier
 
 ## (^\_^) Available Components
 
-### (^\_^)b Currently Available
+The canonical export list lives in `packages/alus/src/lib/components/index.ts`. Demos for every component are in `src/routes/components/{component}/+page.svelte`.
 
-- **Button** - Accessible button with ARIA support and toggle states
-- **Input** - Text input with validation, error states, and accessibility
+- **Form**: Button, Input, Checkbox, Radio, RadioGroup, Select, Textarea, Switch, Slider, FileInput, SearchInput, NumberInput, Form, Fieldset, Label, FieldError, InputGroup, Rating, IconButton, ToggleButton, AutoComplete, Calendar, DatePicker, DateRange, DateRangePicker, TimePicker, ColorPicker
+- **Navigation**: Tabs, Accordion, Breadcrumb, Pagination, Link, ExternalLink, Navigation, Menu, SubMenu, Stepper, CommandMenu
+- **Feedback**: Badge, Tag, Spinner, Skeleton, Progress, Alert, Callout, Banner, InlineMessage, LiveRegion, NotificationBell, Toast (+ Toaster)
+- **Display**: Divider, Kbd, AspectRatio, Frame, Timestamp, CodeBlock, StatCard, Avatar, Card, Image, List, DataList, Table, TreeView, Timeline, Compare, Carousel
+- **Overlay**: Modal, Dialog, Drawer, Sheet, Tooltip, Popover, Dropdown, Overlay, Lightbox, ContextMenu
+- **Layout**: Stack, Flex, Grid, Container, Spacer, Columns
+- **Interactive**: Sortable, Swipeable, Resizable, SplitView, Draggable, Droppable, InfiniteScroll, VirtualList
+- **Utility**: VisuallyHidden, Portal, FocusTrap, ScreenReaderOnly, Conditional
+
+Date components use [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/) for locale, timezone, and non-Gregorian-calendar correctness.
 
 ## (☆^\_☆) Styling with Tailwind CSS
 
@@ -219,14 +225,18 @@ pnpm lint
 
 ## (>\_<) Publishing
 
-The `alus-ui` package is published to npm from `packages/alus/`.
+The `alus-ui` package is published to npm from `packages/alus/` via [release-it](https://github.com/release-it/release-it) with conventional-changelog. See `packages/alus/README.md#releasing` for the full workflow.
 
 ```bash
 cd packages/alus
-pnpm build
-pnpm test
-npm publish
+pnpm release:dry      # preview bump, changelog, tag, publish
+pnpm release          # interactive
+pnpm release:patch    # 0.1.0 → 0.1.1
+pnpm release:minor    # 0.1.0 → 0.2.0
+pnpm release:major    # 0.1.0 → 1.0.0
 ```
+
+Prereqs: clean `main`, `npm whoami` succeeds, `GITHUB_TOKEN` exported (else web fallback). The pipeline runs `pnpm check`, bumps version, runs `pnpm build`, writes `CHANGELOG.md`, commits, tags `v<version>`, pushes, creates the GitHub release, and runs `npm publish`.
 
 ## (O_O) Browser Support
 

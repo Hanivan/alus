@@ -41,10 +41,20 @@ yarn add alus-ui
 
 ## Available Components
 
-### Form Components (^\_^)b
+The canonical export list is `src/lib/components/index.ts`.
 
-- **Button** - Accessible button with ARIA support and toggle states
-- **Input** - Text input with validation, error states, and accessibility
+- **Form** (27): Button, Input, Checkbox, Radio, RadioGroup, Select, Textarea, Switch, Slider, FileInput, SearchInput, NumberInput, Form, Fieldset, Label, FieldError, InputGroup, Rating, IconButton, ToggleButton, AutoComplete, Calendar, DatePicker, DateRange, DateRangePicker, TimePicker, ColorPicker
+- **Navigation** (11): Tabs, Accordion, Breadcrumb, Pagination, Link, ExternalLink, Navigation, Menu, SubMenu, Stepper, CommandMenu
+- **Feedback** (13): Badge, Tag, Spinner, Skeleton, Progress, Alert, Callout, Banner, InlineMessage, LiveRegion, NotificationBell, Toast (+ Toaster)
+- **Display** (18): Divider, Kbd, AspectRatio, Frame, Timestamp, CodeBlock, StatCard, Avatar, Card, Image, List, DataList, Table, TreeView, Timeline, Compare, Carousel
+- **Overlay** (10): Modal, Dialog, Drawer, Sheet, Tooltip, Popover, Dropdown, Overlay, Lightbox, ContextMenu
+- **Layout** (6): Stack, Flex, Grid, Container, Spacer, Columns
+- **Interactive** (8): Sortable, Swipeable, Resizable, SplitView, Draggable, Droppable, InfiniteScroll, VirtualList
+- **Utility** (5): VisuallyHidden, Portal, FocusTrap, ScreenReaderOnly, Conditional
+
+Date components use [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/) for locale/timezone/non-Gregorian-calendar correctness.
+
+**Out of scope** (use external libs): `RichTextEditor`, `DataGrid`, `Chart`, `VideoPlayer`, `AudioPlayer`, `MapView`. `Clone` is not implementable (Svelte 5 lacks `cloneElement`).
 
 ## Features
 
@@ -122,49 +132,35 @@ yarn add alus-ui
 
 ## Component API
 
-### Button
+Per-component prop documentation is not duplicated here — every component is fully typed, so use IDE IntelliSense or browse the source under `src/lib/components/{category}/{component}/`. Each component file has a `Props` interface at the top.
 
-```svelte
-<Button type="button" disabled={false} aria-pressed={undefined} class="" onclick={() => {}}>
-	Button content
-</Button>
+Live, interactive examples for every component are in the showcase app at `src/routes/components/{component}/+page.svelte` (run `pnpm dev` from the repo root).
+
+### Shared ARIA props
+
+Most components accept these standard accessibility props in addition to their own:
+
+- `aria-label?: string`
+- `aria-labelledby?: string`
+- `aria-describedby?: string`
+- `class?: string`
+
+Interactive components additionally accept: `disabled`, `aria-disabled`, plus role-specific state like `aria-pressed`, `aria-expanded`, `aria-checked`, `aria-selected`, `aria-current`.
+
+Form components additionally accept: `required`, `aria-invalid`, `aria-errormessage` (wired via the `validationAttrs` helper).
+
+## Utilities
+
+Beyond components, the package exports a small set of a11y/form utilities:
+
+```ts
+import { labelAttrs, validationAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from 'alus-ui/a11y';
+import { trap, focusFirst } from 'alus-ui/a11y';
+import { generateCounterId } from 'alus-ui/a11y';
+import { createFieldIds, createFormField } from 'alus-ui/utils/form';
 ```
 
-**Props:**
-
-- `type?: 'button' | 'submit' | 'reset'` - Button type (default: 'button')
-- `disabled?: boolean` - Disabled state
-- `aria-pressed?: boolean` - Toggle button state
-- `class?: string` - CSS classes for styling
-- All standard HTML button attributes
-
-### Input
-
-```svelte
-<Input
-	type="text"
-	value={''}
-	autocomplete="off"
-	inputmode="text"
-	aria-invalid={false}
-	aria-label={undefined}
-	aria-describedby={undefined}
-	class=""
-	oninput={(e) => {}}
-/>
-```
-
-**Props:**
-
-- `type?: HTMLInputTypeAttribute` - Input type (default: 'text')
-- `value?: string` - Input value (use `bind:value` for two-way binding)
-- `autocomplete?: string` - Autocomplete attribute
-- `inputmode?: string` - Input mode for mobile keyboards
-- `aria-invalid?: boolean` - Invalid state for validation
-- `aria-label?: string` - Accessibility label
-- `aria-describedby?: string` - ID of describing element
-- `class?: string` - CSS classes for styling
-- All standard HTML input attributes
+See `src/lib/utils/a11y/` and `src/lib/utils/form/` for full reference.
 
 ## Accessibility Features
 
@@ -207,58 +203,6 @@ pnpm build
 # Run tests (Vitest)
 pnpm test
 ```
-
-## Releasing
-
-Releases are driven by [release-it](https://github.com/release-it/release-it) + `@release-it/conventional-changelog`. Versions auto-bump from [Conventional Commits](https://www.conventionalcommits.org/) (`feat:` → minor, `fix:` → patch, `feat!:` / `BREAKING CHANGE:` → major).
-
-### Prerequisites
-
-- Logged in to npm: `npm whoami` should print your username
-- `GITHUB_TOKEN` env var set (else release-it falls back to the web UI for the GitHub release)
-- Clean working tree on `main`
-
-### Commands
-
-```bash
-cd packages/alus
-
-pnpm release:dry      # preview — no git/npm/github writes
-pnpm release          # interactive — prompts for the bump
-pnpm release:patch    # 0.1.0 → 0.1.1
-pnpm release:minor    # 0.1.0 → 0.2.0
-pnpm release:major    # 0.1.0 → 1.0.0
-```
-
-### What `pnpm release` does
-
-1. `before:init` hook → `pnpm check` (svelte-check must pass)
-2. Bumps `package.json` version
-3. `after:bump` hook → `pnpm build` (regenerates `dist/`)
-4. Writes `CHANGELOG.md` from conventional commits since the last tag
-5. Commits `chore(release): v<version>` and tags `v<version>`
-6. Pushes commit + tag to `origin/main`
-7. Creates GitHub release with the changelog body
-8. Publishes to npm (`npm publish` runs `prepublishOnly` → build + test again)
-
-### Commit message conventions
-
-| Prefix       | Section in CHANGELOG | Bump  |
-| ------------ | -------------------- | ----- |
-| `feat:`      | Features             | minor |
-| `fix:`       | Bug Fixes            | patch |
-| `perf:`      | Performance          | patch |
-| `refactor:`  | Refactors            | patch |
-| `docs:`      | Documentation        | patch |
-| `test:`      | Tests                | patch |
-| `build:`     | Build                | patch |
-| `ci:` / `chore:` / `style:` | _(hidden)_ | none |
-
-Append `!` after the type (or include `BREAKING CHANGE:` in the body) for a major bump.
-
-### Config
-
-Settings live in `packages/alus/.release-it.json`. Tag scheme is `v<version>`.
 
 ## License
 

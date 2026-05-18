@@ -61,32 +61,56 @@ git checkout -b fix/issue-description
            └── index.ts
    ```
 
-2. **Follow component template**
+2. **Follow component template** — components MUST use the shared ARIA helpers, never construct ARIA attributes by hand:
 
    ```svelte
    <script lang="ts">
-   	import type { HTMLAttributes } from 'svelte/elements';
+   	import {
+   		labelAttrs,
+   		interactiveStateAttrs,
+   		widgetAttrs,
+   		mergeAttrs
+   	} from '$utils/a11y/index.js';
 
    	interface Props {
-   		// Define your props here
+   		children?: import('svelte').Snippet;
    		class?: string;
+   		disabled?: boolean;
+   		'aria-label'?: string;
+   		'aria-labelledby'?: string;
+   		'aria-describedby'?: string;
    	}
 
-   	let { class: className = '', ...rest }: Props = $props();
+   	let {
+   		children,
+   		class: className = '',
+   		disabled = false,
+   		'aria-label': ariaLabel,
+   		'aria-labelledby': ariaLabelledby,
+   		'aria-describedby': ariaDescribedby
+   	}: Props = $props();
+
+   	const ariaAttrs = $derived(
+   		mergeAttrs(
+   			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby }),
+   			interactiveStateAttrs({ disabled })
+   		)
+   	);
    </script>
 
-   <!-- Unstyled, semantic HTML -->
-   <div class={className} {...rest}>
-   	<!-- Your content -->
-   </div>
+   <button type="button" class={className} {disabled} {...ariaAttrs}>
+   	{#if children}{@render children()}{/if}
+   </button>
    ```
 
 3. **Export from index files**
-   - Update `packages/alus/src/lib/components/yourcomponent/index.ts`
-   - Update `packages/alus/src/lib/components/index.ts`
+   - Create `packages/alus/src/lib/components/{category}/{component}/index.ts` (**must** be `.ts`, not `.js`):
+     ```ts
+     export { default as YourComponent } from './YourComponent.svelte';
+     ```
+   - Re-export from `packages/alus/src/lib/components/index.ts`
 
-4. **Add usage examples** in showcase app
-   - Add examples to `src/routes/+page.svelte` or create new route
+4. **Add a demo** at `src/routes/components/{component}/+page.svelte` following the Japanese-aesthetic template documented in `CLAUDE.md` (hanko-seal + kanji + `japanese-border`).
 
 #### Component Requirements
 
@@ -117,13 +141,17 @@ pnpm format
 
 ### 5. Commit Your Changes
 
-Follow [Conventional Commits](https://www.conventionalcommits.org/):
+Follow [Conventional Commits](https://www.conventionalcommits.org/) — release-it parses these to bump the version and write the changelog.
 
 ```bash
-git commit -m "feat: add Checkbox component"
-git commit -m "fix: correct aria-label on Button"
-git commit -m "docs: update README with new examples"
+git commit -m "feat: add Checkbox component"          # → minor bump, "Features" section
+git commit -m "fix: correct aria-label on Button"     # → patch bump, "Bug Fixes" section
+git commit -m "refactor: simplify menu focus logic"   # → patch bump, "Refactors" section
+git commit -m "docs: update README with new examples" # → patch bump, "Documentation" section
+git commit -m "feat!: rename Switch prop 'on' → 'checked'  # → major bump (breaking)
 ```
+
+`chore:` / `ci:` / `style:` are hidden from the changelog and don't trigger a bump.
 
 ### 6. Create Pull Request
 
@@ -157,43 +185,74 @@ let disabled: boolean | undefined = $props();
 
 ### Svelte 5 Runes
 
-Always use Svelte 5 runes syntax:
+Always use Svelte 5 runes syntax. No legacy mode anywhere in the codebase.
 
 ```svelte
 <script lang="ts">
-// Good - runes
-let { count = 0 }: Props = $props();
-let doubled = $derived(count * 2);
-let message = $state('hello');
+	// Good — runes
+	let { count = 0 }: Props = $props();
+	let doubled = $derived(count * 2);
+	let message = $state('hello');
 
-// Bad - legacy
-export let count = 0;
-$: doubled = count * 2;
+	// Bad — legacy
+	export let count = 0;
+	$: doubled = count * 2;
+</script>
 ```
+
+### Effects and listeners
+
+- **No `onMount` / `onDestroy`.** Use `$effect(() => { ...; return cleanup; })`.
+- **No raw `addEventListener` / `removeEventListener` on `document` or `window`.** Use `useEventListener` from `runed` with a gated getter so attach/detach is reactive:
+
+  ```ts
+  import { useEventListener } from 'runed';
+
+  useEventListener(
+  	() => (open ? document : null),
+  	'keydown',
+  	(e) => {
+  		if (e.key === 'Escape') close();
+  	}
+  );
+  ```
+
+Listeners on a local node inside an `Attachment` are fine to keep inline.
 
 ### Accessibility
 
 Every component must include:
 
-1. **Semantic HTML** - Use proper elements
-2. **ARIA attributes** - aria-label, aria-describedby, etc.
-3. **Keyboard support** - Enter, Space, Escape, Arrow keys
-4. **Focus management** - Visible focus indicators
-5. **Screen reader support** - Labels and announcements
+1. **Semantic HTML** — Use proper elements
+2. **ARIA via the shared helpers** — never inline `aria-*` strings; route everything through `labelAttrs` / `validationAttrs` / `interactiveStateAttrs` / `widgetAttrs` / `mergeAttrs` from `$utils/a11y`
+3. **ARIA value types** from `$types/index.ts` — derived from `svelte/elements` (`AriaBoolean`, `AriaTristate`, `AriaHaspopup`, `AriaLive`, `AriaCurrent`, `AriaRelevant`, `AriaOrientation`). Never redeclare literal unions.
+4. **Keyboard support** — Enter, Space, Escape, Arrow keys, Home/End, Tab
+5. **Focus management** — `trap` + `focusFirst` for modals, roving tabindex for composite widgets, visible focus indicators
+6. **Screen reader support** — labels, live regions via `<VisuallyHidden role="status" aria-live="polite">` (never inline `style="position:absolute…"` or Tailwind `sr-only`)
+7. **Form validation** — `aria-invalid` + `aria-errormessage` via `validationAttrs`
+8. **Virtualised / paginated content** — emit `aria-setsize` + `aria-posinset` (see VirtualList, StepperStep)
 
 ```svelte
-<!-- Good -->
-<button
-	aria-label="Close dialog"
-	aria-pressed={pressed}
-	onkeydown={(e) => {
-		if (e.key === 'Enter' || e.key === ' ') {
-			// Handle activation
-		}
-	}}
->
-	Close
-</button>
+<script lang="ts">
+	import {
+		labelAttrs,
+		validationAttrs,
+		interactiveStateAttrs,
+		widgetAttrs,
+		mergeAttrs
+	} from '$utils/a11y/index.js';
+
+	const ariaAttrs = $derived(
+		mergeAttrs(
+			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby }),
+			validationAttrs({ invalid, required, errormessage }),
+			interactiveStateAttrs({ disabled, pressed }),
+			widgetAttrs({ controls, haspopup, orientation })
+		)
+	);
+</script>
+
+<button type="button" {...ariaAttrs}>{label}</button>
 ```
 
 ### Code Style
@@ -326,10 +385,22 @@ Contributors will be:
 
 Thank you for contributing to alus-ui! (♡˙︶˙♡)
 
+## (>\_<) Releasing
+
+Maintainers cut releases with [release-it](https://github.com/release-it/release-it). See `packages/alus/README.md#releasing` for the full pipeline. TL;DR:
+
+```bash
+cd packages/alus
+pnpm release:dry      # preview
+pnpm release          # interactive
+```
+
+Versions auto-bump from conventional commits. Tag format: `v<version>`.
+
 ## (・\_・) Additional Resources
 
 - [Svelte 5 Documentation](https://svelte.dev/docs)
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 - [ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)
 - [Component Roadmap](docs/todos/ui-components-roadmap.md)
-- [Project CLAUDE.md](CLAUDE.md)
+- [Project CLAUDE.md](CLAUDE.md) — full conventions reference
