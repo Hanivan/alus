@@ -1,6 +1,20 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Textarea } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { Textarea } from 'alus';
+	let bio = $state('');
+<\/script>
+
+<Textarea
+	bind:value={bio}
+	rows={4}
+	placeholder="Tell us about yourself…"
+	maxlength={500}
+	class="w-full rounded border-2 border-(--indigo-dye)/20 p-3 focus:border-(--indigo-dye)"
+/>`;
 
 	let bio = $state('');
 </script>
@@ -73,4 +87,28 @@
 			<p id="comment-help" class="text-sm text-(--charcoal)/60">10–500 characters, required.</p>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'value', type: 'string', default: "''", description: 'Bindable' },
+			{ name: 'rows', type: 'number', default: '3' },
+			{ name: 'cols', type: 'number', default: 'undefined' },
+			{ name: 'maxlength', type: 'number', default: 'undefined' },
+			{ name: 'minlength', type: 'number', default: 'undefined' },
+			{ name: 'placeholder', type: 'string', default: 'undefined' },
+			{ name: 'disabled', type: 'boolean', default: 'false' },
+			{ name: 'required', type: 'boolean', default: 'false' },
+			{ name: 'readonly', type: 'boolean', default: 'false' },
+			{ name: 'aria-invalid', type: 'boolean', default: 'undefined' },
+			{ name: 'aria-errormessage', type: 'string', default: 'undefined' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Native <code class="rounded bg-(--cream) px-1">&lt;textarea&gt;</code> — keyboard accessible by default',
+			'<code class="rounded bg-(--cream) px-1">aria-invalid</code> + <code class="rounded bg-(--cream) px-1">aria-errormessage</code> for validation',
+			'<code class="rounded bg-(--cream) px-1">aria-describedby</code> wires character counter / help text',
+			'Pair with <code class="rounded bg-(--cream) px-1">&lt;Label for&gt;</code> or <code class="rounded bg-(--cream) px-1">aria-label</code>'
+		]}
+	/>
 </main>

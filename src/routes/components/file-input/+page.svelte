@@ -1,6 +1,18 @@
 <script lang="ts">
 	import { CaretLeft, UploadSimple } from 'phosphor-svelte';
 	import { FileInput, Label } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<FileInput
+	accept="image/*"
+	multiple
+	onChange={(files) => console.log(files)}
+	aria-label="Upload photos"
+>
+	{#snippet trigger({ open })}
+		<button onclick={open}>Choose files</button>
+	{/snippet}
+</FileInput>`;
 
 	let files = $state<FileList | null>(null);
 	let multi = $state<FileList | null>(null);
@@ -79,4 +91,22 @@
 			</FileInput>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'accept', type: 'string', default: 'undefined', description: 'MIME / extension filter' },
+			{ name: 'multiple', type: 'boolean', default: 'false' },
+			{ name: 'disabled', type: 'boolean', default: 'false' },
+			{ name: 'required', type: 'boolean', default: 'false' },
+			{ name: 'onChange', type: '(files: FileList) => void', default: 'undefined' },
+			{ name: 'trigger', type: 'Snippet<[{ open: () => void; files: FileList | null }]>', default: 'undefined' },
+			{ name: 'aria-label', type: 'string', default: 'undefined' }
+		]}
+		a11y={[
+			'Hidden native <code class="rounded bg-(--cream) px-1">&lt;input type="file"&gt;</code> for full browser support',
+			'Custom <code class="rounded bg-(--cream) px-1">trigger</code> snippet is keyboard accessible',
+			'<code class="rounded bg-(--cream) px-1">aria-invalid</code> + <code class="rounded bg-(--cream) px-1">aria-errormessage</code> for validation'
+		]}
+	/>
 </main>

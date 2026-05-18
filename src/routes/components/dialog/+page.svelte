@@ -1,6 +1,16 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription, DialogClose } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Dialog>
+	<DialogTrigger>Open</DialogTrigger>
+	<DialogContent>
+		<DialogTitle>Inbox</DialogTitle>
+		<DialogDescription>You have 3 new messages.</DialogDescription>
+		<DialogClose>Close</DialogClose>
+	</DialogContent>
+</Dialog>`;
 </script>
 
 <svelte:head>
@@ -56,4 +66,20 @@
 			</Dialog>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable' },
+			{ name: 'modal', type: 'boolean', default: 'false', description: 'Non-modal by default' },
+			{ name: 'closeOnEscape', type: 'boolean', default: 'true' },
+			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="dialog"</code> — non-modal variant (no <code>aria-modal</code>)',
+			'Page behind remains interactive; useful for inspector / detail panels',
+			'DialogTitle / DialogDescription wired as labelledby / describedby',
+			'Focus moves into the dialog on open; Escape closes and restores focus'
+		]}
+	/>
 </main>

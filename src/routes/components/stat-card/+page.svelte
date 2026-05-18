@@ -1,6 +1,17 @@
 <script lang="ts">
 	import { CaretLeft, ArrowUp, ArrowDown, Minus, Users, ShoppingBag, Cpu, Heart } from 'phosphor-svelte';
 	import { StatCard } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<StatCard
+	label="Active users"
+	value="12,481"
+	change="+8.2%"
+	trend="up"
+	hint="vs last week"
+>
+	{#snippet icon()}<Users class="h-5 w-5" />{/snippet}
+</StatCard>`;
 
 	type Trend = 'up' | 'down' | 'flat';
 
@@ -131,4 +142,23 @@
 			</StatCard>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'label', type: 'string', default: 'required' },
+			{ name: 'value', type: 'string | number', default: 'required' },
+			{ name: 'change', type: 'string', default: 'undefined' },
+			{ name: 'trend', type: "'up' | 'down' | 'flat'", default: 'undefined' },
+			{ name: 'hint', type: 'string', default: 'undefined' },
+			{ name: 'icon', type: 'Snippet', default: 'undefined' },
+			{ name: 'change_snippet', type: 'Snippet<[{ trend, change }]>', default: 'undefined' }
+		]}
+		a11y={[
+			'Value uses a heading so it shows in the document outline',
+			'Trend is conveyed via the change text, not just colour — SRs read "+8.2% up"',
+			'Icons are decorative — marked <code class="rounded bg-(--cream) px-1">aria-hidden</code>',
+			'Hint text is associated with the value via <code class="rounded bg-(--cream) px-1">aria-describedby</code>'
+		]}
+	/>
 </main>

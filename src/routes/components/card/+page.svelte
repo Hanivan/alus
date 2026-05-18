@@ -8,6 +8,18 @@
 		CardContent,
 		CardFooter
 	} from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Card>
+	<CardHeader>
+		<CardTitle>Mount Fuji</CardTitle>
+		<CardDescription>Japan's highest peak.</CardDescription>
+	</CardHeader>
+	<CardContent>An iconic active stratovolcano on Honshu island.</CardContent>
+	<CardFooter>
+		<button>Learn more</button>
+	</CardFooter>
+</Card>`;
 </script>
 
 <svelte:head>
@@ -66,4 +78,18 @@
 			</Card>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'as', type: 'string', default: "'article'", description: 'Element on <code>Card</code>' },
+			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">&lt;article&gt;</code> root — landmark for AT navigation',
+			'<code class="rounded bg-(--cream) px-1">CardTitle</code> renders a heading; <code>aria-labelledby</code> wires it to the card',
+			'<code class="rounded bg-(--cream) px-1">CardDescription</code> wired via <code>aria-describedby</code>',
+			'Footer actions remain focusable in DOM order'
+		]}
+	/>
 </main>

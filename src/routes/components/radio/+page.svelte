@@ -1,6 +1,15 @@
 <script lang="ts">
 	import { CaretLeft, Check } from 'phosphor-svelte';
 	import { Radio } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { Radio } from 'alus';
+	let choice = $state('email');
+<\/script>
+
+<Radio name="contact" value="email" bind:group={choice} class="h-4 w-4" /> Email
+<Radio name="contact" value="phone" bind:group={choice} class="h-4 w-4" /> Phone`;
 
 	let preferredContact = $state('email');
 	let plan = $state('free');
@@ -478,4 +487,24 @@
 			</ol>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'name', type: 'string', default: 'undefined', description: 'Groups radios with the same name' },
+			{ name: 'value', type: 'string', default: 'undefined' },
+			{ name: 'group', type: 'string', default: 'undefined', description: 'Bindable — the selected value' },
+			{ name: 'disabled', type: 'boolean', default: 'false' },
+			{ name: 'required', type: 'boolean', default: 'false' },
+			{ name: 'aria-label', type: 'string', default: 'undefined' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Native <code class="rounded bg-(--cream) px-1">&lt;input type="radio"&gt;</code>',
+			'Same <code class="rounded bg-(--cream) px-1">name</code> auto-groups for tab navigation (Tab to group, Arrows within)',
+			'Use <code class="rounded bg-(--cream) px-1">&lt;RadioGroup&gt;</code> or <code class="rounded bg-(--cream) px-1">&lt;Fieldset&gt;</code> for an accessible group label',
+			'Arrow keys cycle within group, Space selects',
+			'Pair each Radio with a <code class="rounded bg-(--cream) px-1">&lt;Label&gt;</code>'
+		]}
+	/>
 </main>

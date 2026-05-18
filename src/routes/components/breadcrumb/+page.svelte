@@ -1,6 +1,15 @@
 <script lang="ts">
 	import { CaretLeft, CaretRight, House } from 'phosphor-svelte';
 	import { Breadcrumb, BreadcrumbItem, BreadcrumbSeparator } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Breadcrumb>
+	<BreadcrumbItem href="/">Home</BreadcrumbItem>
+	<BreadcrumbSeparator>/</BreadcrumbSeparator>
+	<BreadcrumbItem href="/products">Products</BreadcrumbItem>
+	<BreadcrumbSeparator>/</BreadcrumbSeparator>
+	<BreadcrumbItem current>Tea ware</BreadcrumbItem>
+</Breadcrumb>`;
 </script>
 
 <svelte:head>
@@ -79,4 +88,19 @@
 			</Breadcrumb>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'aria-label', type: 'string', default: "'Breadcrumb'", description: '<code>Breadcrumb</code>' },
+			{ name: 'href', type: 'string', default: 'undefined', description: '<code>BreadcrumbItem</code>' },
+			{ name: 'current', type: 'boolean', default: 'false', description: 'Last item — adds <code>aria-current="page"</code>' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">&lt;nav aria-label="Breadcrumb"&gt;</code> wraps an ordered list',
+			'Final item carries <code class="rounded bg-(--cream) px-1">aria-current="page"</code> and is not a link',
+			'Separators are <code class="rounded bg-(--cream) px-1">aria-hidden</code> — decorative only'
+		]}
+	/>
 </main>

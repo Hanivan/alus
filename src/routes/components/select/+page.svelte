@@ -1,6 +1,22 @@
 <script lang="ts">
 	import { CaretLeft, CaretDown, Check } from 'phosphor-svelte';
 	import { Select, SelectTrigger, SelectContent, SelectOption } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { Select, SelectTrigger, SelectContent, SelectOption } from 'alus';
+	let value = $state('');
+<\/script>
+
+<Select bind:value aria-label="Country">
+	<SelectTrigger class="rounded border-2 border-(--indigo-dye)/20 px-3 py-2">
+		{value || 'Choose a country'}
+	</SelectTrigger>
+	<SelectContent class="rounded border-2 border-(--indigo-dye)/20 bg-white shadow-lg">
+		<SelectOption value="jp">Japan</SelectOption>
+		<SelectOption value="us">United States</SelectOption>
+	</SelectContent>
+</Select>`;
 
 	const countries = [
 		{ value: 'jp', label: 'Japan' },
@@ -179,4 +195,22 @@
 			</ul>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'value', type: 'string', default: 'undefined', description: 'Bindable. <code>Select</code>' },
+			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable. <code>Select</code>' },
+			{ name: 'disabled', type: 'boolean', default: 'false', description: '<code>Select</code>' },
+			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' },
+			{ name: 'value (option)', type: 'string', default: 'required', description: '<code>SelectOption</code>' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="combobox"</code> on trigger, <code class="rounded bg-(--cream) px-1">role="listbox"</code> on content',
+			'<code class="rounded bg-(--cream) px-1">aria-activedescendant</code> tracks highlighted option',
+			'Arrow keys navigate, Enter/Space select, Escape closes, Home/End jump to ends',
+			'Type-ahead character search',
+			'Focus returns to trigger when closed'
+		]}
+	/>
 </main>

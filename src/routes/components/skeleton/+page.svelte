@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Skeleton } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Skeleton class="block h-4 w-1/3 animate-pulse rounded bg-gray-200" />
+<Skeleton class="block h-32 w-full animate-pulse bg-gray-200" />`;
 </script>
 
 <svelte:head>
@@ -48,4 +52,18 @@
 			<Skeleton class="block h-3 w-4/5 animate-pulse bg-(--indigo-dye)/10" />
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'class', type: 'string', default: "''", description: 'Shape + pulse animation' },
+			{ name: 'aria-hidden', type: 'boolean', default: 'true', description: 'Skeletons are decorative' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">aria-hidden="true"</code> hides placeholder rectangles from SRs',
+			'Wrap the loading region in an element with <code class="rounded bg-(--cream) px-1">aria-busy="true"</code> + <code class="rounded bg-(--cream) px-1">aria-live="polite"</code>',
+			'Reveal real content as soon as data arrives — long skeleton states feel broken',
+			'Honour <code class="rounded bg-(--cream) px-1">prefers-reduced-motion</code> to drop the pulse animation'
+		]}
+	/>
 </main>

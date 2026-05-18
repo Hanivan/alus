@@ -1,6 +1,18 @@
 <script lang="ts">
 	import { CaretLeft, CircleNotch, WarningCircle, ArrowClockwise } from 'phosphor-svelte';
 	import { InfiniteScroll, Button } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<InfiniteScroll {hasMore} onLoad={loadMore}>
+	{#each items as item}
+		<Row {item} />
+	{/each}
+	{#snippet sentinel({ loading, done })}
+		{#if done}— end —
+		{:else if loading}Loading…
+		{/if}
+	{/snippet}
+</InfiniteScroll>`;
 
 	let items = $state<number[]>(Array.from({ length: 20 }, (_, i) => i + 1));
 	let hasMore = $state(true);
@@ -166,4 +178,21 @@
 			</div>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'hasMore', type: 'boolean', default: 'true', description: 'When false sentinel stops firing' },
+			{ name: 'onLoad', type: '() => void | Promise<void>', default: 'required' },
+			{ name: 'rootMargin', type: 'string', default: "'200px'" },
+			{ name: 'threshold', type: 'number', default: '0' },
+			{ name: 'sentinel', type: 'Snippet<[{ loading, done }]>', default: 'undefined' }
+		]}
+		a11y={[
+			'Sentinel state should be announced — wrap loading text in a polite live region',
+			'Provide an explicit "Load more" button as fallback when IntersectionObserver fails',
+			'Focus should not jump — new content appends, existing items stay in place',
+			'Set <code class="rounded bg-(--cream) px-1">aria-busy="true"</code> on the scroll container while loading'
+		]}
+	/>
 </main>

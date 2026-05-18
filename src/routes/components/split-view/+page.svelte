@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { SplitView, SplitViewPane, SplitViewHandle } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<SplitView bind:size={pct} min={20} max={80} orientation="horizontal" aria-label="Editor">
+	<SplitViewPane side="first">Left</SplitViewPane>
+	<SplitViewHandle aria-label="Resize panes" />
+	<SplitViewPane side="second">Right</SplitViewPane>
+</SplitView>`;
 
 	let hSize = $state(40);
 	let vSize = $state(55);
@@ -96,4 +103,21 @@
 			</SplitView>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'size', type: 'number', default: '50', description: 'Bindable 0..100 (% of first pane)' },
+			{ name: 'min', type: 'number', default: '0' },
+			{ name: 'max', type: 'number', default: '100' },
+			{ name: 'orientation', type: "'horizontal' | 'vertical'", default: "'horizontal'" },
+			{ name: 'side', type: "'first' | 'second'", default: 'required', description: '<code>SplitViewPane</code>' }
+		]}
+		a11y={[
+			'Handle is <code class="rounded bg-(--cream) px-1">role="separator"</code> + <code class="rounded bg-(--cream) px-1">aria-orientation</code>',
+			'<code class="rounded bg-(--cream) px-1">aria-valuenow</code> / <code>aria-valuemin</code> / <code>aria-valuemax</code> reflect percentages',
+			'Arrows step 1%, PageUp / PageDown 10%, Home / End jump to min / max',
+			'Wrap the whole SplitView with <code class="rounded bg-(--cream) px-1">aria-label</code> describing the layout'
+		]}
+	/>
 </main>

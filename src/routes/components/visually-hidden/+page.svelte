@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { VisuallyHidden } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<button>
+	<span aria-hidden="true">×</span>
+	<VisuallyHidden>Close dialog</VisuallyHidden>
+</button>`;
 </script>
 
 <svelte:head>
@@ -64,33 +70,17 @@
 		</div>
 	</section>
 
-	<section class="mb-16">
-		<h2 class="font-display mb-8 text-2xl text-(--ink)">
-			<span>Accessibility</span>
-			<span class="ml-2 text-lg text-(--bamboo)">アクセシビリティ</span>
-		</h2>
-
-		<div class="japanese-border bg-linear-to-br from-white to-(--cream) p-8">
-			<ul class="space-y-4">
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80">Content remains in DOM and accessibility tree</span>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						>Uses clip pattern (1px sized, clipped) — works with all screen readers</span
-					>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						>Render as <code class="rounded bg-(--cream) px-1">span</code> or
-						<code class="rounded bg-(--cream) px-1">div</code>
-						via <code class="rounded bg-(--cream) px-1">as</code> prop</span
-					>
-				</li>
-			</ul>
-		</div>
-	</section>
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'as', type: "'span' | 'div'", default: "'span'" },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Uses the clip pattern (1px sized + clipped) — content stays in the a11y tree',
+			'Never use <code class="rounded bg-(--cream) px-1">display:none</code> for SR-only text — that removes it from the AT tree',
+			'Pair with icon-only buttons to give them an accessible name',
+			'Skip-link target text + decorative section markers are good fits'
+		]}
+	/>
 </main>

@@ -2,6 +2,14 @@
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Progress } from 'alus';
 	import { onMount } from 'svelte';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Progress
+	value={45}
+	max={100}
+	aria-label="Upload progress"
+	indicatorClass="h-full bg-blue-500 transition-all"
+/>`;
 
 	let value = $state(33);
 
@@ -71,4 +79,22 @@
 			/>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'value', type: 'number', default: '0', description: 'Current progress 0..max' },
+			{ name: 'max', type: 'number', default: '100' },
+			{ name: 'indeterminate', type: 'boolean', default: 'false', description: 'Drops value, animates instead' },
+			{ name: 'indicatorClass', type: 'string', default: "''", description: 'Class on the filled bar' },
+			{ name: 'aria-label', type: 'string', default: 'undefined' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="progressbar"</code> with <code class="rounded bg-(--cream) px-1">aria-valuenow</code>, <code class="rounded bg-(--cream) px-1">aria-valuemin</code>, <code class="rounded bg-(--cream) px-1">aria-valuemax</code>',
+			'Indeterminate mode omits <code class="rounded bg-(--cream) px-1">aria-valuenow</code> per WAI-ARIA spec',
+			'Pair with visible numeric label — bar alone is not enough for SRs in all cases',
+			'Honour <code class="rounded bg-(--cream) px-1">prefers-reduced-motion</code> for indeterminate animation'
+		]}
+	/>
 </main>

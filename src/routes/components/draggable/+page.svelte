@@ -1,6 +1,18 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Draggable, Droppable } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Droppable
+	type="application/x-card"
+	onDrop={({ data }) => moveCard(data.id, col)}
+>
+	{#each cards as card}
+		<Draggable data={card} type="application/x-card">
+			{card.title}
+		</Draggable>
+	{/each}
+</Droppable>`;
 
 	interface Card {
 		id: number;
@@ -67,7 +79,7 @@
 								status[(data as Card).id] = col.id;
 							}
 						}}
-						class="rounded border border-dashed border-(--charcoal)/30 bg-white p-3 data-[over]:border-(--indigo-dye) data-[over]:bg-(--indigo-dye)/5"
+						class="rounded border border-dashed border-(--charcoal)/30 bg-white p-3 data-over:border-(--indigo-dye) data-over:bg-(--indigo-dye)/5"
 					>
 						<h3 class="mb-3 text-xs uppercase tracking-wider text-(--charcoal)/60">{col.label}</h3>
 						<div class="space-y-2">
@@ -75,7 +87,7 @@
 								<Draggable
 									data={card}
 									type="application/x-card"
-									class="cursor-grab rounded border border-(--charcoal)/15 bg-white p-3 text-sm text-(--ink) shadow-sm data-[dragging]:opacity-40"
+									class="cursor-grab rounded border border-(--charcoal)/15 bg-white p-3 text-sm text-(--ink) shadow-sm data-dragging:opacity-40"
 								>
 									{card.title}
 								</Draggable>
@@ -86,4 +98,21 @@
 			</div>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'data', type: 'unknown', default: 'required', description: '<code>Draggable</code> payload — serialized as JSON' },
+			{ name: 'type', type: 'string', default: "'application/json'", description: 'Custom MIME for matching' },
+			{ name: 'onDragStart', type: '(e) => void', default: 'undefined' },
+			{ name: 'onDrop', type: '({ data, event }) => void', default: 'undefined', description: '<code>Droppable</code>' },
+			{ name: 'accept', type: 'string[] | (type) => boolean', default: 'undefined' }
+		]}
+		a11y={[
+			'HTML5 drag-and-drop is pointer-only — pair with keyboard alternatives (move buttons, context menu, or <code>Sortable</code> for lists)',
+			'<code class="rounded bg-(--cream) px-1">data-dragging</code> + <code class="rounded bg-(--cream) px-1">data-over</code> attributes for styling state',
+			'Drop targets must call <code>preventDefault</code> internally — handled by the component',
+			'Provide visible drop-zone affordance — don\'t rely on hover alone'
+		]}
+	/>
 </main>

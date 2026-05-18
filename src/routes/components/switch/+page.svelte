@@ -1,6 +1,19 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Switch, Label } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { Switch } from 'alus';
+	let on = $state(true);
+<\/script>
+
+<Switch
+	bind:checked={on}
+	aria-label="Notifications"
+	class="h-6 w-11 rounded-full bg-(--charcoal)/20 data-[state=on]:bg-(--vermilion)"
+	thumbClass="block h-5 w-5 rounded-full bg-white transition-transform data-[state=on]:translate-x-5"
+/>`;
 
 	let notifications = $state(true);
 	let darkMode = $state(false);
@@ -77,4 +90,24 @@
 			</p>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'checked', type: 'boolean', default: 'false', description: 'Bindable' },
+			{ name: 'disabled', type: 'boolean', default: 'false' },
+			{ name: 'required', type: 'boolean', default: 'false' },
+			{ name: 'name', type: 'string', default: 'undefined' },
+			{ name: 'value', type: 'string', default: "'on'" },
+			{ name: 'aria-label', type: 'string', default: 'undefined' },
+			{ name: 'class', type: 'string', default: "''" },
+			{ name: 'thumbClass', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="switch"</code> + <code class="rounded bg-(--cream) px-1">aria-checked</code>',
+			'Space and Enter toggle',
+			'<code class="rounded bg-(--cream) px-1">data-state="on"|"off"</code> for visual styling',
+			'Pair with <code class="rounded bg-(--cream) px-1">&lt;Label&gt;</code> or use <code class="rounded bg-(--cream) px-1">aria-label</code>'
+		]}
+	/>
 </main>

@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Spinner } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Spinner
+	label="Loading content"
+	class="h-8 w-8 animate-spin rounded-full border-2 border-gray-200 border-t-blue-500"
+/>`;
 </script>
 
 <svelte:head>
@@ -51,4 +57,18 @@
 			/>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'label', type: 'string', default: "'Loading'", description: 'SR-only label announced via aria-label' },
+			{ name: 'class', type: 'string', default: "''", description: 'Sizing + spin animation classes' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="status"</code> + <code class="rounded bg-(--cream) px-1">aria-live="polite"</code> announce loading state',
+			'Label is rendered as visually-hidden text so SRs read it without showing visual noise',
+			'Honour <code class="rounded bg-(--cream) px-1">prefers-reduced-motion</code> by disabling <code>animate-spin</code> when needed',
+			'Pair with descriptive surrounding text — never use a spinner as the only loading affordance'
+		]}
+	/>
 </main>

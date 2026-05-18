@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { CaretLeft, At, MagnifyingGlass, CurrencyDollar } from 'phosphor-svelte';
 	import { InputGroup, Input } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<InputGroup>
+	{#snippet prefix()}<span>$</span>{/snippet}
+	<Input type="number" placeholder="0.00" />
+	{#snippet suffix()}<span>USD</span>{/snippet}
+</InputGroup>`;
 </script>
 
 <svelte:head>
@@ -81,4 +88,18 @@
 			</InputGroup>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'prefix', type: 'Snippet', default: 'undefined' },
+			{ name: 'suffix', type: 'Snippet', default: 'undefined' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Addons are <code class="rounded bg-(--cream) px-1">aria-hidden</code> when purely decorative',
+			'Use <code class="rounded bg-(--cream) px-1">aria-describedby</code> on the inner Input to associate textual addons',
+			'Keyboard behaviour is delegated to the child Input — no extra handling needed'
+		]}
+	/>
 </main>

@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Fieldset, Input } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Fieldset legend="Contact details" class="rounded border-2 border-(--indigo-dye)/20 p-4">
+	<Input type="text" placeholder="Name" />
+	<Input type="email" placeholder="Email" />
+</Fieldset>`;
 
 	let street = $state('');
 	let city = $state('');
@@ -93,4 +99,18 @@
 			</Fieldset>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'legend', type: 'string', default: 'undefined', description: 'Visible group label' },
+			{ name: 'disabled', type: 'boolean', default: 'false', description: 'Disables all child form controls' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Native <code class="rounded bg-(--cream) px-1">&lt;fieldset&gt;</code> + <code class="rounded bg-(--cream) px-1">&lt;legend&gt;</code> — semantic grouping',
+			'Screen readers announce the legend when entering any child field',
+			'<code class="rounded bg-(--cream) px-1">disabled</code> cascades to all descendants natively'
+		]}
+	/>
 </main>

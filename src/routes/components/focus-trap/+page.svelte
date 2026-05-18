@@ -1,6 +1,16 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { FocusTrap, Portal } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `{#if open}
+	<Portal>
+		<FocusTrap active autoFocus restoreFocus>
+			<button>Action</button>
+			<button onclick={() => open = false}>Close</button>
+		</FocusTrap>
+	</Portal>
+{/if}`;
 
 	let open = $state(false);
 </script>
@@ -86,35 +96,19 @@
 		</div>
 	</section>
 
-	<section class="mb-16">
-		<h2 class="font-display mb-8 text-2xl text-(--ink)">
-			<span>Props</span>
-			<span class="ml-2 text-lg text-(--bamboo)">プロパティ</span>
-		</h2>
-
-		<div class="japanese-border bg-linear-to-br from-white to-(--cream) p-8">
-			<ul class="space-y-4">
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						><code class="rounded bg-(--cream) px-1">active</code> — enable/disable trap (default true)</span
-					>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						><code class="rounded bg-(--cream) px-1">autoFocus</code> — focus first focusable on mount
-						(default true)</span
-					>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						><code class="rounded bg-(--cream) px-1">restoreFocus</code> — return focus to previous element
-						on unmount (default true)</span
-					>
-				</li>
-			</ul>
-		</div>
-	</section>
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'active', type: 'boolean', default: 'true', description: 'Enable / disable trap' },
+			{ name: 'autoFocus', type: 'boolean', default: 'true', description: 'Focus first tabbable on mount' },
+			{ name: 'restoreFocus', type: 'boolean', default: 'true', description: 'Return focus on unmount' },
+			{ name: 'initialFocus', type: 'HTMLElement | string', default: 'undefined', description: 'Override first-focus target' }
+		]}
+		a11y={[
+			'Required for any modal-like overlay so Tab / Shift+Tab stay inside',
+			'<code class="rounded bg-(--cream) px-1">restoreFocus</code> returns focus to the trigger on close — never let it fall to <code>&lt;body&gt;</code>',
+			'Pair with <code class="rounded bg-(--cream) px-1">role="dialog"</code> + <code class="rounded bg-(--cream) px-1">aria-modal="true"</code>',
+			'Listen for Escape at the dialog level — FocusTrap does not close on its own'
+		]}
+	/>
 </main>

@@ -1,6 +1,14 @@
 <script lang="ts">
 	import { CaretLeft, Plus, Minus } from 'phosphor-svelte';
 	import { NumberInput, Label } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { NumberInput } from 'alus';
+	let qty = $state(1);
+<\/script>
+
+<NumberInput bind:value={qty} min={0} max={99} step={1} aria-label="Quantity" />`;
 
 	let qty = $state<number | null>(1);
 	let price = $state<number | null>(9.99);
@@ -83,4 +91,21 @@
 			</NumberInput>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'value', type: 'number', default: '0', description: 'Bindable' },
+			{ name: 'min', type: 'number', default: 'undefined' },
+			{ name: 'max', type: 'number', default: 'undefined' },
+			{ name: 'step', type: 'number', default: '1' },
+			{ name: 'disabled', type: 'boolean', default: 'false' },
+			{ name: 'aria-label', type: 'string', default: 'undefined' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="spinbutton"</code> + <code class="rounded bg-(--cream) px-1">aria-valuemin/max/now</code>',
+			'Arrow keys step value; clamps to min/max',
+			'Increment/decrement buttons have accessible labels'
+		]}
+	/>
 </main>

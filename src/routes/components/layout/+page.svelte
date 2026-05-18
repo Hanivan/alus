@@ -1,6 +1,20 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Stack, Flex, Grid, Container, Spacer, Columns } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Stack gap="1rem">
+	<Flex justify="between" align="center" gap="1rem">
+		<span>Logo</span>
+		<Spacer />
+		<span>Profile</span>
+	</Flex>
+	<Grid cols={3} gap="0.75rem">
+		<div>a</div><div>b</div><div>c</div>
+	</Grid>
+	<Container maxWidth="md" padding="1.5rem">centered</Container>
+	<Columns count={2} gap="2rem">…</Columns>
+</Stack>`;
 
 	const tiles = Array.from({ length: 8 }, (_, i) => i + 1);
 	const paragraphs = [
@@ -138,4 +152,23 @@
 			</Columns>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'gap', type: 'string', default: "'0'", description: '<code>Stack</code> / <code>Flex</code> / <code>Grid</code> / <code>Columns</code>' },
+			{ name: 'direction', type: "'vertical' | 'horizontal'", default: "'vertical'", description: '<code>Stack</code>' },
+			{ name: 'justify / align', type: "'start' | 'center' | 'end' | 'between' | 'around' | 'stretch'", default: 'undefined', description: '<code>Flex</code>' },
+			{ name: 'cols / minColWidth', type: 'number | string', default: 'undefined', description: '<code>Grid</code>' },
+			{ name: 'maxWidth', type: "'sm' | 'md' | 'lg' | 'xl' | 'full' | string", default: "'full'", description: '<code>Container</code>' },
+			{ name: 'size / axis', type: "string | 'horizontal' | 'vertical'", default: "'1' / 'auto'", description: '<code>Spacer</code>' },
+			{ name: 'count', type: 'number', default: 'required', description: '<code>Columns</code>' }
+		]}
+		a11y={[
+			'Pure layout primitives — none add semantics or roles',
+			'Children retain their own ARIA — wrap meaningful sections in <code>&lt;section&gt;</code> / <code>&lt;nav&gt;</code> / <code>&lt;article&gt;</code>',
+			'Visual order should match DOM order so SR + keyboard navigation stay consistent',
+			'Avoid <code class="rounded bg-(--cream) px-1">order</code> tricks that reshuffle tab order — bad for keyboard users'
+		]}
+	/>
 </main>

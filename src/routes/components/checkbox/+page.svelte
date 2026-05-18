@@ -1,6 +1,18 @@
 <script lang="ts">
 	import { CaretLeft, Check } from 'phosphor-svelte';
 	import { Checkbox } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { Checkbox } from 'alus';
+	let checked = $state(false);
+<\/script>
+
+<Checkbox
+	bind:checked
+	aria-label="Accept terms"
+	class="h-5 w-5 rounded border-2 border-(--indigo-dye)/30 checked:bg-(--vermilion)"
+/>`;
 
 	let acceptedTerms = $state(false);
 	let newsletter = $state(false);
@@ -369,4 +381,26 @@
 			</ol>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'checked', type: 'boolean', default: 'false', description: 'Bindable' },
+			{ name: 'indeterminate', type: 'boolean', default: 'false' },
+			{ name: 'disabled', type: 'boolean', default: 'false' },
+			{ name: 'required', type: 'boolean', default: 'false' },
+			{ name: 'name', type: 'string', default: 'undefined' },
+			{ name: 'value', type: 'string', default: 'undefined' },
+			{ name: 'aria-label', type: 'string', default: 'undefined' },
+			{ name: 'aria-describedby', type: 'string', default: 'undefined' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Native <code class="rounded bg-(--cream) px-1">&lt;input type="checkbox"&gt;</code>',
+			'Indeterminate state propagated via DOM property (not just visual)',
+			'<code class="rounded bg-(--cream) px-1">aria-checked="mixed"</code> when indeterminate',
+			'Space toggles, no custom key handling needed',
+			'Pair with <code class="rounded bg-(--cream) px-1">&lt;Label for&gt;</code> or wrap for click-anywhere'
+		]}
+	/>
 </main>

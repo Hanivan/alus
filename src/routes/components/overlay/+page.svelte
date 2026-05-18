@@ -1,6 +1,19 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Overlay, Button } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { Overlay, Button } from 'alus';
+	let open = $state(false);
+<\/script>
+
+<Button onclick={() => (open = true)}>Open</Button>
+{#if open}
+	<Overlay onclose={() => (open = false)} class="bg-black/60">
+		<div class="rounded bg-white p-6">…</div>
+	</Overlay>
+{/if}`;
 
 	let open = $state(false);
 </script>
@@ -60,4 +73,19 @@
 			</Overlay>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'closeOnEscape', type: 'boolean', default: 'true' },
+			{ name: 'closeOnOutsideClick', type: 'boolean', default: 'true' },
+			{ name: 'onclose', type: '() => void', default: 'undefined' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Low-level primitive — does NOT add <code class="rounded bg-(--cream) px-1">role="dialog"</code> on its own',
+			'Provides Portal + Escape close + outside-click close — bring your own ARIA',
+			'Use Modal/Dialog/Popover for fully-wired overlays; reach for Overlay only when building custom shells'
+		]}
+	/>
 </main>

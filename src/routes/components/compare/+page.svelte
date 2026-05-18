@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { CaretLeft, CaretLeft as Left, CaretRight as Right } from 'phosphor-svelte';
 	import { Compare } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Compare bind:position aria-label="Compare winter and spring">
+	{#snippet before()}<img src="/winter.jpg" alt="Winter" />{/snippet}
+	{#snippet after()}<img src="/spring.jpg" alt="Spring" />{/snippet}
+</Compare>`;
 
 	let pos = $state(50);
 	let vPos = $state(50);
@@ -104,4 +110,22 @@
 
 		<p class="mt-4 font-mono text-sm text-(--charcoal)/60">position: {Math.round(vPos)}%</p>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'position', type: 'number', default: '50', description: 'Bindable 0..100' },
+			{ name: 'orientation', type: "'horizontal' | 'vertical'", default: "'horizontal'" },
+			{ name: 'before', type: 'Snippet', default: 'required' },
+			{ name: 'after', type: 'Snippet', default: 'required' },
+			{ name: 'handle', type: 'Snippet', default: 'undefined' },
+			{ name: 'handleClass', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Handle is <code class="rounded bg-(--cream) px-1">role="slider"</code> with valuenow / valuemin / valuemax',
+			'Arrow keys move 1%, Shift+arrow 10%, Home / End jump to 0 / 100',
+			'Both <code>before</code> and <code>after</code> images need their own meaningful <code>alt</code>',
+			'Provide <code class="rounded bg-(--cream) px-1">aria-label</code> describing what is being compared'
+		]}
+	/>
 </main>

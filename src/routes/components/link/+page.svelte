@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { CaretLeft, ArrowSquareOut } from 'phosphor-svelte';
 	import { Link } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Link href="/docs" class="text-(--indigo-dye) underline">Docs</Link>
+<Link href="https://svelte.dev" class="text-(--indigo-dye) underline">External</Link>`;
 </script>
 
 <svelte:head>
@@ -65,4 +69,19 @@
 			</p>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'href', type: 'string', default: 'required' },
+			{ name: 'external', type: 'boolean', default: 'auto-detected', description: 'Override external detection' },
+			{ name: 'current', type: 'boolean', default: 'false', description: 'Adds aria-current="page"' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Native <code class="rounded bg-(--cream) px-1">&lt;a href&gt;</code> — keyboard focusable, screen-reader friendly',
+			'Auto-detects external links by URL and sets <code class="rounded bg-(--cream) px-1">rel="noopener"</code> + <code class="rounded bg-(--cream) px-1">target="_blank"</code>',
+			'<code class="rounded bg-(--cream) px-1">current</code> prop sets <code class="rounded bg-(--cream) px-1">aria-current="page"</code> for active routes'
+		]}
+	/>
 </main>

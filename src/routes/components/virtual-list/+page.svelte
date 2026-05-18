@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { CaretLeft, Plus, Trash, Shuffle } from 'phosphor-svelte';
 	import { VirtualList } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<VirtualList items={rows} itemHeight={56} overscan={4} aria-label="Rows">
+	{#snippet item({ item, index })}
+		<div>{index}: {item.title}</div>
+	{/snippet}
+</VirtualList>`;
 
 	interface Row {
 		id: number;
@@ -176,4 +183,21 @@
 			</p>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'items', type: 'T[]', default: 'required' },
+			{ name: 'itemHeight', type: 'number', default: 'required', description: 'Fixed px per row' },
+			{ name: 'overscan', type: 'number', default: '3', description: 'Extra rows rendered above / below viewport' },
+			{ name: 'item', type: 'Snippet<[{ item, index }]>', default: 'required' },
+			{ name: 'aria-label', type: 'string', default: 'undefined' }
+		]}
+		a11y={[
+			'Outer container is a scroll region with the provided <code class="rounded bg-(--cream) px-1">aria-label</code>',
+			'<code class="rounded bg-(--cream) px-1">role="list"</code> + <code class="rounded bg-(--cream) px-1">aria-setsize</code> / <code class="rounded bg-(--cream) px-1">aria-posinset</code> let SRs know total count + position',
+			'Empty state must be rendered by the parent — VirtualList has nothing to show',
+			'Keyboard scrolling works via the native overflow container (PageUp / PageDown / arrow keys)'
+		]}
+	/>
 </main>

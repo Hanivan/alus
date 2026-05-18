@@ -1,6 +1,15 @@
 <script lang="ts">
 	import { CaretLeft, X } from 'phosphor-svelte';
 	import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetDescription, SheetClose } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Sheet side="bottom">
+	<SheetTrigger>Open</SheetTrigger>
+	<SheetContent>
+		<SheetTitle>Filters</SheetTitle>
+		<SheetClose>Done</SheetClose>
+	</SheetContent>
+</Sheet>`;
 
 	let side = $state<'left' | 'right' | 'top' | 'bottom'>('right');
 </script>
@@ -79,4 +88,19 @@
 			</Sheet>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'side', type: "'left' | 'right' | 'top' | 'bottom'", default: "'bottom'", description: 'iOS-style sheet typically slides from bottom' },
+			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable' },
+			{ name: 'closeOnEscape', type: 'boolean', default: 'true' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Same a11y contract as Drawer (this is the re-export)',
+			'<code class="rounded bg-(--cream) px-1">role="dialog"</code> + focus trap + Escape close',
+			'Use for app-shell-style panels (iOS-style filter / detail sheets)'
+		]}
+	/>
 </main>

@@ -1,6 +1,18 @@
 <script lang="ts">
 	import { CaretLeft, Copy, Check } from 'phosphor-svelte';
 	import { CodeBlock } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const codeSample = `<CodeBlock
+	code={src}
+	language="ts"
+	filename="sum.ts"
+	showLineNumbers
+>
+	{#snippet actions({ copy, copied })}
+		<button onclick={copy}>{copied ? 'Copied' : 'Copy'}</button>
+	{/snippet}
+</CodeBlock>`;
 
 	const tsSample = `function sum(a: number, b: number) {
 	return a + b;
@@ -92,4 +104,23 @@ sum(1, 2);`;
 			/>
 		</div>
 	</section>
+
+	<DemoFooter
+		code={codeSample}
+		props={[
+			{ name: 'code', type: 'string', default: 'required' },
+			{ name: 'language', type: 'string', default: 'undefined', description: 'Emitted as <code>data-language</code>' },
+			{ name: 'filename', type: 'string', default: 'undefined' },
+			{ name: 'showLineNumbers', type: 'boolean', default: 'false' },
+			{ name: 'preClass', type: 'string', default: "''" },
+			{ name: 'codeClass', type: 'string', default: "''" },
+			{ name: 'actions', type: 'Snippet<[{ copy, copied }]>', default: 'undefined' }
+		]}
+		a11y={[
+			'Renders native <code class="rounded bg-(--cream) px-1">&lt;pre&gt;&lt;code&gt;</code> — preserves whitespace + monospace',
+			'Copy button (when used) is a real <code>&lt;button&gt;</code> with <code>aria-label</code> + <code>copied</code> live state',
+			'Line numbers are <code class="rounded bg-(--cream) px-1">aria-hidden</code> so SRs read code only',
+			'<code>tabindex="0"</code> on overflow makes long lines keyboard-scrollable'
+		]}
+	/>
 </main>

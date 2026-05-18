@@ -1,6 +1,16 @@
 <script lang="ts">
 	import { CaretLeft, Circle } from 'phosphor-svelte';
 	import { List, ListItem } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<List>
+	<ListItem>Sakura</ListItem>
+	<ListItem>Maple</ListItem>
+</List>
+
+<List as="ol" class="list-decimal pl-5">
+	<ListItem>Wake at dawn</ListItem>
+</List>`;
 </script>
 
 <svelte:head>
@@ -57,4 +67,18 @@
 			</div>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'as', type: "'ul' | 'ol'", default: "'ul'", description: '<code>List</code>' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Renders native <code class="rounded bg-(--cream) px-1">&lt;ul&gt;</code> / <code class="rounded bg-(--cream) px-1">&lt;ol&gt;</code> with <code class="rounded bg-(--cream) px-1">role="list"</code>',
+			'Explicit <code class="rounded bg-(--cream) px-1">role="list"</code> needed because <code>list-style:none</code> strips the implicit role in some SRs',
+			'<code class="rounded bg-(--cream) px-1">&lt;ol&gt;</code> announces item position; use it for ordered procedures',
+			'Items are real <code class="rounded bg-(--cream) px-1">&lt;li&gt;</code> elements with <code class="rounded bg-(--cream) px-1">role="listitem"</code>'
+		]}
+	/>
 </main>

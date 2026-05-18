@@ -1,6 +1,14 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Popover, PopoverTrigger, PopoverContent } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Popover>
+	<PopoverTrigger>Open</PopoverTrigger>
+	<PopoverContent>
+		<input placeholder="Type here…" />
+	</PopoverContent>
+</Popover>`;
 </script>
 
 <svelte:head>
@@ -54,4 +62,22 @@
 			</Popover>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'placement', type: 'Placement', default: "'bottom'", description: 'Floating-UI placement' },
+			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable' },
+			{ name: 'closeOnEscape', type: 'boolean', default: 'true' },
+			{ name: 'closeOnOutsideClick', type: 'boolean', default: 'true' },
+			{ name: 'offset', type: 'number', default: '8' },
+			{ name: 'class', type: 'string', default: "''", description: 'On PopoverContent' }
+		]}
+		a11y={[
+			'Trigger uses <code class="rounded bg-(--cream) px-1">aria-haspopup="dialog"</code> + <code class="rounded bg-(--cream) px-1">aria-expanded</code>',
+			'Content is <code class="rounded bg-(--cream) px-1">role="dialog"</code> — supports focusable controls (unlike Tooltip)',
+			'Escape closes; outside click closes; focus restored to trigger',
+			'Floating-UI flip + shift keeps inside viewport'
+		]}
+	/>
 </main>

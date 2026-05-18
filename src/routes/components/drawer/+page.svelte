@@ -1,6 +1,16 @@
 <script lang="ts">
 	import { CaretLeft, X } from 'phosphor-svelte';
 	import { Drawer, DrawerTrigger, DrawerContent, DrawerTitle, DrawerDescription, DrawerClose } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Drawer side="right">
+	<DrawerTrigger>Open</DrawerTrigger>
+	<DrawerContent>
+		<DrawerTitle>Settings</DrawerTitle>
+		<DrawerDescription>Adjust your preferences.</DrawerDescription>
+		<DrawerClose>Close</DrawerClose>
+	</DrawerContent>
+</Drawer>`;
 
 	let side = $state<'left' | 'right' | 'top' | 'bottom'>('right');
 </script>
@@ -78,4 +88,22 @@
 			</Drawer>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'side', type: "'left' | 'right' | 'top' | 'bottom'", default: "'right'" },
+			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable' },
+			{ name: 'closeOnEscape', type: 'boolean', default: 'true' },
+			{ name: 'closeOnOutsideClick', type: 'boolean', default: 'true' },
+			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="dialog"</code> + <code class="rounded bg-(--cream) px-1">aria-modal="true"</code>',
+			'Focus trap + restoration to trigger on close',
+			'Escape closes; outside click closes',
+			'DrawerTitle / DrawerDescription wired for screen readers',
+			'<code class="rounded bg-(--cream) px-1">data-side</code> attribute for slide-in animation styling'
+		]}
+	/>
 </main>

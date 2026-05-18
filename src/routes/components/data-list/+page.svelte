@@ -1,6 +1,14 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { DataList, DataListTerm, DataListDescription } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<DataList>
+	<DataListTerm>Name</DataListTerm>
+	<DataListDescription>Mount Fuji</DataListDescription>
+	<DataListTerm>Height</DataListTerm>
+	<DataListDescription>3,776 m</DataListDescription>
+</DataList>`;
 </script>
 
 <svelte:head>
@@ -51,4 +59,17 @@
 			</DataList>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
+		]}
+		a11y={[
+			'Renders native <code class="rounded bg-(--cream) px-1">&lt;dl&gt;</code> / <code class="rounded bg-(--cream) px-1">&lt;dt&gt;</code> / <code class="rounded bg-(--cream) px-1">&lt;dd&gt;</code>',
+			'SR navigation associates terms with their descriptions automatically',
+			'Multiple <code>&lt;dd&gt;</code> per <code>&lt;dt&gt;</code> is valid for one-to-many term groups',
+			'Pair with a heading to give the list a meaningful name in the document outline'
+		]}
+	/>
 </main>

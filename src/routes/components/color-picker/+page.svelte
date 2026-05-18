@@ -1,6 +1,14 @@
 <script lang="ts">
 	import { CaretLeft, Lock, Drop } from 'phosphor-svelte';
 	import { ColorPicker } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { ColorPicker } from 'alus';
+	let c = $state('#c84b31');
+<\/script>
+
+<ColorPicker bind:value={c} swatches={['#000','#c84b31','#005f73']} aria-label="Brand color" />`;
 
 	let c1 = $state('#c84b31');
 	let c2 = $state('#005f73');
@@ -93,7 +101,7 @@
 				nativeClass="h-8 w-10 cursor-pointer rounded border-none bg-transparent"
 				inputClass="w-28 rounded border border-(--charcoal)/15 px-2 py-1 text-sm text-(--ink) outline-none focus:border-(--indigo-dye)"
 				swatchesClass="flex items-center gap-1.5"
-				swatchClass="h-6 w-6 rounded border border-(--charcoal)/15 data-[selected]:ring-2 data-[selected]:ring-(--indigo-dye) data-[selected]:ring-offset-1"
+				swatchClass="h-6 w-6 rounded border border-(--charcoal)/15 data-selected:ring-2 data-selected:ring-(--indigo-dye) data-selected:ring-offset-1"
 			/>
 			<div class="mt-4 flex items-center gap-3">
 				<div class="h-12 w-12 rounded border border-(--charcoal)/15" style={`background:${c2};`}></div>
@@ -113,7 +121,7 @@
 				nativeClass="h-8 w-10 cursor-pointer rounded border-none bg-transparent"
 				inputClass="w-32 rounded border border-(--charcoal)/15 px-2 py-1 text-sm text-(--ink) outline-none focus:border-(--indigo-dye)"
 				swatchesClass="flex items-center gap-1.5"
-				swatchClass="h-6 w-6 rounded border border-(--charcoal)/15 data-[selected]:ring-2 data-[selected]:ring-(--indigo-dye) data-[selected]:ring-offset-1"
+				swatchClass="h-6 w-6 rounded border border-(--charcoal)/15 data-selected:ring-2 data-selected:ring-(--indigo-dye) data-selected:ring-offset-1"
 			/>
 			<div class="mt-4 flex items-center gap-3">
 				<div
@@ -183,7 +191,7 @@
 					aria-label="Seasonal palette"
 					class="inline-flex flex-wrap items-center gap-2 rounded border border-(--charcoal)/20 bg-white p-2"
 					swatchesClass="flex flex-wrap items-center gap-1.5"
-					swatchClass="h-7 w-7 rounded border border-(--charcoal)/15 data-[selected]:ring-2 data-[selected]:ring-(--indigo-dye) data-[selected]:ring-offset-1"
+					swatchClass="h-7 w-7 rounded border border-(--charcoal)/15 data-selected:ring-2 data-selected:ring-(--indigo-dye) data-selected:ring-offset-1"
 				/>
 			</div>
 			<div>
@@ -198,4 +206,23 @@
 			</div>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'value', type: 'string', default: "'#000000'", description: 'Bindable hex' },
+			{ name: 'swatches', type: 'string[]', default: 'undefined' },
+			{ name: 'showInput', type: 'boolean', default: 'true' },
+			{ name: 'showNative', type: 'boolean', default: 'true' },
+			{ name: 'disabled', type: 'boolean', default: 'false' },
+			{ name: 'aria-label', type: 'string', default: "'Color'" },
+			{ name: 'onChange', type: '(v: string) => void', default: 'undefined' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="group"</code> wraps the native input + text + swatches',
+			'Native <code class="rounded bg-(--cream) px-1">&lt;input type="color"&gt;</code> provides OS-level accessibility',
+			'Swatch buttons are keyboard focusable with <code class="rounded bg-(--cream) px-1">aria-label</code> per colour',
+			'Hex text accepts 3 / 6 / 8 character forms and normalises'
+		]}
+	/>
 </main>

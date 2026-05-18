@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Portal } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `{#if open}
+	<Portal>
+		<div class="fixed inset-0 z-50">…</div>
+	</Portal>
+{/if}`;
 
 	let showPortal = $state(false);
 </script>
@@ -62,40 +69,17 @@
 		</div>
 	</section>
 
-	<section class="mb-16">
-		<h2 class="font-display mb-8 text-2xl text-(--ink)">
-			<span>Use Cases</span>
-			<span class="ml-2 text-lg text-(--bamboo)">用途</span>
-		</h2>
-
-		<div class="japanese-border bg-linear-to-br from-white to-(--cream) p-8">
-			<ul class="space-y-4">
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						>Modals, dialogs, drawers — escape parent stacking context</span
-					>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						>Tooltips, popovers — avoid <code class="rounded bg-(--cream) px-1"
-							>overflow:hidden</code
-						> clipping</span
-					>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80">Toasts, notifications — render at viewport edge</span>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						><code class="rounded bg-(--cream) px-1">target</code> prop accepts element or selector;
-						<code class="rounded bg-(--cream) px-1">disabled</code> renders in place</span
-					>
-				</li>
-			</ul>
-		</div>
-	</section>
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'target', type: 'HTMLElement | string', default: 'document.body', description: 'Selector or element' },
+			{ name: 'disabled', type: 'boolean', default: 'false', description: 'Renders in place instead of teleporting' }
+		]}
+		a11y={[
+			'Teleporting breaks DOM order — pair with <code class="rounded bg-(--cream) px-1">FocusTrap</code> for modal-like content',
+			'Restore focus to the trigger on close so keyboard / SR users don\'t get lost',
+			'Use <code class="rounded bg-(--cream) px-1">role="dialog"</code> + <code>aria-modal</code> when wrapping modal content',
+			'Layered content needs explicit z-index — Portal does not impose stacking'
+		]}
+	/>
 </main>

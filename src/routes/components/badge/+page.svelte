@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Badge } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Badge variant="success" aria-label="3 unread">
+	3
+</Badge>`;
 </script>
 
 <svelte:head>
@@ -122,32 +127,19 @@
 		</div>
 	</section>
 
-	<!-- Accessibility -->
-	<section class="mb-16">
-		<h2 class="font-display mb-8 text-2xl text-(--ink)">
-			<span>Accessibility</span>
-			<span class="ml-2 text-lg text-(--bamboo)">アクセシビリティ</span>
-		</h2>
-
-		<div class="japanese-border bg-linear-to-br from-white to-(--cream) p-8">
-			<ul class="space-y-4">
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						>Semantic <code class="rounded bg-(--cream) px-1">&lt;span&gt;</code> element</span
-					>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80">ARIA live regions for dynamic content</span>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						>Configurable <code class="rounded bg-(--cream) px-1">aria-label</code> for screen readers</span
-					>
-				</li>
-			</ul>
-		</div>
-	</section>
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'variant', type: "'default' | 'success' | 'warning' | 'error' | 'info'", default: "'default'" },
+			{ name: 'aria-label', type: 'string', default: 'undefined', description: 'Critical for icon-only or count badges' },
+			{ name: 'aria-live', type: "'off' | 'polite' | 'assertive'", default: "'off'", description: 'Announce count changes' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Renders a semantic <code class="rounded bg-(--cream) px-1">&lt;span&gt;</code>',
+			'For changing counts set <code class="rounded bg-(--cream) px-1">aria-live="polite"</code> so SRs announce updates',
+			'Always provide an <code class="rounded bg-(--cream) px-1">aria-label</code> when the badge shows only a number ("3 unread notifications")',
+			'Color is decorative — meaning must come from text or label'
+		]}
+	/>
 </main>

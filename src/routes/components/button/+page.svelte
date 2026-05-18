@@ -1,9 +1,24 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Button } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
 
 	let subscribed = $state(false);
 	let disabled = $state(false);
+
+	const code = `<script lang="ts">
+	import { Button } from 'alus';
+	let pressed = $state(false);
+<\/script>
+
+<Button
+	type="button"
+	aria-pressed={pressed}
+	onclick={() => (pressed = !pressed)}
+	class="rounded bg-(--indigo-dye) px-6 py-3 text-white hover:bg-(--vermilion)"
+>
+	{pressed ? 'Subscribed' : 'Subscribe'}
+</Button>`;
 </script>
 
 <svelte:head>
@@ -113,106 +128,24 @@
 		</div>
 	</section>
 
-	<!-- Props Reference -->
-	<section class="mb-16">
-		<h2 class="font-display mb-8 text-2xl text-(--ink)">
-			<span>Props</span>
-			<span class="ml-2 text-lg text-(--bamboo)">プロパティ</span>
-		</h2>
-
-		<div class="japanese-border overflow-x-auto bg-white/50 p-8 backdrop-blur-sm">
-			<table class="w-full text-left">
-				<thead>
-					<tr class="border-b border-(--indigo-dye)/20">
-						<th class="px-4 py-3 font-semibold text-(--ink)">Prop</th>
-						<th class="px-4 py-3 font-semibold text-(--ink)">Type</th>
-						<th class="px-4 py-3 font-semibold text-(--ink)">Default</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="border-b border-(--indigo-dye)/10">
-						<td class="px-4 py-3"
-							><code class="rounded bg-(--cream) px-2 py-1 text-sm">type</code></td
-						>
-						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
-							><code class="text-sm">'button' | 'submit' | 'reset'</code></td
-						>
-						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
-							><code class="text-sm">'button'</code></td
-						>
-					</tr>
-					<tr class="border-b border-(--indigo-dye)/10">
-						<td class="px-4 py-3"
-							><code class="rounded bg-(--cream) px-2 py-1 text-sm">disabled</code></td
-						>
-						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
-							><code class="text-sm">boolean</code></td
-						>
-						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
-							><code class="text-sm">false</code></td
-						>
-					</tr>
-					<tr class="border-b border-(--indigo-dye)/10">
-						<td class="px-4 py-3"
-							><code class="rounded bg-(--cream) px-2 py-1 text-sm">aria-pressed</code></td
-						>
-						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
-							><code class="text-sm">boolean</code></td
-						>
-						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
-							><code class="text-sm">undefined</code></td
-						>
-					</tr>
-					<tr>
-						<td class="px-4 py-3"
-							><code class="rounded bg-(--cream) px-2 py-1 text-sm">class</code></td
-						>
-						<td class="px-4 py-3 text-sm text-(--charcoal)/70"
-							><code class="text-sm">string</code></td
-						>
-						<td class="px-4 py-3 text-sm text-(--charcoal)/70"><code class="text-sm">''</code></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</section>
-
-	<!-- Accessibility -->
-	<section class="mb-16">
-		<h2 class="font-display mb-8 text-2xl text-(--ink)">
-			<span>Accessibility</span>
-			<span class="ml-2 text-lg text-(--bamboo)">アクセシビリティ</span>
-		</h2>
-
-		<div class="japanese-border bg-linear-to-br from-white to-(--cream) p-8">
-			<ul class="space-y-4">
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						>Semantic HTML with native <code class="rounded bg-(--cream) px-1">&lt;button&gt;</code> element</span
-					>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						>Full ARIA support (aria-label, aria-pressed, aria-describedby)</span
-					>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80">Keyboard navigation with Enter and Space keys</span>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80">Visible focus indicators for keyboard users</span>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80">Screen reader announcements for state changes</span>
-				</li>
-			</ul>
-		</div>
-	</section>
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'type', type: "'button' | 'submit' | 'reset'", default: "'button'" },
+			{ name: 'disabled', type: 'boolean', default: 'false' },
+			{ name: 'aria-pressed', type: 'boolean', default: 'undefined', description: 'Toggle state' },
+			{ name: 'aria-label', type: 'string', default: 'undefined' },
+			{ name: 'class', type: 'string', default: "''" },
+			{ name: 'onclick', type: '(e: MouseEvent) => void', default: 'undefined' }
+		]}
+		a11y={[
+			'Semantic native <code class="rounded bg-(--cream) px-1">&lt;button&gt;</code> element',
+			'Full ARIA support: <code class="rounded bg-(--cream) px-1">aria-label</code>, <code class="rounded bg-(--cream) px-1">aria-pressed</code>, <code class="rounded bg-(--cream) px-1">aria-describedby</code>',
+			'Keyboard activation with Enter and Space',
+			'Visible focus indicator for keyboard users',
+			'Screen-reader announcements on state changes'
+		]}
+	/>
 
 	<!-- Keyboard Testing -->
 	<section>

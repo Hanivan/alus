@@ -1,6 +1,18 @@
 <script lang="ts">
 	import { CaretLeft, Plus } from 'phosphor-svelte';
 	import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Accordion type="single">
+	<AccordionItem value="a">
+		<AccordionTrigger>What is Alus?</AccordionTrigger>
+		<AccordionContent>Unstyled, accessible Svelte 5 primitives.</AccordionContent>
+	</AccordionItem>
+	<AccordionItem value="b">
+		<AccordionTrigger>Tailwind compatible?</AccordionTrigger>
+		<AccordionContent>Yes — bring your own classes.</AccordionContent>
+	</AccordionItem>
+</Accordion>`;
 
 	let single = $state<string[]>(['a']);
 	let multi = $state<string[]>([]);
@@ -82,4 +94,22 @@
 			<p class="mt-4 text-sm text-(--charcoal)/60">Open: {multi.join(', ') || '—'}</p>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'type', type: "'single' | 'multiple'", default: "'single'", description: '<code>Accordion</code>' },
+			{ name: 'value', type: 'string[]', default: '[]', description: 'Bindable open items. <code>Accordion</code>' },
+			{ name: 'collapsible', type: 'boolean', default: 'true', description: 'Single mode: allow closing all' },
+			{ name: 'value (item)', type: 'string', default: 'required', description: '<code>AccordionItem</code>' },
+			{ name: 'disabled', type: 'boolean', default: 'false', description: '<code>AccordionItem</code>' },
+			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
+		]}
+		a11y={[
+			'Trigger uses <code class="rounded bg-(--cream) px-1">aria-expanded</code> + <code class="rounded bg-(--cream) px-1">aria-controls</code>',
+			'Content uses <code class="rounded bg-(--cream) px-1">aria-labelledby</code> pointing to trigger',
+			'Arrow keys cycle triggers, Home/End jump, Enter/Space toggle',
+			'<code class="rounded bg-(--cream) px-1">data-state="open"|"closed"</code> for animation styling'
+		]}
+	/>
 </main>

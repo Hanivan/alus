@@ -1,6 +1,18 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { RadioGroup, Radio } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { RadioGroup, Radio } from 'alus';
+	let plan = $state('pro');
+<\/script>
+
+<RadioGroup name="plan" bind:value={plan} legend="Choose a plan">
+	<Radio value="free" /> Free
+	<Radio value="pro" /> Pro
+	<Radio value="team" /> Team
+</RadioGroup>`;
 
 	let plan = $state('pro');
 	let size = $state('m');
@@ -82,4 +94,23 @@
 			<p class="mt-4 text-sm text-(--charcoal)/60">Selected: {size}</p>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'name', type: 'string', default: 'undefined', description: 'Shared form name' },
+			{ name: 'value', type: 'string', default: 'undefined', description: 'Bindable selection' },
+			{ name: 'legend', type: 'string', default: 'undefined' },
+			{ name: 'orientation', type: "'horizontal' | 'vertical'", default: "'vertical'" },
+			{ name: 'disabled', type: 'boolean', default: 'false' },
+			{ name: 'required', type: 'boolean', default: 'false' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="radiogroup"</code> on the group',
+			'Arrow keys cycle, Tab moves in/out of group (roving tabindex)',
+			'<code class="rounded bg-(--cream) px-1">aria-orientation</code> reflects layout',
+			'Provides <code class="rounded bg-(--cream) px-1">RadioGroupContext</code> so child Radios share name'
+		]}
+	/>
 </main>

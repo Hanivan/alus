@@ -1,6 +1,16 @@
 <script lang="ts">
 	import { CaretLeft, CaretDown, PencilSimple, Trash, Copy, Share } from 'phosphor-svelte';
 	import { Menu, MenuTrigger, MenuContent, MenuItem } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Menu>
+	<MenuTrigger>File</MenuTrigger>
+	<MenuContent>
+		<MenuItem onSelect={() => doNew()}>New</MenuItem>
+		<MenuItem onSelect={() => open()}>Open…</MenuItem>
+		<MenuItem onSelect={() => save()}>Save</MenuItem>
+	</MenuContent>
+</Menu>`;
 
 	let last = $state('');
 </script>
@@ -53,21 +63,21 @@
 				>
 					<MenuItem
 						onSelect={() => (last = 'Edit')}
-						class="flex cursor-pointer items-center gap-2 px-3 py-2 text-(--charcoal) data-[highlighted]:bg-(--cream) data-[highlighted]:text-(--vermilion)"
+						class="flex cursor-pointer items-center gap-2 px-3 py-2 text-(--charcoal) data-highlighted:bg-(--cream) data-highlighted:text-(--vermilion)"
 					>
 						<PencilSimple class="h-4 w-4" />
 						<span>Edit</span>
 					</MenuItem>
 					<MenuItem
 						onSelect={() => (last = 'Duplicate')}
-						class="flex cursor-pointer items-center gap-2 px-3 py-2 text-(--charcoal) data-[highlighted]:bg-(--cream) data-[highlighted]:text-(--vermilion)"
+						class="flex cursor-pointer items-center gap-2 px-3 py-2 text-(--charcoal) data-highlighted:bg-(--cream) data-highlighted:text-(--vermilion)"
 					>
 						<Copy class="h-4 w-4" />
 						<span>Duplicate</span>
 					</MenuItem>
 					<MenuItem
 						onSelect={() => (last = 'Share')}
-						class="flex cursor-pointer items-center gap-2 px-3 py-2 text-(--charcoal) data-[highlighted]:bg-(--cream) data-[highlighted]:text-(--vermilion)"
+						class="flex cursor-pointer items-center gap-2 px-3 py-2 text-(--charcoal) data-highlighted:bg-(--cream) data-highlighted:text-(--vermilion)"
 					>
 						<Share class="h-4 w-4" />
 						<span>Share</span>
@@ -75,7 +85,7 @@
 					<div class="my-1 h-px bg-(--indigo-dye)/10"></div>
 					<MenuItem
 						onSelect={() => (last = 'Delete')}
-						class="flex cursor-pointer items-center gap-2 px-3 py-2 text-(--vermilion) data-[highlighted]:bg-(--vermilion)/10"
+						class="flex cursor-pointer items-center gap-2 px-3 py-2 text-(--vermilion) data-highlighted:bg-(--vermilion)/10"
 					>
 						<Trash class="h-4 w-4" />
 						<span>Delete</span>
@@ -92,4 +102,23 @@
 			<p class="text-sm text-(--charcoal)/60">Last selected: <code>{last || '—'}</code></p>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable. <code>Menu</code>' },
+			{ name: 'placement', type: 'Placement', default: "'bottom-start'" },
+			{ name: 'closeOnSelect', type: 'boolean', default: 'true' },
+			{ name: 'onSelect', type: '() => void', default: 'undefined', description: '<code>MenuItem</code>' },
+			{ name: 'disabled', type: 'boolean', default: 'false', description: '<code>MenuItem</code>' },
+			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
+		]}
+		a11y={[
+			'Trigger: <code class="rounded bg-(--cream) px-1">aria-haspopup="menu"</code> + <code class="rounded bg-(--cream) px-1">aria-expanded</code>',
+			'<code class="rounded bg-(--cream) px-1">role="menu"</code> + <code class="rounded bg-(--cream) px-1">role="menuitem"</code>',
+			'Arrow keys cycle, Home/End jump, type-ahead character search',
+			'Enter/Space select, Escape closes and restores focus to trigger',
+			'Floating-UI positioning with viewport-fit'
+		]}
+	/>
 </main>

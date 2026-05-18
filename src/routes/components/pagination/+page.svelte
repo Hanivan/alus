@@ -1,6 +1,14 @@
 <script lang="ts">
 	import { CaretLeft, CaretRight, CaretDoubleLeft, CaretDoubleRight } from 'phosphor-svelte';
 	import { Pagination } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { Pagination } from 'alus';
+	let page = $state(1);
+<\/script>
+
+<Pagination bind:page count={120} pageSize={10} siblingCount={1} aria-label="Search results" />`;
 
 	let page = $state(1);
 </script>
@@ -102,4 +110,23 @@
 			</Pagination>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'page', type: 'number', default: '1', description: 'Bindable current page (1-indexed)' },
+			{ name: 'count', type: 'number', default: '0', description: 'Total item count' },
+			{ name: 'pageSize', type: 'number', default: '10' },
+			{ name: 'siblingCount', type: 'number', default: '1' },
+			{ name: 'boundaryCount', type: 'number', default: '1' },
+			{ name: 'aria-label', type: 'string', default: "'Pagination'" },
+			{ name: 'onChange', type: '(page: number) => void', default: 'undefined' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">&lt;nav aria-label="Pagination"&gt;</code> wraps a list',
+			'Current page button has <code class="rounded bg-(--cream) px-1">aria-current="page"</code>',
+			'Each button has <code class="rounded bg-(--cream) px-1">aria-label</code> (e.g. "Go to page 3", "Previous page")',
+			'Ellipsis renders as <code class="rounded bg-(--cream) px-1">aria-hidden</code> spacer'
+		]}
+	/>
 </main>

@@ -8,6 +8,22 @@
 		CarouselNext,
 		CarouselIndicators
 	} from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Carousel bind:index loop autoplay={3000} aria-label="Four seasons">
+	<CarouselSlides>
+		{#each slides as s, i}
+			<CarouselSlide index={i}>{s.kanji}</CarouselSlide>
+		{/each}
+	</CarouselSlides>
+	<CarouselPrev>‹</CarouselPrev>
+	<CarouselIndicators aria-label="Choose season">
+		{#snippet item({ active })}
+			<span class:active />
+		{/snippet}
+	</CarouselIndicators>
+	<CarouselNext>›</CarouselNext>
+</Carousel>`;
 
 	const slides = [
 		{ kanji: '春', en: 'Spring', cherry: '🌸', bg: 'var(--cherry-blossom)' },
@@ -104,4 +120,21 @@
 			</p>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'index', type: 'number', default: '0', description: 'Bindable active slide' },
+			{ name: 'loop', type: 'boolean', default: 'false' },
+			{ name: 'autoplay', type: 'number', default: '0', description: 'ms between slides; 0 disables' },
+			{ name: 'aria-label', type: 'string', default: 'required', description: 'Names the carousel region' },
+			{ name: 'index', type: 'number', default: 'required', description: '<code>CarouselSlide</code>' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="region"</code> + <code class="rounded bg-(--cream) px-1">aria-roledescription="carousel"</code>',
+			'Each slide has <code class="rounded bg-(--cream) px-1">aria-roledescription="slide"</code> + <code class="rounded bg-(--cream) px-1">aria-label="N of total"</code>',
+			'Autoplay pauses on hover / focus + honours <code class="rounded bg-(--cream) px-1">prefers-reduced-motion</code>',
+			'Prev / Next are real buttons; indicators are <code>role="tab"</code> with <code>aria-selected</code>'
+		]}
+	/>
 </main>

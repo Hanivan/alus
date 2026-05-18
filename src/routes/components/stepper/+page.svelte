@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { CaretLeft, Check } from 'phosphor-svelte';
 	import { Stepper, StepperStep, Button } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Stepper value={1} steps={3}>
+	<StepperStep index={0}>Account</StepperStep>
+	<StepperStep index={1}>Address</StepperStep>
+	<StepperStep index={2}>Confirm</StepperStep>
+</Stepper>`;
 
 	let current = $state(1);
 	const steps = [
@@ -105,4 +112,21 @@
 			</div>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'value', type: 'number', default: '0', description: 'Bindable current step index' },
+			{ name: 'steps', type: 'number', default: 'required', description: 'Total step count' },
+			{ name: 'orientation', type: "'horizontal' | 'vertical'", default: "'horizontal'" },
+			{ name: 'index', type: 'number', default: 'required', description: '<code>StepperStep</code>' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="group"</code> + <code class="rounded bg-(--cream) px-1">aria-label</code>',
+			'Current step marked with <code class="rounded bg-(--cream) px-1">aria-current="step"</code>',
+			'Completed / current / upcoming states surfaced as <code class="rounded bg-(--cream) px-1">data-state</code>',
+			'Pair with form sections that themselves announce errors via <code class="rounded bg-(--cream) px-1">aria-invalid</code>'
+		]}
+	/>
 </main>

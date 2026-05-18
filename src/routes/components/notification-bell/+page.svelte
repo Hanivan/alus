@@ -1,6 +1,14 @@
 <script lang="ts">
 	import { CaretLeft, Bell, BellRinging } from 'phosphor-svelte';
 	import { NotificationBell, Button } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<NotificationBell count={3} max={99} onclick={open}>
+	{#snippet children({ hasUnread })}
+		{#if hasUnread}<BellRinging class="h-6 w-6" />
+		{:else}<Bell class="h-6 w-6" />{/if}
+	{/snippet}
+</NotificationBell>`;
 
 	let count = $state(3);
 	let big = $state(127);
@@ -104,4 +112,22 @@
 			</div>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'count', type: 'number', default: '0', description: 'Unread item count' },
+			{ name: 'max', type: 'number', default: '99', description: 'Caps display — shows <code>99+</code> over' },
+			{ name: 'showZero', type: 'boolean', default: 'false', description: 'Render badge when count is 0' },
+			{ name: 'onclick', type: '(e) => void', default: 'undefined' },
+			{ name: 'badgeClass', type: 'string', default: "''" },
+			{ name: 'children', type: 'Snippet<[{ hasUnread }]>', default: 'undefined' }
+		]}
+		a11y={[
+			'Real <code class="rounded bg-(--cream) px-1">&lt;button&gt;</code> with <code class="rounded bg-(--cream) px-1">aria-label</code> like "Notifications, 3 unread"',
+			'Count changes emit a polite live announcement automatically',
+			'Badge is decorative — count is also encoded into the aria-label',
+			'Focusable / keyboard-activatable like any button'
+		]}
+	/>
 </main>

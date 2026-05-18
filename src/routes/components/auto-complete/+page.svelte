@@ -1,6 +1,18 @@
 <script lang="ts">
 	import { CaretLeft, MapPin, MagnifyingGlass, CircleNotch } from 'phosphor-svelte';
 	import { AutoComplete, type AutoCompleteOption } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { AutoComplete, type AutoCompleteOption } from 'alus';
+	const options: AutoCompleteOption<string>[] = [
+		{ value: 'tyo', label: 'Tokyo' },
+		{ value: 'kyt', label: 'Kyoto' }
+	];
+	let value = $state('');
+<\/script>
+
+<AutoComplete {options} bind:value aria-label="City" />`;
 
 	interface City {
 		id: string;
@@ -100,7 +112,7 @@
 				class="relative max-w-md"
 				inputClass="w-full rounded border-2 border-(--indigo-dye)/20 bg-white px-4 py-3 text-(--ink) transition-colors focus:border-(--indigo-dye) focus:outline-none"
 				listClass="z-50 max-h-64 overflow-auto rounded border-2 border-(--indigo-dye)/20 bg-white p-1 shadow-lg"
-				optionClass="flex items-center gap-2 rounded px-3 py-2 text-sm text-(--ink) hover:bg-(--charcoal)/5 data-[highlighted]:bg-(--indigo-dye) data-[highlighted]:text-white"
+				optionClass="flex items-center gap-2 rounded px-3 py-2 text-sm text-(--ink) hover:bg-(--charcoal)/5 data-highlighted:bg-(--indigo-dye) data-highlighted:text-white"
 				emptyClass="rounded px-3 py-2 text-sm text-(--charcoal)/50"
 			>
 				{#snippet option({ option: o })}
@@ -130,7 +142,7 @@
 				class="relative max-w-md"
 				inputClass="w-full rounded border-2 border-(--indigo-dye)/20 bg-white px-4 py-3 text-(--ink) transition-colors focus:border-(--indigo-dye) focus:outline-none"
 				listClass="z-50 max-h-64 overflow-auto rounded border-2 border-(--indigo-dye)/20 bg-white p-1 shadow-lg"
-				optionClass="flex items-center justify-between rounded px-3 py-2 text-sm text-(--ink) hover:bg-(--charcoal)/5 data-[highlighted]:bg-(--indigo-dye) data-[highlighted]:text-white"
+				optionClass="flex items-center justify-between rounded px-3 py-2 text-sm text-(--ink) hover:bg-(--charcoal)/5 data-highlighted:bg-(--indigo-dye) data-highlighted:text-white"
 				emptyClass="rounded px-3 py-2 text-sm text-(--charcoal)/50"
 			/>
 			<p class="mt-3 text-xs text-(--charcoal)/60">
@@ -153,7 +165,7 @@
 					class="relative"
 					inputClass="w-full rounded border-2 border-(--indigo-dye)/20 bg-white px-4 py-3 pr-10 text-(--ink) transition-colors focus:border-(--indigo-dye) focus:outline-none"
 					listClass="z-50 max-h-64 overflow-auto rounded border-2 border-(--indigo-dye)/20 bg-white p-1 shadow-lg"
-					optionClass="rounded px-3 py-2 text-sm text-(--ink) hover:bg-(--charcoal)/5 data-[highlighted]:bg-(--indigo-dye) data-[highlighted]:text-white"
+					optionClass="rounded px-3 py-2 text-sm text-(--ink) hover:bg-(--charcoal)/5 data-highlighted:bg-(--indigo-dye) data-highlighted:text-white"
 					emptyClass="rounded px-3 py-2 text-sm text-(--charcoal)/50"
 				>
 					{#snippet empty({ query })}
@@ -196,4 +208,27 @@
 			/>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'options', type: 'AutoCompleteOption<T>[]', default: '[]' },
+			{ name: 'value', type: 'string', default: "''", description: 'Bindable input text' },
+			{ name: 'selected', type: 'AutoCompleteOption<T> | null', default: 'null', description: 'Bindable' },
+			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable' },
+			{ name: 'minLength', type: 'number', default: '0' },
+			{ name: 'maxResults', type: 'number', default: '50' },
+			{ name: 'filter', type: '(o, q) => boolean', default: 'label-contains', description: 'Custom filter' },
+			{ name: 'option', type: 'Snippet', default: 'undefined', description: 'Custom option renderer' },
+			{ name: 'empty', type: 'Snippet<[{ query }]>', default: 'undefined' },
+			{ name: 'onSelect', type: '(o) => void', default: 'undefined' },
+			{ name: 'onInput', type: '(v: string) => void', default: 'undefined' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="combobox"</code> + <code class="rounded bg-(--cream) px-1">role="listbox"</code> pattern',
+			'<code class="rounded bg-(--cream) px-1">aria-activedescendant</code> tracks the highlighted option without moving focus',
+			'<code class="rounded bg-(--cream) px-1">aria-expanded</code> reflects open state',
+			'ArrowUp/Down navigate, Enter selects, Escape closes, Home/End jump'
+		]}
+	/>
 </main>

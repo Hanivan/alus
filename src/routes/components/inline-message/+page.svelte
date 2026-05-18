@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { CaretLeft, Info, CheckCircle, Warning, XCircle } from 'phosphor-svelte';
 	import { InlineMessage, Input, Button } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<InlineMessage variant="error">
+	{#snippet icon()}<XCircle class="h-4 w-4" />{/snippet}
+	Please enter a valid email address.
+</InlineMessage>`;
 
 	let email = $state('');
 	let submitted = $state(false);
@@ -110,4 +116,19 @@
 			</InlineMessage>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'variant', type: "'info' | 'success' | 'warning' | 'error'", default: "'info'" },
+			{ name: 'icon', type: 'Snippet', default: 'undefined' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Auto-picks <code class="rounded bg-(--cream) px-1">role="alert"</code> for error / warning, <code class="rounded bg-(--cream) px-1">role="status"</code> for info / success',
+			'Associate with form fields via <code class="rounded bg-(--cream) px-1">aria-describedby</code> or <code class="rounded bg-(--cream) px-1">aria-errormessage</code>',
+			'Pair invalid fields with <code class="rounded bg-(--cream) px-1">aria-invalid="true"</code>',
+			'Icon is decorative — message text carries the meaning'
+		]}
+	/>
 </main>

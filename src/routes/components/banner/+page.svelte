@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { CaretLeft, Info, CheckCircle, Warning, XCircle, Megaphone } from 'phosphor-svelte';
 	import { Banner, Button } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Banner variant="warning" role="alert" dismissible bind:open={open}>
+	{#snippet icon()}<Warning class="h-5 w-5" />{/snippet}
+	You are nearing your storage quota (92%).
+</Banner>`;
 
 	let infoOpen = $state(true);
 	let warnOpen = $state(true);
@@ -104,4 +110,22 @@
 			</Button>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'variant', type: "'announcement' | 'info' | 'success' | 'warning' | 'error'", default: "'info'" },
+			{ name: 'role', type: "'region' | 'status' | 'alert'", default: "'region'" },
+			{ name: 'dismissible', type: 'boolean', default: 'false' },
+			{ name: 'open', type: 'boolean', default: 'true', description: 'Bindable' },
+			{ name: 'icon', type: 'Snippet', default: 'undefined' },
+			{ name: 'title', type: 'Snippet', default: 'undefined' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="region"</code> with <code class="rounded bg-(--cream) px-1">aria-label</code> for non-urgent context',
+			'Promote to <code class="rounded bg-(--cream) px-1">role="alert"</code> only for critical interrupts',
+			'Dismiss button has <code class="rounded bg-(--cream) px-1">aria-label="Dismiss"</code> + restores focus on close',
+			'Mount near top of the page so SRs encounter it before main content'
+		]}
+	/>
 </main>

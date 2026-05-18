@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Timestamp } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Timestamp value={Date.now() - 60_000} />
+<Timestamp value={ts} mode="absolute" />
+<Timestamp value={ts} mode="both" relativeStyle="short" />`;
 
 	const now = Date.now();
 	const samples = [
@@ -85,4 +90,21 @@
 			</p>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'value', type: 'number | string | Date', default: 'required' },
+			{ name: 'mode', type: "'relative' | 'absolute' | 'both'", default: "'relative'" },
+			{ name: 'relativeStyle', type: "'long' | 'short' | 'narrow'", default: "'long'" },
+			{ name: 'locale', type: 'string', default: 'undefined', description: 'Falls back to user locale' },
+			{ name: 'updateInterval', type: 'number', default: '60_000', description: 'ms; 0 disables auto-refresh' }
+		]}
+		a11y={[
+			'Renders semantic <code class="rounded bg-(--cream) px-1">&lt;time datetime="…"&gt;</code>',
+			'Absolute ISO date in <code class="rounded bg-(--cream) px-1">datetime</code> attr lets AT show exact time',
+			'Visible text uses <code class="rounded bg-(--cream) px-1">Intl.RelativeTimeFormat</code> for localisation',
+			'Auto-refresh respects <code class="rounded bg-(--cream) px-1">prefers-reduced-motion</code>'
+		]}
+	/>
 </main>

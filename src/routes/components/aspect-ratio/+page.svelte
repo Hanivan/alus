@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { AspectRatio } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<AspectRatio ratio={16 / 9}>
+	<img src="/photo.jpg" alt="" class="h-full w-full object-cover" />
+</AspectRatio>`;
 
 	const ratios = [
 		{ label: '16:9', value: 16 / 9 },
@@ -56,4 +61,19 @@
 			{/each}
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'ratio', type: 'number', default: '1', description: 'width / height' },
+			{ name: 'innerClass', type: 'string', default: "''", description: 'Class on the inner wrapper' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Pure layout primitive — does not add semantics',
+			'Children retain their own roles and accessible names',
+			'No focus / keyboard handling — meant for static media containers',
+			'Honour reduced motion if the slotted content animates'
+		]}
+	/>
 </main>

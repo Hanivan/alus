@@ -1,6 +1,15 @@
 <script lang="ts">
 	import { CaretLeft, DotsSixVertical } from 'phosphor-svelte';
 	import { Sortable } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Sortable bind:items={tasks} getKey={(t) => t.id} aria-label="Tasks">
+	{#snippet item({ value, grabbed, itemAttrs })}
+		<li {...itemAttrs} class:grabbed>
+			{value.label}
+		</li>
+	{/snippet}
+</Sortable>`;
 
 	let tasks = $state([
 		{ id: 'a', label: 'Write the proposal', kanji: '書' },
@@ -110,4 +119,21 @@
 			</Sortable>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'items', type: 'T[]', default: 'required', description: 'Bindable' },
+			{ name: 'getKey', type: '(item) => string | number', default: 'undefined', description: 'Stable key for keyed each' },
+			{ name: 'orientation', type: "'vertical' | 'horizontal'", default: "'vertical'" },
+			{ name: 'item', type: 'Snippet<[{ value, grabbed, isDragging, over, itemAttrs }]>', default: 'required' },
+			{ name: 'aria-label', type: 'string', default: 'required' }
+		]}
+		a11y={[
+			'Each item is keyboard-grabbable: <code class="rounded bg-(--cream) px-1">Space</code> to grab, arrows to move, Space drops, Esc cancels',
+			'<code class="rounded bg-(--cream) px-1">aria-grabbed</code> + <code class="rounded bg-(--cream) px-1">aria-dropeffect</code> reflect drag state',
+			'Live region announces position changes ("moved item N to position M")',
+			'Drag handle is the entire item — focusable with <code>tabindex</code>'
+		]}
+	/>
 </main>

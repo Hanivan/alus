@@ -1,6 +1,16 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Tabs, TabList, Tab, TabPanel } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Tabs value="overview">
+	<TabList>
+		<Tab value="overview">Overview</Tab>
+		<Tab value="settings">Settings</Tab>
+	</TabList>
+	<TabPanel value="overview">Overview content</TabPanel>
+	<TabPanel value="settings">Settings content</TabPanel>
+</Tabs>`;
 
 	let current = $state('overview');
 </script>
@@ -73,4 +83,23 @@
 			</Tabs>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'value', type: 'string', default: 'undefined', description: 'Bindable. <code>Tabs</code>' },
+			{ name: 'orientation', type: "'horizontal' | 'vertical'", default: "'horizontal'" },
+			{ name: 'activationMode', type: "'automatic' | 'manual'", default: "'automatic'" },
+			{ name: 'value (Tab/TabPanel)', type: 'string', default: 'required' },
+			{ name: 'disabled', type: 'boolean', default: 'false', description: '<code>Tab</code>' },
+			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="tablist"</code> + <code class="rounded bg-(--cream) px-1">role="tab"</code> + <code class="rounded bg-(--cream) px-1">role="tabpanel"</code>',
+			'Roving tabindex — Tab into list, Arrows cycle, Tab leaves',
+			'<code class="rounded bg-(--cream) px-1">aria-selected</code> + <code class="rounded bg-(--cream) px-1">aria-controls</code> wired automatically',
+			'Home/End jump to first/last',
+			'Manual activation mode (Enter/Space to activate) supports complex panels'
+		]}
+	/>
 </main>

@@ -1,6 +1,17 @@
 <script lang="ts">
 	import { CaretLeft, X } from 'phosphor-svelte';
 	import { Modal, ModalTrigger, ModalContent, ModalTitle, ModalDescription, ModalClose } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Modal>
+	<ModalTrigger>Open</ModalTrigger>
+	<ModalContent>
+		<ModalTitle>Confirm delete</ModalTitle>
+		<ModalDescription>This cannot be undone.</ModalDescription>
+		<ModalClose>Cancel</ModalClose>
+		<button onclick={remove}>Delete</button>
+	</ModalContent>
+</Modal>`;
 </script>
 
 <svelte:head>
@@ -68,4 +79,21 @@
 			</Modal>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable. <code>Modal</code>' },
+			{ name: 'closeOnEscape', type: 'boolean', default: 'true', description: '<code>Modal</code>' },
+			{ name: 'closeOnOutsideClick', type: 'boolean', default: 'true', description: '<code>Modal</code>' },
+			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="dialog"</code> + <code class="rounded bg-(--cream) px-1">aria-modal="true"</code>',
+			'Focus trapped while open; restored to trigger on close',
+			'ModalTitle wired as <code class="rounded bg-(--cream) px-1">aria-labelledby</code>, ModalDescription as <code class="rounded bg-(--cream) px-1">aria-describedby</code>',
+			'Escape closes; outside click closes; backdrop is <code class="rounded bg-(--cream) px-1">aria-hidden</code>',
+			'Portalled to <code class="rounded bg-(--cream) px-1">document.body</code> to escape stacking contexts'
+		]}
+	/>
 </main>

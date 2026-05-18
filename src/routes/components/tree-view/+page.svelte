@@ -1,6 +1,16 @@
 <script lang="ts">
 	import { CaretLeft, CaretRight, Folder, FolderOpen, File } from 'phosphor-svelte';
 	import { TreeView, TreeItem } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<TreeView bind:selected aria-label="Project files">
+	<TreeItem id="src">
+		{#snippet label({ expanded })}{expanded ? '▾' : '▸'} src{/snippet}
+		<TreeItem id="src/index.ts">
+			{#snippet label()}index.ts{/snippet}
+		</TreeItem>
+	</TreeItem>
+</TreeView>`;
 
 	let selected = $state<string | null>(null);
 </script>
@@ -125,6 +135,23 @@
 			</p>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'selected', type: 'string | null', default: 'null', description: 'Bindable selected id' },
+			{ name: 'defaultExpanded', type: 'string[]', default: '[]', description: 'Ids open on mount' },
+			{ name: 'id', type: 'string', default: 'required', description: '<code>TreeItem</code>' },
+			{ name: 'label', type: 'Snippet<[{ expanded, selected }]>', default: 'undefined' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="tree"</code> + <code class="rounded bg-(--cream) px-1">role="treeitem"</code> with <code class="rounded bg-(--cream) px-1">aria-level</code>',
+			'<code class="rounded bg-(--cream) px-1">aria-expanded</code> reflects open / closed state per item',
+			'<code class="rounded bg-(--cream) px-1">aria-selected</code> tracks current selection (single-select)',
+			'Keyboard: Arrows navigate / open / close, Home / End jump, Enter / Space selects, type-ahead supported'
+		]}
+	/>
 </main>
 
 <style>

@@ -1,6 +1,25 @@
 <script lang="ts">
 	import { CaretLeft, CheckCircle, Warning, XCircle, Info, X } from 'phosphor-svelte';
 	import { Toaster, createToaster, Button, type ToastPlacement } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { Toaster, createToaster } from 'alus';
+	const tt = createToaster<{ title: string }>();
+<\/script>
+
+<Toaster toaster={tt} placement="bottom-right" closeDelay={4000}>
+	{#snippet toast(t)}
+		<div {...t.content}>
+			<p {...t.title}>{t.data.title}</p>
+			<button {...t.close}>×</button>
+		</div>
+	{/snippet}
+</Toaster>
+
+<button onclick={() => tt.addToast({ data: { title: 'Saved' } })}>
+	Toast
+</button>`;
 
 	type Variant = 'default' | 'success' | 'error' | 'warning' | 'info';
 	type ToastData = {
@@ -232,4 +251,22 @@
 			</section>
 		{/snippet}
 	</Toaster>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'toaster', type: 'Toaster<T>', default: 'required', description: 'From <code>createToaster()</code>' },
+			{ name: 'placement', type: 'ToastPlacement', default: "'bottom-right'" },
+			{ name: 'closeDelay', type: 'number', default: '4000', description: 'ms; 0 = persistent' },
+			{ name: 'hover', type: "'pause' | 'pause-all' | null", default: "'pause'" },
+			{ name: 'tabHidden', type: "'pause' | 'pause-all' | null", default: "'pause-all'" },
+			{ name: 'type', type: "'polite' | 'assertive'", default: "'polite'", description: 'Per-toast override' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="region"</code> + <code class="rounded bg-(--cream) px-1">aria-label="Notifications"</code> wraps the toast list',
+			'Each toast renders with <code class="rounded bg-(--cream) px-1">role="status"</code> (polite) or <code class="rounded bg-(--cream) px-1">role="alert"</code> (assertive)',
+			'Hover / focus / tab-hidden pause the auto-dismiss timer so SR users can read',
+			'Close button is a real <code class="rounded bg-(--cream) px-1">&lt;button&gt;</code> with <code class="rounded bg-(--cream) px-1">aria-label="Close"</code>'
+		]}
+	/>
 </main>

@@ -1,6 +1,17 @@
 <script lang="ts">
 	import { CaretLeft, Check, Circle, CircleNotch } from 'phosphor-svelte';
 	import { Timeline, TimelineItem } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Timeline aria-label="Project milestones">
+	<TimelineItem status="completed" time="Q1" datetime="2026-01-01">
+		{#snippet marker()}<Check />{/snippet}
+		<p>Foundation shipped.</p>
+	</TimelineItem>
+	<TimelineItem status="current" time="Q2" datetime="2026-05-18">
+		<p>In progress.</p>
+	</TimelineItem>
+</Timeline>`;
 </script>
 
 <svelte:head>
@@ -97,4 +108,21 @@
 			</Timeline>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'orientation', type: "'vertical' | 'horizontal'", default: "'vertical'", description: '<code>Timeline</code>' },
+			{ name: 'status', type: "'completed' | 'current' | 'upcoming'", default: "'upcoming'", description: '<code>TimelineItem</code>' },
+			{ name: 'time', type: 'string', default: 'undefined' },
+			{ name: 'datetime', type: 'string', default: 'undefined', description: 'ISO 8601 for <code>&lt;time&gt;</code>' },
+			{ name: 'marker', type: 'Snippet', default: 'undefined' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">&lt;ol&gt;</code> root — items are ordered semantically',
+			'Current item gets <code class="rounded bg-(--cream) px-1">aria-current="step"</code>',
+			'<code class="rounded bg-(--cream) px-1">datetime</code> attribute on internal <code>&lt;time&gt;</code> exposes machine-readable date',
+			'Status surfaced as <code class="rounded bg-(--cream) px-1">data-status</code> for styling'
+		]}
+	/>
 </main>

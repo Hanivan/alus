@@ -1,6 +1,23 @@
 <script lang="ts">
 	import { CaretLeft, Warning, Check } from 'phosphor-svelte';
 	import { Input } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { Input } from 'alus';
+	let value = $state('');
+	let error = $derived(value.length > 0 && value.length < 2 ? 'Too short' : '');
+<\/script>
+
+<Input
+	type="text"
+	bind:value
+	placeholder="Your name"
+	aria-invalid={!!error}
+	aria-errormessage={error ? 'name-err' : undefined}
+	class="w-full rounded border-2 border-(--indigo-dye)/20 px-4 py-3 focus:border-(--indigo-dye) focus:outline-none"
+/>
+{#if error}<p id="name-err" role="alert">{error}</p>{/if}`;
 
 	// Basic Input section
 	let basicName = $state('');
@@ -472,4 +489,26 @@
 			</ol>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'type', type: "'text' | 'email' | 'password' | 'tel' | 'url' | ...", default: "'text'" },
+			{ name: 'value', type: 'string', default: "''", description: 'Bindable' },
+			{ name: 'placeholder', type: 'string', default: 'undefined' },
+			{ name: 'disabled', type: 'boolean', default: 'false' },
+			{ name: 'required', type: 'boolean', default: 'false' },
+			{ name: 'aria-invalid', type: 'boolean', default: 'undefined' },
+			{ name: 'aria-errormessage', type: 'string', default: 'undefined' },
+			{ name: 'aria-describedby', type: 'string', default: 'undefined' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Semantic native <code class="rounded bg-(--cream) px-1">&lt;input&gt;</code> element',
+			'<code class="rounded bg-(--cream) px-1">aria-invalid</code> + <code class="rounded bg-(--cream) px-1">aria-errormessage</code> for validation',
+			'<code class="rounded bg-(--cream) px-1">aria-describedby</code> wires help text to the field',
+			'Required state via native <code class="rounded bg-(--cream) px-1">required</code> attribute',
+			'Keyboard accessible by default — no custom key handling needed'
+		]}
+	/>
 </main>

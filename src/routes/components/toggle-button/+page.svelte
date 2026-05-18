@@ -1,6 +1,16 @@
 <script lang="ts">
 	import { CaretLeft, TextB, TextItalic, TextUnderline, Sun, Moon } from 'phosphor-svelte';
 	import { ToggleButton } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { ToggleButton } from 'alus';
+	let bold = $state(false);
+<\/script>
+
+<ToggleButton bind:pressed={bold} aria-label="Bold" class="data-[state=on]:bg-(--indigo-dye) data-[state=on]:text-white">
+	B
+</ToggleButton>`;
 
 	let bold = $state(true);
 	let italic = $state(false);
@@ -80,4 +90,20 @@
 			</ToggleButton>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'pressed', type: 'boolean', default: 'false', description: 'Bindable' },
+			{ name: 'disabled', type: 'boolean', default: 'false' },
+			{ name: 'aria-label', type: 'string', default: 'undefined' },
+			{ name: 'onPressedChange', type: '(pressed: boolean) => void', default: 'undefined' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">aria-pressed</code> on the underlying button',
+			'<code class="rounded bg-(--cream) px-1">data-state="on"|"off"</code> for styling without colour-only cues',
+			'Enter and Space toggle'
+		]}
+	/>
 </main>

@@ -1,6 +1,16 @@
 <script lang="ts">
 	import { CaretLeft, CaretDown } from 'phosphor-svelte';
 	import { Dropdown, DropdownTrigger, DropdownContent, DropdownItem } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Dropdown>
+	<DropdownTrigger>Actions</DropdownTrigger>
+	<DropdownContent>
+		<DropdownItem onclick={() => share()}>Share</DropdownItem>
+		<DropdownItem onclick={() => archive()}>Archive</DropdownItem>
+		<DropdownItem onclick={() => del()} class="text-red-500">Delete</DropdownItem>
+	</DropdownContent>
+</Dropdown>`;
 
 	let last = $state('');
 </script>
@@ -53,7 +63,7 @@
 					{#each ['Name', 'Date', 'Size', 'Type'] as opt (opt)}
 						<DropdownItem
 							onSelect={() => (last = opt)}
-							class="cursor-pointer px-3 py-2 text-(--charcoal) data-[highlighted]:bg-(--cream) data-[highlighted]:text-(--vermilion)"
+							class="cursor-pointer px-3 py-2 text-(--charcoal) data-highlighted:bg-(--cream) data-highlighted:text-(--vermilion)"
 						>
 							{opt}
 						</DropdownItem>
@@ -64,4 +74,22 @@
 			<p class="text-sm text-(--charcoal)/60">Last selected: <code>{last || '—'}</code></p>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable. <code>Dropdown</code>' },
+			{ name: 'placement', type: 'Placement', default: "'bottom-start'" },
+			{ name: 'closeOnSelect', type: 'boolean', default: 'true' },
+			{ name: 'disabled', type: 'boolean', default: 'false', description: '<code>DropdownItem</code>' },
+			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
+		]}
+		a11y={[
+			'Trigger: <code class="rounded bg-(--cream) px-1">aria-haspopup="menu"</code> + <code class="rounded bg-(--cream) px-1">aria-expanded</code>',
+			'<code class="rounded bg-(--cream) px-1">role="menu"</code> + <code class="rounded bg-(--cream) px-1">role="menuitem"</code>',
+			'Arrow keys cycle items, Home/End jump, type-ahead search',
+			'Enter/Space activate; Escape closes and restores focus',
+			'Focus auto-restored to trigger on close'
+		]}
+	/>
 </main>

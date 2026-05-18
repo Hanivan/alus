@@ -1,6 +1,20 @@
 <script lang="ts">
 	import { CaretLeft, Copy, Scissors, Clipboard, Trash, ArrowsClockwise } from 'phosphor-svelte';
 	import { ContextMenu, type ContextMenuItemEntry } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { ContextMenu, type ContextMenuItemEntry } from 'alus';
+	const items: ContextMenuItemEntry[] = [
+		{ label: 'Copy', onSelect: () => copy() },
+		{ label: 'Cut', onSelect: () => cut() },
+		{ label: 'Delete', onSelect: () => del() }
+	];
+<\/script>
+
+<ContextMenu {items}>
+	<div class="cursor-context-menu">Right-click me</div>
+</ContextMenu>`;
 
 	let lastAction = $state('—');
 
@@ -65,7 +79,7 @@
 				{items}
 				class="flex h-40 cursor-context-menu items-center justify-center rounded border border-dashed border-(--charcoal)/30 bg-white"
 				menuClass="z-50 min-w-44 rounded border border-(--charcoal)/15 bg-white p-1 shadow-lg"
-				itemClass="block w-full rounded px-3 py-1.5 text-left text-sm text-(--ink) hover:bg-(--cream) data-[highlighted]:bg-(--indigo-dye) data-[highlighted]:text-white disabled:opacity-40"
+				itemClass="block w-full rounded px-3 py-1.5 text-left text-sm text-(--ink) hover:bg-(--cream) data-highlighted:bg-(--indigo-dye) data-highlighted:text-white disabled:opacity-40"
 				separatorClass="my-1 h-px bg-(--charcoal)/15"
 			>
 				<span class="text-sm text-(--charcoal)/60">Right-click anywhere in this box</span>
@@ -81,7 +95,7 @@
 				items={richItems}
 				class="flex h-40 cursor-context-menu items-center justify-center rounded border border-dashed border-(--charcoal)/30 bg-white"
 				menuClass="z-50 min-w-48 rounded border border-(--charcoal)/15 bg-white p-1 shadow-lg"
-				itemClass="flex w-full items-center gap-2 rounded px-3 py-1.5 text-left text-sm text-(--ink) hover:bg-(--cream) data-[highlighted]:bg-(--indigo-dye) data-[highlighted]:text-white"
+				itemClass="flex w-full items-center gap-2 rounded px-3 py-1.5 text-left text-sm text-(--ink) hover:bg-(--cream) data-highlighted:bg-(--indigo-dye) data-highlighted:text-white"
 				separatorClass="my-1 h-px bg-(--charcoal)/15"
 			>
 				<span class="text-sm text-(--charcoal)/60">Right-click here</span>
@@ -95,4 +109,22 @@
 			</ContextMenu>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'items', type: 'ContextMenuItemEntry[]', default: '[]' },
+			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable' },
+			{ name: 'disabled', type: 'boolean', default: 'false' },
+			{ name: 'item', type: 'Snippet<[{ entry, highlighted, index }]>', default: 'undefined' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Opens on right-click and on Shift+F10 / ContextMenu key',
+			'<code class="rounded bg-(--cream) px-1">role="menu"</code> + <code class="rounded bg-(--cream) px-1">role="menuitem"</code>',
+			'Arrow keys navigate, Enter/Space activate, Escape closes',
+			'Viewport-aware positioning so the menu always fits',
+			'Focus returns to the trigger element on close'
+		]}
+	/>
 </main>

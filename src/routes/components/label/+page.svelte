@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Label, Input } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Label for="email" required>Email</Label>
+<Input id="email" type="email" required />`;
 </script>
 
 <svelte:head>
@@ -60,4 +64,19 @@
 			/>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'for', type: 'string', default: 'undefined', description: 'ID of the associated control' },
+			{ name: 'required', type: 'boolean', default: 'false', description: 'Renders required indicator' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Native <code class="rounded bg-(--cream) px-1">&lt;label&gt;</code> with <code class="rounded bg-(--cream) px-1">for</code> attribute',
+			'Clicking the label focuses the associated control',
+			'Required indicator is announced by screen readers',
+			'Always pair a Label with any focusable form control'
+		]}
+	/>
 </main>

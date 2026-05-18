@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Kbd } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Kbd>Esc</Kbd>
+<Kbd keys={['Ctrl', 'S']} />
+<Kbd keys={['g', 'i']} separator=" then " />`;
 </script>
 
 <svelte:head>
@@ -61,4 +66,19 @@
 			</p>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'keys', type: 'string[]', default: 'undefined', description: 'Renders each key as a <code>&lt;kbd&gt;</code> joined by separator' },
+			{ name: 'separator', type: 'string', default: "'+'", description: 'Visual + SR-announced' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Renders native <code class="rounded bg-(--cream) px-1">&lt;kbd&gt;</code> — SR announces "keyboard" semantics',
+			'Separator is included in the SR text so chord meaning is preserved',
+			'Use real keyboard activation, not just visual hints — many users only see the kbd label',
+			'For platform-specific keys (⌘ vs Ctrl), prefer named tokens that SRs can pronounce'
+		]}
+	/>
 </main>

@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Tag } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Tag removable onremove={() => remove(id)} aria-label="React tag">
+	React
+</Tag>`;
 
 	let tags = $state([
 		{ id: '1', label: 'React' },
@@ -101,37 +106,20 @@
 		</div>
 	</section>
 
-	<!-- Accessibility -->
-	<section class="mb-16">
-		<h2 class="font-display mb-8 text-2xl text-(--ink)">
-			<span>Accessibility</span>
-			<span class="ml-2 text-lg text-(--bamboo)">アクセシビリティ</span>
-		</h2>
-
-		<div class="japanese-border bg-linear-to-br from-white to-(--cream) p-8">
-			<ul class="space-y-4">
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						>Semantic <code class="rounded bg-(--cream) px-1">&lt;span&gt;</code> with button for removal</span
-					>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						>Remove button has <code class="rounded bg-(--cream) px-1">aria-label="Remove"</code
-						></span
-					>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80">Keyboard accessible remove action</span>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80">Disabled state support</span>
-				</li>
-			</ul>
-		</div>
-	</section>
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'removable', type: 'boolean', default: 'false', description: 'Renders dismiss button' },
+			{ name: 'onremove', type: '() => void', default: 'undefined' },
+			{ name: 'disabled', type: 'boolean', default: 'false' },
+			{ name: 'aria-label', type: 'string', default: 'undefined', description: 'Tag label for SRs' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Tag is a <code class="rounded bg-(--cream) px-1">&lt;span&gt;</code>; dismiss is a real <code class="rounded bg-(--cream) px-1">&lt;button&gt;</code>',
+			'Dismiss button has <code class="rounded bg-(--cream) px-1">aria-label="Remove"</code> + activates on Enter / Space',
+			'Disabled tags expose <code class="rounded bg-(--cream) px-1">aria-disabled</code> and skip the dismiss handler',
+			'Use a parent <code class="rounded bg-(--cream) px-1">role="list"</code> when rendering a collection'
+		]}
+	/>
 </main>

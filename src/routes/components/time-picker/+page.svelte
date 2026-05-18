@@ -1,6 +1,14 @@
 <script lang="ts">
 	import { CaretLeft, Lock, WarningCircle, CheckCircle } from 'phosphor-svelte';
 	import { TimePicker, type Time } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { TimePicker, type Time } from 'alus';
+	let t = $state<Time | null>({ hour: 9, minute: 30 });
+<\/script>
+
+<TimePicker bind:value={t} hour12 showSeconds={false} aria-label="Meeting time" />`;
 
 	let t1 = $state<Time | null>({ hour: 9, minute: 30 });
 	let t2 = $state<Time | null>({ hour: 14, minute: 0 });
@@ -159,7 +167,7 @@
 					bind:value={required}
 					required
 					aria-label="Departure time"
-					class="inline-flex items-center gap-1 rounded border border-(--charcoal)/20 bg-white px-2 py-1.5 text-(--ink) data-[required]:border-(--indigo-dye)/40"
+					class="inline-flex items-center gap-1 rounded border border-(--charcoal)/20 bg-white px-2 py-1.5 text-(--ink) data-required:border-(--indigo-dye)/40"
 					fieldClass="w-10 bg-transparent text-center text-sm outline-none focus:text-(--indigo-dye)"
 					separatorClass="text-(--charcoal)/40"
 				/>
@@ -179,4 +187,26 @@
 			</p>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'value', type: 'Time | null', default: 'null', description: 'Bindable { hour, minute, second? }' },
+			{ name: 'hour12', type: 'boolean', default: 'false' },
+			{ name: 'showSeconds', type: 'boolean', default: 'false' },
+			{ name: 'step', type: 'number', default: '1', description: 'Default step for all fields' },
+			{ name: 'minuteStep', type: 'number', default: 'step' },
+			{ name: 'secondStep', type: 'number', default: 'step' },
+			{ name: 'disabled', type: 'boolean', default: 'false' },
+			{ name: 'required', type: 'boolean', default: 'false' },
+			{ name: 'onChange', type: '(t: Time) => void', default: 'undefined' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="group"</code> with <code class="rounded bg-(--cream) px-1">aria-label</code>',
+			'Each segment has its own <code class="rounded bg-(--cream) px-1">aria-label</code> (Hour / Minute / Second)',
+			'ArrowUp/Down step by configured amount; values wrap at boundaries',
+			'AM/PM toggle uses <code class="rounded bg-(--cream) px-1">aria-pressed</code>',
+			'<code class="rounded bg-(--cream) px-1">aria-disabled</code> propagates to the group'
+		]}
+	/>
 </main>

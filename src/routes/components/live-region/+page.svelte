@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { LiveRegion, Button } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<LiveRegion politeness="polite" {message} />
+<LiveRegion politeness="assertive" message={criticalMessage} />`;
 
 	let message = $state('');
 	let counter = 0;
@@ -75,4 +79,20 @@
 			</p>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'message', type: 'string', default: "''", description: 'Text to announce (changes trigger SR)' },
+			{ name: 'politeness', type: "'polite' | 'assertive'", default: "'polite'" },
+			{ name: 'atomic', type: 'boolean', default: 'true', description: 'aria-atomic announces entire region' },
+			{ name: 'relevant', type: 'string', default: "'additions text'" }
+		]}
+		a11y={[
+			'Visually hidden via the same technique as <code>VisuallyHidden</code> — not <code>display:none</code>',
+			'<code class="rounded bg-(--cream) px-1">aria-live="polite"</code> waits for SR idle; <code class="rounded bg-(--cream) px-1">assertive</code> interrupts',
+			'Reserve <code>assertive</code> for truly critical info — overuse trains users to ignore announcements',
+			'Mount once near the page root; update <code>message</code> reactively to trigger announcements'
+		]}
+	/>
 </main>

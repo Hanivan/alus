@@ -1,6 +1,14 @@
 <script lang="ts">
 	import { CaretLeft, Star } from 'phosphor-svelte';
 	import { Rating } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { Rating } from 'alus';
+	let score = $state(3);
+<\/script>
+
+<Rating bind:value={score} max={5} aria-label="Quality rating" />`;
 
 	let val = $state(3);
 	let preview = $state(3);
@@ -74,4 +82,24 @@
 			</div>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'value', type: 'number', default: '0', description: 'Bindable' },
+			{ name: 'max', type: 'number', default: '5' },
+			{ name: 'readonly', type: 'boolean', default: 'false' },
+			{ name: 'disabled', type: 'boolean', default: 'false' },
+			{ name: 'name', type: 'string', default: 'undefined' },
+			{ name: 'item', type: 'Snippet<[{ index; filled; displayed; value; max }]>', default: 'undefined' },
+			{ name: 'onValueChange', type: '(v: number) => void', default: 'undefined' },
+			{ name: 'onHoverChange', type: '(displayed: number) => void', default: 'undefined' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="radiogroup"</code> with hidden radios per star',
+			'Arrow keys + digits set value, Home/End jump to min/max',
+			'<code class="rounded bg-(--cream) px-1">aria-valuetext</code> announces "3 out of 5 stars"',
+			'Readonly mode disables interaction without disabling focus'
+		]}
+	/>
 </main>

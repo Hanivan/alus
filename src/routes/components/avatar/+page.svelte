@@ -1,6 +1,14 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Avatar } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Avatar
+	src="/u/yuki.jpg"
+	alt="Yuki Tanaka"
+	fallback="Yuki Tanaka"
+	size="md"
+/>`;
 
 	let brokenUrl = $state('https://invalid-url.example/avatar.jpg');
 </script>
@@ -125,35 +133,20 @@
 		</div>
 	</section>
 
-	<!-- Accessibility -->
-	<section class="mb-16">
-		<h2 class="font-display mb-8 text-2xl text-(--ink)">
-			<span>Accessibility</span>
-			<span class="ml-2 text-lg text-(--bamboo)">アクセシビリティ</span>
-		</h2>
-
-		<div class="japanese-border bg-linear-to-br from-white to-(--cream) p-8">
-			<ul class="space-y-4">
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						><code class="rounded bg-(--cream) px-1">aria-label</code> from
-						<code class="rounded bg-(--cream) px-1">alt</code> prop or explicit label</span
-					>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						>Image has <code class="rounded bg-(--cream) px-1">aria-hidden</code> to avoid double announcements</span
-					>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						>Fallback text hidden from screen readers (visual only)</span
-					>
-				</li>
-			</ul>
-		</div>
-	</section>
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'src', type: 'string', default: 'undefined', description: 'Image URL — falls back if missing or broken' },
+			{ name: 'alt', type: 'string', default: 'undefined', description: 'Used for label + img alt' },
+			{ name: 'fallback', type: 'string', default: 'undefined', description: 'Shown when no image; auto-initialized from name' },
+			{ name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Used as a data attr; sizing comes from class' },
+			{ name: 'aria-label', type: 'string', default: 'undefined', description: 'Overrides alt for SRs' }
+		]}
+		a11y={[
+			'Root <code class="rounded bg-(--cream) px-1">&lt;span&gt;</code> uses the alt / aria-label as accessible name',
+			'Inner <code class="rounded bg-(--cream) px-1">&lt;img&gt;</code> marked <code>aria-hidden</code> to avoid double announcement',
+			'Fallback text is visual only — SRs read the avatar label, not the initials',
+			'On broken image load, the component swaps to fallback without losing the accessible name'
+		]}
+	/>
 </main>

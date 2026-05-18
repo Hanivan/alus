@@ -1,6 +1,14 @@
 <script lang="ts">
 	import { CaretLeft, MagnifyingGlass, X } from 'phosphor-svelte';
 	import { SearchInput, Label } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { SearchInput } from 'alus';
+	let q = $state('');
+<\/script>
+
+<SearchInput bind:value={q} placeholder="Search…" aria-label="Search" class="w-full" />`;
 
 	let query = $state('');
 	let custom = $state('');
@@ -85,4 +93,22 @@
 			</SearchInput>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'value', type: 'string', default: "''", description: 'Bindable' },
+			{ name: 'placeholder', type: 'string', default: 'undefined' },
+			{ name: 'disabled', type: 'boolean', default: 'false' },
+			{ name: 'onSearch', type: '(q: string) => void', default: 'undefined', description: 'Fires on Enter' },
+			{ name: 'onClear', type: '() => void', default: 'undefined' },
+			{ name: 'aria-label', type: 'string', default: 'undefined' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Native <code class="rounded bg-(--cream) px-1">&lt;input type="search"&gt;</code> + <code class="rounded bg-(--cream) px-1">role="searchbox"</code>',
+			'Clear button has accessible label and resets value',
+			'Enter submits; Escape clears'
+		]}
+	/>
 </main>

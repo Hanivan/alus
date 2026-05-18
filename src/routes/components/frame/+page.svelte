@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Frame } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Frame width={280} height={160} overflow="auto">
+	<p>Long content scrolls inside the fixed box.</p>
+</Frame>`;
 </script>
 
 <svelte:head>
@@ -70,4 +75,23 @@
 			</Frame>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'width', type: 'number | string', default: 'undefined' },
+			{ name: 'height', type: 'number | string', default: 'undefined' },
+			{ name: 'minWidth', type: 'number | string', default: 'undefined' },
+			{ name: 'minHeight', type: 'number | string', default: 'undefined' },
+			{ name: 'maxWidth', type: 'number | string', default: 'undefined' },
+			{ name: 'maxHeight', type: 'number | string', default: 'undefined' },
+			{ name: 'overflow', type: "'visible' | 'hidden' | 'auto' | 'scroll'", default: "'visible'" }
+		]}
+		a11y={[
+			'Pure layout primitive — adds no semantics',
+			'Scrollable frames (<code>overflow:auto</code>) are keyboard-scrollable when given <code>tabindex="0"</code>',
+			'Provide an accessible name for scroll containers via <code>aria-label</code>',
+			'Children retain their own roles'
+		]}
+	/>
 </main>

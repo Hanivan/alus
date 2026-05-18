@@ -1,6 +1,14 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Slider, Label } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { Slider } from 'alus';
+	let volume = $state(50);
+<\/script>
+
+<Slider bind:value={volume} min={0} max={100} step={5} aria-label="Volume" class="w-full" />`;
 
 	let volume = $state(50);
 	let brightness = $state(80);
@@ -57,4 +65,24 @@
 			</div>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'value', type: 'number', default: '0', description: 'Bindable' },
+			{ name: 'min', type: 'number', default: '0' },
+			{ name: 'max', type: 'number', default: '100' },
+			{ name: 'step', type: 'number', default: '1' },
+			{ name: 'disabled', type: 'boolean', default: 'false' },
+			{ name: 'aria-label', type: 'string', default: 'undefined' },
+			{ name: 'aria-valuetext', type: '(v: number) => string', default: 'undefined' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Native <code class="rounded bg-(--cream) px-1">&lt;input type="range"&gt;</code>',
+			'Arrow keys step by <code class="rounded bg-(--cream) px-1">step</code>, Home/End jump to min/max',
+			'PageUp/PageDown jump by 10× step',
+			'<code class="rounded bg-(--cream) px-1">aria-valuetext</code> customises announced value (e.g. "50%")'
+		]}
+	/>
 </main>

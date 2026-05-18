@@ -2,6 +2,16 @@
 	import { CaretLeft } from 'phosphor-svelte';
 	import { DateRange, type DateRangeValue } from 'alus';
 	import { type DateValue, getLocalTimeZone, today } from '@internationalized/date';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { DateRange } from 'alus';
+	import type { DateValue } from '@internationalized/date';
+	let start = $state<DateValue | null>(null);
+	let end = $state<DateValue | null>(null);
+<\/script>
+
+<DateRange bind:start bind:end numberOfMonths={2} aria-label="Trip dates" />`;
 
 	const tz = getLocalTimeZone();
 	const now = today(tz);
@@ -17,11 +27,11 @@
 
 	const dayClass =
 		'h-9 w-9 rounded text-sm text-(--ink) hover:bg-(--charcoal)/10 ' +
-		'data-[out-month]:text-(--charcoal)/30 ' +
-		'data-[today]:font-bold data-[today]:text-(--vermilion) ' +
-		'data-[in-range]:rounded-none data-[in-range]:bg-(--indigo-dye)/15 data-[in-range]:text-(--ink) ' +
-		'data-[range-start]:bg-(--indigo-dye) data-[range-start]:text-white data-[range-start]:rounded-l-md data-[range-start]:rounded-r-none ' +
-		'data-[range-end]:bg-(--indigo-dye) data-[range-end]:text-white data-[range-end]:rounded-r-md data-[range-end]:rounded-l-none ' +
+		'data-out-month:text-(--charcoal)/30 ' +
+		'data-today:font-bold data-today:text-(--vermilion) ' +
+		'data-in-range:rounded-none data-in-range:bg-(--indigo-dye)/15 data-in-range:text-(--ink) ' +
+		'data-range-start:bg-(--indigo-dye) data-range-start:text-white data-range-start:rounded-l-md data-range-start:rounded-r-none ' +
+		'data-range-end:bg-(--indigo-dye) data-range-end:text-white data-range-end:rounded-r-md data-range-end:rounded-l-none ' +
 		'disabled:opacity-30 disabled:hover:bg-transparent';
 
 	const headerClass =
@@ -30,7 +40,7 @@
 		'grid grid-cols-7 gap-0.5 [&>[role=row]]:contents [&[data-calendar-months]]:grid-cols-3 [&[data-calendar-years]]:grid-cols-3';
 	const weekdayClass = 'text-center text-xs uppercase tracking-wider text-(--charcoal)/50 py-1';
 	const monthClass =
-		'rounded px-2 py-3 text-sm text-(--ink) hover:bg-(--charcoal)/10 data-[current]:bg-(--indigo-dye) data-[current]:text-white disabled:opacity-30';
+		'rounded px-2 py-3 text-sm text-(--ink) hover:bg-(--charcoal)/10 data-current:bg-(--indigo-dye) data-current:text-white disabled:opacity-30';
 
 	function fmt(d: DateValue | null) {
 		return d
@@ -144,4 +154,24 @@
 			/>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'start', type: 'DateValue | null', default: 'null', description: 'Bindable' },
+			{ name: 'end', type: 'DateValue | null', default: 'null', description: 'Bindable' },
+			{ name: 'numberOfMonths', type: '1 | 2', default: '1' },
+			{ name: 'min / max', type: 'DateValue', default: 'undefined' },
+			{ name: 'locale', type: 'string', default: 'navigator.language' },
+			{ name: 'timeZone', type: 'string', default: 'getLocalTimeZone()' },
+			{ name: 'isDateDisabled', type: '(d) => boolean', default: 'undefined' },
+			{ name: 'onChange', type: '(r: DateRangeValue) => void', default: 'undefined' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="group"</code> wraps both Calendars',
+			'Each Calendar keeps its full grid + arrow-key navigation',
+			'Day buttons get <code class="rounded bg-(--cream) px-1">data-range-start</code>, <code class="rounded bg-(--cream) px-1">data-range-end</code>, <code class="rounded bg-(--cream) px-1">data-in-range</code> for styling',
+			'Hover preview between start and prospective end is announced via aria-selected'
+		]}
+	/>
 </main>

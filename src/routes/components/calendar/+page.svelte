@@ -1,6 +1,15 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Calendar } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { Calendar } from 'alus';
+	import { type DateValue, today, getLocalTimeZone } from '@internationalized/date';
+	let value = $state<DateValue | null>(null);
+<\/script>
+
+<Calendar bind:value min={today(getLocalTimeZone())} aria-label="Event date" />`;
 	import {
 		type DateValue,
 		getLocalTimeZone,
@@ -59,9 +68,9 @@
 	const baseWeekday =
 		'text-center text-xs uppercase tracking-wider text-(--charcoal)/50 py-1';
 	const baseDay =
-		'h-9 w-9 rounded text-sm text-(--ink) hover:bg-(--charcoal)/10 data-[out-month]:text-(--charcoal)/30 data-[today]:font-bold data-[today]:text-(--vermilion) data-[selected]:bg-(--indigo-dye) data-[selected]:text-white disabled:opacity-30 disabled:hover:bg-transparent';
+		'h-9 w-9 rounded text-sm text-(--ink) hover:bg-(--charcoal)/10 data-out-month:text-(--charcoal)/30 data-today:font-bold data-today:text-(--vermilion) data-selected:bg-(--indigo-dye) data-selected:text-white disabled:opacity-30 disabled:hover:bg-transparent';
 	const baseMonth =
-		'rounded px-2 py-3 text-sm text-(--ink) hover:bg-(--charcoal)/10 data-[current]:bg-(--indigo-dye) data-[current]:text-white disabled:opacity-30 disabled:hover:bg-transparent';
+		'rounded px-2 py-3 text-sm text-(--ink) hover:bg-(--charcoal)/10 data-current:bg-(--indigo-dye) data-current:text-white disabled:opacity-30 disabled:hover:bg-transparent';
 	const baseYear = baseMonth;
 </script>
 
@@ -242,4 +251,29 @@
 			</p>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'value', type: 'DateValue | null', default: 'null', description: 'Bindable' },
+			{ name: 'viewDate', type: 'DateValue', default: 'today(tz)', description: 'Bindable, controls visible month' },
+			{ name: 'view', type: "'days' | 'months' | 'years'", default: "'days'", description: 'Bindable' },
+			{ name: 'min / max', type: 'DateValue', default: 'undefined' },
+			{ name: 'locale', type: 'string', default: 'navigator.language' },
+			{ name: 'timeZone', type: 'string', default: 'getLocalTimeZone()' },
+			{ name: 'weekStartsOn', type: '0..6', default: 'locale default' },
+			{ name: 'isDateDisabled', type: '(d: DateValue) => boolean', default: 'undefined' },
+			{ name: 'dayDataAttrs', type: '(d: CalendarDay) => Record<string, string?>', default: 'undefined' },
+			{ name: 'onDayHover', type: '(d: DateValue) => void', default: 'undefined' },
+			{ name: 'day', type: 'Snippet<[{ day: CalendarDay }]>', default: 'undefined' },
+			{ name: 'onSelect', type: '(d: DateValue) => void', default: 'undefined' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="grid"</code> + <code class="rounded bg-(--cream) px-1">role="gridcell"</code> + <code class="rounded bg-(--cream) px-1">aria-selected</code>',
+			'Arrow keys move day-by-day, Home/End jump to week edges',
+			'PageUp/PageDown jump months; Shift+PageUp/PageDown jump years',
+			'Enter/Space selects, <code class="rounded bg-(--cream) px-1">aria-current="date"</code> marks today',
+			'Locale-aware weekday order and month/year formatting via Intl'
+		]}
+	/>
 </main>

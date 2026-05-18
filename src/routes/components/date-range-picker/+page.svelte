@@ -2,6 +2,16 @@
 	import { CaretLeft, CalendarBlank } from 'phosphor-svelte';
 	import { DateRangePicker } from 'alus';
 	import { type DateValue, getLocalTimeZone, today } from '@internationalized/date';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { DateRangePicker } from 'alus';
+	import type { DateValue } from '@internationalized/date';
+	let start = $state<DateValue | null>(null);
+	let end = $state<DateValue | null>(null);
+<\/script>
+
+<DateRangePicker bind:start bind:end placeholder="Pick dates…" aria-label="Trip dates" />`;
 
 	const tz = getLocalTimeZone();
 	const now = today(tz);
@@ -19,7 +29,7 @@
 	}
 
 	const inputClass =
-		'inline-flex items-center gap-2 rounded border-2 border-(--indigo-dye)/20 bg-white px-3 py-2 text-sm text-(--ink) transition-colors focus:border-(--indigo-dye) data-[placeholder]:text-(--charcoal)/50';
+		'inline-flex items-center gap-2 rounded border-2 border-(--indigo-dye)/20 bg-white px-3 py-2 text-sm text-(--ink) transition-colors focus:border-(--indigo-dye) data-placeholder:text-(--charcoal)/50';
 	const popClass = 'z-50 rounded border-2 border-(--indigo-dye)/20 bg-white p-3 shadow-lg';
 	const calClass = 'text-sm text-(--ink)';
 	const headerClass =
@@ -29,14 +39,14 @@
 	const weekdayClass = 'text-center text-xs uppercase tracking-wider text-(--charcoal)/50 py-1';
 	const dayClass =
 		'h-9 w-9 rounded text-sm text-(--ink) hover:bg-(--charcoal)/10 ' +
-		'data-[out-month]:text-(--charcoal)/30 ' +
-		'data-[today]:font-bold data-[today]:text-(--vermilion) ' +
-		'data-[in-range]:rounded-none data-[in-range]:bg-(--indigo-dye)/15 data-[in-range]:text-(--ink) ' +
-		'data-[range-start]:bg-(--indigo-dye) data-[range-start]:text-white data-[range-start]:rounded-l-md data-[range-start]:rounded-r-none ' +
-		'data-[range-end]:bg-(--indigo-dye) data-[range-end]:text-white data-[range-end]:rounded-r-md data-[range-end]:rounded-l-none ' +
+		'data-out-month:text-(--charcoal)/30 ' +
+		'data-today:font-bold data-today:text-(--vermilion) ' +
+		'data-in-range:rounded-none data-in-range:bg-(--indigo-dye)/15 data-in-range:text-(--ink) ' +
+		'data-range-start:bg-(--indigo-dye) data-range-start:text-white data-range-start:rounded-l-md data-range-start:rounded-r-none ' +
+		'data-range-end:bg-(--indigo-dye) data-range-end:text-white data-range-end:rounded-r-md data-range-end:rounded-l-none ' +
 		'disabled:opacity-30 disabled:hover:bg-transparent';
 	const monthClass =
-		'rounded px-2 py-3 text-sm text-(--ink) hover:bg-(--charcoal)/10 data-[current]:bg-(--indigo-dye) data-[current]:text-white disabled:opacity-30';
+		'rounded px-2 py-3 text-sm text-(--ink) hover:bg-(--charcoal)/10 data-current:bg-(--indigo-dye) data-current:text-white disabled:opacity-30';
 </script>
 
 <svelte:head>
@@ -118,4 +128,25 @@
 			</p>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'start / end', type: 'DateValue | null', default: 'null', description: 'Bindable' },
+			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable' },
+			{ name: 'numberOfMonths', type: '1 | 2', default: '2' },
+			{ name: 'min / max', type: 'DateValue', default: 'undefined' },
+			{ name: 'locale', type: 'string', default: 'navigator.language' },
+			{ name: 'separator', type: 'string', default: "'–'" },
+			{ name: 'closeOnSelect', type: 'boolean', default: 'true' },
+			{ name: 'placeholder', type: 'string', default: "'Select range…'" },
+			{ name: 'onChange', type: '(r: DateRangeValue) => void', default: 'undefined' }
+		]}
+		a11y={[
+			'Trigger button advertises a dialog popover (<code class="rounded bg-(--cream) px-1">aria-haspopup="dialog"</code>)',
+			'Auto-closes once both start and end are picked',
+			'Escape closes and returns focus to the trigger',
+			'Embedded DateRange retains its full keyboard contract'
+		]}
+	/>
 </main>

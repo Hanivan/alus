@@ -22,6 +22,20 @@
 		CommandMenuGroup,
 		CommandMenuEmpty
 	} from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<CommandMenu shortcut="$mod+k">
+	<CommandMenuContent>
+		<CommandMenuInput placeholder="Type a command…" />
+		<CommandMenuList>
+			<CommandMenuGroup heading="Files">
+				<CommandMenuItem onSelect={() => newFile()}>New file</CommandMenuItem>
+				<CommandMenuItem onSelect={() => open()}>Open…</CommandMenuItem>
+			</CommandMenuGroup>
+			<CommandMenuEmpty>No results.</CommandMenuEmpty>
+		</CommandMenuList>
+	</CommandMenuContent>
+</CommandMenu>`;
 
 	let open = $state(false);
 	let lastSelected = $state<string | null>(null);
@@ -115,7 +129,7 @@
 									value="New file"
 									keywords="create document 新規 ファイル 作成"
 									onSelect={() => handle('New file')}
-									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-[highlighted]:bg-(--cream)"
+									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
 								>
 									<File class="h-4 w-4 text-(--indigo-dye)" />
 									<span>New file</span>
@@ -125,7 +139,7 @@
 									value="Open folder"
 									keywords="directory browse フォルダ 開く"
 									onSelect={() => handle('Open folder')}
-									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-[highlighted]:bg-(--cream)"
+									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
 								>
 									<Folder class="h-4 w-4 text-(--indigo-dye)" />
 									<span>Open folder</span>
@@ -145,7 +159,7 @@
 									value="Profile"
 									keywords="account user me プロフィール 自分"
 									onSelect={() => handle('Profile')}
-									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-[highlighted]:bg-(--cream)"
+									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
 								>
 									<User class="h-4 w-4 text-(--indigo-dye)" />
 									<span>View profile</span>
@@ -154,7 +168,7 @@
 									value="Settings"
 									keywords="preferences config gear 設定 環境"
 									onSelect={() => handle('Settings')}
-									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-[highlighted]:bg-(--cream)"
+									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
 								>
 									<Gear class="h-4 w-4 text-(--indigo-dye)" />
 									<span>Settings</span>
@@ -174,7 +188,7 @@
 									value="Light theme"
 									keywords="day bright sun 明るい 太陽 昼"
 									onSelect={() => handle('Light theme')}
-									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-[highlighted]:bg-(--cream)"
+									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
 								>
 									<Sun class="h-4 w-4 text-(--muted-gold)" />
 									<span>Switch to light</span>
@@ -183,7 +197,7 @@
 									value="Dark theme"
 									keywords="night moon 暗い 夜 月"
 									onSelect={() => handle('Dark theme')}
-									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-[highlighted]:bg-(--cream)"
+									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
 								>
 									<Moon class="h-4 w-4 text-(--indigo-dye)" />
 									<span>Switch to dark</span>
@@ -202,7 +216,7 @@
 									value="Open terminal"
 									keywords="shell command line cli 端末 ターミナル"
 									onSelect={() => handle('Open terminal')}
-									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-[highlighted]:bg-(--cream)"
+									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
 								>
 									<Terminal class="h-4 w-4 text-(--indigo-dye)" />
 									<span>Open terminal</span>
@@ -211,7 +225,7 @@
 									value="Reload"
 									keywords="refresh restart 更新 再読み込み"
 									onSelect={() => handle('Reload')}
-									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-[highlighted]:bg-(--cream)"
+									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
 								>
 									<ArrowsClockwise class="h-4 w-4 text-(--indigo-dye)" />
 									<span>Reload window</span>
@@ -220,7 +234,7 @@
 									value="Clear cache"
 									keywords="delete trash purge 削除 消去 ゴミ箱"
 									onSelect={() => handle('Clear cache')}
-									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-[highlighted]:bg-(--cream)"
+									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
 								>
 									<Trash class="h-4 w-4 text-(--vermilion)" />
 									<span>Clear cache</span>
@@ -238,4 +252,24 @@
 			{/if}
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable. <code>CommandMenu</code>' },
+			{ name: 'shortcut', type: 'string', default: "'$mod+k'", description: 'Keyboard shortcut to open ($mod = Ctrl/Cmd)' },
+			{ name: 'value', type: 'string', default: 'undefined', description: 'Bindable search query' },
+			{ name: 'filter', type: '(item, q) => number', default: 'fuzzy', description: 'Custom scoring' },
+			{ name: 'heading', type: 'string', default: 'undefined', description: '<code>CommandMenuGroup</code>' },
+			{ name: 'onSelect', type: '() => void', default: 'undefined', description: '<code>CommandMenuItem</code>' },
+			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="dialog"</code> + <code class="rounded bg-(--cream) px-1">aria-modal="true"</code>',
+			'Input is <code class="rounded bg-(--cream) px-1">role="combobox"</code>, list is <code class="rounded bg-(--cream) px-1">role="listbox"</code>',
+			'<code class="rounded bg-(--cream) px-1">aria-activedescendant</code> tracks highlighted item without moving focus',
+			'Arrow keys navigate, Enter activates, Escape closes',
+			'Groups use <code class="rounded bg-(--cream) px-1">role="group"</code> + <code class="rounded bg-(--cream) px-1">aria-labelledby</code> for heading association'
+		]}
+	/>
 </main>

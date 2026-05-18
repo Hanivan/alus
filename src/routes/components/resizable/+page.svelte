@@ -1,6 +1,17 @@
 <script lang="ts">
 	import { CaretLeft, DotsSixVertical, DotsSix } from 'phosphor-svelte';
 	import { Resizable } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Resizable
+	bind:size={width}
+	side="right"
+	minSize={120}
+	maxSize={600}
+	aria-label="Resize width"
+>
+	Content
+</Resizable>`;
 
 	let width = $state(280);
 	let height = $state(180);
@@ -76,4 +87,22 @@
 			</Resizable>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'size', type: 'number', default: 'required', description: 'Bindable px' },
+			{ name: 'side', type: "'right' | 'bottom' | 'left' | 'top'", default: "'right'" },
+			{ name: 'minSize', type: 'number', default: '0' },
+			{ name: 'maxSize', type: 'number', default: 'Infinity' },
+			{ name: 'step', type: 'number', default: '1', description: 'Keyboard step in px' },
+			{ name: 'handleClass', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Handle is <code class="rounded bg-(--cream) px-1">role="separator"</code> + <code class="rounded bg-(--cream) px-1">aria-orientation</code>',
+			'<code class="rounded bg-(--cream) px-1">aria-valuenow</code> / <code>aria-valuemin</code> / <code>aria-valuemax</code> reflect current + bounds',
+			'Arrow keys step by <code>step</code>, Home / End jump to min / max',
+			'Pointer cursor matches orientation (ew-resize / ns-resize)'
+		]}
+	/>
 </main>

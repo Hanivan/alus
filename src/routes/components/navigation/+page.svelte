@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { CaretLeft, House, Compass, BookOpen, Gear } from 'phosphor-svelte';
 	import { Navigation } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Navigation aria-label="Primary">
+	<a href="/" aria-current="page">Home</a>
+	<a href="/about">About</a>
+	<a href="/contact">Contact</a>
+</Navigation>`;
 </script>
 
 <svelte:head>
@@ -81,4 +88,17 @@
 			</Navigation>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'aria-label', type: 'string', default: 'undefined', description: 'Required if multiple <nav>s on page' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Renders a semantic <code class="rounded bg-(--cream) px-1">&lt;nav&gt;</code> landmark',
+			'<code class="rounded bg-(--cream) px-1">aria-label</code> distinguishes multiple navs (e.g. "Primary" vs "Footer")',
+			'Mark active link with <code class="rounded bg-(--cream) px-1">aria-current="page"</code> on the child anchor'
+		]}
+	/>
 </main>

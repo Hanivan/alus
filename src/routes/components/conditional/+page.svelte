@@ -1,6 +1,14 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Conditional, Button } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Conditional when={signedIn}>
+	<p>Welcome back!</p>
+	{#snippet fallback()}
+		<p>Please sign in.</p>
+	{/snippet}
+</Conditional>`;
 
 	let signedIn = $state(false);
 	let count = $state(0);
@@ -65,4 +73,19 @@
 			</Conditional>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'when', type: 'unknown', default: 'required', description: 'Truthy renders children' },
+			{ name: 'children', type: 'Snippet', default: 'required' },
+			{ name: 'fallback', type: 'Snippet', default: 'undefined' }
+		]}
+		a11y={[
+			'No semantics on its own — children retain their own roles',
+			'State changes that swap content should be announced via a live region when relevant',
+			'Prefer native <code class="rounded bg-(--cream) px-1">&#123;#if&#125;</code> for trivial cases — this is sugar for swap-with-fallback patterns',
+			'Avoid hiding interactive content based on volatile state without announcing the change'
+		]}
+	/>
 </main>

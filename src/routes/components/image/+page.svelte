@@ -1,6 +1,15 @@
 <script lang="ts">
 	import { CaretLeft, ImageBroken } from 'phosphor-svelte';
 	import { Image } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Image src="/photo.jpg" alt="Mount Fuji" loading="lazy">
+	{#snippet fallback()}
+		<div class="grid place-items-center bg-gray-100">
+			<ImageBroken class="h-8 w-8" />
+		</div>
+	{/snippet}
+</Image>`;
 </script>
 
 <svelte:head>
@@ -62,4 +71,21 @@
 			</div>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'src', type: 'string', default: 'required' },
+			{ name: 'alt', type: 'string', default: 'required', description: 'Empty string = decorative' },
+			{ name: 'loading', type: "'lazy' | 'eager'", default: "'lazy'" },
+			{ name: 'fallback', type: 'Snippet', default: 'undefined', description: 'Rendered on error' },
+			{ name: 'placeholder', type: 'Snippet', default: 'undefined', description: 'Rendered while loading' }
+		]}
+		a11y={[
+			'Native <code class="rounded bg-(--cream) px-1">&lt;img&gt;</code> with required <code>alt</code>',
+			'Decorative images should use <code class="rounded bg-(--cream) px-1">alt=""</code> — never omit the attribute',
+			'<code class="rounded bg-(--cream) px-1">loading="lazy"</code> defers offscreen image fetch',
+			'Fallback inherits the same accessible name as the original image'
+		]}
+	/>
 </main>

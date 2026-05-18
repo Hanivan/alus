@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Form, Input, Textarea, Button, FieldError } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Form onsubmit={(data) => console.log(data)} class="space-y-3">
+	<Input name="email" type="email" required placeholder="Email" />
+	<Textarea name="message" required rows={4} placeholder="Message" />
+	<Button type="submit">Send</Button>
+</Form>`;
 
 	let name = $state('');
 	let email = $state('');
@@ -164,4 +171,19 @@
 			</ul>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'onsubmit', type: '(data: FormData) => void', default: 'undefined' },
+			{ name: 'novalidate', type: 'boolean', default: 'false' },
+			{ name: 'aria-label', type: 'string', default: 'undefined' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Native <code class="rounded bg-(--cream) px-1">&lt;form&gt;</code> — submit on Enter inside any field',
+			'<code class="rounded bg-(--cream) px-1">&lt;FieldError&gt;</code> auto-wires <code class="rounded bg-(--cream) px-1">role="alert"</code> for live error announcement',
+			'Group related fields with <code class="rounded bg-(--cream) px-1">&lt;Fieldset&gt;</code> for screen-reader context'
+		]}
+	/>
 </main>

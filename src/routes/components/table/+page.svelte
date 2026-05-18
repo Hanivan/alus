@@ -10,6 +10,23 @@
 		TableHeader,
 		TableCell
 	} from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Table>
+	<TableCaption>Team scoreboard</TableCaption>
+	<TableHead>
+		<TableRow>
+			<TableHeader scope="col" sort="ascending">Name</TableHeader>
+			<TableHeader scope="col">Score</TableHeader>
+		</TableRow>
+	</TableHead>
+	<TableBody>
+		<TableRow>
+			<TableHeader scope="row">Akira</TableHeader>
+			<TableCell>92</TableCell>
+		</TableRow>
+	</TableBody>
+</Table>`;
 
 	interface Row {
 		id: number;
@@ -127,4 +144,19 @@
 			</Table>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'scope', type: "'col' | 'row' | 'colgroup' | 'rowgroup'", default: 'undefined', description: '<code>TableHeader</code>' },
+			{ name: 'sort', type: "'ascending' | 'descending' | 'none' | 'other'", default: 'undefined', description: 'Sets aria-sort' },
+			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
+		]}
+		a11y={[
+			'Native <code class="rounded bg-(--cream) px-1">&lt;table&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code> — full table semantics',
+			'<code class="rounded bg-(--cream) px-1">scope</code> wires headers to their data cells for SR reading',
+			'<code class="rounded bg-(--cream) px-1">aria-sort</code> announces sort state on sortable columns',
+			'<code class="rounded bg-(--cream) px-1">TableCaption</code> provides the table\'s accessible name'
+		]}
+	/>
 </main>

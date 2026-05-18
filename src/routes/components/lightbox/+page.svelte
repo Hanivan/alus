@@ -1,6 +1,19 @@
 <script lang="ts">
 	import { CaretLeft, X, CaretLeft as Prev, CaretRight as Next } from 'phosphor-svelte';
 	import { Lightbox, type LightboxImage } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<script lang="ts">
+	import { Lightbox, type LightboxImage } from 'alus';
+	const images: LightboxImage[] = [
+		{ src: '/a.jpg', alt: 'First' },
+		{ src: '/b.jpg', alt: 'Second' }
+	];
+	let open = $state(false);
+	let index = $state(0);
+<\/script>
+
+<Lightbox {images} bind:open bind:index />`;
 
 	const images: LightboxImage[] = [
 		{
@@ -69,6 +82,26 @@
 			</div>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'images', type: 'LightboxImage[]', default: '[]' },
+			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable' },
+			{ name: 'index', type: 'number', default: '0', description: 'Bindable current image' },
+			{ name: 'loop', type: 'boolean', default: 'true' },
+			{ name: 'controls', type: 'Snippet', default: 'undefined', description: 'Custom prev/next UI' },
+			{ name: 'caption', type: 'Snippet<[{ image, index }]>', default: 'undefined' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="dialog"</code> + <code class="rounded bg-(--cream) px-1">aria-modal="true"</code>',
+			'Focus trap + Escape close',
+			'ArrowLeft / ArrowRight navigate between images',
+			'<code class="rounded bg-(--cream) px-1">aria-live="polite"</code> announces image change',
+			'Each image renders as <code class="rounded bg-(--cream) px-1">&lt;figure&gt;</code> with <code class="rounded bg-(--cream) px-1">&lt;figcaption&gt;</code>'
+		]}
+	/>
 </main>
 
 <Lightbox

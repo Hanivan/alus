@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { CaretLeft, Info, CheckCircle, Warning, XCircle, Lightbulb, Note } from 'phosphor-svelte';
 	import { Callout } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Callout variant="tip">
+	{#snippet title()}Tip{/snippet}
+	Bind both halves of a SplitView for nested layouts.
+</Callout>`;
 
 	type Variant = 'note' | 'info' | 'success' | 'warning' | 'error' | 'tip';
 
@@ -94,4 +100,21 @@
 			{/each}
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'variant', type: "'note' | 'info' | 'success' | 'warning' | 'error' | 'tip'", default: "'note'" },
+			{ name: 'title', type: 'Snippet', default: 'undefined' },
+			{ name: 'icon', type: 'Snippet', default: 'undefined' },
+			{ name: 'titleClass', type: 'string', default: "''" },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Static block — not a live region (use <code>Alert</code> for dynamic announcements)',
+			'Title renders as a real heading so it shows up in document outline',
+			'Color is decorative — variant meaning must be in the text',
+			'Icon is marked <code class="rounded bg-(--cream) px-1">aria-hidden</code> automatically'
+		]}
+	/>
 </main>

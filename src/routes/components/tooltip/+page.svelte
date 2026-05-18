@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { CaretLeft, Info } from 'phosphor-svelte';
 	import { Tooltip, TooltipTrigger, TooltipContent } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Tooltip>
+	<TooltipTrigger>Hover me</TooltipTrigger>
+	<TooltipContent>Helpful hint</TooltipContent>
+</Tooltip>`;
 </script>
 
 <svelte:head>
@@ -54,4 +60,23 @@
 			{/each}
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'placement', type: 'Placement', default: "'top'", description: 'Floating-UI placement' },
+			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable' },
+			{ name: 'openDelay', type: 'number', default: '300' },
+			{ name: 'closeDelay', type: 'number', default: '100' },
+			{ name: 'offset', type: 'number', default: '6' },
+			{ name: 'class', type: 'string', default: "''", description: 'On TooltipContent' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="tooltip"</code>; trigger gets <code class="rounded bg-(--cream) px-1">aria-describedby</code>',
+			'Opens on hover AND keyboard focus (required by WCAG 1.4.13)',
+			'Escape dismisses without losing focus',
+			'Floating-UI with flip + shift keeps it inside viewport',
+			'Never put interactive content inside — use Popover instead'
+		]}
+	/>
 </main>

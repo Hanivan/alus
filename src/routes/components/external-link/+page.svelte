@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { CaretLeft, ArrowSquareOut } from 'phosphor-svelte';
 	import { ExternalLink } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<ExternalLink href="https://svelte.dev" class="text-(--indigo-dye) underline">
+	Svelte docs
+</ExternalLink>`;
 </script>
 
 <svelte:head>
@@ -65,4 +70,18 @@
 			</p>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'href', type: 'string', default: 'required' },
+			{ name: 'icon', type: 'Snippet', default: 'undefined', description: 'Optional trailing icon' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">target="_blank"</code> + <code class="rounded bg-(--cream) px-1">rel="noopener noreferrer"</code> baked in',
+			'Appends sr-only "(opens in new tab)" announcement for screen readers',
+			'Decorative icon is <code class="rounded bg-(--cream) px-1">aria-hidden</code>'
+		]}
+	/>
 </main>

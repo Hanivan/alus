@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Divider } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Divider class="border-t border-gray-200" />
+<Divider orientation="vertical" class="h-6 border-l border-gray-200" />`;
 </script>
 
 <svelte:head>
@@ -61,30 +65,18 @@
 		</div>
 	</section>
 
-	<!-- Accessibility -->
-	<section class="mb-16">
-		<h2 class="font-display mb-8 text-2xl text-(--ink)">
-			<span>Accessibility</span>
-			<span class="ml-2 text-lg text-(--bamboo)">アクセシビリティ</span>
-		</h2>
-
-		<div class="japanese-border bg-linear-to-br from-white to-(--cream) p-8">
-			<ul class="space-y-4">
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						>Horizontal: native <code class="rounded bg-(--cream) px-1">&lt;hr&gt;</code> element
-						with <code class="rounded bg-(--cream) px-1">aria-hidden</code></span
-					>
-				</li>
-				<li class="flex items-start gap-3">
-					<span class="mt-0.5 text-(--matcha)">✓</span>
-					<span class="text-(--charcoal)/80"
-						>Vertical: <code class="rounded bg-(--cream) px-1">role="separator"</code> with
-						<code class="rounded bg-(--cream) px-1">aria-orientation="vertical"</code></span
-					>
-				</li>
-			</ul>
-		</div>
-	</section>
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'orientation', type: "'horizontal' | 'vertical'", default: "'horizontal'" },
+			{ name: 'decorative', type: 'boolean', default: 'false', description: 'Removes from a11y tree' },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Horizontal: native <code class="rounded bg-(--cream) px-1">&lt;hr&gt;</code> for semantic content separation',
+			'Vertical: <code class="rounded bg-(--cream) px-1">role="separator"</code> + <code class="rounded bg-(--cream) px-1">aria-orientation="vertical"</code>',
+			'<code>decorative</code> prop adds <code class="rounded bg-(--cream) px-1">aria-hidden</code> for purely visual lines',
+			'Use sparingly — whitespace and headings are usually clearer than rules'
+		]}
+	/>
 </main>

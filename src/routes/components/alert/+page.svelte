@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { CaretLeft, Info, CheckCircle, Warning, XCircle } from 'phosphor-svelte';
 	import { Alert } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Alert variant="success" role="status" dismissible>
+	{#snippet title()}Saved{/snippet}
+	Your changes have been saved.
+</Alert>`;
 
 	let showInfo = $state(true);
 </script>
@@ -108,4 +114,23 @@
 			</Alert>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'variant', type: "'info' | 'success' | 'warning' | 'error'", default: "'info'" },
+			{ name: 'role', type: "'alert' | 'status'", default: "'alert'", description: '<code>alert</code> interrupts, <code>status</code> waits' },
+			{ name: 'dismissible', type: 'boolean', default: 'false' },
+			{ name: 'open', type: 'boolean', default: 'true', description: 'Bindable visibility' },
+			{ name: 'titleClass', type: 'string', default: "''" },
+			{ name: 'title', type: 'Snippet', default: 'undefined' },
+			{ name: 'icon', type: 'Snippet', default: 'undefined' }
+		]}
+		a11y={[
+			'<code class="rounded bg-(--cream) px-1">role="alert"</code> for errors / warnings — interrupts SR immediately',
+			'<code class="rounded bg-(--cream) px-1">role="status"</code> for success / info — queues politely',
+			'Dismiss button has <code class="rounded bg-(--cream) px-1">aria-label="Close"</code> and is keyboard activated',
+			'Title (when present) is associated with the alert region via aria attrs'
+		]}
+	/>
 </main>

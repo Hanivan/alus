@@ -1,6 +1,16 @@
 <script lang="ts">
 	import { CaretLeft, ArrowLeft, ArrowRight, ArrowUp, ArrowDown } from 'phosphor-svelte';
 	import { Swipeable, type SwipeDirection } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<Swipeable
+	onSwipe={(d) => handle(d)}
+	onSwipeMove={({ dx }) => (dragX = dx)}
+	threshold={50}
+	preventScroll
+>
+	<div style="transform:translateX({dragX}px)">…</div>
+</Swipeable>`;
 
 	let lastDirection = $state<SwipeDirection | null>(null);
 	let dragX = $state(0);
@@ -108,4 +118,22 @@
 			card: {cardIndex + 1} / {cards.length} · drag dx: {Math.round(dragX)}px
 		</p>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'onSwipe', type: '(direction) => void', default: 'undefined', description: 'Fires once on threshold cross' },
+			{ name: 'onSwipeStart', type: '(e) => void', default: 'undefined' },
+			{ name: 'onSwipeMove', type: '({ dx, dy }) => void', default: 'undefined' },
+			{ name: 'onSwipeEnd', type: '({ direction, dx, dy, velocity }) => void', default: 'undefined' },
+			{ name: 'threshold', type: 'number', default: '50', description: 'Min px to fire onSwipe' },
+			{ name: 'preventScroll', type: 'boolean', default: 'false' }
+		]}
+		a11y={[
+			'Pointer-only gesture — pair with visible buttons or keyboard handlers for parity',
+			'Set <code class="rounded bg-(--cream) px-1">aria-label</code> on the swipe surface so SR users know what it does',
+			'Announce post-swipe state changes via a live region (e.g. "moved to card 2")',
+			'<code>preventScroll</code> blocks native page scroll while dragging — use only when intent is clear'
+		]}
+	/>
 </main>

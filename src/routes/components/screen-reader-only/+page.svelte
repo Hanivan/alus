@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { CaretLeft, Trash, MagnifyingGlass } from 'phosphor-svelte';
 	import { ScreenReaderOnly } from 'alus';
+	import DemoFooter from '$components/DemoFooter.svelte';
+
+	const code = `<button>
+	<Trash class="h-5 w-5" />
+	<ScreenReaderOnly>Delete item</ScreenReaderOnly>
+</button>`;
 </script>
 
 <svelte:head>
@@ -53,4 +59,18 @@
 			</p>
 		</div>
 	</section>
+
+	<DemoFooter
+		{code}
+		props={[
+			{ name: 'as', type: "'span' | 'div'", default: "'span'" },
+			{ name: 'class', type: 'string', default: "''" }
+		]}
+		a11y={[
+			'Alias of <code class="rounded bg-(--cream) px-1">VisuallyHidden</code> — same clip-pattern implementation',
+			'Use for icon-only button labels, skip-link targets, and decorative section markers',
+			'Pair icon with <code class="rounded bg-(--cream) px-1">aria-hidden="true"</code> so SR reads only the hidden label',
+			'Never wrap interactive content inside it — focus into invisible text confuses keyboard users'
+		]}
+	/>
 </main>
