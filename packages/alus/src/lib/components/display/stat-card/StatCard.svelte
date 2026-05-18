@@ -43,9 +43,7 @@
 	const labelId = generateCounterId('stat-label');
 	const valueId = generateCounterId('stat-value');
 
-	const trendText = $derived(
-		trend === 'up' ? ' increased' : trend === 'down' ? ' decreased' : ''
-	);
+	const trendText = $derived(trend === 'up' ? ' increased' : trend === 'down' ? ' decreased' : '');
 	const inferredLabel = $derived(`${label}: ${value}${trendText}`);
 </script>
 

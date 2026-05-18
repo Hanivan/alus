@@ -119,7 +119,12 @@
 		{code}
 		props={[
 			{ name: 'variant', type: "'info' | 'success' | 'warning' | 'error'", default: "'info'" },
-			{ name: 'role', type: "'alert' | 'status'", default: "'alert'", description: '<code>alert</code> interrupts, <code>status</code> waits' },
+			{
+				name: 'role',
+				type: "'alert' | 'status'",
+				default: "'alert'",
+				description: '<code>alert</code> interrupts, <code>status</code> waits'
+			},
 			{ name: 'dismissible', type: 'boolean', default: 'false' },
 			{ name: 'open', type: 'boolean', default: 'true', description: 'Bindable visibility' },
 			{ name: 'titleClass', type: 'string', default: "''" },

@@ -87,7 +87,12 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'value', type: 'string', default: 'undefined', description: 'Bindable. <code>Tabs</code>' },
+			{
+				name: 'value',
+				type: 'string',
+				default: 'undefined',
+				description: 'Bindable. <code>Tabs</code>'
+			},
 			{ name: 'orientation', type: "'horizontal' | 'vertical'", default: "'horizontal'" },
 			{ name: 'activationMode', type: "'automatic' | 'manual'", default: "'automatic'" },
 			{ name: 'value (Tab/TabPanel)', type: 'string', default: 'required' },

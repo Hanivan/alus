@@ -46,7 +46,9 @@
 	<section class="mb-16">
 		<h2 class="font-display mb-8 text-2xl text-(--ink)">Common ratios</h2>
 
-		<div class="japanese-border grid grid-cols-2 gap-6 bg-white/50 p-8 backdrop-blur-sm md:grid-cols-3 lg:grid-cols-5">
+		<div
+			class="japanese-border grid grid-cols-2 gap-6 bg-white/50 p-8 backdrop-blur-sm md:grid-cols-3 lg:grid-cols-5"
+		>
 			{#each ratios as r}
 				<div class="flex flex-col items-center gap-2">
 					<AspectRatio
@@ -66,7 +68,12 @@
 		{code}
 		props={[
 			{ name: 'ratio', type: 'number', default: '1', description: 'width / height' },
-			{ name: 'innerClass', type: 'string', default: "''", description: 'Class on the inner wrapper' },
+			{
+				name: 'innerClass',
+				type: 'string',
+				default: "''",
+				description: 'Class on the inner wrapper'
+			},
 			{ name: 'class', type: 'string', default: "''" }
 		]}
 		a11y={[

@@ -137,7 +137,9 @@
 			</div>
 
 			{#if dynamic.length === 0}
-				<div class="flex h-64 items-center justify-center rounded border border-dashed border-(--charcoal)/20 bg-white text-sm text-(--charcoal)/50">
+				<div
+					class="flex h-64 items-center justify-center rounded border border-dashed border-(--charcoal)/20 bg-white text-sm text-(--charcoal)/50"
+				>
 					Empty list — add some items to begin.
 				</div>
 			{:else}
@@ -166,7 +168,9 @@
 		<h2 class="font-display mb-6 text-2xl text-(--ink)">Empty state</h2>
 		<div class="japanese-border bg-white/50 p-4 backdrop-blur-sm">
 			{#if empty.length === 0}
-				<div class="flex h-32 items-center justify-center rounded border border-dashed border-(--charcoal)/20 bg-white text-sm text-(--charcoal)/50">
+				<div
+					class="flex h-32 items-center justify-center rounded border border-dashed border-(--charcoal)/20 bg-white text-sm text-(--charcoal)/50"
+				>
 					Nothing here yet.
 				</div>
 			{:else}
@@ -189,7 +193,12 @@
 		props={[
 			{ name: 'items', type: 'T[]', default: 'required' },
 			{ name: 'itemHeight', type: 'number', default: 'required', description: 'Fixed px per row' },
-			{ name: 'overscan', type: 'number', default: '3', description: 'Extra rows rendered above / below viewport' },
+			{
+				name: 'overscan',
+				type: 'number',
+				default: '3',
+				description: 'Extra rows rendered above / below viewport'
+			},
 			{ name: 'item', type: 'Snippet<[{ item, index }]>', default: 'required' },
 			{ name: 'aria-label', type: 'string', default: 'undefined' }
 		]}

@@ -74,8 +74,18 @@
 		{code}
 		props={[
 			{ name: 'href', type: 'string', default: 'required' },
-			{ name: 'external', type: 'boolean', default: 'auto-detected', description: 'Override external detection' },
-			{ name: 'current', type: 'boolean', default: 'false', description: 'Adds aria-current="page"' },
+			{
+				name: 'external',
+				type: 'boolean',
+				default: 'auto-detected',
+				description: 'Override external detection'
+			},
+			{
+				name: 'current',
+				type: 'boolean',
+				default: 'false',
+				description: 'Adds aria-current="page"'
+			},
 			{ name: 'class', type: 'string', default: "''" }
 		]}
 		a11y={[

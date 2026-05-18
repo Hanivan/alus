@@ -35,8 +35,8 @@
 			</div>
 		</div>
 		<p class="max-w-2xl text-xl text-(--charcoal)/70">
-			Two-pane split view with a draggable separator. Size is a percent (0–100). Keyboard: arrow keys
-			step, PageUp/PageDown large step, Home / End jump to min / max.
+			Two-pane split view with a draggable separator. Size is a percent (0–100). Keyboard: arrow
+			keys step, PageUp/PageDown large step, Home / End jump to min / max.
 		</p>
 	</header>
 
@@ -60,7 +60,7 @@
 				</SplitViewPane>
 				<SplitViewHandle
 					aria-label="Resize horizontal panes"
-					class="w-1.5 cursor-ew-resize bg-(--indigo-dye)/15 hover:bg-(--indigo-dye)/40 focus-visible:bg-(--vermilion) outline-none"
+					class="w-1.5 cursor-ew-resize bg-(--indigo-dye)/15 outline-none hover:bg-(--indigo-dye)/40 focus-visible:bg-(--vermilion)"
 				/>
 				<SplitViewPane side="second" class="bg-white p-6">
 					<div class="flex h-full flex-col items-center justify-center gap-2 text-(--ink)">
@@ -92,7 +92,7 @@
 				</SplitViewPane>
 				<SplitViewHandle
 					aria-label="Resize vertical panes"
-					class="h-1.5 cursor-ns-resize bg-(--matcha)/25 hover:bg-(--matcha)/50 focus-visible:bg-(--vermilion) outline-none"
+					class="h-1.5 cursor-ns-resize bg-(--matcha)/25 outline-none hover:bg-(--matcha)/50 focus-visible:bg-(--vermilion)"
 				/>
 				<SplitViewPane side="second" class="bg-white p-6">
 					<div class="flex h-full flex-col items-center justify-center gap-2 text-(--ink)">
@@ -107,11 +107,21 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'size', type: 'number', default: '50', description: 'Bindable 0..100 (% of first pane)' },
+			{
+				name: 'size',
+				type: 'number',
+				default: '50',
+				description: 'Bindable 0..100 (% of first pane)'
+			},
 			{ name: 'min', type: 'number', default: '0' },
 			{ name: 'max', type: 'number', default: '100' },
 			{ name: 'orientation', type: "'horizontal' | 'vertical'", default: "'horizontal'" },
-			{ name: 'side', type: "'first' | 'second'", default: 'required', description: '<code>SplitViewPane</code>' }
+			{
+				name: 'side',
+				type: "'first' | 'second'",
+				default: 'required',
+				description: '<code>SplitViewPane</code>'
+			}
 		]}
 		a11y={[
 			'Handle is <code class="rounded bg-(--cream) px-1">role="separator"</code> + <code class="rounded bg-(--cream) px-1">aria-orientation</code>',

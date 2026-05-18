@@ -1,7 +1,12 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
 	import { computePosition, autoUpdate, flip, shift, offset } from '@floating-ui/dom';
-	import { DateFormatter, getLocalTimeZone, today as iToday, type DateValue } from '@internationalized/date';
+	import {
+		DateFormatter,
+		getLocalTimeZone,
+		today as iToday,
+		type DateValue
+	} from '@internationalized/date';
 	import { useEventListener } from 'runed';
 	import { generateCounterId } from '$utils/a11y/id.js';
 	import { trap, focusFirst } from '$utils/a11y/index.js';

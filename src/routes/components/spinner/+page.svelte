@@ -61,8 +61,18 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'label', type: 'string', default: "'Loading'", description: 'SR-only label announced via aria-label' },
-			{ name: 'class', type: 'string', default: "''", description: 'Sizing + spin animation classes' }
+			{
+				name: 'label',
+				type: 'string',
+				default: "'Loading'",
+				description: 'SR-only label announced via aria-label'
+			},
+			{
+				name: 'class',
+				type: 'string',
+				default: "''",
+				description: 'Sizing + spin animation classes'
+			}
 		]}
 		a11y={[
 			'<code class="rounded bg-(--cream) px-1">role="status"</code> + <code class="rounded bg-(--cream) px-1">aria-live="polite"</code> announce loading state',

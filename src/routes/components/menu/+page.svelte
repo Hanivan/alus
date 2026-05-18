@@ -106,10 +106,20 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable. <code>Menu</code>' },
+			{
+				name: 'open',
+				type: 'boolean',
+				default: 'false',
+				description: 'Bindable. <code>Menu</code>'
+			},
 			{ name: 'placement', type: 'Placement', default: "'bottom-start'" },
 			{ name: 'closeOnSelect', type: 'boolean', default: 'true' },
-			{ name: 'onSelect', type: '() => void', default: 'undefined', description: '<code>MenuItem</code>' },
+			{
+				name: 'onSelect',
+				type: '() => void',
+				default: 'undefined',
+				description: '<code>MenuItem</code>'
+			},
 			{ name: 'disabled', type: 'boolean', default: 'false', description: '<code>MenuItem</code>' },
 			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
 		]}

@@ -18,12 +18,7 @@
 	}: Props = $props();
 </script>
 
-<div
-	role="group"
-	class={className}
-	aria-label={ariaLabel}
-	aria-labelledby={ariaLabelledby}
->
+<div role="group" class={className} aria-label={ariaLabel} aria-labelledby={ariaLabelledby}>
 	{#if prefix}
 		<span data-input-addon="prefix">{@render prefix()}</span>
 	{/if}

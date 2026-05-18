@@ -177,12 +177,6 @@
 	);
 </script>
 
-<ul
-	bind:this={rootEl}
-	role="tree"
-	class={className}
-	onkeydown={onKeydown}
-	{...ariaAttrs}
->
+<ul bind:this={rootEl} role="tree" class={className} onkeydown={onKeydown} {...ariaAttrs}>
 	{#if children}{@render children()}{/if}
 </ul>

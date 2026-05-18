@@ -102,9 +102,7 @@
 					class="w-full max-w-lg overflow-hidden rounded-lg border border-(--indigo-dye)/20 bg-white shadow-2xl"
 					aria-label="Command menu"
 				>
-					<div
-						class="flex items-center gap-3 border-b border-(--indigo-dye)/10 px-4 py-3"
-					>
+					<div class="flex items-center gap-3 border-b border-(--indigo-dye)/10 px-4 py-3">
 						<MagnifyingGlass class="h-4 w-4 text-(--charcoal)/50" />
 						<CommandMenuInput
 							class="flex-1 bg-transparent text-(--ink) placeholder:text-(--charcoal)/40 focus:outline-none"
@@ -256,12 +254,37 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable. <code>CommandMenu</code>' },
-			{ name: 'shortcut', type: 'string', default: "'$mod+k'", description: 'Keyboard shortcut to open ($mod = Ctrl/Cmd)' },
+			{
+				name: 'open',
+				type: 'boolean',
+				default: 'false',
+				description: 'Bindable. <code>CommandMenu</code>'
+			},
+			{
+				name: 'shortcut',
+				type: 'string',
+				default: "'$mod+k'",
+				description: 'Keyboard shortcut to open ($mod = Ctrl/Cmd)'
+			},
 			{ name: 'value', type: 'string', default: 'undefined', description: 'Bindable search query' },
-			{ name: 'filter', type: '(item, q) => number', default: 'fuzzy', description: 'Custom scoring' },
-			{ name: 'heading', type: 'string', default: 'undefined', description: '<code>CommandMenuGroup</code>' },
-			{ name: 'onSelect', type: '() => void', default: 'undefined', description: '<code>CommandMenuItem</code>' },
+			{
+				name: 'filter',
+				type: '(item, q) => number',
+				default: 'fuzzy',
+				description: 'Custom scoring'
+			},
+			{
+				name: 'heading',
+				type: 'string',
+				default: 'undefined',
+				description: '<code>CommandMenuGroup</code>'
+			},
+			{
+				name: 'onSelect',
+				type: '() => void',
+				default: 'undefined',
+				description: '<code>CommandMenuItem</code>'
+			},
 			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
 		]}
 		a11y={[

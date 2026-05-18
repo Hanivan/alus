@@ -92,9 +92,24 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'aria-label', type: 'string', default: "'Breadcrumb'", description: '<code>Breadcrumb</code>' },
-			{ name: 'href', type: 'string', default: 'undefined', description: '<code>BreadcrumbItem</code>' },
-			{ name: 'current', type: 'boolean', default: 'false', description: 'Last item — adds <code>aria-current="page"</code>' },
+			{
+				name: 'aria-label',
+				type: 'string',
+				default: "'Breadcrumb'",
+				description: '<code>Breadcrumb</code>'
+			},
+			{
+				name: 'href',
+				type: 'string',
+				default: 'undefined',
+				description: '<code>BreadcrumbItem</code>'
+			},
+			{
+				name: 'current',
+				type: 'boolean',
+				default: 'false',
+				description: 'Last item — adds <code>aria-current="page"</code>'
+			},
 			{ name: 'class', type: 'string', default: "''" }
 		]}
 		a11y={[

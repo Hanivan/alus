@@ -62,7 +62,9 @@
 						<Star
 							class="h-8 w-8 transition-colors"
 							weight={filled ? 'fill' : 'regular'}
-							style="color:{filled ? 'var(--vermilion)' : 'var(--charcoal)'};opacity:{filled ? 1 : 0.3};"
+							style="color:{filled ? 'var(--vermilion)' : 'var(--charcoal)'};opacity:{filled
+								? 1
+								: 0.3};"
 						/>
 					{/snippet}
 				</Rating>
@@ -75,7 +77,9 @@
 						<Star
 							class="h-6 w-6"
 							weight={filled ? 'fill' : 'regular'}
-							style="color:{filled ? 'var(--vermilion)' : 'var(--charcoal)'};opacity:{filled ? 1 : 0.3};"
+							style="color:{filled ? 'var(--vermilion)' : 'var(--charcoal)'};opacity:{filled
+								? 1
+								: 0.3};"
 						/>
 					{/snippet}
 				</Rating>
@@ -91,7 +95,11 @@
 			{ name: 'readonly', type: 'boolean', default: 'false' },
 			{ name: 'disabled', type: 'boolean', default: 'false' },
 			{ name: 'name', type: 'string', default: 'undefined' },
-			{ name: 'item', type: 'Snippet<[{ index; filled; displayed; value; max }]>', default: 'undefined' },
+			{
+				name: 'item',
+				type: 'Snippet<[{ index; filled; displayed; value; max }]>',
+				default: 'undefined'
+			},
 			{ name: 'onValueChange', type: '(v: number) => void', default: 'undefined' },
 			{ name: 'onHoverChange', type: '(displayed: number) => void', default: 'undefined' }
 		]}

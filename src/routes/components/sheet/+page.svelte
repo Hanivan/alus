@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { CaretLeft, X } from 'phosphor-svelte';
-	import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetDescription, SheetClose } from 'alus';
+	import {
+		Sheet,
+		SheetTrigger,
+		SheetContent,
+		SheetTitle,
+		SheetDescription,
+		SheetClose
+	} from 'alus';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Sheet side="bottom">
@@ -36,8 +43,7 @@
 			</div>
 		</div>
 		<p class="max-w-2xl text-xl text-(--charcoal)/70">
-			iOS-style side panel — re-exports <code>Drawer</code> as <code>Sheet</code> for naming
-			convention.
+			iOS-style side panel — re-exports <code>Drawer</code> as <code>Sheet</code> for naming convention.
 		</p>
 	</header>
 
@@ -64,13 +70,13 @@
 				</SheetTrigger>
 				<SheetContent
 					backdropClass="fixed inset-0 bg-(--ink)/40 z-50"
-					class="fixed bg-white p-6 shadow-2xl z-50 {side === 'right'
+					class="fixed z-50 bg-white p-6 shadow-2xl {side === 'right'
 						? 'top-0 right-0 h-full w-80'
 						: side === 'left'
 							? 'top-0 left-0 h-full w-80'
 							: side === 'top'
-								? 'top-0 left-0 right-0 h-64'
-								: 'bottom-0 left-0 right-0 h-64'}"
+								? 'top-0 right-0 left-0 h-64'
+								: 'right-0 bottom-0 left-0 h-64'}"
 				>
 					<div class="mb-4 flex items-start justify-between">
 						<div>
@@ -92,7 +98,12 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'side', type: "'left' | 'right' | 'top' | 'bottom'", default: "'bottom'", description: 'iOS-style sheet typically slides from bottom' },
+			{
+				name: 'side',
+				type: "'left' | 'right' | 'top' | 'bottom'",
+				default: "'bottom'",
+				description: 'iOS-style sheet typically slides from bottom'
+			},
 			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable' },
 			{ name: 'closeOnEscape', type: 'boolean', default: 'true' },
 			{ name: 'class', type: 'string', default: "''" }

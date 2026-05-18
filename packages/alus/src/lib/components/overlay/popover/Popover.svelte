@@ -36,12 +36,7 @@
 		onOpenChange?: (open: boolean) => void;
 	}
 
-	let {
-		children,
-		open = $bindable(false),
-		disabled = false,
-		onOpenChange
-	}: Props = $props();
+	let { children, open = $bindable(false), disabled = false, onOpenChange }: Props = $props();
 
 	let triggerEl = $state<HTMLElement | null>(null);
 	let contentEl = $state<HTMLElement | null>(null);

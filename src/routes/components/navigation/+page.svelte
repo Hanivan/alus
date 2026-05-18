@@ -80,7 +80,11 @@
 				<a href="#overview" class="block rounded px-3 py-1.5 text-(--ink) hover:bg-(--cream)">
 					Overview
 				</a>
-				<a href="#install" aria-current="page" class="block rounded bg-(--indigo-dye)/10 px-3 py-1.5 text-(--indigo-dye)">
+				<a
+					href="#install"
+					aria-current="page"
+					class="block rounded bg-(--indigo-dye)/10 px-3 py-1.5 text-(--indigo-dye)"
+				>
 					Installation
 				</a>
 				<a href="#usage" class="block rounded px-3 py-1.5 text-(--ink) hover:bg-(--cream)">Usage</a>
@@ -92,7 +96,12 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'aria-label', type: 'string', default: 'undefined', description: 'Required if multiple <nav>s on page' },
+			{
+				name: 'aria-label',
+				type: 'string',
+				default: 'undefined',
+				description: 'Required if multiple <nav>s on page'
+			},
 			{ name: 'class', type: 'string', default: "''" }
 		]}
 		a11y={[

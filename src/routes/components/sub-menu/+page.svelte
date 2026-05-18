@@ -69,7 +69,9 @@
 		<h2 class="font-display mb-6 text-2xl text-(--ink)">File menu</h2>
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<Menu>
-				<MenuTrigger class="rounded border border-(--charcoal)/20 bg-white px-3 py-1.5 text-sm text-(--ink)">
+				<MenuTrigger
+					class="rounded border border-(--charcoal)/20 bg-white px-3 py-1.5 text-sm text-(--ink)"
+				>
 					File
 				</MenuTrigger>
 				<MenuContent
@@ -87,7 +89,7 @@
 						menuClass="z-50 min-w-44 rounded border border-(--charcoal)/15 bg-white p-1 shadow-lg"
 						itemClass="flex w-full items-center gap-2 rounded px-3 py-1.5 text-left text-sm text-(--ink) hover:bg-(--cream) data-highlighted:bg-(--indigo-dye) data-highlighted:text-white"
 						separatorClass="my-1 h-px bg-(--charcoal)/15"
-						class="flex items-center justify-between rounded px-3 py-1.5 text-sm text-(--ink) hover:bg-(--cream) data-[state=open]:bg-(--indigo-dye)/10 data-highlighted:bg-(--indigo-dye) data-highlighted:text-white"
+						class="flex items-center justify-between rounded px-3 py-1.5 text-sm text-(--ink) hover:bg-(--cream) data-highlighted:bg-(--indigo-dye) data-highlighted:text-white data-[state=open]:bg-(--indigo-dye)/10"
 					>
 						{#snippet children()}
 							<span>New</span>
@@ -107,7 +109,7 @@
 						items={shareItems}
 						menuClass="z-50 min-w-40 rounded border border-(--charcoal)/15 bg-white p-1 shadow-lg"
 						itemClass="block w-full rounded px-3 py-1.5 text-left text-sm text-(--ink) hover:bg-(--cream) data-highlighted:bg-(--indigo-dye) data-highlighted:text-white disabled:opacity-40 disabled:hover:bg-transparent"
-						class="flex items-center justify-between rounded px-3 py-1.5 text-sm text-(--ink) hover:bg-(--cream) data-[state=open]:bg-(--indigo-dye)/10 data-highlighted:bg-(--indigo-dye) data-highlighted:text-white"
+						class="flex items-center justify-between rounded px-3 py-1.5 text-sm text-(--ink) hover:bg-(--cream) data-highlighted:bg-(--indigo-dye) data-highlighted:text-white data-[state=open]:bg-(--indigo-dye)/10"
 					/>
 
 					<div class="my-1 h-px bg-(--charcoal)/15"></div>

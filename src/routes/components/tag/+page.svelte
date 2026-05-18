@@ -109,10 +109,20 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'removable', type: 'boolean', default: 'false', description: 'Renders dismiss button' },
+			{
+				name: 'removable',
+				type: 'boolean',
+				default: 'false',
+				description: 'Renders dismiss button'
+			},
 			{ name: 'onremove', type: '() => void', default: 'undefined' },
 			{ name: 'disabled', type: 'boolean', default: 'false' },
-			{ name: 'aria-label', type: 'string', default: 'undefined', description: 'Tag label for SRs' },
+			{
+				name: 'aria-label',
+				type: 'string',
+				default: 'undefined',
+				description: 'Tag label for SRs'
+			},
 			{ name: 'class', type: 'string', default: "''" }
 		]}
 		a11y={[

@@ -57,7 +57,12 @@
 		{code}
 		props={[
 			{ name: 'class', type: 'string', default: "''", description: 'Shape + pulse animation' },
-			{ name: 'aria-hidden', type: 'boolean', default: 'true', description: 'Skeletons are decorative' }
+			{
+				name: 'aria-hidden',
+				type: 'boolean',
+				default: 'true',
+				description: 'Skeletons are decorative'
+			}
 		]}
 		a11y={[
 			'<code class="rounded bg-(--cream) px-1">aria-hidden="true"</code> hides placeholder rectangles from SRs',

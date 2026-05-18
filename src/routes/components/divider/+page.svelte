@@ -69,7 +69,12 @@
 		{code}
 		props={[
 			{ name: 'orientation', type: "'horizontal' | 'vertical'", default: "'horizontal'" },
-			{ name: 'decorative', type: 'boolean', default: 'false', description: 'Removes from a11y tree' },
+			{
+				name: 'decorative',
+				type: 'boolean',
+				default: 'false',
+				description: 'Removes from a11y tree'
+			},
 			{ name: 'class', type: 'string', default: "''" }
 		]}
 		a11y={[

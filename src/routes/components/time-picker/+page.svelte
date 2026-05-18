@@ -19,9 +19,7 @@
 	let appt = $state<Time | null>({ hour: 7, minute: 0 });
 	const businessOpen = 9;
 	const businessClose = 17;
-	const outOfHours = $derived(
-		!!appt && (appt.hour < businessOpen || appt.hour >= businessClose)
-	);
+	const outOfHours = $derived(!!appt && (appt.hour < businessOpen || appt.hour >= businessClose));
 
 	let required = $state<Time | null>(null);
 	let submitted = $state(false);
@@ -124,7 +122,9 @@
 	</section>
 
 	<section class="mb-16">
-		<h2 class="font-display mb-6 text-2xl text-(--ink)">Business hours validation (9:00 – 17:00)</h2>
+		<h2 class="font-display mb-6 text-2xl text-(--ink)">
+			Business hours validation (9:00 – 17:00)
+		</h2>
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<TimePicker
 				bind:value={appt}
@@ -191,7 +191,12 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'value', type: 'Time | null', default: 'null', description: 'Bindable { hour, minute, second? }' },
+			{
+				name: 'value',
+				type: 'Time | null',
+				default: 'null',
+				description: 'Bindable { hour, minute, second? }'
+			},
 			{ name: 'hour12', type: 'boolean', default: 'false' },
 			{ name: 'showSeconds', type: 'boolean', default: 'false' },
 			{ name: 'step', type: 'number', default: '1', description: 'Default step for all fields' },

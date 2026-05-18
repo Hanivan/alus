@@ -154,12 +154,7 @@
 	);
 </script>
 
-<div
-	class={className}
-	role="group"
-	data-required={required || undefined}
-	{...ariaAttrs}
->
+<div class={className} role="group" data-required={required || undefined} {...ariaAttrs}>
 	<input
 		type="text"
 		inputmode="numeric"

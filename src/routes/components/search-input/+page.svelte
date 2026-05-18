@@ -100,7 +100,12 @@
 			{ name: 'value', type: 'string', default: "''", description: 'Bindable' },
 			{ name: 'placeholder', type: 'string', default: 'undefined' },
 			{ name: 'disabled', type: 'boolean', default: 'false' },
-			{ name: 'onSearch', type: '(q: string) => void', default: 'undefined', description: 'Fires on Enter' },
+			{
+				name: 'onSearch',
+				type: '(q: string) => void',
+				default: 'undefined',
+				description: 'Fires on Enter'
+			},
 			{ name: 'onClear', type: '() => void', default: 'undefined' },
 			{ name: 'aria-label', type: 'string', default: 'undefined' },
 			{ name: 'class', type: 'string', default: "''" }

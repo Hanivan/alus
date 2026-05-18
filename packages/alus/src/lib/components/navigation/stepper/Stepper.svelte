@@ -68,10 +68,6 @@
 	);
 </script>
 
-<ol
-	class={className}
-	data-orientation={orientation}
-	{...ariaAttrs}
->
+<ol class={className} data-orientation={orientation} {...ariaAttrs}>
 	{#if children}{@render children()}{/if}
 </ol>

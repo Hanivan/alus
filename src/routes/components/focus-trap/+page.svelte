@@ -100,9 +100,24 @@
 		{code}
 		props={[
 			{ name: 'active', type: 'boolean', default: 'true', description: 'Enable / disable trap' },
-			{ name: 'autoFocus', type: 'boolean', default: 'true', description: 'Focus first tabbable on mount' },
-			{ name: 'restoreFocus', type: 'boolean', default: 'true', description: 'Return focus on unmount' },
-			{ name: 'initialFocus', type: 'HTMLElement | string', default: 'undefined', description: 'Override first-focus target' }
+			{
+				name: 'autoFocus',
+				type: 'boolean',
+				default: 'true',
+				description: 'Focus first tabbable on mount'
+			},
+			{
+				name: 'restoreFocus',
+				type: 'boolean',
+				default: 'true',
+				description: 'Return focus on unmount'
+			},
+			{
+				name: 'initialFocus',
+				type: 'HTMLElement | string',
+				default: 'undefined',
+				description: 'Override first-focus target'
+			}
 		]}
 		a11y={[
 			'Required for any modal-like overlay so Tab / Shift+Tab stay inside',

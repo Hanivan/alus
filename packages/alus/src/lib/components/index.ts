@@ -105,10 +105,7 @@ export {
 	getCommandMenuContext,
 	setCommandMenuContext
 } from './navigation/command-menu/index.js';
-export type {
-	CommandMenuContext,
-	CommandItemEntry
-} from './navigation/command-menu/index.js';
+export type { CommandMenuContext, CommandItemEntry } from './navigation/command-menu/index.js';
 
 // Feedback Components
 export { Badge } from './feedback/badge/index.js';
@@ -162,11 +159,7 @@ export {
 export type { CardContext } from './display/card/index.js';
 export { Image } from './display/image/index.js';
 export { List, ListItem } from './display/list/index.js';
-export {
-	DataList,
-	DataListTerm,
-	DataListDescription
-} from './display/data-list/index.js';
+export { DataList, DataListTerm, DataListDescription } from './display/data-list/index.js';
 export {
 	Table,
 	TableCaption,

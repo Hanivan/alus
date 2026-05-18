@@ -1,5 +1,14 @@
 <script lang="ts">
-	import { CaretLeft, ArrowUp, ArrowDown, Minus, Users, ShoppingBag, Cpu, Heart } from 'phosphor-svelte';
+	import {
+		CaretLeft,
+		ArrowUp,
+		ArrowDown,
+		Minus,
+		Users,
+		ShoppingBag,
+		Cpu,
+		Heart
+	} from 'phosphor-svelte';
 	import { StatCard } from 'alus';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
@@ -49,7 +58,9 @@
 
 	<section class="mb-16">
 		<h2 class="font-display mb-6 text-2xl text-(--ink)">Dashboard tiles</h2>
-		<div class="japanese-border grid grid-cols-1 gap-4 bg-white/50 p-8 backdrop-blur-sm md:grid-cols-2 lg:grid-cols-4">
+		<div
+			class="japanese-border grid grid-cols-1 gap-4 bg-white/50 p-8 backdrop-blur-sm md:grid-cols-2 lg:grid-cols-4"
+		>
 			<StatCard
 				label="Active users"
 				value="12,481"

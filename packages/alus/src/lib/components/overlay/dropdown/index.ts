@@ -6,4 +6,7 @@ export {
 	getMenuContext as getDropdownContext,
 	setMenuContext as setDropdownContext
 } from '../../navigation/menu/index.js';
-export type { MenuContext as DropdownContext, MenuItemEntry as DropdownItemEntry } from '../../navigation/menu/index.js';
+export type {
+	MenuContext as DropdownContext,
+	MenuItemEntry as DropdownItemEntry
+} from '../../navigation/menu/index.js';

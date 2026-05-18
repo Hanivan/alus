@@ -68,8 +68,18 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'for', type: 'string', default: 'undefined', description: 'ID of the associated control' },
-			{ name: 'required', type: 'boolean', default: 'false', description: 'Renders required indicator' },
+			{
+				name: 'for',
+				type: 'string',
+				default: 'undefined',
+				description: 'ID of the associated control'
+			},
+			{
+				name: 'required',
+				type: 'boolean',
+				default: 'false',
+				description: 'Renders required indicator'
+			},
 			{ name: 'class', type: 'string', default: "''" }
 		]}
 		a11y={[

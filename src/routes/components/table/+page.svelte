@@ -49,7 +49,8 @@
 		[...rows].sort((a, b) => {
 			const av = a[sortKey];
 			const bv = b[sortKey];
-			const cmp = typeof av === 'number' ? av - (bv as number) : String(av).localeCompare(String(bv));
+			const cmp =
+				typeof av === 'number' ? av - (bv as number) : String(av).localeCompare(String(bv));
 			return sortDir === 'ascending' ? cmp : -cmp;
 		})
 	);
@@ -148,8 +149,18 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'scope', type: "'col' | 'row' | 'colgroup' | 'rowgroup'", default: 'undefined', description: '<code>TableHeader</code>' },
-			{ name: 'sort', type: "'ascending' | 'descending' | 'none' | 'other'", default: 'undefined', description: 'Sets aria-sort' },
+			{
+				name: 'scope',
+				type: "'col' | 'row' | 'colgroup' | 'rowgroup'",
+				default: 'undefined',
+				description: '<code>TableHeader</code>'
+			},
+			{
+				name: 'sort',
+				type: "'ascending' | 'descending' | 'none' | 'other'",
+				default: 'undefined',
+				description: 'Sets aria-sort'
+			},
 			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
 		]}
 		a11y={[

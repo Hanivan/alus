@@ -7,11 +7,7 @@
 		'aria-label'?: string;
 	}
 
-	let {
-		children,
-		class: className = '',
-		'aria-label': ariaLabel = 'Close'
-	}: Props = $props();
+	let { children, class: className = '', 'aria-label': ariaLabel = 'Close' }: Props = $props();
 
 	const ctx = getModalContext();
 </script>

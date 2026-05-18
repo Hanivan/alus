@@ -65,10 +65,7 @@
 	let tabAttr: Record<string, string> = $derived({ [TAB_ATTR]: value });
 
 	const ariaAttrs = $derived(
-		mergeAttrs(
-			interactiveStateAttrs({ selected, disabled }),
-			widgetAttrs({ controls: panelId })
-		)
+		mergeAttrs(interactiveStateAttrs({ selected, disabled }), widgetAttrs({ controls: panelId }))
 	);
 </script>
 

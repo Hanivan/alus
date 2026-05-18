@@ -11,11 +11,6 @@
 	const ctx = getCarouselContext();
 </script>
 
-<div
-	id={ctx.slidesId}
-	class={className}
-	aria-live={live}
-	aria-atomic="false"
->
+<div id={ctx.slidesId} class={className} aria-live={live} aria-atomic="false">
 	{#if children}{@render children()}{/if}
 </div>

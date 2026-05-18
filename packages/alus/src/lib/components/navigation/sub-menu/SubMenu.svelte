@@ -99,7 +99,8 @@
 		const list = enabledIndices;
 		if (!list.length) return;
 		const cur = list.indexOf(highlighted);
-		const next = cur === -1 ? (dir === 1 ? 0 : list.length - 1) : (cur + dir + list.length) % list.length;
+		const next =
+			cur === -1 ? (dir === 1 ? 0 : list.length - 1) : (cur + dir + list.length) % list.length;
 		highlighted = list[next];
 	}
 

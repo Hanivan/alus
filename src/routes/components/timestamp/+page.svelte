@@ -97,8 +97,18 @@
 			{ name: 'value', type: 'number | string | Date', default: 'required' },
 			{ name: 'mode', type: "'relative' | 'absolute' | 'both'", default: "'relative'" },
 			{ name: 'relativeStyle', type: "'long' | 'short' | 'narrow'", default: "'long'" },
-			{ name: 'locale', type: 'string', default: 'undefined', description: 'Falls back to user locale' },
-			{ name: 'updateInterval', type: 'number', default: '60_000', description: 'ms; 0 disables auto-refresh' }
+			{
+				name: 'locale',
+				type: 'string',
+				default: 'undefined',
+				description: 'Falls back to user locale'
+			},
+			{
+				name: 'updateInterval',
+				type: 'number',
+				default: '60_000',
+				description: 'ms; 0 disables auto-refresh'
+			}
 		]}
 		a11y={[
 			'Renders semantic <code class="rounded bg-(--cream) px-1">&lt;time datetime="…"&gt;</code>',

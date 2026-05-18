@@ -1,13 +1,6 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import {
-		Card,
-		CardHeader,
-		CardTitle,
-		CardDescription,
-		CardContent,
-		CardFooter
-	} from 'alus';
+	import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from 'alus';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Card>
@@ -82,7 +75,12 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'as', type: 'string', default: "'article'", description: 'Element on <code>Card</code>' },
+			{
+				name: 'as',
+				type: 'string',
+				default: "'article'",
+				description: 'Element on <code>Card</code>'
+			},
 			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
 		]}
 		a11y={[

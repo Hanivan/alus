@@ -90,7 +90,12 @@
 			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable' },
 			{ name: 'index', type: 'number', default: '0', description: 'Bindable current image' },
 			{ name: 'loop', type: 'boolean', default: 'true' },
-			{ name: 'controls', type: 'Snippet', default: 'undefined', description: 'Custom prev/next UI' },
+			{
+				name: 'controls',
+				type: 'Snippet',
+				default: 'undefined',
+				description: 'Custom prev/next UI'
+			},
 			{ name: 'caption', type: 'Snippet<[{ image, index }]>', default: 'undefined' },
 			{ name: 'class', type: 'string', default: "''" }
 		]}

@@ -37,8 +37,7 @@
 	}
 
 	const templateCols = $derived.by(() => {
-		if (minColWidth)
-			return `grid-template-columns:repeat(auto-fill,minmax(${minColWidth},1fr));`;
+		if (minColWidth) return `grid-template-columns:repeat(auto-fill,minmax(${minColWidth},1fr));`;
 		if (cols === undefined) return '';
 		return `grid-template-columns:${typeof cols === 'number' ? `repeat(${cols},minmax(0,1fr))` : cols};`;
 	});

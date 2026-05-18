@@ -49,7 +49,8 @@
 	}
 
 	function reorder(from: number, to: number): number {
-		if (from === to || from < 0 || to < 0 || from >= items.length || to >= items.length) return from;
+		if (from === to || from < 0 || to < 0 || from >= items.length || to >= items.length)
+			return from;
 		const next = items.slice();
 		const [moved] = next.splice(from, 1);
 		next.splice(to, 0, moved);

@@ -48,7 +48,14 @@
 	}
 </script>
 
-<div role="tablist" tabindex="-1" aria-label={ariaLabel} class={className} onkeydown={onKeydown} bind:this={listEl}>
+<div
+	role="tablist"
+	tabindex="-1"
+	aria-label={ariaLabel}
+	class={className}
+	onkeydown={onKeydown}
+	bind:this={listEl}
+>
 	{#each Array(ctx.count()) as _, i (i)}
 		{@const active = ctx.index() === i}
 		<button

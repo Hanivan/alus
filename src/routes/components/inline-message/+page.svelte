@@ -92,12 +92,18 @@
 	<section class="mb-16">
 		<h2 class="font-display mb-6 text-2xl text-(--ink)">Variants</h2>
 		<div class="japanese-border space-y-2 bg-white/50 p-8 backdrop-blur-sm">
-			<InlineMessage variant="info" class="inline-flex items-center gap-1.5 text-sm text-(--indigo-dye)">
+			<InlineMessage
+				variant="info"
+				class="inline-flex items-center gap-1.5 text-sm text-(--indigo-dye)"
+			>
 				{#snippet icon()}<Info class="h-4 w-4" />{/snippet}
 				This field is optional.
 			</InlineMessage>
 			<br />
-			<InlineMessage variant="success" class="inline-flex items-center gap-1.5 text-sm text-(--matcha)">
+			<InlineMessage
+				variant="success"
+				class="inline-flex items-center gap-1.5 text-sm text-(--matcha)"
+			>
 				{#snippet icon()}<CheckCircle class="h-4 w-4" />{/snippet}
 				Username available.
 			</InlineMessage>
@@ -110,7 +116,10 @@
 				Weak password.
 			</InlineMessage>
 			<br />
-			<InlineMessage variant="error" class="inline-flex items-center gap-1.5 text-sm text-(--vermilion)">
+			<InlineMessage
+				variant="error"
+				class="inline-flex items-center gap-1.5 text-sm text-(--vermilion)"
+			>
 				{#snippet icon()}<XCircle class="h-4 w-4" />{/snippet}
 				Username already taken.
 			</InlineMessage>

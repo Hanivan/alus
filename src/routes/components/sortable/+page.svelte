@@ -47,12 +47,10 @@
 			Drag with pointer or use keyboard. Press <kbd
 				class="rounded border border-(--charcoal)/20 bg-white px-1.5 py-0.5 text-xs">Space</kbd
 			>
-			to grab, arrows to move, <kbd
-				class="rounded border border-(--charcoal)/20 bg-white px-1.5 py-0.5 text-xs">Space</kbd
-			>
-			to drop, <kbd class="rounded border border-(--charcoal)/20 bg-white px-1.5 py-0.5 text-xs"
-				>Esc</kbd
-			> to cancel.
+			to grab, arrows to move,
+			<kbd class="rounded border border-(--charcoal)/20 bg-white px-1.5 py-0.5 text-xs">Space</kbd>
+			to drop,
+			<kbd class="rounded border border-(--charcoal)/20 bg-white px-1.5 py-0.5 text-xs">Esc</kbd> to cancel.
 		</p>
 	</header>
 
@@ -69,7 +67,7 @@
 				{#snippet item({ value, grabbed, isDragging, over, itemAttrs })}
 					<li
 						{...itemAttrs}
-						class="flex cursor-grab items-center gap-4 rounded border border-(--charcoal)/15 bg-white px-4 py-3 outline-none transition-shadow focus-visible:ring-2 focus-visible:ring-(--vermilion)"
+						class="flex cursor-grab items-center gap-4 rounded border border-(--charcoal)/15 bg-white px-4 py-3 transition-shadow outline-none focus-visible:ring-2 focus-visible:ring-(--vermilion)"
 						style={grabbed
 							? 'background:var(--cherry-blossom);box-shadow:0 6px 16px rgba(0,0,0,0.12);'
 							: isDragging
@@ -124,9 +122,18 @@
 		{code}
 		props={[
 			{ name: 'items', type: 'T[]', default: 'required', description: 'Bindable' },
-			{ name: 'getKey', type: '(item) => string | number', default: 'undefined', description: 'Stable key for keyed each' },
+			{
+				name: 'getKey',
+				type: '(item) => string | number',
+				default: 'undefined',
+				description: 'Stable key for keyed each'
+			},
 			{ name: 'orientation', type: "'vertical' | 'horizontal'", default: "'vertical'" },
-			{ name: 'item', type: 'Snippet<[{ value, grabbed, isDragging, over, itemAttrs }]>', default: 'required' },
+			{
+				name: 'item',
+				type: 'Snippet<[{ value, grabbed, isDragging, over, itemAttrs }]>',
+				default: 'required'
+			},
 			{ name: 'aria-label', type: 'string', default: 'required' }
 		]}
 		a11y={[

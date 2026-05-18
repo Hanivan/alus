@@ -491,9 +491,19 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'name', type: 'string', default: 'undefined', description: 'Groups radios with the same name' },
+			{
+				name: 'name',
+				type: 'string',
+				default: 'undefined',
+				description: 'Groups radios with the same name'
+			},
 			{ name: 'value', type: 'string', default: 'undefined' },
-			{ name: 'group', type: 'string', default: 'undefined', description: 'Bindable — the selected value' },
+			{
+				name: 'group',
+				type: 'string',
+				default: 'undefined',
+				description: 'Bindable — the selected value'
+			},
 			{ name: 'disabled', type: 'boolean', default: 'false' },
 			{ name: 'required', type: 'boolean', default: 'false' },
 			{ name: 'aria-label', type: 'string', default: 'undefined' },

@@ -22,11 +22,6 @@
 	);
 </script>
 
-<ol
-	role="list"
-	class={className}
-	data-orientation={orientation}
-	{...ariaAttrs}
->
+<ol role="list" class={className} data-orientation={orientation} {...ariaAttrs}>
 	{#if children}{@render children()}{/if}
 </ol>

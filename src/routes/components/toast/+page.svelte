@@ -98,9 +98,9 @@
 			</div>
 		</div>
 		<p class="max-w-2xl text-xl text-(--charcoal)/70">
-			Headless toaster modeled on Melt UI. <code>Toaster</code> class owns state; component spreads
-			attrs. Hover pauses the timer, tab-hidden pauses all. Animation-frame timer for clean
-			pause/resume — no setTimeout drift.
+			Headless toaster modeled on Melt UI. <code>Toaster</code> class owns state; component spreads attrs.
+			Hover pauses the timer, tab-hidden pauses all. Animation-frame timer for clean pause/resume — no
+			setTimeout drift.
 		</p>
 	</header>
 
@@ -192,7 +192,11 @@
 					<Button
 						onclick={() =>
 							tt.addToast({
-								data: { title: 'Saved', description: 'Settings synced to the cloud.', variant: 'success' }
+								data: {
+									title: 'Saved',
+									description: 'Settings synced to the cloud.',
+									variant: 'success'
+								}
 							})}
 						class="rounded border border-(--matcha) bg-(--matcha) px-4 py-2 text-sm text-white"
 					>
@@ -202,7 +206,11 @@
 						onclick={() =>
 							tt.addToast({
 								type: 'assertive',
-								data: { title: 'Heads up', description: 'Token expires in 5 minutes.', variant: 'warning' }
+								data: {
+									title: 'Heads up',
+									description: 'Token expires in 5 minutes.',
+									variant: 'warning'
+								}
 							})}
 						class="rounded border border-(--muted-gold) bg-(--muted-gold) px-4 py-2 text-sm text-(--ink)"
 					>
@@ -218,8 +226,7 @@
 									variant: 'error',
 									action: {
 										label: 'Retry',
-										onClick: () =>
-											tt.addToast({ data: { title: 'Retrying…', variant: 'info' } })
+										onClick: () => tt.addToast({ data: { title: 'Retrying…', variant: 'info' } })
 									}
 								}
 							})}
@@ -231,7 +238,11 @@
 						onclick={() =>
 							tt.addToast({
 								closeDelay: 0,
-								data: { title: 'Persistent', description: 'Stays until dismissed.', variant: 'info' }
+								data: {
+									title: 'Persistent',
+									description: 'Stays until dismissed.',
+									variant: 'info'
+								}
 							})}
 						class="rounded border border-(--indigo-dye) px-4 py-2 text-sm text-(--indigo-dye)"
 					>
@@ -255,12 +266,22 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'toaster', type: 'Toaster<T>', default: 'required', description: 'From <code>createToaster()</code>' },
+			{
+				name: 'toaster',
+				type: 'Toaster<T>',
+				default: 'required',
+				description: 'From <code>createToaster()</code>'
+			},
 			{ name: 'placement', type: 'ToastPlacement', default: "'bottom-right'" },
 			{ name: 'closeDelay', type: 'number', default: '4000', description: 'ms; 0 = persistent' },
 			{ name: 'hover', type: "'pause' | 'pause-all' | null", default: "'pause'" },
 			{ name: 'tabHidden', type: "'pause' | 'pause-all' | null", default: "'pause-all'" },
-			{ name: 'type', type: "'polite' | 'assertive'", default: "'polite'", description: 'Per-toast override' }
+			{
+				name: 'type',
+				type: "'polite' | 'assertive'",
+				default: "'polite'",
+				description: 'Per-toast override'
+			}
 		]}
 		a11y={[
 			'<code class="rounded bg-(--cream) px-1">role="region"</code> + <code class="rounded bg-(--cream) px-1">aria-label="Notifications"</code> wraps the toast list',

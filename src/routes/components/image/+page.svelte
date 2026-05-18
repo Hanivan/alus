@@ -76,10 +76,20 @@
 		{code}
 		props={[
 			{ name: 'src', type: 'string', default: 'required' },
-			{ name: 'alt', type: 'string', default: 'required', description: 'Empty string = decorative' },
+			{
+				name: 'alt',
+				type: 'string',
+				default: 'required',
+				description: 'Empty string = decorative'
+			},
 			{ name: 'loading', type: "'lazy' | 'eager'", default: "'lazy'" },
 			{ name: 'fallback', type: 'Snippet', default: 'undefined', description: 'Rendered on error' },
-			{ name: 'placeholder', type: 'Snippet', default: 'undefined', description: 'Rendered while loading' }
+			{
+				name: 'placeholder',
+				type: 'Snippet',
+				default: 'undefined',
+				description: 'Rendered while loading'
+			}
 		]}
 		a11y={[
 			'Native <code class="rounded bg-(--cream) px-1">&lt;img&gt;</code> with required <code>alt</code>',

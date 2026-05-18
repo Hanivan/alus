@@ -59,7 +59,8 @@
 				{#snippet title()}
 					<span class="font-display">New release</span>
 				{/snippet}
-				<span class="text-(--charcoal)/80">Alus v0.0.2 ships with Toast and Layout primitives.</span>
+				<span class="text-(--charcoal)/80">Alus v0.0.2 ships with Toast and Layout primitives.</span
+				>
 			</Banner>
 
 			<Banner
@@ -114,7 +115,11 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'variant', type: "'announcement' | 'info' | 'success' | 'warning' | 'error'", default: "'info'" },
+			{
+				name: 'variant',
+				type: "'announcement' | 'info' | 'success' | 'warning' | 'error'",
+				default: "'info'"
+			},
 			{ name: 'role', type: "'region' | 'status' | 'alert'", default: "'region'" },
 			{ name: 'dismissible', type: 'boolean', default: 'false' },
 			{ name: 'open', type: 'boolean', default: 'true', description: 'Bindable' },

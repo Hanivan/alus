@@ -31,19 +31,22 @@
 			</div>
 		</div>
 		<p class="max-w-2xl text-xl text-(--charcoal)/70">
-			Alias of <code>VisuallyHidden</code> — content not rendered to screen but read by screen
-			readers.
+			Alias of <code>VisuallyHidden</code> — content not rendered to screen but read by screen readers.
 		</p>
 	</header>
 
 	<section class="mb-16">
 		<h2 class="font-display mb-6 text-2xl text-(--ink)">Icon-only buttons</h2>
 		<div class="japanese-border flex items-center gap-3 bg-white/50 p-8 backdrop-blur-sm">
-			<button class="inline-flex h-10 w-10 items-center justify-center rounded border border-(--charcoal)/20 bg-white text-(--vermilion)">
+			<button
+				class="inline-flex h-10 w-10 items-center justify-center rounded border border-(--charcoal)/20 bg-white text-(--vermilion)"
+			>
 				<Trash class="h-5 w-5" />
 				<ScreenReaderOnly>Delete item</ScreenReaderOnly>
 			</button>
-			<button class="inline-flex h-10 w-10 items-center justify-center rounded border border-(--charcoal)/20 bg-white text-(--indigo-dye)">
+			<button
+				class="inline-flex h-10 w-10 items-center justify-center rounded border border-(--charcoal)/20 bg-white text-(--indigo-dye)"
+			>
 				<MagnifyingGlass class="h-5 w-5" />
 				<ScreenReaderOnly>Search</ScreenReaderOnly>
 			</button>

@@ -35,8 +35,8 @@
 		</div>
 		<p class="max-w-2xl text-xl text-(--charcoal)/70">
 			Reveal "after" over "before" by dragging the handle, or focus the handle and use arrow keys.
-			<code class="font-mono text-sm">role=slider</code> with valuenow / valuemin / valuemax.
-			Click anywhere on the track to jump.
+			<code class="font-mono text-sm">role=slider</code> with valuenow / valuemin / valuemax. Click anywhere
+			on the track to jump.
 		</p>
 	</header>
 
@@ -92,16 +92,12 @@
 				handleClass="outline-none h-1 bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.15)] focus-visible:bg-(--vermilion)"
 			>
 				{#snippet before()}
-					<div
-						class="flex h-full w-full items-center justify-center bg-(--matcha)/70 text-white"
-					>
+					<div class="flex h-full w-full items-center justify-center bg-(--matcha)/70 text-white">
 						<span class="font-display text-7xl">地</span>
 					</div>
 				{/snippet}
 				{#snippet after()}
-					<div
-						class="flex h-full w-full items-center justify-center bg-(--indigo-dye) text-white"
-					>
+					<div class="flex h-full w-full items-center justify-center bg-(--indigo-dye) text-white">
 						<span class="font-display text-7xl">空</span>
 					</div>
 				{/snippet}

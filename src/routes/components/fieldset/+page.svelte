@@ -104,7 +104,12 @@
 		{code}
 		props={[
 			{ name: 'legend', type: 'string', default: 'undefined', description: 'Visible group label' },
-			{ name: 'disabled', type: 'boolean', default: 'false', description: 'Disables all child form controls' },
+			{
+				name: 'disabled',
+				type: 'boolean',
+				default: 'false',
+				description: 'Disables all child form controls'
+			},
 			{ name: 'class', type: 'string', default: "''" }
 		]}
 		a11y={[

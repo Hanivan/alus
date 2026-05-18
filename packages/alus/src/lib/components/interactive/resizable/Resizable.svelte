@@ -1,10 +1,5 @@
 <script lang="ts">
-	import {
-		labelAttrs,
-		interactiveStateAttrs,
-		widgetAttrs,
-		mergeAttrs
-	} from '$utils/a11y/index.js';
+	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	type Side = 'right' | 'bottom' | 'left' | 'top';
 
@@ -116,7 +111,12 @@
 	const containerStyle = $derived(axis === 'x' ? `width:${size}px` : `height:${size}px`);
 </script>
 
-<div class={className} style={containerStyle} data-side={side} data-dragging={dragging || undefined}>
+<div
+	class={className}
+	style={containerStyle}
+	data-side={side}
+	data-dragging={dragging || undefined}
+>
 	{#if children}{@render children()}{/if}
 	<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->

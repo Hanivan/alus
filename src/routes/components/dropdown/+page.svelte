@@ -78,10 +78,20 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable. <code>Dropdown</code>' },
+			{
+				name: 'open',
+				type: 'boolean',
+				default: 'false',
+				description: 'Bindable. <code>Dropdown</code>'
+			},
 			{ name: 'placement', type: 'Placement', default: "'bottom-start'" },
 			{ name: 'closeOnSelect', type: 'boolean', default: 'true' },
-			{ name: 'disabled', type: 'boolean', default: 'false', description: '<code>DropdownItem</code>' },
+			{
+				name: 'disabled',
+				type: 'boolean',
+				default: 'false',
+				description: '<code>DropdownItem</code>'
+			},
 			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
 		]}
 		a11y={[

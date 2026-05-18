@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { CaretLeft, X } from 'phosphor-svelte';
-	import { Modal, ModalTrigger, ModalContent, ModalTitle, ModalDescription, ModalClose } from 'alus';
+	import {
+		Modal,
+		ModalTrigger,
+		ModalContent,
+		ModalTitle,
+		ModalDescription,
+		ModalClose
+	} from 'alus';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Modal>
@@ -68,7 +75,9 @@
 						This action cannot be undone. Are you sure you want to proceed?
 					</ModalDescription>
 					<div class="flex justify-end gap-2">
-						<ModalClose class="border border-(--indigo-dye)/20 px-4 py-2 text-(--ink) hover:bg-(--cream)">
+						<ModalClose
+							class="border border-(--indigo-dye)/20 px-4 py-2 text-(--ink) hover:bg-(--cream)"
+						>
 							Cancel
 						</ModalClose>
 						<ModalClose class="bg-(--vermilion) px-4 py-2 text-white hover:bg-(--vermilion)/90">
@@ -83,9 +92,24 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable. <code>Modal</code>' },
-			{ name: 'closeOnEscape', type: 'boolean', default: 'true', description: '<code>Modal</code>' },
-			{ name: 'closeOnOutsideClick', type: 'boolean', default: 'true', description: '<code>Modal</code>' },
+			{
+				name: 'open',
+				type: 'boolean',
+				default: 'false',
+				description: 'Bindable. <code>Modal</code>'
+			},
+			{
+				name: 'closeOnEscape',
+				type: 'boolean',
+				default: 'true',
+				description: '<code>Modal</code>'
+			},
+			{
+				name: 'closeOnOutsideClick',
+				type: 'boolean',
+				default: 'true',
+				description: '<code>Modal</code>'
+			},
 			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
 		]}
 		a11y={[

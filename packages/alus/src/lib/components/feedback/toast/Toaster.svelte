@@ -49,9 +49,7 @@
 	}: Props = $props();
 
 	const t = untrack(
-		() =>
-			providedToaster ??
-			new ToasterClass<T>({ closeDelay, type, hover, tabHidden })
+		() => providedToaster ?? new ToasterClass<T>({ closeDelay, type, hover, tabHidden })
 	);
 	setToasterContext(t as ToasterClass<Record<string, unknown>>);
 </script>

@@ -8,14 +8,7 @@
 		status?: 'completed' | 'current' | 'upcoming';
 	}
 
-	let {
-		children,
-		class: className = '',
-		marker,
-		time,
-		datetime,
-		status
-	}: Props = $props();
+	let { children, class: className = '', marker, time, datetime, status }: Props = $props();
 </script>
 
 <li

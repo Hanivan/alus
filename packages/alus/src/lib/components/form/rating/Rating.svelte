@@ -1,11 +1,6 @@
 <script lang="ts">
 	import { generateCounterId } from '$utils/a11y/id.js';
-	import {
-		labelAttrs,
-		interactiveStateAttrs,
-		widgetAttrs,
-		mergeAttrs
-	} from '$utils/a11y/index.js';
+	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	interface Props {
 		value?: number;

@@ -98,11 +98,36 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'type', type: "'single' | 'multiple'", default: "'single'", description: '<code>Accordion</code>' },
-			{ name: 'value', type: 'string[]', default: '[]', description: 'Bindable open items. <code>Accordion</code>' },
-			{ name: 'collapsible', type: 'boolean', default: 'true', description: 'Single mode: allow closing all' },
-			{ name: 'value (item)', type: 'string', default: 'required', description: '<code>AccordionItem</code>' },
-			{ name: 'disabled', type: 'boolean', default: 'false', description: '<code>AccordionItem</code>' },
+			{
+				name: 'type',
+				type: "'single' | 'multiple'",
+				default: "'single'",
+				description: '<code>Accordion</code>'
+			},
+			{
+				name: 'value',
+				type: 'string[]',
+				default: '[]',
+				description: 'Bindable open items. <code>Accordion</code>'
+			},
+			{
+				name: 'collapsible',
+				type: 'boolean',
+				default: 'true',
+				description: 'Single mode: allow closing all'
+			},
+			{
+				name: 'value (item)',
+				type: 'string',
+				default: 'required',
+				description: '<code>AccordionItem</code>'
+			},
+			{
+				name: 'disabled',
+				type: 'boolean',
+				default: 'false',
+				description: '<code>AccordionItem</code>'
+			},
 			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
 		]}
 		a11y={[

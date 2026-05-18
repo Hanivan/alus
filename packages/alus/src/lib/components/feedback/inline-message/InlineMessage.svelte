@@ -26,9 +26,7 @@
 	const effectiveRole = $derived(
 		role ?? (variant === 'error' || variant === 'warning' ? 'alert' : 'status')
 	);
-	const effectiveLive = $derived(
-		live ?? (effectiveRole === 'alert' ? 'assertive' : 'polite')
-	);
+	const effectiveLive = $derived(live ?? (effectiveRole === 'alert' ? 'assertive' : 'polite'));
 </script>
 
 <span

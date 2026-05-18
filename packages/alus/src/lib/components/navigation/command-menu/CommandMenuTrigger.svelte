@@ -9,8 +9,11 @@
 		'aria-label'?: string;
 	}
 
-	let { children, class: className = '', 'aria-label': ariaLabel = 'Open command menu' }: Props =
-		$props();
+	let {
+		children,
+		class: className = '',
+		'aria-label': ariaLabel = 'Open command menu'
+	}: Props = $props();
 
 	const ctx = getCommandMenuContext();
 

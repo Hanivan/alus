@@ -37,9 +37,7 @@
 		return () => clearInterval(id);
 	});
 
-	const absolute = $derived(
-		new Intl.DateTimeFormat(locale, dateOptions).format(date)
-	);
+	const absolute = $derived(new Intl.DateTimeFormat(locale, dateOptions).format(date));
 
 	const relative = $derived.by(() => {
 		const diffMs = date.getTime() - now;

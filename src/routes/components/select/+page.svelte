@@ -199,11 +199,26 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'value', type: 'string', default: 'undefined', description: 'Bindable. <code>Select</code>' },
-			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable. <code>Select</code>' },
+			{
+				name: 'value',
+				type: 'string',
+				default: 'undefined',
+				description: 'Bindable. <code>Select</code>'
+			},
+			{
+				name: 'open',
+				type: 'boolean',
+				default: 'false',
+				description: 'Bindable. <code>Select</code>'
+			},
 			{ name: 'disabled', type: 'boolean', default: 'false', description: '<code>Select</code>' },
 			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' },
-			{ name: 'value (option)', type: 'string', default: 'required', description: '<code>SelectOption</code>' }
+			{
+				name: 'value (option)',
+				type: 'string',
+				default: 'required',
+				description: '<code>SelectOption</code>'
+			}
 		]}
 		a11y={[
 			'<code class="rounded bg-(--cream) px-1">role="combobox"</code> on trigger, <code class="rounded bg-(--cream) px-1">role="listbox"</code> on content',

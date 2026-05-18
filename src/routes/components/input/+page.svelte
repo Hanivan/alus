@@ -493,7 +493,11 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'type', type: "'text' | 'email' | 'password' | 'tel' | 'url' | ...", default: "'text'" },
+			{
+				name: 'type',
+				type: "'text' | 'email' | 'password' | 'tel' | 'url' | ...",
+				default: "'text'"
+			},
 			{ name: 'value', type: 'string', default: "''", description: 'Bindable' },
 			{ name: 'placeholder', type: 'string', default: 'undefined' },
 			{ name: 'disabled', type: 'boolean', default: 'false' },

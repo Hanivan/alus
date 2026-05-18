@@ -37,7 +37,8 @@
 			</div>
 		</div>
 		<p class="max-w-2xl text-xl text-(--charcoal)/70">
-			Hierarchical tree with role=tree, aria-expanded, aria-level, and full keyboard nav (arrows, Home, End, Enter).
+			Hierarchical tree with role=tree, aria-expanded, aria-level, and full keyboard nav (arrows,
+			Home, End, Enter).
 		</p>
 	</header>
 
@@ -139,8 +140,18 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'selected', type: 'string | null', default: 'null', description: 'Bindable selected id' },
-			{ name: 'defaultExpanded', type: 'string[]', default: '[]', description: 'Ids open on mount' },
+			{
+				name: 'selected',
+				type: 'string | null',
+				default: 'null',
+				description: 'Bindable selected id'
+			},
+			{
+				name: 'defaultExpanded',
+				type: 'string[]',
+				default: '[]',
+				description: 'Ids open on mount'
+			},
 			{ name: 'id', type: 'string', default: 'required', description: '<code>TreeItem</code>' },
 			{ name: 'label', type: 'Snippet<[{ expanded, selected }]>', default: 'undefined' },
 			{ name: 'class', type: 'string', default: "''" }

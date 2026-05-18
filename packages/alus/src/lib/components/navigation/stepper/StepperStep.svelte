@@ -1,11 +1,6 @@
 <script lang="ts">
 	import { getStepperContext } from './Stepper.svelte';
-	import {
-		interactiveStateAttrs,
-		labelAttrs,
-		widgetAttrs,
-		mergeAttrs
-	} from '$utils/a11y/index.js';
+	import { interactiveStateAttrs, labelAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	interface Props {
 		index: number;

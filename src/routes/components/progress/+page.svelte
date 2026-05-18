@@ -85,8 +85,18 @@
 		props={[
 			{ name: 'value', type: 'number', default: '0', description: 'Current progress 0..max' },
 			{ name: 'max', type: 'number', default: '100' },
-			{ name: 'indeterminate', type: 'boolean', default: 'false', description: 'Drops value, animates instead' },
-			{ name: 'indicatorClass', type: 'string', default: "''", description: 'Class on the filled bar' },
+			{
+				name: 'indeterminate',
+				type: 'boolean',
+				default: 'false',
+				description: 'Drops value, animates instead'
+			},
+			{
+				name: 'indicatorClass',
+				type: 'string',
+				default: "''",
+				description: 'Class on the filled bar'
+			},
 			{ name: 'aria-label', type: 'string', default: 'undefined' },
 			{ name: 'class', type: 'string', default: "''" }
 		]}

@@ -80,8 +80,7 @@
 	const filtered = $derived.by(() => {
 		const q = value.trim().toLowerCase();
 		if (q.length < minLength) return [];
-		const fn =
-			filter ?? ((o: AutoCompleteOption<T>) => o.label.toLowerCase().includes(q));
+		const fn = filter ?? ((o: AutoCompleteOption<T>) => o.label.toLowerCase().includes(q));
 		const out: AutoCompleteOption<T>[] = [];
 		for (const o of options) {
 			if (fn(o, q)) {

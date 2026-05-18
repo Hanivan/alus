@@ -84,7 +84,10 @@
 				inputClass="w-28 rounded border border-(--charcoal)/15 px-2 py-1 text-sm text-(--ink) outline-none focus:border-(--indigo-dye)"
 			/>
 			<div class="mt-4 flex items-center gap-3">
-				<div class="h-12 w-12 rounded border border-(--charcoal)/15" style={`background:${c1};`}></div>
+				<div
+					class="h-12 w-12 rounded border border-(--charcoal)/15"
+					style={`background:${c1};`}
+				></div>
 				<code class="text-sm text-(--charcoal)/70">{c1}</code>
 			</div>
 		</div>
@@ -104,7 +107,10 @@
 				swatchClass="h-6 w-6 rounded border border-(--charcoal)/15 data-selected:ring-2 data-selected:ring-(--indigo-dye) data-selected:ring-offset-1"
 			/>
 			<div class="mt-4 flex items-center gap-3">
-				<div class="h-12 w-12 rounded border border-(--charcoal)/15" style={`background:${c2};`}></div>
+				<div
+					class="h-12 w-12 rounded border border-(--charcoal)/15"
+					style={`background:${c2};`}
+				></div>
 				<code class="text-sm text-(--charcoal)/70">{c2}</code>
 			</div>
 		</div>
@@ -125,7 +131,7 @@
 			/>
 			<div class="mt-4 flex items-center gap-3">
 				<div
-					class="h-12 w-12 rounded border border-(--charcoal)/15 bg-[length:8px_8px] bg-[linear-gradient(45deg,#ccc_25%,transparent_25%,transparent_75%,#ccc_75%),linear-gradient(45deg,#ccc_25%,transparent_25%,transparent_75%,#ccc_75%)] bg-[position:0_0,4px_4px]"
+					class="h-12 w-12 rounded border border-(--charcoal)/15 bg-[linear-gradient(45deg,#ccc_25%,transparent_25%,transparent_75%,#ccc_75%),linear-gradient(45deg,#ccc_25%,transparent_25%,transparent_75%,#ccc_75%)] bg-[length:8px_8px] bg-[position:0_0,4px_4px]"
 				>
 					<div class="h-full w-full rounded" style={`background:${c3};`}></div>
 				</div>

@@ -1,11 +1,6 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
-	import {
-		labelAttrs,
-		interactiveStateAttrs,
-		widgetAttrs,
-		mergeAttrs
-	} from '$utils/a11y/index.js';
+	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	interface Props {
 		before: import('svelte').Snippet;
@@ -190,11 +185,7 @@
 	<div class={beforeClass} data-layer="before" style="position:absolute;inset:0;">
 		{@render before()}
 	</div>
-	<div
-		class={afterClass}
-		data-layer="after"
-		style={`position:absolute;inset:0;${afterClipStyle}`}
-	>
+	<div class={afterClass} data-layer="after" style={`position:absolute;inset:0;${afterClipStyle}`}>
 		{@render after()}
 	</div>
 

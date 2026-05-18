@@ -130,9 +130,23 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'variant', type: "'default' | 'success' | 'warning' | 'error' | 'info'", default: "'default'" },
-			{ name: 'aria-label', type: 'string', default: 'undefined', description: 'Critical for icon-only or count badges' },
-			{ name: 'aria-live', type: "'off' | 'polite' | 'assertive'", default: "'off'", description: 'Announce count changes' },
+			{
+				name: 'variant',
+				type: "'default' | 'success' | 'warning' | 'error' | 'info'",
+				default: "'default'"
+			},
+			{
+				name: 'aria-label',
+				type: 'string',
+				default: 'undefined',
+				description: 'Critical for icon-only or count badges'
+			},
+			{
+				name: 'aria-live',
+				type: "'off' | 'polite' | 'assertive'",
+				default: "'off'",
+				description: 'Announce count changes'
+			},
 			{ name: 'class', type: 'string', default: "''" }
 		]}
 		a11y={[

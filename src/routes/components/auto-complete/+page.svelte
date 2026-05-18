@@ -31,7 +31,10 @@
 		{ value: { id: 'sha', name: 'Shanghai', country: 'China' }, label: 'Shanghai' },
 		{ value: { id: 'tpe', name: 'Taipei', country: 'Taiwan' }, label: 'Taipei' },
 		{ value: { id: 'bkk', name: 'Bangkok', country: 'Thailand' }, label: 'Bangkok' },
-		{ value: { id: 'sgn', name: 'Ho Chi Minh City', country: 'Vietnam' }, label: 'Ho Chi Minh City' },
+		{
+			value: { id: 'sgn', name: 'Ho Chi Minh City', country: 'Vietnam' },
+			label: 'Ho Chi Minh City'
+		},
 		{ value: { id: 'sin', name: 'Singapore', country: 'Singapore' }, label: 'Singapore' },
 		{ value: { id: 'mnl', name: 'Manila', country: 'Philippines' }, label: 'Manila' },
 		{ value: { id: 'kul', name: 'Kuala Lumpur', country: 'Malaysia' }, label: 'Kuala Lumpur' }
@@ -152,7 +155,9 @@
 	</section>
 
 	<section class="mb-16">
-		<h2 class="font-display mb-6 text-2xl text-(--ink)">Async (min 2 chars, debounced via token)</h2>
+		<h2 class="font-display mb-6 text-2xl text-(--ink)">
+			Async (min 2 chars, debounced via token)
+		</h2>
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<div class="relative max-w-md">
 				<AutoComplete
@@ -181,7 +186,9 @@
 						{/if}
 					{/snippet}
 				</AutoComplete>
-				<div class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-(--charcoal)/40">
+				<div
+					class="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-(--charcoal)/40"
+				>
 					{#if asyncLoading}
 						<CircleNotch class="h-4 w-4 animate-spin" />
 					{:else}
@@ -214,12 +221,27 @@
 		props={[
 			{ name: 'options', type: 'AutoCompleteOption<T>[]', default: '[]' },
 			{ name: 'value', type: 'string', default: "''", description: 'Bindable input text' },
-			{ name: 'selected', type: 'AutoCompleteOption<T> | null', default: 'null', description: 'Bindable' },
+			{
+				name: 'selected',
+				type: 'AutoCompleteOption<T> | null',
+				default: 'null',
+				description: 'Bindable'
+			},
 			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable' },
 			{ name: 'minLength', type: 'number', default: '0' },
 			{ name: 'maxResults', type: 'number', default: '50' },
-			{ name: 'filter', type: '(o, q) => boolean', default: 'label-contains', description: 'Custom filter' },
-			{ name: 'option', type: 'Snippet', default: 'undefined', description: 'Custom option renderer' },
+			{
+				name: 'filter',
+				type: '(o, q) => boolean',
+				default: 'label-contains',
+				description: 'Custom filter'
+			},
+			{
+				name: 'option',
+				type: 'Snippet',
+				default: 'undefined',
+				description: 'Custom option renderer'
+			},
 			{ name: 'empty', type: 'Snippet<[{ query }]>', default: 'undefined' },
 			{ name: 'onSelect', type: '(o) => void', default: 'undefined' },
 			{ name: 'onInput', type: '(v: string) => void', default: 'undefined' }

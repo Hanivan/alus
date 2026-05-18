@@ -262,7 +262,11 @@
 			{ name: 'min / max', type: 'DateValue', default: 'undefined' },
 			{ name: 'locale', type: 'string', default: 'navigator.language' },
 			{ name: 'timeZone', type: 'string', default: 'getLocalTimeZone()' },
-			{ name: 'dateOptions', type: 'Intl.DateTimeFormatOptions', default: '{ year, month: short, day }' },
+			{
+				name: 'dateOptions',
+				type: 'Intl.DateTimeFormatOptions',
+				default: '{ year, month: short, day }'
+			},
 			{ name: 'placeholder', type: 'string', default: "'Select date…'" },
 			{ name: 'closeOnSelect', type: 'boolean', default: 'true' },
 			{ name: 'required', type: 'boolean', default: 'false' },

@@ -75,7 +75,12 @@
 		{code}
 		props={[
 			{ name: 'href', type: 'string', default: 'required' },
-			{ name: 'icon', type: 'Snippet', default: 'undefined', description: 'Optional trailing icon' },
+			{
+				name: 'icon',
+				type: 'Snippet',
+				default: 'undefined',
+				description: 'Optional trailing icon'
+			},
 			{ name: 'class', type: 'string', default: "''" }
 		]}
 		a11y={[

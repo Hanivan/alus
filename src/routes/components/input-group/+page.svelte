@@ -43,7 +43,9 @@
 		</h2>
 
 		<div class="japanese-border space-y-4 bg-white/50 p-8 backdrop-blur-sm">
-			<InputGroup class="flex items-center border border-(--indigo-dye)/20 focus-within:border-(--vermilion)">
+			<InputGroup
+				class="flex items-center border border-(--indigo-dye)/20 focus-within:border-(--vermilion)"
+			>
 				{#snippet prefix()}
 					<span class="grid h-10 w-10 place-items-center bg-(--cream) text-(--charcoal)/60">
 						<At class="h-4 w-4" />
@@ -56,7 +58,9 @@
 				/>
 			</InputGroup>
 
-			<InputGroup class="flex items-center border border-(--indigo-dye)/20 focus-within:border-(--vermilion)">
+			<InputGroup
+				class="flex items-center border border-(--indigo-dye)/20 focus-within:border-(--vermilion)"
+			>
 				{#snippet prefix()}
 					<span class="grid h-10 w-10 place-items-center text-(--charcoal)/60">
 						<MagnifyingGlass class="h-4 w-4" />
@@ -71,7 +75,9 @@
 				{/snippet}
 			</InputGroup>
 
-			<InputGroup class="flex items-center border border-(--indigo-dye)/20 focus-within:border-(--vermilion)">
+			<InputGroup
+				class="flex items-center border border-(--indigo-dye)/20 focus-within:border-(--vermilion)"
+			>
 				{#snippet prefix()}
 					<span class="grid h-10 w-10 place-items-center bg-(--cream) text-(--charcoal)/60">
 						<CurrencyDollar class="h-4 w-4" />

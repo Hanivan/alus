@@ -64,7 +64,12 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'placement', type: 'Placement', default: "'top'", description: 'Floating-UI placement' },
+			{
+				name: 'placement',
+				type: 'Placement',
+				default: "'top'",
+				description: 'Floating-UI placement'
+			},
 			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable' },
 			{ name: 'openDelay', type: 'number', default: '300' },
 			{ name: 'closeDelay', type: 'number', default: '100' },

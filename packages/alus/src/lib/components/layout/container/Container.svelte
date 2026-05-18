@@ -32,9 +32,7 @@
 		return typeof v === 'number' ? `${v}px` : v;
 	}
 
-	const mw = $derived(
-		maxWidth in sizeMap ? sizeMap[maxWidth as Size] : (maxWidth as string)
-	);
+	const mw = $derived(maxWidth in sizeMap ? sizeMap[maxWidth as Size] : (maxWidth as string));
 
 	const baseStyle = $derived(
 		`max-width:${mw};${center ? 'margin-left:auto;margin-right:auto;' : ''}padding-left:${toCssValue(padding)};padding-right:${toCssValue(padding)};width:100%;`

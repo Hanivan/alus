@@ -7,7 +7,11 @@
 		'aria-label'?: string;
 	}
 
-	let { children, class: className = '', 'aria-label': ariaLabel = 'Previous slide' }: Props = $props();
+	let {
+		children,
+		class: className = '',
+		'aria-label': ariaLabel = 'Previous slide'
+	}: Props = $props();
 	const ctx = getCarouselContext();
 	const disabled = $derived(!ctx.loop() && ctx.index() === 0);
 </script>

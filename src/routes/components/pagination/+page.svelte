@@ -114,7 +114,12 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'page', type: 'number', default: '1', description: 'Bindable current page (1-indexed)' },
+			{
+				name: 'page',
+				type: 'number',
+				default: '1',
+				description: 'Bindable current page (1-indexed)'
+			},
 			{ name: 'count', type: 'number', default: '0', description: 'Total item count' },
 			{ name: 'pageSize', type: 'number', default: '10' },
 			{ name: 'siblingCount', type: 'number', default: '1' },

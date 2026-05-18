@@ -65,7 +65,10 @@
 	<section class="mb-16">
 		<h2 class="font-display mb-6 text-2xl text-(--ink)">Truthy check</h2>
 		<div class="japanese-border space-y-3 bg-white/50 p-8 backdrop-blur-sm">
-			<Button onclick={() => count++} class="rounded border border-(--charcoal)/20 px-3 py-1.5 text-sm text-(--ink)">
+			<Button
+				onclick={() => count++}
+				class="rounded border border-(--charcoal)/20 px-3 py-1.5 text-sm text-(--ink)"
+			>
 				Increment ({count})
 			</Button>
 			<Conditional when={count > 3}>
@@ -77,7 +80,12 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'when', type: 'unknown', default: 'required', description: 'Truthy renders children' },
+			{
+				name: 'when',
+				type: 'unknown',
+				default: 'required',
+				description: 'Truthy renders children'
+			},
 			{ name: 'children', type: 'Snippet', default: 'required' },
 			{ name: 'fallback', type: 'Snippet', default: 'undefined' }
 		]}

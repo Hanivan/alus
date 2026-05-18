@@ -29,8 +29,7 @@
 	const hasUnread = $derived(count > 0);
 	const showBadge = $derived(hasUnread || showZero);
 	const label = $derived(
-		ariaLabel ??
-			(hasUnread ? `Notifications, ${count} unread` : 'Notifications, no unread items')
+		ariaLabel ?? (hasUnread ? `Notifications, ${count} unread` : 'Notifications, no unread items')
 	);
 
 	const srOnlyStyle =

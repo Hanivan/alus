@@ -57,9 +57,7 @@
 			id={ctx.contentId}
 			role="tooltip"
 			class={className}
-			style="position:fixed; top:0; left:0;{interactive
-				? ''
-				: ' pointer-events:none;'}"
+			style="position:fixed; top:0; left:0;{interactive ? '' : ' pointer-events:none;'}"
 			onpointerenter={interactive ? ctx.cancel : undefined}
 			onpointerleave={interactive ? ctx.scheduleClose : undefined}
 			{@attach contentRef}

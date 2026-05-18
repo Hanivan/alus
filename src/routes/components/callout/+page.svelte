@@ -30,7 +30,11 @@
 
 	const items: { variant: Variant; title: string; body: string }[] = [
 		{ variant: 'note', title: 'Note', body: 'A simple note for context that does not interrupt.' },
-		{ variant: 'info', title: 'Heads up', body: 'You can configure this in your account settings.' },
+		{
+			variant: 'info',
+			title: 'Heads up',
+			body: 'You can configure this in your account settings.'
+		},
 		{ variant: 'tip', title: 'Tip', body: 'Bind both halves of a SplitView for nested layouts.' },
 		{
 			variant: 'success',
@@ -104,7 +108,11 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'variant', type: "'note' | 'info' | 'success' | 'warning' | 'error' | 'tip'", default: "'note'" },
+			{
+				name: 'variant',
+				type: "'note' | 'info' | 'success' | 'warning' | 'error' | 'tip'",
+				default: "'note'"
+			},
 			{ name: 'title', type: 'Snippet', default: 'undefined' },
 			{ name: 'icon', type: 'Snippet', default: 'undefined' },
 			{ name: 'titleClass', type: 'string', default: "''" },

@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { CaretLeft, X } from 'phosphor-svelte';
-	import { Drawer, DrawerTrigger, DrawerContent, DrawerTitle, DrawerDescription, DrawerClose } from 'alus';
+	import {
+		Drawer,
+		DrawerTrigger,
+		DrawerContent,
+		DrawerTitle,
+		DrawerDescription,
+		DrawerClose
+	} from 'alus';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Drawer side="right">
@@ -69,7 +76,7 @@
 				</DrawerTrigger>
 				<DrawerContent
 					backdropClass="fixed inset-0 z-50 bg-(--ink)/40 backdrop-blur-sm"
-					class="fixed z-50 bg-white p-6 shadow-2xl focus:outline-none data-[drawer-side=left]:top-0 data-[drawer-side=left]:left-0 data-[drawer-side=left]:h-full data-[drawer-side=left]:w-80 data-[drawer-side=right]:top-0 data-[drawer-side=right]:right-0 data-[drawer-side=right]:h-full data-[drawer-side=right]:w-80 data-[drawer-side=top]:top-0 data-[drawer-side=top]:left-0 data-[drawer-side=top]:right-0 data-[drawer-side=top]:h-64 data-[drawer-side=bottom]:right-0 data-[drawer-side=bottom]:bottom-0 data-[drawer-side=bottom]:left-0 data-[drawer-side=bottom]:h-64"
+					class="fixed z-50 bg-white p-6 shadow-2xl focus:outline-none data-[drawer-side=bottom]:right-0 data-[drawer-side=bottom]:bottom-0 data-[drawer-side=bottom]:left-0 data-[drawer-side=bottom]:h-64 data-[drawer-side=left]:top-0 data-[drawer-side=left]:left-0 data-[drawer-side=left]:h-full data-[drawer-side=left]:w-80 data-[drawer-side=right]:top-0 data-[drawer-side=right]:right-0 data-[drawer-side=right]:h-full data-[drawer-side=right]:w-80 data-[drawer-side=top]:top-0 data-[drawer-side=top]:right-0 data-[drawer-side=top]:left-0 data-[drawer-side=top]:h-64"
 				>
 					<DrawerClose
 						aria-label="Close"
@@ -81,7 +88,9 @@
 					<DrawerDescription class="mb-4 text-(--charcoal)/70">
 						Sliding from {side}. Position styled via <code>data-drawer-side</code>.
 					</DrawerDescription>
-					<DrawerClose class="border border-(--indigo-dye)/20 px-4 py-2 text-(--ink) hover:bg-(--cream)">
+					<DrawerClose
+						class="border border-(--indigo-dye)/20 px-4 py-2 text-(--ink) hover:bg-(--cream)"
+					>
 						Close
 					</DrawerClose>
 				</DrawerContent>

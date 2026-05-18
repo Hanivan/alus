@@ -81,7 +81,9 @@
 	</section>
 
 	<section class="mb-16">
-		<h2 class="font-display mb-6 text-2xl text-(--ink)">Flex — justify between, gap, align center</h2>
+		<h2 class="font-display mb-6 text-2xl text-(--ink)">
+			Flex — justify between, gap, align center
+		</h2>
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<Flex justify="between" align="center" gap="1rem">
 				<div class="{card} h-12 w-16">左</div>
@@ -156,12 +158,43 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'gap', type: 'string', default: "'0'", description: '<code>Stack</code> / <code>Flex</code> / <code>Grid</code> / <code>Columns</code>' },
-			{ name: 'direction', type: "'vertical' | 'horizontal'", default: "'vertical'", description: '<code>Stack</code>' },
-			{ name: 'justify / align', type: "'start' | 'center' | 'end' | 'between' | 'around' | 'stretch'", default: 'undefined', description: '<code>Flex</code>' },
-			{ name: 'cols / minColWidth', type: 'number | string', default: 'undefined', description: '<code>Grid</code>' },
-			{ name: 'maxWidth', type: "'sm' | 'md' | 'lg' | 'xl' | 'full' | string", default: "'full'", description: '<code>Container</code>' },
-			{ name: 'size / axis', type: "string | 'horizontal' | 'vertical'", default: "'1' / 'auto'", description: '<code>Spacer</code>' },
+			{
+				name: 'gap',
+				type: 'string',
+				default: "'0'",
+				description:
+					'<code>Stack</code> / <code>Flex</code> / <code>Grid</code> / <code>Columns</code>'
+			},
+			{
+				name: 'direction',
+				type: "'vertical' | 'horizontal'",
+				default: "'vertical'",
+				description: '<code>Stack</code>'
+			},
+			{
+				name: 'justify / align',
+				type: "'start' | 'center' | 'end' | 'between' | 'around' | 'stretch'",
+				default: 'undefined',
+				description: '<code>Flex</code>'
+			},
+			{
+				name: 'cols / minColWidth',
+				type: 'number | string',
+				default: 'undefined',
+				description: '<code>Grid</code>'
+			},
+			{
+				name: 'maxWidth',
+				type: "'sm' | 'md' | 'lg' | 'xl' | 'full' | string",
+				default: "'full'",
+				description: '<code>Container</code>'
+			},
+			{
+				name: 'size / axis',
+				type: "string | 'horizontal' | 'vertical'",
+				default: "'1' / 'auto'",
+				description: '<code>Spacer</code>'
+			},
 			{ name: 'count', type: 'number', default: 'required', description: '<code>Columns</code>' }
 		]}
 		a11y={[

@@ -56,18 +56,18 @@ The showcase app (`src/routes/`) uses a **Japanese Creative / 和モダン** web
 
 ### Palette (CSS custom properties in `src/routes/layout.css`)
 
-| Token | Hex | Use |
-| --- | --- | --- |
-| `--indigo-dye` | `#1e3a5f` | Primary borders, accents, selected state |
-| `--vermilion` | `#e85d4e` | Hanko seal, hover accents, danger |
-| `--matcha` | `#7a9b56` | Success state |
-| `--cherry-blossom` | `#f8c3cd` | Soft accent |
-| `--cream` | `#faf8f5` | Background tint *(reserved — avoid on white text)* |
-| `--charcoal` | `#2d2d2d` | Body text |
-| `--ink` | `#1a1a1a` | Headings |
-| `--paper-white` | `#fcfbf9` | Page background |
-| `--bamboo` | `#8b7355` | Subtitles, supporting text |
-| `--muted-gold` | `#c9a959` | Highlights |
+| Token              | Hex       | Use                                                |
+| ------------------ | --------- | -------------------------------------------------- |
+| `--indigo-dye`     | `#1e3a5f` | Primary borders, accents, selected state           |
+| `--vermilion`      | `#e85d4e` | Hanko seal, hover accents, danger                  |
+| `--matcha`         | `#7a9b56` | Success state                                      |
+| `--cherry-blossom` | `#f8c3cd` | Soft accent                                        |
+| `--cream`          | `#faf8f5` | Background tint _(reserved — avoid on white text)_ |
+| `--charcoal`       | `#2d2d2d` | Body text                                          |
+| `--ink`            | `#1a1a1a` | Headings                                           |
+| `--paper-white`    | `#fcfbf9` | Page background                                    |
+| `--bamboo`         | `#8b7355` | Subtitles, supporting text                         |
+| `--muted-gold`     | `#c9a959` | Highlights                                         |
 
 ### Typography
 
@@ -88,22 +88,26 @@ The showcase app (`src/routes/`) uses a **Japanese Creative / 和モダン** web
 Every component demo at `src/routes/components/{component}/+page.svelte` follows this skeleton — keep it consistent when adding new demos:
 
 ```svelte
-<a href="/" class="mb-8 inline-flex items-center gap-2 text-(--indigo-dye) hover:text-(--vermilion)">
-    <CaretLeft class="h-5 w-5" />
-    <span>Back to Components</span>
+<a
+	href="/"
+	class="mb-8 inline-flex items-center gap-2 text-(--indigo-dye) hover:text-(--vermilion)"
+>
+	<CaretLeft class="h-5 w-5" />
+	<span>Back to Components</span>
 </a>
 <main>
-    <header class="mb-16">
-        <div class="hanko-seal">{kanji}</div>          <!-- 1-char kanji -->
-        <h1 class="font-display text-5xl text-(--ink) md:text-6xl">ComponentName</h1>
-        <p class="tracking-widest text-(--bamboo)">{japanese-subtitle}</p>
-    </header>
-    <section class="mb-16">
-        <h2 class="font-display mb-6 text-2xl text-(--ink)">Section title</h2>
-        <div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
-            <!-- live example -->
-        </div>
-    </section>
+	<header class="mb-16">
+		<div class="hanko-seal">{kanji}</div>
+		<!-- 1-char kanji -->
+		<h1 class="font-display text-5xl text-(--ink) md:text-6xl">ComponentName</h1>
+		<p class="tracking-widest text-(--bamboo)">{japanese - subtitle}</p>
+	</header>
+	<section class="mb-16">
+		<h2 class="font-display mb-6 text-2xl text-(--ink)">Section title</h2>
+		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
+			<!-- live example -->
+		</div>
+	</section>
 </main>
 ```
 
@@ -339,14 +343,14 @@ The getter target (`open ? document : null`) drives reactive attach/detach — n
 
 ### ARIA Helper Utilities (`src/lib/utils/a11y/aria.ts`)
 
-| Utility                   | Purpose                        | Example                                                                              |
-| ------------------------- | ------------------------------ | ------------------------------------------------------------------------------------ |
-| `labelAttrs()`            | Label/description associations | `labelAttrs({ label, labelledby, describedby })`                                     |
-| `validationAttrs()`       | Form validation states         | `validationAttrs({ invalid, required, errormessage })`                               |
-| `interactiveStateAttrs()` | Interactive element states     | `interactiveStateAttrs({ disabled, pressed, expanded, checked, selected, current })` |
-| `widgetAttrs()`           | Complex widget attributes      | `widgetAttrs({ controls, haspopup, live, orientation, valuemin, valuemax, valuenow, valuetext, posinset, setsize, level, activedescendant })` |
-| `mergeAttrs()`            | Combine multiple ARIA objects  | `mergeAttrs(labelAttrs(...), interactiveStateAttrs(...))`                            |
-| `trap(node)` / `focusFirst(node)` | Focus management (from `$utils/a11y/focus`) | Modal/Popover/Lightbox dialogs                                       |
+| Utility                           | Purpose                                     | Example                                                                                                                                       |
+| --------------------------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `labelAttrs()`                    | Label/description associations              | `labelAttrs({ label, labelledby, describedby })`                                                                                              |
+| `validationAttrs()`               | Form validation states                      | `validationAttrs({ invalid, required, errormessage })`                                                                                        |
+| `interactiveStateAttrs()`         | Interactive element states                  | `interactiveStateAttrs({ disabled, pressed, expanded, checked, selected, current })`                                                          |
+| `widgetAttrs()`                   | Complex widget attributes                   | `widgetAttrs({ controls, haspopup, live, orientation, valuemin, valuemax, valuenow, valuetext, posinset, setsize, level, activedescendant })` |
+| `mergeAttrs()`                    | Combine multiple ARIA objects               | `mergeAttrs(labelAttrs(...), interactiveStateAttrs(...))`                                                                                     |
+| `trap(node)` / `focusFirst(node)` | Focus management (from `$utils/a11y/focus`) | Modal/Popover/Lightbox dialogs                                                                                                                |
 
 ARIA value types live in `$types/index.ts` and are derived from `svelte/elements` AriaAttributes — never redeclare literal unions. Pattern: `type AriaAttrValue<K> = NonNullable<AriaAttrs[K]>` → `AriaBoolean`, `AriaTristate`, `AriaHaspopup`, `AriaLive`, `AriaCurrent`, `AriaRelevant`, `AriaOrientation`.
 

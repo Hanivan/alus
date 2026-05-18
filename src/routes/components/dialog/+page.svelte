@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription, DialogClose } from 'alus';
+	import {
+		Dialog,
+		DialogTrigger,
+		DialogContent,
+		DialogTitle,
+		DialogDescription,
+		DialogClose
+	} from 'alus';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Dialog>
@@ -59,7 +66,9 @@
 					<DialogDescription class="mb-4 text-sm text-(--charcoal)/70">
 						This is a non-modal dialog. The page behind remains interactive.
 					</DialogDescription>
-					<DialogClose class="bg-(--indigo-dye) px-4 py-2 text-sm text-white hover:bg-(--indigo-dye)/90">
+					<DialogClose
+						class="bg-(--indigo-dye) px-4 py-2 text-sm text-white hover:bg-(--indigo-dye)/90"
+					>
 						Dismiss
 					</DialogClose>
 				</DialogContent>

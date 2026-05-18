@@ -49,12 +49,7 @@
 {#snippet inner()}
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<div
-		class={className}
-		{style}
-		data-overlay
-		onclick={onBackdropClick}
-	>
+	<div class={className} {style} data-overlay onclick={onBackdropClick}>
 		{#if children}{@render children()}{/if}
 	</div>
 {/snippet}

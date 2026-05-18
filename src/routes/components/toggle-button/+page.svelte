@@ -40,7 +40,8 @@
 			</div>
 		</div>
 		<p class="max-w-2xl text-xl text-(--charcoal)/70">
-			Two-state button using <code>aria-pressed</code>. Click toggles. Bindable <code>pressed</code>.
+			Two-state button using <code>aria-pressed</code>. Click toggles. Bindable
+			<code>pressed</code>.
 		</p>
 	</header>
 

@@ -70,7 +70,9 @@ sum(1, 2);`;
 				lineNumbersClass="select-none whitespace-pre text-right text-white/40"
 			>
 				{#snippet actions({ copy, copied })}
-					<div class="flex items-center justify-between border-b border-white/10 bg-white/5 px-4 py-2">
+					<div
+						class="flex items-center justify-between border-b border-white/10 bg-white/5 px-4 py-2"
+					>
 						<span class="font-mono text-xs text-white/70">sum.ts</span>
 						<button
 							type="button"
@@ -109,7 +111,12 @@ sum(1, 2);`;
 		code={codeSample}
 		props={[
 			{ name: 'code', type: 'string', default: 'required' },
-			{ name: 'language', type: 'string', default: 'undefined', description: 'Emitted as <code>data-language</code>' },
+			{
+				name: 'language',
+				type: 'string',
+				default: 'undefined',
+				description: 'Emitted as <code>data-language</code>'
+			},
 			{ name: 'filename', type: 'string', default: 'undefined' },
 			{ name: 'showLineNumbers', type: 'boolean', default: 'false' },
 			{ name: 'preClass', type: 'string', default: "''" },

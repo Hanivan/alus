@@ -155,9 +155,7 @@
 			const d = viewDate.set({ month: m, day: 1 });
 			const monthEnd = d.set({ day: d.calendar.getDaysInMonth(d) });
 			const outOfRange =
-				disabled ||
-				(min && monthEnd.compare(min) < 0) ||
-				(max && d.compare(max) > 0);
+				disabled || (min && monthEnd.compare(min) < 0) || (max && d.compare(max) > 0);
 			out.push({
 				date: d,
 				label: monthShortFormatter.format(d.toDate(timeZone)),
@@ -180,9 +178,7 @@
 			const yearEnd = viewDate.set({ year: y, month: 12, day: 1 });
 			const yearEndDay = yearEnd.set({ day: yearEnd.calendar.getDaysInMonth(yearEnd) });
 			const outOfRange =
-				disabled ||
-				(min && yearEndDay.compare(min) < 0) ||
-				(max && d.compare(max) > 0);
+				disabled || (min && yearEndDay.compare(min) < 0) || (max && d.compare(max) > 0);
 			out.push({
 				date: d,
 				label: yearOnlyFormatter.format(d.toDate(timeZone)),
@@ -386,7 +382,7 @@
 								data-out-month={!cd.inMonth ? '' : undefined}
 								data-today={cd.isToday ? '' : undefined}
 								data-selected={cd.isSelected ? '' : undefined}
-								{...(dayDataAttrs?.(cd) ?? {})}
+								{...dayDataAttrs?.(cd) ?? {}}
 								class={dayClass}
 								onclick={() => select(cd.date)}
 								onkeydown={(e) => onDayKey(e, cd.date)}

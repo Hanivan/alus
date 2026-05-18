@@ -47,7 +47,7 @@
 		<div class="japanese-border flex items-end gap-8 bg-white/50 p-8 backdrop-blur-sm">
 			<div class="flex flex-col items-center gap-3">
 				<NotificationBell
-					count={count}
+					{count}
 					onclick={() => (count = 0)}
 					class="relative rounded-full border border-(--charcoal)/15 bg-white p-3 text-(--ink) hover:border-(--vermilion)"
 					badgeClass="absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-(--vermilion) px-1 text-[10px] font-bold text-white"
@@ -117,8 +117,18 @@
 		{code}
 		props={[
 			{ name: 'count', type: 'number', default: '0', description: 'Unread item count' },
-			{ name: 'max', type: 'number', default: '99', description: 'Caps display — shows <code>99+</code> over' },
-			{ name: 'showZero', type: 'boolean', default: 'false', description: 'Render badge when count is 0' },
+			{
+				name: 'max',
+				type: 'number',
+				default: '99',
+				description: 'Caps display — shows <code>99+</code> over'
+			},
+			{
+				name: 'showZero',
+				type: 'boolean',
+				default: 'false',
+				description: 'Render badge when count is 0'
+			},
 			{ name: 'onclick', type: '(e) => void', default: 'undefined' },
 			{ name: 'badgeClass', type: 'string', default: "''" },
 			{ name: 'children', type: 'Snippet<[{ hasUnread }]>', default: 'undefined' }

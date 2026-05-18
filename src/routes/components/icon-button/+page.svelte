@@ -105,10 +105,20 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'aria-label', type: 'string', default: 'required', description: 'Mandatory — icon has no text' },
+			{
+				name: 'aria-label',
+				type: 'string',
+				default: 'required',
+				description: 'Mandatory — icon has no text'
+			},
 			{ name: 'type', type: "'button' | 'submit' | 'reset'", default: "'button'" },
 			{ name: 'disabled', type: 'boolean', default: 'false' },
-			{ name: 'aria-pressed', type: 'boolean', default: 'undefined', description: 'For toggle variant' },
+			{
+				name: 'aria-pressed',
+				type: 'boolean',
+				default: 'undefined',
+				description: 'For toggle variant'
+			},
 			{ name: 'onclick', type: '(e: MouseEvent) => void', default: 'undefined' },
 			{ name: 'class', type: 'string', default: "''" }
 		]}

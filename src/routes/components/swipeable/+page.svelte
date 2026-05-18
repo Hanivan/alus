@@ -50,7 +50,8 @@
 			</div>
 		</div>
 		<p class="max-w-2xl text-xl text-(--charcoal)/70">
-			Pointer swipe handler. Reports direction on threshold or velocity. Live drag info during gesture.
+			Pointer swipe handler. Reports direction on threshold or velocity. Live drag info during
+			gesture.
 		</p>
 	</header>
 
@@ -59,7 +60,7 @@
 
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<Swipeable
-				class="flex h-64 select-none items-center justify-center rounded border border-dashed border-(--charcoal)/30 bg-white/60 text-center"
+				class="flex h-64 items-center justify-center rounded border border-dashed border-(--charcoal)/30 bg-white/60 text-center select-none"
 				onSwipe={(d) => (lastDirection = d)}
 			>
 				<div class="flex flex-col items-center gap-2">
@@ -91,7 +92,7 @@
 
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<Swipeable
-				class="relative h-72 overflow-hidden rounded touch-none select-none"
+				class="relative h-72 touch-none overflow-hidden rounded select-none"
 				onSwipeMove={({ dx }) => (dragX = dx)}
 				onSwipeEnd={({ direction }) => {
 					dragX = 0;
@@ -122,10 +123,19 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'onSwipe', type: '(direction) => void', default: 'undefined', description: 'Fires once on threshold cross' },
+			{
+				name: 'onSwipe',
+				type: '(direction) => void',
+				default: 'undefined',
+				description: 'Fires once on threshold cross'
+			},
 			{ name: 'onSwipeStart', type: '(e) => void', default: 'undefined' },
 			{ name: 'onSwipeMove', type: '({ dx, dy }) => void', default: 'undefined' },
-			{ name: 'onSwipeEnd', type: '({ direction, dx, dy, velocity }) => void', default: 'undefined' },
+			{
+				name: 'onSwipeEnd',
+				type: '({ direction, dx, dy, velocity }) => void',
+				default: 'undefined'
+			},
 			{ name: 'threshold', type: 'number', default: '50', description: 'Min px to fire onSwipe' },
 			{ name: 'preventScroll', type: 'boolean', default: 'false' }
 		]}

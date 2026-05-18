@@ -1,5 +1,10 @@
 <script lang="ts">
-	import { labelAttrs, validationAttrs, interactiveStateAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import {
+		labelAttrs,
+		validationAttrs,
+		interactiveStateAttrs,
+		mergeAttrs
+	} from '$utils/a11y/index.js';
 
 	interface Props {
 		children?: import('svelte').Snippet<[{ value: string; clear: () => void }]>;
@@ -71,7 +76,9 @@
 			{...ariaAttrs}
 		/>
 		{#if value}
-			<button type="button" {...labelAttrs({ label: clearLabel })} onclick={clear} {disabled}>×</button>
+			<button type="button" {...labelAttrs({ label: clearLabel })} onclick={clear} {disabled}
+				>×</button
+			>
 		{/if}
 	</div>
 {/if}

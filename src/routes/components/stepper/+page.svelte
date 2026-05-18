@@ -48,11 +48,7 @@
 		<h2 class="font-display mb-8 text-2xl text-(--ink)">Linear (click prior steps)</h2>
 
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
-			<Stepper
-				bind:current
-				aria-label="Onboarding"
-				class="mb-8 flex items-center gap-2"
-			>
+			<Stepper bind:current aria-label="Onboarding" class="mb-8 flex items-center gap-2">
 				{#each steps as step, i}
 					<StepperStep index={i} class="flex flex-1 items-center gap-3">
 						{#snippet children({ status })}
@@ -74,9 +70,7 @@
 								<span class="font-display text-sm text-(--charcoal)/50">{step.kanji}</span>
 								<span
 									class="text-sm font-medium"
-									style={status === 'upcoming'
-										? 'color:rgba(45,45,45,0.4);'
-										: 'color:var(--ink);'}
+									style={status === 'upcoming' ? 'color:rgba(45,45,45,0.4);' : 'color:var(--ink);'}
 								>
 									{step.title}
 								</span>
@@ -119,7 +113,12 @@
 			{ name: 'value', type: 'number', default: '0', description: 'Bindable current step index' },
 			{ name: 'steps', type: 'number', default: 'required', description: 'Total step count' },
 			{ name: 'orientation', type: "'horizontal' | 'vertical'", default: "'horizontal'" },
-			{ name: 'index', type: 'number', default: 'required', description: '<code>StepperStep</code>' },
+			{
+				name: 'index',
+				type: 'number',
+				default: 'required',
+				description: '<code>StepperStep</code>'
+			},
 			{ name: 'class', type: 'string', default: "''" }
 		]}
 		a11y={[

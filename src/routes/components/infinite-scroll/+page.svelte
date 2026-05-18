@@ -182,7 +182,12 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'hasMore', type: 'boolean', default: 'true', description: 'When false sentinel stops firing' },
+			{
+				name: 'hasMore',
+				type: 'boolean',
+				default: 'true',
+				description: 'When false sentinel stops firing'
+			},
 			{ name: 'onLoad', type: '() => void | Promise<void>', default: 'required' },
 			{ name: 'rootMargin', type: 'string', default: "'200px'" },
 			{ name: 'threshold', type: 'number', default: '0' },

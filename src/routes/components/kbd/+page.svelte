@@ -40,7 +40,10 @@
 
 		<div class="japanese-border space-y-6 bg-white/50 p-8 backdrop-blur-sm">
 			<p class="text-(--ink)">
-				Press <Kbd class="inline-flex items-center justify-center rounded border border-(--charcoal)/20 bg-white px-1.5 py-0.5 font-mono text-xs text-(--ink) shadow-[0_1px_0_rgba(0,0,0,0.05)]">Esc</Kbd> to close.
+				Press <Kbd
+					class="inline-flex items-center justify-center rounded border border-(--charcoal)/20 bg-white px-1.5 py-0.5 font-mono text-xs text-(--ink) shadow-[0_1px_0_rgba(0,0,0,0.05)]"
+					>Esc</Kbd
+				> to close.
 			</p>
 
 			<p class="text-(--ink)">
@@ -52,15 +55,25 @@
 			</p>
 
 			<p class="text-(--ink)">
-				Sequential: <Kbd class="inline-flex items-center gap-1" keys={['g', 'i']} separator=" then " />
+				Sequential: <Kbd
+					class="inline-flex items-center gap-1"
+					keys={['g', 'i']}
+					separator=" then "
+				/>
 				(go to inbox).
 			</p>
 
 			<p class="text-(--ink)">
 				Custom inner: <Kbd class="inline-flex items-center gap-1">
-					<kbd class="inline-flex items-center justify-center rounded border border-(--charcoal)/20 bg-white px-1.5 py-0.5 font-mono text-xs text-(--ink) shadow-[0_1px_0_rgba(0,0,0,0.05)]">↑</kbd>
+					<kbd
+						class="inline-flex items-center justify-center rounded border border-(--charcoal)/20 bg-white px-1.5 py-0.5 font-mono text-xs text-(--ink) shadow-[0_1px_0_rgba(0,0,0,0.05)]"
+						>↑</kbd
+					>
 					<span aria-hidden="true">+</span>
-					<kbd class="inline-flex items-center justify-center rounded border border-(--charcoal)/20 bg-white px-1.5 py-0.5 font-mono text-xs text-(--ink) shadow-[0_1px_0_rgba(0,0,0,0.05)]">↓</kbd>
+					<kbd
+						class="inline-flex items-center justify-center rounded border border-(--charcoal)/20 bg-white px-1.5 py-0.5 font-mono text-xs text-(--ink) shadow-[0_1px_0_rgba(0,0,0,0.05)]"
+						>↓</kbd
+					>
 				</Kbd>
 				to scroll.
 			</p>
@@ -70,7 +83,12 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'keys', type: 'string[]', default: 'undefined', description: 'Renders each key as a <code>&lt;kbd&gt;</code> joined by separator' },
+			{
+				name: 'keys',
+				type: 'string[]',
+				default: 'undefined',
+				description: 'Renders each key as a <code>&lt;kbd&gt;</code> joined by separator'
+			},
 			{ name: 'separator', type: 'string', default: "'+'", description: 'Visual + SR-announced' },
 			{ name: 'class', type: 'string', default: "''" }
 		]}

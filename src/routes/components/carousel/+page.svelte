@@ -66,19 +66,10 @@
 		<h2 class="font-display mb-8 text-2xl text-(--ink)">Four seasons</h2>
 
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
-			<Carousel
-				bind:index
-				loop
-				autoplay={3000}
-				aria-label="Four seasons"
-				class="relative"
-			>
+			<Carousel bind:index loop autoplay={3000} aria-label="Four seasons" class="relative">
 				<CarouselSlides class="relative h-64 overflow-hidden rounded">
 					{#each slides as s, i (i)}
-						<CarouselSlide
-							index={i}
-							class="absolute inset-0 flex items-center justify-center"
-						>
+						<CarouselSlide index={i} class="absolute inset-0 flex items-center justify-center">
 							<div
 								class="flex h-full w-full flex-col items-center justify-center text-center text-white"
 								style="background:{s.bg};"
@@ -126,9 +117,24 @@
 		props={[
 			{ name: 'index', type: 'number', default: '0', description: 'Bindable active slide' },
 			{ name: 'loop', type: 'boolean', default: 'false' },
-			{ name: 'autoplay', type: 'number', default: '0', description: 'ms between slides; 0 disables' },
-			{ name: 'aria-label', type: 'string', default: 'required', description: 'Names the carousel region' },
-			{ name: 'index', type: 'number', default: 'required', description: '<code>CarouselSlide</code>' }
+			{
+				name: 'autoplay',
+				type: 'number',
+				default: '0',
+				description: 'ms between slides; 0 disables'
+			},
+			{
+				name: 'aria-label',
+				type: 'string',
+				default: 'required',
+				description: 'Names the carousel region'
+			},
+			{
+				name: 'index',
+				type: 'number',
+				default: 'required',
+				description: '<code>CarouselSlide</code>'
+			}
 		]}
 		a11y={[
 			'<code class="rounded bg-(--cream) px-1">role="region"</code> + <code class="rounded bg-(--cream) px-1">aria-roledescription="carousel"</code>',

@@ -66,7 +66,12 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'placement', type: 'Placement', default: "'bottom'", description: 'Floating-UI placement' },
+			{
+				name: 'placement',
+				type: 'Placement',
+				default: "'bottom'",
+				description: 'Floating-UI placement'
+			},
 			{ name: 'open', type: 'boolean', default: 'false', description: 'Bindable' },
 			{ name: 'closeOnEscape', type: 'boolean', default: 'true' },
 			{ name: 'closeOnOutsideClick', type: 'boolean', default: 'true' },

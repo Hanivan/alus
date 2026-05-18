@@ -60,9 +60,7 @@
 			>
 				<div class="rounded bg-white p-6 shadow-2xl">
 					<h2 class="font-display text-xl text-(--ink)">Custom panel</h2>
-					<p class="mt-2 text-sm text-(--charcoal)/70">
-						Click backdrop or press Escape to close.
-					</p>
+					<p class="mt-2 text-sm text-(--charcoal)/70">Click backdrop or press Escape to close.</p>
 					<button
 						class="mt-4 rounded border border-(--charcoal)/20 px-3 py-1.5 text-sm text-(--ink)"
 						onclick={() => (open = false)}

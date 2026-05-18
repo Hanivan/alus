@@ -7,14 +7,7 @@
 		colspan?: number;
 		rowspan?: number;
 	}
-	let {
-		children,
-		class: className = '',
-		scope = 'col',
-		sort,
-		colspan,
-		rowspan
-	}: Props = $props();
+	let { children, class: className = '', scope = 'col', sort, colspan, rowspan }: Props = $props();
 </script>
 
 <th class={className} {scope} aria-sort={sort} {colspan} {rowspan}>

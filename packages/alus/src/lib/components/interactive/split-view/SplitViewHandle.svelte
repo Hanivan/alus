@@ -1,12 +1,7 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
 	import { getSplitViewContext } from './SplitView.svelte';
-	import {
-		labelAttrs,
-		interactiveStateAttrs,
-		widgetAttrs,
-		mergeAttrs
-	} from '$utils/a11y/index.js';
+	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	interface Props {
 		class?: string;

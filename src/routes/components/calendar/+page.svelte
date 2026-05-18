@@ -65,8 +65,7 @@
 		'mb-3 flex items-center justify-between gap-1 [&_button]:rounded [&_button]:px-2 [&_button]:py-1 [&_button]:text-(--charcoal)/70 [&_button]:hover:bg-(--charcoal)/10 [&_[data-calendar-label]]:font-display [&_[data-calendar-label]]:flex-1 [&_[data-calendar-label]]:flex [&_[data-calendar-label]]:items-center [&_[data-calendar-label]]:justify-center [&_[data-calendar-label]]:gap-1';
 	const baseGrid =
 		'grid grid-cols-7 gap-0.5 [&>[role=row]]:contents [&[data-calendar-months]]:grid-cols-3 [&[data-calendar-years]]:grid-cols-3';
-	const baseWeekday =
-		'text-center text-xs uppercase tracking-wider text-(--charcoal)/50 py-1';
+	const baseWeekday = 'text-center text-xs uppercase tracking-wider text-(--charcoal)/50 py-1';
 	const baseDay =
 		'h-9 w-9 rounded text-sm text-(--ink) hover:bg-(--charcoal)/10 data-out-month:text-(--charcoal)/30 data-today:font-bold data-today:text-(--vermilion) data-selected:bg-(--indigo-dye) data-selected:text-white disabled:opacity-30 disabled:hover:bg-transparent';
 	const baseMonth =
@@ -199,7 +198,7 @@
 						{d.date.day}
 						{#if isHoliday(d.date) && d.inMonth}
 							<span
-								class="absolute right-0.5 top-0.5 h-1.5 w-1.5 rounded-full bg-(--vermilion)"
+								class="absolute top-0.5 right-0.5 h-1.5 w-1.5 rounded-full bg-(--vermilion)"
 								aria-label="Holiday"
 							></span>
 						{/if}
@@ -256,14 +255,28 @@
 		{code}
 		props={[
 			{ name: 'value', type: 'DateValue | null', default: 'null', description: 'Bindable' },
-			{ name: 'viewDate', type: 'DateValue', default: 'today(tz)', description: 'Bindable, controls visible month' },
-			{ name: 'view', type: "'days' | 'months' | 'years'", default: "'days'", description: 'Bindable' },
+			{
+				name: 'viewDate',
+				type: 'DateValue',
+				default: 'today(tz)',
+				description: 'Bindable, controls visible month'
+			},
+			{
+				name: 'view',
+				type: "'days' | 'months' | 'years'",
+				default: "'days'",
+				description: 'Bindable'
+			},
 			{ name: 'min / max', type: 'DateValue', default: 'undefined' },
 			{ name: 'locale', type: 'string', default: 'navigator.language' },
 			{ name: 'timeZone', type: 'string', default: 'getLocalTimeZone()' },
 			{ name: 'weekStartsOn', type: '0..6', default: 'locale default' },
 			{ name: 'isDateDisabled', type: '(d: DateValue) => boolean', default: 'undefined' },
-			{ name: 'dayDataAttrs', type: '(d: CalendarDay) => Record<string, string?>', default: 'undefined' },
+			{
+				name: 'dayDataAttrs',
+				type: '(d: CalendarDay) => Record<string, string?>',
+				default: 'undefined'
+			},
 			{ name: 'onDayHover', type: '(d: DateValue) => void', default: 'undefined' },
 			{ name: 'day', type: 'Snippet<[{ day: CalendarDay }]>', default: 'undefined' },
 			{ name: 'onSelect', type: '(d: DateValue) => void', default: 'undefined' }

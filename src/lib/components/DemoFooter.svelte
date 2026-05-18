@@ -36,7 +36,9 @@
 		aria-label="{language} implementation example"
 	>
 		{#snippet actions({ copy, copied })}
-			<div class="flex items-center justify-between border-b border-(--paper-white)/15 px-4 py-2 text-xs">
+			<div
+				class="flex items-center justify-between border-b border-(--paper-white)/15 px-4 py-2 text-xs"
+			>
 				<span class="font-display tracking-widest text-(--paper-white)/70">
 					{language.toUpperCase()}
 				</span>

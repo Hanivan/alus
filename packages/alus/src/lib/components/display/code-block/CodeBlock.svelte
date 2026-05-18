@@ -4,7 +4,9 @@
 		language?: string;
 		filename?: string;
 		showLineNumbers?: boolean;
-		actions?: import('svelte').Snippet<[{ code: string; copy: () => Promise<void>; copied: boolean }]>;
+		actions?: import('svelte').Snippet<
+			[{ code: string; copy: () => Promise<void>; copied: boolean }]
+		>;
 		class?: string;
 		preClass?: string;
 		codeClass?: string;
@@ -52,6 +54,7 @@
 		aria-label={ariaLabel ?? (language ? `${language} code` : 'code')}>{#if showLineNumbers}<span
 				class={lineNumbersClass}
 				aria-hidden="true"
-				data-line-numbers>{#each lines as _, i}{i + 1}{#if i < lines.length - 1}{'\n'}{/if}{/each}</span><code
-				class={codeClass}>{code}</code>{:else}<code class={codeClass}>{code}</code>{/if}</pre>
+				data-line-numbers
+				>{#each lines as _, i}{i + 1}{#if i < lines.length - 1}{'\n'}{/if}{/each}</span
+			><code class={codeClass}>{code}</code>{:else}<code class={codeClass}>{code}</code>{/if}</pre>
 </div>

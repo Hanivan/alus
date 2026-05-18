@@ -136,11 +136,36 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'src', type: 'string', default: 'undefined', description: 'Image URL — falls back if missing or broken' },
-			{ name: 'alt', type: 'string', default: 'undefined', description: 'Used for label + img alt' },
-			{ name: 'fallback', type: 'string', default: 'undefined', description: 'Shown when no image; auto-initialized from name' },
-			{ name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Used as a data attr; sizing comes from class' },
-			{ name: 'aria-label', type: 'string', default: 'undefined', description: 'Overrides alt for SRs' }
+			{
+				name: 'src',
+				type: 'string',
+				default: 'undefined',
+				description: 'Image URL — falls back if missing or broken'
+			},
+			{
+				name: 'alt',
+				type: 'string',
+				default: 'undefined',
+				description: 'Used for label + img alt'
+			},
+			{
+				name: 'fallback',
+				type: 'string',
+				default: 'undefined',
+				description: 'Shown when no image; auto-initialized from name'
+			},
+			{
+				name: 'size',
+				type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+				default: "'md'",
+				description: 'Used as a data attr; sizing comes from class'
+			},
+			{
+				name: 'aria-label',
+				type: 'string',
+				default: 'undefined',
+				description: 'Overrides alt for SRs'
+			}
 		]}
 		a11y={[
 			'Root <code class="rounded bg-(--cream) px-1">&lt;span&gt;</code> uses the alt / aria-label as accessible name',

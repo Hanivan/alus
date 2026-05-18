@@ -109,12 +109,7 @@
 	}
 </script>
 
-<div
-	class={className}
-	role="group"
-	aria-label={ariaLabel}
-	onpointerleave={() => (hovered = null)}
->
+<div class={className} role="group" aria-label={ariaLabel} onpointerleave={() => (hovered = null)}>
 	<div class={monthsClass}>
 		<Calendar
 			value={null}

@@ -72,12 +72,22 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'target', type: 'HTMLElement | string', default: 'document.body', description: 'Selector or element' },
-			{ name: 'disabled', type: 'boolean', default: 'false', description: 'Renders in place instead of teleporting' }
+			{
+				name: 'target',
+				type: 'HTMLElement | string',
+				default: 'document.body',
+				description: 'Selector or element'
+			},
+			{
+				name: 'disabled',
+				type: 'boolean',
+				default: 'false',
+				description: 'Renders in place instead of teleporting'
+			}
 		]}
 		a11y={[
 			'Teleporting breaks DOM order — pair with <code class="rounded bg-(--cream) px-1">FocusTrap</code> for modal-like content',
-			'Restore focus to the trigger on close so keyboard / SR users don\'t get lost',
+			"Restore focus to the trigger on close so keyboard / SR users don't get lost",
 			'Use <code class="rounded bg-(--cream) px-1">role="dialog"</code> + <code>aria-modal</code> when wrapping modal content',
 			'Layered content needs explicit z-index — Portal does not impose stacking'
 		]}

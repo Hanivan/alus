@@ -95,12 +95,21 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'accept', type: 'string', default: 'undefined', description: 'MIME / extension filter' },
+			{
+				name: 'accept',
+				type: 'string',
+				default: 'undefined',
+				description: 'MIME / extension filter'
+			},
 			{ name: 'multiple', type: 'boolean', default: 'false' },
 			{ name: 'disabled', type: 'boolean', default: 'false' },
 			{ name: 'required', type: 'boolean', default: 'false' },
 			{ name: 'onChange', type: '(files: FileList) => void', default: 'undefined' },
-			{ name: 'trigger', type: 'Snippet<[{ open: () => void; files: FileList | null }]>', default: 'undefined' },
+			{
+				name: 'trigger',
+				type: 'Snippet<[{ open: () => void; files: FileList | null }]>',
+				default: 'undefined'
+			},
 			{ name: 'aria-label', type: 'string', default: 'undefined' }
 		]}
 		a11y={[

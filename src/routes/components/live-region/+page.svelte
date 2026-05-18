@@ -83,9 +83,19 @@
 	<DemoFooter
 		{code}
 		props={[
-			{ name: 'message', type: 'string', default: "''", description: 'Text to announce (changes trigger SR)' },
+			{
+				name: 'message',
+				type: 'string',
+				default: "''",
+				description: 'Text to announce (changes trigger SR)'
+			},
 			{ name: 'politeness', type: "'polite' | 'assertive'", default: "'polite'" },
-			{ name: 'atomic', type: 'boolean', default: 'true', description: 'aria-atomic announces entire region' },
+			{
+				name: 'atomic',
+				type: 'boolean',
+				default: 'true',
+				description: 'aria-atomic announces entire region'
+			},
 			{ name: 'relevant', type: 'string', default: "'additions text'" }
 		]}
 		a11y={[

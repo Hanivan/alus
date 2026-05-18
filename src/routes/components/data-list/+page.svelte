@@ -32,9 +32,7 @@
 				<p class="tracking-widest text-(--bamboo)">データリスト</p>
 			</div>
 		</div>
-		<p class="max-w-2xl text-xl text-(--charcoal)/70">
-			Semantic dl/dt/dd for key-value pairs.
-		</p>
+		<p class="max-w-2xl text-xl text-(--charcoal)/70">Semantic dl/dt/dd for key-value pairs.</p>
 	</header>
 
 	<section class="mb-16">
@@ -62,9 +60,7 @@
 
 	<DemoFooter
 		{code}
-		props={[
-			{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }
-		]}
+		props={[{ name: 'class', type: 'string', default: "''", description: 'On any sub-component' }]}
 		a11y={[
 			'Renders native <code class="rounded bg-(--cream) px-1">&lt;dl&gt;</code> / <code class="rounded bg-(--cream) px-1">&lt;dt&gt;</code> / <code class="rounded bg-(--cream) px-1">&lt;dd&gt;</code>',
 			'SR navigation associates terms with their descriptions automatically',
