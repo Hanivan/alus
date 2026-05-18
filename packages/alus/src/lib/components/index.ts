@@ -29,6 +29,8 @@ export { Slider } from './form/slider/index.js';
 export { FileInput } from './form/file-input/index.js';
 export { SearchInput } from './form/search-input/index.js';
 export { NumberInput } from './form/number-input/index.js';
+export { InputGroup, InputAddon } from './form/input-group/index.js';
+export { Rating } from './form/rating/index.js';
 
 // Navigation Components
 export {
@@ -79,6 +81,24 @@ export { Alert } from './feedback/alert/index.js';
 // Display Components
 export { Divider } from './display/divider/index.js';
 export { Avatar } from './display/avatar/index.js';
+export {
+	Card,
+	CardHeader,
+	CardTitle,
+	CardDescription,
+	CardContent,
+	CardFooter,
+	getCardContext,
+	setCardContext
+} from './display/card/index.js';
+export type { CardContext } from './display/card/index.js';
+export { Image } from './display/image/index.js';
+export { List, ListItem } from './display/list/index.js';
+export {
+	DataList,
+	DataListTerm,
+	DataListDescription
+} from './display/data-list/index.js';
 
 // Overlay Components
 export {

@@ -238,6 +238,42 @@
 			description: 'Button-triggered menu with keyboard navigation',
 			href: '/components/dropdown',
 			kanji: '下'
+		},
+		{
+			title: 'Card',
+			description: 'Card container with header/title/description/content/footer',
+			href: '/components/card',
+			kanji: '札'
+		},
+		{
+			title: 'Image',
+			description: 'Image with lazy loading, placeholder, and error fallback',
+			href: '/components/image',
+			kanji: '画'
+		},
+		{
+			title: 'List',
+			description: 'Semantic ul/ol with explicit list role and ListItem',
+			href: '/components/list',
+			kanji: '列'
+		},
+		{
+			title: 'DataList',
+			description: 'Semantic dl/dt/dd for key-value pairs',
+			href: '/components/data-list',
+			kanji: '表'
+		},
+		{
+			title: 'InputGroup',
+			description: 'Input with prefix and suffix addon snippets',
+			href: '/components/input-group',
+			kanji: '組'
+		},
+		{
+			title: 'Rating',
+			description: 'Star rating with keyboard nav and aria-valuetext',
+			href: '/components/rating',
+			kanji: '星'
 		}
 	];
 

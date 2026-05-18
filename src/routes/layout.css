@@ -189,6 +189,19 @@ select,
 	display: none;
 }
 
+/* Strip stock chrome from text-like inputs */
+[type='text'],
+[type='email'],
+[type='password'],
+[type='tel'],
+[type='url'] {
+	appearance: none;
+	-webkit-appearance: none;
+	border: 0;
+	background: transparent;
+	outline: none;
+}
+
 /* Disable stock browser focus ring on form controls — apps style their own */
 input:focus,
 input:focus-visible,
