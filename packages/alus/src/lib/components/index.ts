@@ -140,6 +140,7 @@ export {
 } from './display/tree-view/index.js';
 export type { TreeViewContext } from './display/tree-view/index.js';
 export { Timeline, TimelineItem } from './display/timeline/index.js';
+export { Compare } from './display/compare/index.js';
 export {
 	Carousel,
 	CarouselSlides,
@@ -206,6 +207,20 @@ export {
 	setDropdownContext
 } from './overlay/dropdown/index.js';
 export type { DropdownContext, DropdownItemEntry } from './overlay/dropdown/index.js';
+
+// Interactive Components
+export { Sortable } from './interactive/sortable/index.js';
+export { Swipeable } from './interactive/swipeable/index.js';
+export type { SwipeDirection } from './interactive/swipeable/index.js';
+export { Resizable } from './interactive/resizable/index.js';
+export {
+	SplitView,
+	SplitViewPane,
+	SplitViewHandle,
+	getSplitViewContext,
+	setSplitViewContext
+} from './interactive/split-view/index.js';
+export type { SplitViewContext } from './interactive/split-view/index.js';
 
 // Utility Components
 export { VisuallyHidden } from './utility/visually-hidden/index.js';

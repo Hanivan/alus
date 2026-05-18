@@ -310,6 +310,36 @@
 			description: 'Cmd+K command palette with search, groups, and keyboard nav',
 			href: '/components/command-menu',
 			kanji: '命'
+		},
+		{
+			title: 'Sortable',
+			description: 'Drag-and-drop list with keyboard reorder and roving tabindex',
+			href: '/components/sortable',
+			kanji: '並'
+		},
+		{
+			title: 'Swipeable',
+			description: 'Pointer swipe handler with direction, threshold, and velocity',
+			href: '/components/swipeable',
+			kanji: '掃'
+		},
+		{
+			title: 'Resizable',
+			description: 'Resizable container with draggable handle and keyboard step',
+			href: '/components/resizable',
+			kanji: '伸'
+		},
+		{
+			title: 'SplitView',
+			description: 'Two-pane split view with separator role and keyboard resize',
+			href: '/components/split-view',
+			kanji: '分'
+		},
+		{
+			title: 'Compare',
+			description: 'Compare slider revealing one layer over another with role=slider',
+			href: '/components/compare',
+			kanji: '比'
 		}
 	];
 
