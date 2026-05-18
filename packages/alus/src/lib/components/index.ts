@@ -35,6 +35,12 @@ export { IconButton } from './form/icon-button/index.js';
 export { ToggleButton } from './form/toggle-button/index.js';
 export { AutoComplete } from './form/auto-complete/index.js';
 export type { AutoCompleteOption } from './form/auto-complete/index.js';
+export { Calendar } from './form/calendar/index.js';
+export type { CalendarDay, CalendarView } from './form/calendar/index.js';
+export { DatePicker } from './form/date-picker/index.js';
+export { TimePicker } from './form/time-picker/index.js';
+export type { Time } from './form/time-picker/index.js';
+export { ColorPicker } from './form/color-picker/index.js';
 
 // Navigation Components
 export {
@@ -284,6 +290,7 @@ export type { DraggableEvent } from './interactive/draggable/index.js';
 export { Droppable } from './interactive/droppable/index.js';
 export type { DroppableEvent } from './interactive/droppable/index.js';
 export { InfiniteScroll } from './interactive/infinite-scroll/index.js';
+export { VirtualList } from './interactive/virtual-list/index.js';
 
 // Utility Components
 export { VisuallyHidden } from './utility/visually-hidden/index.js';

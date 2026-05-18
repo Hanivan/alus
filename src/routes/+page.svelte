@@ -508,6 +508,36 @@
 			description: 'Combobox input with filtered suggestions and aria-activedescendant',
 			href: '/components/auto-complete',
 			kanji: '補'
+		},
+		{
+			title: 'Calendar',
+			description: 'Month grid with full keyboard nav, locale weekdays, min/max bounds',
+			href: '/components/calendar',
+			kanji: '暦'
+		},
+		{
+			title: 'DatePicker',
+			description: 'Input button + Calendar popover with Floating UI positioning',
+			href: '/components/date-picker',
+			kanji: '日'
+		},
+		{
+			title: 'TimePicker',
+			description: 'Hour/minute(/second) inputs with ArrowUp/Down stepping and AM/PM toggle',
+			href: '/components/time-picker',
+			kanji: '時'
+		},
+		{
+			title: 'ColorPicker',
+			description: 'Native color input + hex text + optional swatch grid',
+			href: '/components/color-picker',
+			kanji: '色'
+		},
+		{
+			title: 'VirtualList',
+			description: 'Windowed scrolling for huge lists with fixed itemHeight and overscan',
+			href: '/components/virtual-list',
+			kanji: '虚'
 		}
 	];
 

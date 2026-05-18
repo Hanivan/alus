@@ -67,6 +67,7 @@
 	},
 	"dependencies": {
 		"@floating-ui/dom": "^1.7.6",
+		"@internationalized/date": "^3.12.1",
 		"runed": "^0.37.1"
 	},
 	"devDependencies": {

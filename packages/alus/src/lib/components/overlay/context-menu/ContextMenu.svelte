@@ -192,6 +192,7 @@
 				{#if it.separator}
 					<div role="separator" class={separatorClass}></div>
 				{:else if item}
+					<!-- svelte-ignore a11y_click_events_have_key_events -->
 					<div
 						role="menuitem"
 						tabindex={highlighted === i ? 0 : -1}
