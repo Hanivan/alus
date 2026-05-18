@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.2](https://github.com/Hanivan/alus/compare/v0.1.1...v0.1.2) (2026-05-18)
+
+### Documentation
+
+* Update contributing guidelines and README for component structure and accessibility ([ae6e277](https://github.com/Hanivan/alus/commit/ae6e2778f0b65554e34a93cf7fc9bc465bba758f))
+
 ## 0.1.1 (2026-05-18)
 
 ### Features
