@@ -394,6 +394,42 @@
 			description: 'Stack, Flex, Grid, Container, Spacer, Columns — structure primitives',
 			href: '/components/layout',
 			kanji: '構'
+		},
+		{
+			title: 'Frame',
+			description: 'Fixed-size container with overflow control and min/max bounds',
+			href: '/components/frame',
+			kanji: '枠'
+		},
+		{
+			title: 'Timestamp',
+			description: 'Semantic <time> with relative formatting via Intl.RelativeTimeFormat',
+			href: '/components/timestamp',
+			kanji: '時'
+		},
+		{
+			title: 'CodeBlock',
+			description: 'Pre/code wrapper with optional line numbers and copy action snippet',
+			href: '/components/code-block',
+			kanji: '码'
+		},
+		{
+			title: 'StatCard',
+			description: 'Metric tile with label, value, trend indicator, and change snippet',
+			href: '/components/stat-card',
+			kanji: '数'
+		},
+		{
+			title: 'Banner',
+			description: 'Page-level alert strip with variants, dismissible, and role switching',
+			href: '/components/banner',
+			kanji: '幕'
+		},
+		{
+			title: 'InlineMessage',
+			description: 'Inline form-field message with auto role=alert for error/warning',
+			href: '/components/inline-message',
+			kanji: '伝'
 		}
 	];
 
