@@ -388,6 +388,12 @@
 			description: 'Highlighted info box with title, icon, variants, and role=note',
 			href: '/components/callout',
 			kanji: '枠'
+		},
+		{
+			title: 'Layout',
+			description: 'Stack, Flex, Grid, Container, Spacer, Columns — structure primitives',
+			href: '/components/layout',
+			kanji: '構'
 		}
 	];
 

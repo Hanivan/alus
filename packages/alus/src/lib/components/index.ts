@@ -232,6 +232,14 @@ export {
 } from './overlay/dropdown/index.js';
 export type { DropdownContext, DropdownItemEntry } from './overlay/dropdown/index.js';
 
+// Layout Components
+export { Stack } from './layout/stack/index.js';
+export { Flex } from './layout/flex/index.js';
+export { Grid } from './layout/grid/index.js';
+export { Container } from './layout/container/index.js';
+export { Spacer } from './layout/spacer/index.js';
+export { Columns } from './layout/columns/index.js';
+
 // Interactive Components
 export { Sortable } from './interactive/sortable/index.js';
 export { Swipeable } from './interactive/swipeable/index.js';
