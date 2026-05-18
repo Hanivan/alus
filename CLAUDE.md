@@ -1,17 +1,17 @@
 ## Project Overview
 
-**Alus** is a monorepo containing an unstyled, accessible component library built with Svelte 5 runes mode.
+**alus-ui** is a monorepo containing an unstyled, accessible Svelte 5 component library. Published name: `alus-ui` (folder is `packages/alus/`, kept for historical reasons).
 
 ### Repository Structure
 
 This is a **pnpm workspace** with two main packages:
 
-- **Root** (`/`) - SvelteKit showcase/demo application demonstrating the Alus components
-- **packages/alus** - The core component library (publishable package)
+- **Root** (`/`) - SvelteKit showcase/demo application demonstrating the alus-ui components
+- **packages/alus** - The core component library, published as `alus-ui`
 
 ### Component Library Philosophy
 
-The Alus library provides **unstyled, accessible UI primitives** that:
+The alus-ui library provides **unstyled, accessible UI primitives** that:
 
 - Have no default styling (complete styling freedom with Tailwind CSS)
 - Include proper ARIA attributes and semantic HTML
@@ -43,7 +43,7 @@ Date components use **`@internationalized/date`** for locale/timezone/non-Gregor
 
 - **Language**: TypeScript
 - **Package Manager**: pnpm (workspace monorepo)
-- **Framework**: SvelteKit (root), Svelte Package (alus library)
+- **Framework**: SvelteKit (root), Svelte Package (alus-ui library)
 - **Add-ons**: prettier, eslint, vitest, tailwindcss, sveltekit-adapter, mcp
 - **Deployment**: Netlify adapter
 - **Styling**: Tailwind CSS v4 with @tailwindcss/vite, `@tailwindcss/forms` + `@tailwindcss/typography` plugins

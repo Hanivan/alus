@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { Switch, Label } from 'alus';
+	import { Switch, Label } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { Switch } from 'alus';
+	import { Switch } from 'alus-ui';
 	let on = $state(true);
 <\/script>
 

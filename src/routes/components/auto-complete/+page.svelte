@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft, MapPin, MagnifyingGlass, CircleNotch } from 'phosphor-svelte';
-	import { AutoComplete, type AutoCompleteOption } from 'alus';
+	import { AutoComplete, type AutoCompleteOption } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { AutoComplete, type AutoCompleteOption } from 'alus';
+	import { AutoComplete, type AutoCompleteOption } from 'alus-ui';
 	const options: AutoCompleteOption<string>[] = [
 		{ value: 'tyo', label: 'Tokyo' },
 		{ value: 'kyt', label: 'Kyoto' }

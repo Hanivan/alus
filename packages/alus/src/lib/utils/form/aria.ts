@@ -40,7 +40,7 @@ function buildDescribedBy(descriptionId?: string, errorId?: string): string | un
  * @example
  * ```svelte
  * <script>
- *   import { getFieldAriaAttrs } from 'alus/utils/form';
+ *   import { getFieldAriaAttrs } from 'alus-ui/utils/form';
  *
  *   const aria = getFieldAriaAttrs({
  *     descriptionId: 'help-id',

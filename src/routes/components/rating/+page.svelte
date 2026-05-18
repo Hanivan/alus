@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft, Star } from 'phosphor-svelte';
-	import { Rating } from 'alus';
+	import { Rating } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { Rating } from 'alus';
+	import { Rating } from 'alus-ui';
 	let score = $state(3);
 <\/script>
 

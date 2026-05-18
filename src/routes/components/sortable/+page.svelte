@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, DotsSixVertical } from 'phosphor-svelte';
-	import { Sortable } from 'alus';
+	import { Sortable } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Sortable bind:items={tasks} getKey={(t) => t.id} aria-label="Tasks">

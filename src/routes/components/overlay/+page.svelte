@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { Overlay, Button } from 'alus';
+	import { Overlay, Button } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { Overlay, Button } from 'alus';
+	import { Overlay, Button } from 'alus-ui';
 	let open = $state(false);
 <\/script>
 

@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft, Lock, WarningCircle, CheckCircle } from 'phosphor-svelte';
-	import { TimePicker, type Time } from 'alus';
+	import { TimePicker, type Time } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { TimePicker, type Time } from 'alus';
+	import { TimePicker, type Time } from 'alus-ui';
 	let t = $state<Time | null>({ hour: 9, minute: 30 });
 <\/script>
 

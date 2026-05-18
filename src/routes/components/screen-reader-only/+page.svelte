@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, Trash, MagnifyingGlass } from 'phosphor-svelte';
-	import { ScreenReaderOnly } from 'alus';
+	import { ScreenReaderOnly } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<button>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { Progress } from 'alus';
+	import { Progress } from 'alus-ui';
 	import { onMount } from 'svelte';
 	import DemoFooter from '$components/DemoFooter.svelte';
 

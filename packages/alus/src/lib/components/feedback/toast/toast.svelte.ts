@@ -1,7 +1,7 @@
 import { getContext, setContext, untrack } from 'svelte';
 import { SvelteMap } from 'svelte/reactivity';
 
-const KEY = Symbol('alus:toaster');
+const KEY = Symbol('alus-ui:toaster');
 
 export type ToastType = 'polite' | 'assertive';
 export type HoverBehavior = 'pause' | 'pause-all' | null;

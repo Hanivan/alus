@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { Calendar } from 'alus';
+	import { Calendar } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { Calendar } from 'alus';
+	import { Calendar } from 'alus-ui';
 	import { type DateValue, today, getLocalTimeZone } from '@internationalized/date';
 	let value = $state<DateValue | null>(null);
 <\/script>

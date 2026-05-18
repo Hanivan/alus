@@ -1,7 +1,7 @@
 <script lang="ts" module>
 	import { getContext, setContext } from 'svelte';
 
-	const KEY = Symbol('alus:modal');
+	const KEY = Symbol('alus-ui:modal');
 
 	export interface ModalContext {
 		open: () => boolean;

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { Popover, PopoverTrigger, PopoverContent } from 'alus';
+	import { Popover, PopoverTrigger, PopoverContent } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Popover>

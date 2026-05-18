@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft, CaretRight, CaretDoubleLeft, CaretDoubleRight } from 'phosphor-svelte';
-	import { Pagination } from 'alus';
+	import { Pagination } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { Pagination } from 'alus';
+	import { Pagination } from 'alus-ui';
 	let page = $state(1);
 <\/script>
 

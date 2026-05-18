@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { Frame } from 'alus';
+	import { Frame } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Frame width={280} height={160} overflow="auto">

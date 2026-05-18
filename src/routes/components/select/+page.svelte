@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft, CaretDown, Check } from 'phosphor-svelte';
-	import { Select, SelectTrigger, SelectContent, SelectOption } from 'alus';
+	import { Select, SelectTrigger, SelectContent, SelectOption } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { Select, SelectTrigger, SelectContent, SelectOption } from 'alus';
+	import { Select, SelectTrigger, SelectContent, SelectOption } from 'alus-ui';
 	let value = $state('');
 <\/script>
 

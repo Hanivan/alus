@@ -8,7 +8,7 @@ export interface TabsContext {
 	baseId: string;
 }
 
-const KEY = Symbol('alus-tabs');
+const KEY = Symbol('alus-ui-tabs');
 
 export function setTabsContext(ctx: TabsContext) {
 	setContext(KEY, ctx);
@@ -20,5 +20,5 @@ export function getTabsContext(): TabsContext {
 	return ctx;
 }
 
-export const TAB_LIST_ATTR = 'data-alus-tab-list';
-export const TAB_ATTR = 'data-alus-tab';
+export const TAB_LIST_ATTR = 'data-alus-ui-tab-list';
+export const TAB_ATTR = 'data-alus-ui-tab';

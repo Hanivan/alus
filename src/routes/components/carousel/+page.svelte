@@ -7,7 +7,7 @@
 		CarouselPrev,
 		CarouselNext,
 		CarouselIndicators
-	} from 'alus';
+	} from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Carousel bind:index loop autoplay={3000} aria-label="Four seasons">

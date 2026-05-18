@@ -4,7 +4,7 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "concurrently --kill-others \"pnpm --filter alus dev\" \"pnpm dev:showcase\"",
+		"dev": "concurrently --kill-others \"pnpm --filter alus-ui dev\" \"pnpm dev:showcase\"",
 		"dev:showcase": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
@@ -18,7 +18,7 @@
 	},
 	"dependencies": {
 		"@internationalized/date": "^3.12.1",
-		"alus": "workspace:*",
+		"alus-ui": "workspace:*",
 		"phosphor-svelte": "^3.1.0",
 		"runed": "^0.37.1"
 	},

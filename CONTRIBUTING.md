@@ -1,6 +1,6 @@
-# Contributing to Alus
+# Contributing to alus-ui
 
-Thank you for your interest in contributing to Alus! This document provides guidelines and instructions for contributing to the project.
+Thank you for your interest in contributing to alus-ui! This document provides guidelines and instructions for contributing to the project.
 
 ## \(^o^)/ Getting Started
 
@@ -324,7 +324,7 @@ Contributors will be:
 - Credited in release notes
 - Acknowledged in significant contributions
 
-Thank you for contributing to Alus! (♡˙︶˙♡)
+Thank you for contributing to alus-ui! (♡˙︶˙♡)
 
 ## (・\_・) Additional Resources
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { Label, Input } from 'alus';
+	import { Label, Input } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Label for="email" required>Email</Label>

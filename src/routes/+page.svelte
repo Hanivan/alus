@@ -8,7 +8,7 @@
 		CommandMenuItem,
 		CommandMenuGroup,
 		CommandMenuEmpty
-	} from 'alus';
+	} from 'alus-ui';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 

@@ -21,7 +21,7 @@ export interface FormFieldState<T = string> {
  * @example
  * ```svelte
  * <script>
- *   import { createFormField } from 'alus/utils/form';
+ *   import { createFormField } from 'alus-ui/utils/form';
  *
  *   let email = createFormField('');
  * </script>
@@ -64,7 +64,7 @@ export interface FormState<T extends Record<string, unknown>> {
  * @example
  * ```svelte
  * <script>
- *   import { createFormState } from 'alus/utils/form';
+ *   import { createFormState } from 'alus-ui/utils/form';
  *
  *   let form = createFormState({
  *     email: '',

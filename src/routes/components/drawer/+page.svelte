@@ -7,7 +7,7 @@
 		DrawerTitle,
 		DrawerDescription,
 		DrawerClose
-	} from 'alus';
+	} from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Drawer side="right">

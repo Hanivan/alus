@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft, X, CaretLeft as Prev, CaretRight as Next } from 'phosphor-svelte';
-	import { Lightbox, type LightboxImage } from 'alus';
+	import { Lightbox, type LightboxImage } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { Lightbox, type LightboxImage } from 'alus';
+	import { Lightbox, type LightboxImage } from 'alus-ui';
 	const images: LightboxImage[] = [
 		{ src: '/a.jpg', alt: 'First' },
 		{ src: '/b.jpg', alt: 'Second' }

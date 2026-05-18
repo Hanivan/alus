@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, Heart, Bell, Gear, Trash, Plus, Star } from 'phosphor-svelte';
-	import { IconButton } from 'alus';
+	import { IconButton } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<IconButton aria-label="Delete item" onclick={() => remove()}>

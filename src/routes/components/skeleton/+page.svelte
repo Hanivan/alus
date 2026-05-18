@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { Skeleton } from 'alus';
+	import { Skeleton } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Skeleton class="block h-4 w-1/3 animate-pulse rounded bg-gray-200" />

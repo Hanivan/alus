@@ -9,13 +9,13 @@ Reusable utilities for form field management and accessibility.
 Generate consistent, accessible IDs for form fields.
 
 ```typescript
-import { createFieldIds, createFieldGroupIds } from 'alus/utils/form';
+import { createFieldIds, createFieldGroupIds } from 'alus-ui/utils/form';
 
 const ids = createFieldIds('email');
-// { label: 'alus-email-abc123-label', input: 'alus-email-abc123-input', ... }
+// { label: 'alus-ui-email-abc123-label', input: 'alus-ui-email-abc123-input', ... }
 
 const groupIds = createFieldGroupIds('password');
-// { group: 'alus-password-abc123-group', label: 'alus-password-abc123-label', ... }
+// { group: 'alus-ui-password-abc123-group', label: 'alus-ui-password-abc123-label', ... }
 ```
 
 ### `aria.ts` - ARIA Attributes
@@ -23,7 +23,7 @@ const groupIds = createFieldGroupIds('password');
 Build proper ARIA attributes for form fields.
 
 ```typescript
-import { getFieldAriaAttrs, hasError, getErrorMessage } from 'alus/utils/form';
+import { getFieldAriaAttrs, hasError, getErrorMessage } from 'alus-ui/utils/form';
 
 const aria = getFieldAriaAttrs({
 	descriptionId: 'help-text',
@@ -41,7 +41,7 @@ getErrorMessage('Some error'); // 'Some error'
 Create reactive form field and form state.
 
 ```typescript
-import { createFormField, createFormState, hasFormErrors, isFormValid } from 'alus/utils/form';
+import { createFormField, createFormState, hasFormErrors, isFormValid } from 'alus-ui/utils/form';
 
 // Single field
 let email = createFormField('');
@@ -65,8 +65,8 @@ isFormValid(form); // true if valid and all touched
 
 ```svelte
 <script lang="ts">
-	import { Input } from 'alus';
-	import { createFieldIds } from 'alus/utils/form';
+	import { Input } from 'alus-ui';
+	import { createFieldIds } from 'alus-ui/utils/form';
 
 	const ids = createFieldIds('email');
 
@@ -96,8 +96,8 @@ isFormValid(form); // true if valid and all touched
 
 ```svelte
 <script lang="ts">
-	import { Input, Checkbox } from 'alus';
-	import { createFormState, isFormValid, hasFormErrors } from 'alus/utils/form';
+	import { Input, Checkbox } from 'alus-ui';
+	import { createFormState, isFormValid, hasFormErrors } from 'alus-ui/utils/form';
 
 	let form = createFormState({
 		email: '',

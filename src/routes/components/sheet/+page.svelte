@@ -7,7 +7,7 @@
 		SheetTitle,
 		SheetDescription,
 		SheetClose
-	} from 'alus';
+	} from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Sheet side="bottom">

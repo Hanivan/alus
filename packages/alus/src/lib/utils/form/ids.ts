@@ -23,7 +23,7 @@ export interface FieldIds {
  * @example
  * ```svelte
  * <script>
- *   import { createFieldIds } from 'alus/utils/form';
+ *   import { createFieldIds } from 'alus-ui/utils/form';
  *
  *   const ids = createFieldIds('email');
  * </script>
@@ -51,7 +51,7 @@ export function createFieldIds(fieldName: string): FieldIds {
  * @example
  * ```svelte
  * const ids = createFieldGroupIds('password');
- * // { group: 'alus-password-xyz-group', field: 'alus-password-xyz-field', ... }
+ * // { group: 'alus-ui-password-xyz-group', field: 'alus-ui-password-xyz-field', ... }
  * ```
  */
 export function createFieldGroupIds(groupName: string): FieldIds & { group: string } {

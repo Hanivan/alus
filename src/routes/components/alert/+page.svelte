@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, Info, CheckCircle, Warning, XCircle } from 'phosphor-svelte';
-	import { Alert } from 'alus';
+	import { Alert } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Alert variant="success" role="status" dismissible>

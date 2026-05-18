@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, Plus } from 'phosphor-svelte';
-	import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from 'alus';
+	import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Accordion type="single">

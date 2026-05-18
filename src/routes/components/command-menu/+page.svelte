@@ -21,7 +21,7 @@
 		CommandMenuItem,
 		CommandMenuGroup,
 		CommandMenuEmpty
-	} from 'alus';
+	} from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<CommandMenu shortcut="$mod+k">

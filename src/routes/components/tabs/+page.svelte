@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { Tabs, TabList, Tab, TabPanel } from 'alus';
+	import { Tabs, TabList, Tab, TabPanel } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Tabs value="overview">

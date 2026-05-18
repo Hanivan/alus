@@ -9,7 +9,7 @@
 		TableRow,
 		TableHeader,
 		TableCell
-	} from 'alus';
+	} from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Table>

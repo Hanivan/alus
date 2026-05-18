@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { Stack, Flex, Grid, Container, Spacer, Columns } from 'alus';
+	import { Stack, Flex, Grid, Container, Spacer, Columns } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Stack gap="1rem">

@@ -14,7 +14,7 @@ let counter = 0;
  * @example
  * ```svelte
  * <script>
- *   import { generateId } from 'alus';
+ *   import { generateId } from 'alus-ui';
  *
  *   const labelId = generateId('label');
  *   const errorId = generateId('error');

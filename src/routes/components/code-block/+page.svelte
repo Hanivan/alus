@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, Copy, Check } from 'phosphor-svelte';
-	import { CodeBlock } from 'alus';
+	import { CodeBlock } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const codeSample = `<CodeBlock

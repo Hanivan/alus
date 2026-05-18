@@ -14,7 +14,7 @@
 
 ```svelte
 <script>
-	import { Button, Input, CONSTANTS } from 'alus';
+	import { Button, Input, CONSTANTS } from 'alus-ui';
 </script>
 
 <Button
@@ -37,8 +37,8 @@
 
 ```svelte
 <script>
-	import { Input, CONSTANTS } from 'alus';
-	import { generateId, labelAttrs } from 'alus/a11y';
+	import { Input, CONSTANTS } from 'alus-ui';
+	import { generateId, labelAttrs } from 'alus-ui/a11y';
 
 	const labelId = generateId('label');
 	let email = $state('');
@@ -61,8 +61,8 @@
 
 ```svelte
 <script>
-	import { Input, CONSTANTS } from 'alus';
-	import { generateId, labelAttrs } from 'alus/a11y';
+	import { Input, CONSTANTS } from 'alus-ui';
+	import { generateId, labelAttrs } from 'alus-ui/a11y';
 
 	const labelId = generateId('label');
 	let password = $state('');
@@ -84,8 +84,8 @@
 
 ```svelte
 <script>
-	import { Input, CONSTANTS } from 'alus';
-	import { generateId, labelAttrs } from 'alus/a11y';
+	import { Input, CONSTANTS } from 'alus-ui';
+	import { generateId, labelAttrs } from 'alus-ui/a11y';
 
 	const labelId = generateId('label');
 	let phone = $state('');
@@ -107,8 +107,8 @@
 
 ```svelte
 <script>
-	import { Input, CONSTANTS } from 'alus';
-	import { generateId, labelAttrs } from 'alus/a11y';
+	import { Input, CONSTANTS } from 'alus-ui';
+	import { generateId, labelAttrs } from 'alus-ui/a11y';
 
 	const firstNameId = generateId('label');
 	const lastNameId = generateId('label');
@@ -148,7 +148,7 @@
 
 ```svelte
 <script>
-	import { Button, CONSTANTS } from 'alus';
+	import { Button, CONSTANTS } from 'alus-ui';
 </script>
 
 <Button
@@ -164,8 +164,8 @@
 
 ```svelte
 <script>
-	import { Button, CONSTANTS } from 'alus';
-	import { interactiveStateAttrs } from 'alus/a11y';
+	import { Button, CONSTANTS } from 'alus-ui';
+	import { interactiveStateAttrs } from 'alus-ui/a11y';
 
 	let isPressed = $state(false);
 </script>
@@ -187,8 +187,8 @@
 
 ```svelte
 <script>
-  import { Button, CONSTANTS, type AriaHaspopup } from 'alus';
-  import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from 'alus/a11y';
+  import { Button, CONSTANTS, type AriaHaspopup } from 'alus-ui';
+  import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from 'alus-ui/a11y';
 
   let isOpen = $state(false);
   const menuId = 'options-menu';
@@ -221,8 +221,8 @@
 
 ```svelte
 <script>
-	import { Input, CONSTANTS } from 'alus';
-	import { labelAttrs, widgetAttrs } from 'alus/a11y';
+	import { Input, CONSTANTS } from 'alus-ui';
+	import { labelAttrs, widgetAttrs } from 'alus-ui/a11y';
 
 	let searchQuery = $state('');
 	let results = $state([]);
@@ -277,7 +277,7 @@ import type {
 	AriaHaspopup,
 	AriaLive,
 	AriaOrientation
-} from 'alus';
+} from 'alus-ui';
 
 // Use in your own components
 function createInput(type: InputType) {
@@ -288,7 +288,7 @@ function createInput(type: InputType) {
 ## Type Exports for Extension
 
 ```ts
-import type { FormFieldConfig, LabelConfig, ValidationConfig } from 'alus';
+import type { FormFieldConfig, LabelConfig, ValidationConfig } from 'alus-ui';
 
 // Extend for your custom components
 interface MyCustomFieldConfig extends FormFieldConfig {

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { Fieldset, Input } from 'alus';
+	import { Fieldset, Input } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Fieldset legend="Contact details" class="rounded border-2 border-(--indigo-dye)/20 p-4">

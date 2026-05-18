@@ -1,4 +1,4 @@
-# Alus - Svelte 5 Component Library
+# alus-ui - Svelte 5 Component Library
 
 > **Unstyled, accessible Svelte 5 components** with full keyboard navigation and WCAG 2.1 AA compliance
 
@@ -6,9 +6,9 @@
 [![Svelte 5](https://img.shields.io/badge/Svelte-5.55-orange)](https://svelte.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue)](https://www.typescriptlang.org/)
 
-## (☆^O^☆) What is Alus?
+## (☆^O^☆) What is alus-ui?
 
-Alus is a monorepo containing:
+alus-ui is a monorepo containing:
 
 - **(^\_^) Component Library** (`packages/alus`) - Unstyled, accessible UI components
 - **(^\_^) Showcase App** (`/`) - Live demo and documentation site
@@ -28,16 +28,16 @@ Alus is a monorepo containing:
 
 ```bash
 # Install the component library
-npm install alus
+npm install alus-ui
 # or
-pnpm add alus
+pnpm add alus-ui
 ```
 
 ### Usage
 
 ```svelte
 <script lang="ts">
-	import { Button, Input } from 'alus';
+	import { Button, Input } from 'alus-ui';
 
 	let name = $state('');
 </script>
@@ -138,11 +138,11 @@ pnpm format           # Format code with Prettier
 
 ## (☆^\_☆) Styling with Tailwind CSS
 
-Alus components are unstyled and designed to work with Tailwind CSS:
+alus-ui components are unstyled and designed to work with Tailwind CSS:
 
 ```svelte
 <script lang="ts">
-	import { Button } from 'alus';
+	import { Button } from 'alus-ui';
 </script>
 
 <!-- Primary button -->
@@ -162,7 +162,7 @@ Alus components are unstyled and designed to work with Tailwind CSS:
 
 ## (°_°) Accessibility Features
 
-Every Alus component includes:
+Every alus-ui component includes:
 
 - (^\_^) Semantic HTML elements
 - (^\_^) ARIA attributes and roles
@@ -219,7 +219,7 @@ pnpm lint
 
 ## (>\_<) Publishing
 
-The `alus` package is published to npm from `packages/alus/`.
+The `alus-ui` package is published to npm from `packages/alus/`.
 
 ```bash
 cd packages/alus
@@ -253,7 +253,7 @@ Built with:
 ## (º_º) Links
 
 - [GitHub Repository](https://github.com/Hanivan/alus)
-- [npm Package](https://www.npmjs.com/package/alus)
+- [npm Package](https://www.npmjs.com/package/alus-ui)
 - [Component Library](./packages/alus/README.md)
 - [Component Roadmap](./docs/todos/ui-components-roadmap.md)
 - [Issue Tracker](https://github.com/Hanivan/alus/issues)

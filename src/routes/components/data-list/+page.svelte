@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { DataList, DataListTerm, DataListDescription } from 'alus';
+	import { DataList, DataListTerm, DataListDescription } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<DataList>

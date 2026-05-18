@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { Form, Input, Textarea, Button, FieldError } from 'alus';
+	import { Form, Input, Textarea, Button, FieldError } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Form onsubmit={(data) => console.log(data)} class="space-y-3">

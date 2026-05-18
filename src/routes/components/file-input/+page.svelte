@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, UploadSimple } from 'phosphor-svelte';
-	import { FileInput, Label } from 'alus';
+	import { FileInput, Label } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<FileInput

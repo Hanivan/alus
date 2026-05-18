@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, CaretRight, House } from 'phosphor-svelte';
-	import { Breadcrumb, BreadcrumbItem, BreadcrumbSeparator } from 'alus';
+	import { Breadcrumb, BreadcrumbItem, BreadcrumbSeparator } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Breadcrumb>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from 'alus';
+	import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Card>

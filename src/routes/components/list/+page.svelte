@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, Circle } from 'phosphor-svelte';
-	import { List, ListItem } from 'alus';
+	import { List, ListItem } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<List>

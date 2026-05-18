@@ -1,7 +1,7 @@
 <script lang="ts" module>
 	import { getContext, setContext } from 'svelte';
 
-	const KEY = Symbol('alus:popover');
+	const KEY = Symbol('alus-ui:popover');
 
 	export interface PopoverContext {
 		open: () => boolean;

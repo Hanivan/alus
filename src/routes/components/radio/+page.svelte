@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft, Check } from 'phosphor-svelte';
-	import { Radio } from 'alus';
+	import { Radio } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { Radio } from 'alus';
+	import { Radio } from 'alus-ui';
 	let choice = $state('email');
 <\/script>
 

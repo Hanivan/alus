@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, CaretDown } from 'phosphor-svelte';
-	import { Dropdown, DropdownTrigger, DropdownContent, DropdownItem } from 'alus';
+	import { Dropdown, DropdownTrigger, DropdownContent, DropdownItem } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Dropdown>

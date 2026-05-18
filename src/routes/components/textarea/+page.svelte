@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { Textarea } from 'alus';
+	import { Textarea } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { Textarea } from 'alus';
+	import { Textarea } from 'alus-ui';
 	let bio = $state('');
 <\/script>
 

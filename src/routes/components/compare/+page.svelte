@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, CaretLeft as Left, CaretRight as Right } from 'phosphor-svelte';
-	import { Compare } from 'alus';
+	import { Compare } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Compare bind:position aria-label="Compare winter and spring">

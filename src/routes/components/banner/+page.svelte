@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, Info, CheckCircle, Warning, XCircle, Megaphone } from 'phosphor-svelte';
-	import { Banner, Button } from 'alus';
+	import { Banner, Button } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Banner variant="warning" role="alert" dismissible bind:open={open}>

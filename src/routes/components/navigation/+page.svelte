@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, House, Compass, BookOpen, Gear } from 'phosphor-svelte';
-	import { Navigation } from 'alus';
+	import { Navigation } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Navigation aria-label="Primary">

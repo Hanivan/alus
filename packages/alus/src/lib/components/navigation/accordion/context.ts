@@ -20,8 +20,8 @@ export interface AccordionItemContext {
 	readonly contentId: string;
 }
 
-const ROOT = Symbol('alus-accordion-root');
-const ITEM = Symbol('alus-accordion-item');
+const ROOT = Symbol('alus-ui-accordion-root');
+const ITEM = Symbol('alus-ui-accordion-item');
 
 export function setAccordionRoot(ctx: AccordionRootContext) {
 	setContext(ROOT, ctx);

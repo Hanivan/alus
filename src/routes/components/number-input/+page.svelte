@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft, Plus, Minus } from 'phosphor-svelte';
-	import { NumberInput, Label } from 'alus';
+	import { NumberInput, Label } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { NumberInput } from 'alus';
+	import { NumberInput } from 'alus-ui';
 	let qty = $state(1);
 <\/script>
 

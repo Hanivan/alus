@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft, Lock, Drop } from 'phosphor-svelte';
-	import { ColorPicker } from 'alus';
+	import { ColorPicker } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { ColorPicker } from 'alus';
+	import { ColorPicker } from 'alus-ui';
 	let c = $state('#c84b31');
 <\/script>
 

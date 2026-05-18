@@ -1,7 +1,7 @@
 <script lang="ts" module>
 	import { getContext, setContext } from 'svelte';
 
-	const KEY = Symbol('alus:radio-group');
+	const KEY = Symbol('alus-ui:radio-group');
 
 	export interface RadioGroupContext {
 		name: () => string;

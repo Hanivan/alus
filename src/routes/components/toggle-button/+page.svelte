@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft, TextB, TextItalic, TextUnderline, Sun, Moon } from 'phosphor-svelte';
-	import { ToggleButton } from 'alus';
+	import { ToggleButton } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { ToggleButton } from 'alus';
+	import { ToggleButton } from 'alus-ui';
 	let bold = $state(false);
 <\/script>
 

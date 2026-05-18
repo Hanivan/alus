@@ -31,7 +31,7 @@
 	let {
 		children,
 		data,
-		type = 'application/x-alus',
+		type = 'application/x-alus-ui',
 		disabled = false,
 		effect = 'move',
 		as = 'div',

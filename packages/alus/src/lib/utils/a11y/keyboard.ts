@@ -8,7 +8,7 @@
  * @example
  * ```svelte
  * <script>
- *   import { keyboard } from 'alus';
+ *   import { keyboard } from 'alus-ui';
  *
  *   function handleKeydown(e: KeyboardEvent) {
  *     if (keyboard.isActivationKey(e)) {

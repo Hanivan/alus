@@ -1,7 +1,7 @@
 <script lang="ts" module>
 	import { getContext, setContext } from 'svelte';
 
-	const KEY = Symbol('alus:menu');
+	const KEY = Symbol('alus-ui:menu');
 
 	export interface MenuItemEntry {
 		el: HTMLElement;

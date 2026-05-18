@@ -1,13 +1,13 @@
-# Alus
+# alus-ui
 
 > **Unstyled, accessible Svelte 5 components** with full keyboard navigation and WCAG 2.1 AA compliance
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Svelte 5](https://img.shields.io/badge/Svelte-5.55-orange)](https://svelte.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue)](https://www.typescriptlang.org/)
-[![npm package](https://img.shields.io/badge/npm-alus-critical)](https://www.npmjs.com/package/alus)
+[![npm package](https://img.shields.io/badge/npm-alus--ui-critical)](https://www.npmjs.com/package/alus-ui)
 
-Alus provides a set of primitive UI components that are:
+alus-ui provides a set of primitive UI components that are:
 
 - **Unstyled** - Complete styling freedom with Tailwind CSS or any CSS framework
 - **Accessible** - WCAG 2.1 AA compliant with proper ARIA attributes
@@ -18,18 +18,18 @@ Alus provides a set of primitive UI components that are:
 ## Installation
 
 ```bash
-npm install alus
+npm install alus-ui
 # or
-pnpm add alus
+pnpm add alus-ui
 # or
-yarn add alus
+yarn add alus-ui
 ```
 
 ## Quick Start
 
 ```svelte
 <script lang="ts">
-	import { Button, Input } from 'alus';
+	import { Button, Input } from 'alus-ui';
 
 	let name = $state('');
 </script>
@@ -80,7 +80,7 @@ yarn add alus
 
 ```svelte
 <script lang="ts">
-	import { Button } from 'alus';
+	import { Button } from 'alus-ui';
 </script>
 
 <Button class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700" aria-label="Submit form">
@@ -92,7 +92,7 @@ yarn add alus
 
 ```svelte
 <script lang="ts">
-	import { Input } from 'alus';
+	import { Input } from 'alus-ui';
 
 	let email = $state('');
 	let emailError = $derived.by(() => {
@@ -208,6 +208,58 @@ pnpm build
 pnpm test
 ```
 
+## Releasing
+
+Releases are driven by [release-it](https://github.com/release-it/release-it) + `@release-it/conventional-changelog`. Versions auto-bump from [Conventional Commits](https://www.conventionalcommits.org/) (`feat:` → minor, `fix:` → patch, `feat!:` / `BREAKING CHANGE:` → major).
+
+### Prerequisites
+
+- Logged in to npm: `npm whoami` should print your username
+- `GITHUB_TOKEN` env var set (else release-it falls back to the web UI for the GitHub release)
+- Clean working tree on `main`
+
+### Commands
+
+```bash
+cd packages/alus
+
+pnpm release:dry      # preview — no git/npm/github writes
+pnpm release          # interactive — prompts for the bump
+pnpm release:patch    # 0.1.0 → 0.1.1
+pnpm release:minor    # 0.1.0 → 0.2.0
+pnpm release:major    # 0.1.0 → 1.0.0
+```
+
+### What `pnpm release` does
+
+1. `before:init` hook → `pnpm check` (svelte-check must pass)
+2. Bumps `package.json` version
+3. `after:bump` hook → `pnpm build` (regenerates `dist/`)
+4. Writes `CHANGELOG.md` from conventional commits since the last tag
+5. Commits `chore(release): alus-ui v<version>` and tags `alus-ui-v<version>`
+6. Pushes commit + tag to `origin/main`
+7. Creates GitHub release with the changelog body
+8. Publishes to npm (`npm publish` runs `prepublishOnly` → build + test again)
+
+### Commit message conventions
+
+| Prefix       | Section in CHANGELOG | Bump  |
+| ------------ | -------------------- | ----- |
+| `feat:`      | Features             | minor |
+| `fix:`       | Bug Fixes            | patch |
+| `perf:`      | Performance          | patch |
+| `refactor:`  | Refactors            | patch |
+| `docs:`      | Documentation        | patch |
+| `test:`      | Tests                | patch |
+| `build:`     | Build                | patch |
+| `ci:` / `chore:` / `style:` | _(hidden)_ | none |
+
+Append `!` after the type (or include `BREAKING CHANGE:` in the body) for a major bump.
+
+### Config
+
+Settings live in `packages/alus/.release-it.json`. Tag scheme is `alus-ui-v<version>` so future workspace packages can release independently.
+
 ## License
 
 MIT
@@ -229,7 +281,7 @@ Built with:
 
 ## Related Projects
 
-- [Showcase App](https://github.com/Hanivan/alus) - Live demo of all Alus components
+- [Showcase App](https://github.com/Hanivan/alus) - Live demo of all alus-ui components
 - [Contributing](https://github.com/Hanivan/alus/blob/main/CONTRIBUTING.md) - How to contribute
 
 ---

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, At, MagnifyingGlass, CurrencyDollar } from 'phosphor-svelte';
-	import { InputGroup, Input } from 'alus';
+	import { InputGroup, Input } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<InputGroup>

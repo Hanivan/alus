@@ -9,7 +9,7 @@
 		Cpu,
 		Heart
 	} from 'phosphor-svelte';
-	import { StatCard } from 'alus';
+	import { StatCard } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<StatCard

@@ -1,7 +1,7 @@
 <script lang="ts" module>
 	import { getContext, setContext } from 'svelte';
 
-	const KEY = Symbol('alus:select');
+	const KEY = Symbol('alus-ui:select');
 
 	export interface SelectOptionEntry {
 		value: unknown;

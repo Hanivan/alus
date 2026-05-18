@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { Button } from 'alus';
+	import { Button } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	let subscribed = $state(false);
 	let disabled = $state(false);
 
 	const code = `<script lang="ts">
-	import { Button } from 'alus';
+	import { Button } from 'alus-ui';
 	let pressed = $state(false);
 <\/script>
 

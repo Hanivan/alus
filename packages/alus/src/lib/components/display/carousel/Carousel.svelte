@@ -1,7 +1,7 @@
 <script lang="ts" module>
 	import { getContext, setContext } from 'svelte';
 
-	const KEY = Symbol('alus:carousel');
+	const KEY = Symbol('alus-ui:carousel');
 
 	export interface CarouselContext {
 		index: () => number;

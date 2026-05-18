@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { CaretLeft, Calendar as CalIcon, Lock } from 'phosphor-svelte';
-	import { DatePicker } from 'alus';
+	import { DatePicker } from 'alus-ui';
 	import { type DateValue, getLocalTimeZone, today } from '@internationalized/date';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { DatePicker } from 'alus';
+	import { DatePicker } from 'alus-ui';
 	import type { DateValue } from '@internationalized/date';
 	let value = $state<DateValue | null>(null);
 <\/script>

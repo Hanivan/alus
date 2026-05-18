@@ -1,7 +1,7 @@
 <script lang="ts" module>
 	import { getContext, setContext } from 'svelte';
 
-	const KEY = Symbol('alus:tooltip');
+	const KEY = Symbol('alus-ui:tooltip');
 
 	export interface TooltipContext {
 		open: () => boolean;

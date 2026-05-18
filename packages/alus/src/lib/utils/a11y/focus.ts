@@ -9,7 +9,7 @@
  * @example
  * ```svelte
  * <script>
- *   import { focus } from 'alus';
+ *   import { focus } from 'alus-ui';
  *   let modalElement;
  *
  *   function openModal() {
@@ -57,7 +57,7 @@ export function trap(container: HTMLElement): () => void {
  * @example
  * ```svelte
  * <script>
- *   import { focus } from 'alus';
+ *   import { focus } from 'alus-ui';
  *   let dialogElement;
  *
  *   function open() {

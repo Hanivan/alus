@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { Slider, Label } from 'alus';
+	import { Slider, Label } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { Slider } from 'alus';
+	import { Slider } from 'alus-ui';
 	let volume = $state(50);
 <\/script>
 

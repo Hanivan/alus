@@ -8,7 +8,7 @@
 </script>
 
 <script lang="ts">
-	import { CodeBlock } from 'alus';
+	import { CodeBlock } from 'alus-ui';
 
 	interface Props {
 		code: string;

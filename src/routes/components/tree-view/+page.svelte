@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, CaretRight, Folder, FolderOpen, File } from 'phosphor-svelte';
-	import { TreeView, TreeItem } from 'alus';
+	import { TreeView, TreeItem } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<TreeView bind:selected aria-label="Project files">

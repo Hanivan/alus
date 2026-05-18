@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, Check, Circle, CircleNotch } from 'phosphor-svelte';
-	import { Timeline, TimelineItem } from 'alus';
+	import { Timeline, TimelineItem } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Timeline aria-label="Project milestones">

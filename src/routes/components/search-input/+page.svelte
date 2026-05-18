@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft, MagnifyingGlass, X } from 'phosphor-svelte';
-	import { SearchInput, Label } from 'alus';
+	import { SearchInput, Label } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { SearchInput } from 'alus';
+	import { SearchInput } from 'alus-ui';
 	let q = $state('');
 <\/script>
 

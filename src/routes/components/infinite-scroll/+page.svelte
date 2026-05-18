@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, CircleNotch, WarningCircle, ArrowClockwise } from 'phosphor-svelte';
-	import { InfiniteScroll, Button } from 'alus';
+	import { InfiniteScroll, Button } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<InfiniteScroll {hasMore} onLoad={loadMore}>

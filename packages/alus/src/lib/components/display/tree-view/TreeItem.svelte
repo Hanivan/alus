@@ -3,7 +3,7 @@
 	import { getContext, setContext } from 'svelte';
 	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-	const LEVEL_KEY = Symbol('alus:tree-item-level');
+	const LEVEL_KEY = Symbol('alus-ui:tree-item-level');
 
 	interface Props {
 		id: string;

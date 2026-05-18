@@ -7,7 +7,7 @@
 		ModalTitle,
 		ModalDescription,
 		ModalClose
-	} from 'alus';
+	} from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Modal>

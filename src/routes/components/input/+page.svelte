@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft, Warning, Check } from 'phosphor-svelte';
-	import { Input } from 'alus';
+	import { Input } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { Input } from 'alus';
+	import { Input } from 'alus-ui';
 	let value = $state('');
 	let error = $derived(value.length > 0 && value.length < 2 ? 'Too short' : '');
 <\/script>

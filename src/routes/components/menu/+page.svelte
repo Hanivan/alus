@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, CaretDown, PencilSimple, Trash, Copy, Share } from 'phosphor-svelte';
-	import { Menu, MenuTrigger, MenuContent, MenuItem } from 'alus';
+	import { Menu, MenuTrigger, MenuContent, MenuItem } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Menu>

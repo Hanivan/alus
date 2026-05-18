@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, Info } from 'phosphor-svelte';
-	import { Tooltip, TooltipTrigger, TooltipContent } from 'alus';
+	import { Tooltip, TooltipTrigger, TooltipContent } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Tooltip>

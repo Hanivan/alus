@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { LiveRegion, Button } from 'alus';
+	import { LiveRegion, Button } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<LiveRegion politeness="polite" {message} />

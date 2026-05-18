@@ -1,7 +1,7 @@
 <script lang="ts" module>
 	import { getContext, setContext } from 'svelte';
 
-	const KEY = Symbol('alus:command-menu');
+	const KEY = Symbol('alus-ui:command-menu');
 
 	export interface CommandItemEntry {
 		id: string;

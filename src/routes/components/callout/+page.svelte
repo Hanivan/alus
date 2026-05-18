@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, Info, CheckCircle, Warning, XCircle, Lightbulb, Note } from 'phosphor-svelte';
-	import { Callout } from 'alus';
+	import { Callout } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Callout variant="tip">

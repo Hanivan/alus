@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, ArrowSquareOut } from 'phosphor-svelte';
-	import { ExternalLink } from 'alus';
+	import { ExternalLink } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<ExternalLink href="https://svelte.dev" class="text-(--indigo-dye) underline">

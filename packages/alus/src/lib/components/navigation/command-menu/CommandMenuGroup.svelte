@@ -1,7 +1,7 @@
 <script lang="ts" module>
 	import { getContext, setContext } from 'svelte';
 
-	const GROUP_KEY = Symbol('alus:command-menu-group');
+	const GROUP_KEY = Symbol('alus-ui:command-menu-group');
 
 	export interface CommandMenuGroupContext {
 		track: (getVisible: () => boolean) => () => void;

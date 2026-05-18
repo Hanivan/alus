@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
-	import { RadioGroup, Radio } from 'alus';
+	import { RadioGroup, Radio } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { RadioGroup, Radio } from 'alus';
+	import { RadioGroup, Radio } from 'alus-ui';
 	let plan = $state('pro');
 <\/script>
 

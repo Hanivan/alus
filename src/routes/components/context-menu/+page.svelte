@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft, Copy, Scissors, Clipboard, Trash, ArrowsClockwise } from 'phosphor-svelte';
-	import { ContextMenu, type ContextMenuItemEntry } from 'alus';
+	import { ContextMenu, type ContextMenuItemEntry } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { ContextMenu, type ContextMenuItemEntry } from 'alus';
+	import { ContextMenu, type ContextMenuItemEntry } from 'alus-ui';
 	const items: ContextMenuItemEntry[] = [
 		{ label: 'Copy', onSelect: () => copy() },
 		{ label: 'Cut', onSelect: () => cut() },

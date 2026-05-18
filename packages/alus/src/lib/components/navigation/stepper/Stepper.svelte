@@ -1,7 +1,7 @@
 <script lang="ts" module>
 	import { getContext, setContext } from 'svelte';
 
-	const KEY = Symbol('alus:stepper');
+	const KEY = Symbol('alus-ui:stepper');
 
 	export interface StepperContext {
 		current: () => number;

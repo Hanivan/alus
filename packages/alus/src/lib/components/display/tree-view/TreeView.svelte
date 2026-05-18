@@ -2,7 +2,7 @@
 	import { getContext, setContext } from 'svelte';
 	import { SvelteSet } from 'svelte/reactivity';
 
-	const KEY = Symbol('alus:tree-view');
+	const KEY = Symbol('alus-ui:tree-view');
 
 	export interface TreeViewContext {
 		expanded: SvelteSet<string>;

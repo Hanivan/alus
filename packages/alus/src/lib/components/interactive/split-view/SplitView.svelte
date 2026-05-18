@@ -2,7 +2,7 @@
 	import { getContext, setContext } from 'svelte';
 	import { generateCounterId } from '$utils/a11y/id.js';
 
-	const KEY = Symbol('alus:split-view');
+	const KEY = Symbol('alus-ui:split-view');
 
 	export interface SplitViewContext {
 		orientation: () => 'horizontal' | 'vertical';

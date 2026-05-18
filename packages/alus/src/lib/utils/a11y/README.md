@@ -11,7 +11,7 @@ import {
 	interactiveStateAttrs,
 	widgetAttrs,
 	mergeAttrs
-} from 'alus/a11y';
+} from 'alus-ui/a11y';
 ```
 
 ## ARIA Attribute Builders
@@ -22,7 +22,7 @@ Creates ARIA attributes for labeling and describing elements.
 
 ```svelte
 <script>
-	import { Input, labelAttrs } from 'alus';
+	import { Input, labelAttrs } from 'alus-ui';
 </script>
 
 <!-- Using aria-label -->
@@ -48,7 +48,7 @@ Creates ARIA attributes for form validation states.
 
 ```svelte
 <script>
-	import { Input, validationAttrs } from 'alus';
+	import { Input, validationAttrs } from 'alus-ui';
 	let email = $state('');
 	let error = $state('');
 </script>
@@ -71,7 +71,7 @@ Creates ARIA attributes for interactive element states.
 
 ```svelte
 <script>
-	import { Button, interactiveStateAttrs } from 'alus';
+	import { Button, interactiveStateAttrs } from 'alus-ui';
 	let pressed = $state(false);
 	let expanded = $state(false);
 </script>
@@ -91,7 +91,7 @@ Creates ARIA attributes for complex widgets and roles.
 
 ```svelte
 <script>
-	import { widgetAttrs } from 'alus';
+	import { widgetAttrs } from 'alus-ui';
 	let value = $state(50);
 </script>
 
@@ -113,7 +113,7 @@ Combines multiple ARIA attribute objects into one.
 
 ```svelte
 <script>
-	import { mergeAttrs, labelAttrs, interactiveStateAttrs } from 'alus';
+	import { mergeAttrs, labelAttrs, interactiveStateAttrs } from 'alus-ui';
 </script>
 
 <button {...mergeAttrs(labelAttrs({ label: 'Menu' }), interactiveStateAttrs({ expanded: true }))}>
@@ -124,7 +124,7 @@ Combines multiple ARIA attribute objects into one.
 ## Focus Management
 
 ```ts
-import { focus } from 'alus/a11y';
+import { focus } from 'alus-ui/a11y';
 
 // Trap focus within a container (for modals, dropdowns)
 const cleanup = focus.trap(modalElement);
@@ -145,7 +145,7 @@ if (focus.isFocusable(element)) {
 ## Keyboard Utilities
 
 ```ts
-import { keyboard } from 'alus/a11y';
+import { keyboard } from 'alus-ui/a11y';
 
 element.addEventListener('keydown', (e) => {
 	// Check for activation keys (Enter/Space)
@@ -173,7 +173,7 @@ element.addEventListener('keydown', (e) => {
 
 ```svelte
 <script>
-	import { generateId } from 'alus/a11y';
+	import { generateId } from 'alus-ui/a11y';
 
 	const labelId = generateId('label');
 	const errorId = generateId('error');
@@ -198,7 +198,7 @@ element.addEventListener('keydown', (e) => {
 
 ```svelte
 <script>
-	import { Input, labelAttrs, validationAttrs, generateId } from 'alus';
+	import { Input, labelAttrs, validationAttrs, generateId } from 'alus-ui';
 
 	let value = $state('');
 	let error = $state('');
@@ -243,7 +243,7 @@ element.addEventListener('keydown', (e) => {
 
 ```svelte
 <script>
-	import { Button, interactiveStateAttrs } from 'alus';
+	import { Button, interactiveStateAttrs } from 'alus-ui';
 
 	let isPressed = $state(false);
 </script>
@@ -272,7 +272,7 @@ element.addEventListener('keydown', (e) => {
 		interactiveStateAttrs,
 		mergeAttrs,
 		generateId
-	} from 'alus';
+	} from 'alus-ui';
 
 	let isOpen = $state(false);
 	const menuId = generateId('menu');

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CaretLeft, ArrowLeft, ArrowRight, ArrowUp, ArrowDown } from 'phosphor-svelte';
-	import { Swipeable, type SwipeDirection } from 'alus';
+	import { Swipeable, type SwipeDirection } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<Swipeable

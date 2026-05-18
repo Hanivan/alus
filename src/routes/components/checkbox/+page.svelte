@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { CaretLeft, Check } from 'phosphor-svelte';
-	import { Checkbox } from 'alus';
+	import { Checkbox } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
-	import { Checkbox } from 'alus';
+	import { Checkbox } from 'alus-ui';
 	let checked = $state(false);
 <\/script>
 
