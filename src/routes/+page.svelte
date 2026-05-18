@@ -430,6 +430,84 @@
 			description: 'Inline form-field message with auto role=alert for error/warning',
 			href: '/components/inline-message',
 			kanji: '伝'
+		},
+		{
+			title: 'ToggleButton',
+			description: 'Two-state button with aria-pressed and bindable pressed prop',
+			href: '/components/toggle-button',
+			kanji: '押'
+		},
+		{
+			title: 'Navigation',
+			description: 'Semantic <nav> wrapper with ARIA label and aria-current',
+			href: '/components/navigation',
+			kanji: '航'
+		},
+		{
+			title: 'ScreenReaderOnly',
+			description: 'Alias of VisuallyHidden — content only announced to screen readers',
+			href: '/components/screen-reader-only',
+			kanji: '読'
+		},
+		{
+			title: 'Conditional',
+			description: 'Render children when condition is truthy, else fallback snippet',
+			href: '/components/conditional',
+			kanji: '条'
+		},
+		{
+			title: 'Sheet',
+			description: 'iOS-style side panel — re-export of Drawer',
+			href: '/components/sheet',
+			kanji: '紙'
+		},
+		{
+			title: 'Overlay',
+			description: 'Low-level backdrop primitive with portal, Escape, and outside-click',
+			href: '/components/overlay',
+			kanji: '蓋'
+		},
+		{
+			title: 'Lightbox',
+			description: 'Image overlay viewer with prev/next, keyboard arrows, and loop',
+			href: '/components/lightbox',
+			kanji: '写'
+		},
+		{
+			title: 'ContextMenu',
+			description: 'Right-click context menu with keyboard nav and viewport-aware positioning',
+			href: '/components/context-menu',
+			kanji: '右'
+		},
+		{
+			title: 'Draggable',
+			description: 'HTML5 drag wrapper with JSON payload and dragging state',
+			href: '/components/draggable',
+			kanji: '掴'
+		},
+		{
+			title: 'Droppable',
+			description: 'Drop zone counterpart to Draggable with over-state and effect',
+			href: '/components/droppable',
+			kanji: '受'
+		},
+		{
+			title: 'InfiniteScroll',
+			description: 'IntersectionObserver sentinel that calls onLoad until hasMore is false',
+			href: '/components/infinite-scroll',
+			kanji: '続'
+		},
+		{
+			title: 'SubMenu',
+			description: 'Nested menu inside Menu — ArrowRight opens, ArrowLeft closes',
+			href: '/components/sub-menu',
+			kanji: '枝'
+		},
+		{
+			title: 'AutoComplete',
+			description: 'Combobox input with filtered suggestions and aria-activedescendant',
+			href: '/components/auto-complete',
+			kanji: '補'
 		}
 	];
 

@@ -32,6 +32,9 @@ export { NumberInput } from './form/number-input/index.js';
 export { InputGroup, InputAddon } from './form/input-group/index.js';
 export { Rating } from './form/rating/index.js';
 export { IconButton } from './form/icon-button/index.js';
+export { ToggleButton } from './form/toggle-button/index.js';
+export { AutoComplete } from './form/auto-complete/index.js';
+export type { AutoCompleteOption } from './form/auto-complete/index.js';
 
 // Navigation Components
 export {
@@ -62,6 +65,9 @@ export { Breadcrumb, BreadcrumbItem, BreadcrumbSeparator } from './navigation/br
 export { Pagination } from './navigation/pagination/index.js';
 export { Link } from './navigation/link/index.js';
 export { ExternalLink } from './navigation/external-link/index.js';
+export { Navigation } from './navigation/navigation/index.js';
+export { SubMenu } from './navigation/sub-menu/index.js';
+export type { SubMenuItem } from './navigation/sub-menu/index.js';
 export {
 	Menu,
 	MenuTrigger,
@@ -237,6 +243,20 @@ export {
 	setDropdownContext
 } from './overlay/dropdown/index.js';
 export type { DropdownContext, DropdownItemEntry } from './overlay/dropdown/index.js';
+export {
+	Sheet,
+	SheetContent,
+	SheetTrigger,
+	SheetTitle,
+	SheetDescription,
+	SheetClose
+} from './overlay/sheet/index.js';
+export type { SheetSide } from './overlay/sheet/index.js';
+export { Overlay } from './overlay/overlay/index.js';
+export { Lightbox } from './overlay/lightbox/index.js';
+export type { LightboxImage } from './overlay/lightbox/index.js';
+export { ContextMenu } from './overlay/context-menu/index.js';
+export type { ContextMenuItemEntry } from './overlay/context-menu/index.js';
 
 // Layout Components
 export { Stack } from './layout/stack/index.js';
@@ -259,8 +279,15 @@ export {
 	setSplitViewContext
 } from './interactive/split-view/index.js';
 export type { SplitViewContext } from './interactive/split-view/index.js';
+export { Draggable } from './interactive/draggable/index.js';
+export type { DraggableEvent } from './interactive/draggable/index.js';
+export { Droppable } from './interactive/droppable/index.js';
+export type { DroppableEvent } from './interactive/droppable/index.js';
+export { InfiniteScroll } from './interactive/infinite-scroll/index.js';
 
 // Utility Components
 export { VisuallyHidden } from './utility/visually-hidden/index.js';
 export { Portal } from './utility/portal/index.js';
 export { FocusTrap } from './utility/focus-trap/index.js';
+export { ScreenReaderOnly } from './utility/screen-reader-only/index.js';
+export { Conditional } from './utility/conditional/index.js';
