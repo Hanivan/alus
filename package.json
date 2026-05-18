@@ -6,8 +6,10 @@
 	"scripts": {
 		"dev": "concurrently --kill-others \"pnpm --filter alus-ui dev\" \"pnpm dev:showcase\"",
 		"dev:showcase": "vite dev",
+		"predev:showcase": "wrangler types",
+		"prebuild": "wrangler types",
 		"build": "vite build",
-		"preview": "vite preview",
+		"preview": "wrangler dev",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -25,7 +27,7 @@
 	"devDependencies": {
 		"@eslint/compat": "^2.0.4",
 		"@eslint/js": "^10.0.1",
-		"@sveltejs/adapter-netlify": "^6.0.4",
+		"@sveltejs/adapter-cloudflare": "^7.2.8",
 		"@sveltejs/kit": "^2.57.0",
 		"@sveltejs/vite-plugin-svelte": "^7.0.0",
 		"@tailwindcss/forms": "^0.5.11",
