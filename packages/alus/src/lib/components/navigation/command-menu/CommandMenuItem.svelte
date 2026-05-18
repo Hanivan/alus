@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { untrack } from 'svelte';
 	import { generateCounterId } from '$utils/a11y/id.js';
 	import { interactiveStateAttrs } from '$utils/a11y/index.js';
 	import { getCommandMenuContext } from './CommandMenu.svelte';
@@ -30,12 +31,14 @@
 	const visible = $derived(ctx.filteredItems().some((i) => i.id === id));
 
 	$effect(() => {
-		const unregister = ctx.registerItem({ id, value, keywords, disabled, onSelect });
-		const untrack = group?.track(() => visible);
-		return () => {
-			unregister();
-			untrack?.();
-		};
+		return untrack(() => {
+			const unregister = ctx.registerItem({ id, value, keywords, disabled, onSelect });
+			const untrackVis = group?.track(() => visible);
+			return () => {
+				unregister();
+				untrackVis?.();
+			};
+		});
 	});
 
 	function onClick() {

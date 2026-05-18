@@ -130,10 +130,10 @@
 				description: 'Names the carousel region'
 			},
 			{
-				name: 'index',
+				name: 'CarouselSlide.index',
 				type: 'number',
 				default: 'required',
-				description: '<code>CarouselSlide</code>'
+				description: 'Position of the slide within the carousel'
 			}
 		]}
 		a11y={[

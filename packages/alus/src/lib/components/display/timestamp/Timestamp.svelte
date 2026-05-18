@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { untrack } from 'svelte';
+
 	type Mode = 'absolute' | 'relative' | 'both';
 	type Style = 'long' | 'short' | 'narrow';
 
@@ -30,11 +32,13 @@
 	const date = $derived(value instanceof Date ? value : new Date(value));
 
 	$effect(() => {
-		if (mode === 'absolute') return;
-		const id = setInterval(() => {
-			now = Date.now();
-		}, updateInterval);
-		return () => clearInterval(id);
+		return untrack(() => {
+			if (mode === 'absolute') return;
+			const id = setInterval(() => {
+				now = Date.now();
+			}, updateInterval);
+			return () => clearInterval(id);
+		});
 	});
 
 	const absolute = $derived(new Intl.DateTimeFormat(locale, dateOptions).format(date));

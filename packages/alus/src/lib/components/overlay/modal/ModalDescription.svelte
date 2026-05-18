@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { untrack } from 'svelte';
 	import { getModalContext } from './Modal.svelte';
 
 	interface Props {
@@ -11,8 +12,10 @@
 	const ctx = getModalContext();
 
 	$effect(() => {
-		ctx.setHasDescription(true);
-		return () => ctx.setHasDescription(false);
+		return untrack(() => {
+			ctx.setHasDescription(true);
+			return () => ctx.setHasDescription(false);
+		});
 	});
 </script>
 

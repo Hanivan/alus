@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { untrack } from 'svelte';
 	import { getCarouselContext } from './Carousel.svelte';
 
 	interface Props {
@@ -14,8 +15,10 @@
 	const active = $derived(ctx.index() === index);
 
 	$effect(() => {
-		const reg = ctx.registerSlide();
-		return reg.unregister;
+		return untrack(() => {
+			const reg = ctx.registerSlide();
+			return reg.unregister;
+		});
 	});
 </script>
 

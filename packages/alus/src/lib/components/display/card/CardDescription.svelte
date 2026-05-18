@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { untrack } from 'svelte';
 	import { getCardContext } from './Card.svelte';
 
 	interface Props {
@@ -11,8 +12,10 @@
 	const ctx = getCardContext();
 
 	$effect(() => {
-		ctx.setHasDescription(true);
-		return () => ctx.setHasDescription(false);
+		return untrack(() => {
+			ctx.setHasDescription(true);
+			return () => ctx.setHasDescription(false);
+		});
 	});
 </script>
 
