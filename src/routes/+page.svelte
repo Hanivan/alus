@@ -292,6 +292,24 @@
 			description: 'Vertical or horizontal timeline with markers and status',
 			href: '/components/timeline',
 			kanji: '時'
+		},
+		{
+			title: 'Stepper',
+			description: 'Wizard step indicator with completed/current/upcoming states',
+			href: '/components/stepper',
+			kanji: '階'
+		},
+		{
+			title: 'Carousel',
+			description: 'Slide carousel with prev/next, indicators, and loop',
+			href: '/components/carousel',
+			kanji: '輪'
+		},
+		{
+			title: 'CommandMenu',
+			description: 'Cmd+K command palette with search, groups, and keyboard nav',
+			href: '/components/command-menu',
+			kanji: '命'
 		}
 	];
 

@@ -69,6 +69,29 @@ export {
 	setMenuContext
 } from './navigation/menu/index.js';
 export type { MenuContext, MenuItemEntry } from './navigation/menu/index.js';
+export {
+	Stepper,
+	StepperStep,
+	getStepperContext,
+	setStepperContext
+} from './navigation/stepper/index.js';
+export type { StepperContext } from './navigation/stepper/index.js';
+export {
+	CommandMenu,
+	CommandMenuTrigger,
+	CommandMenuContent,
+	CommandMenuInput,
+	CommandMenuList,
+	CommandMenuItem,
+	CommandMenuGroup,
+	CommandMenuEmpty,
+	getCommandMenuContext,
+	setCommandMenuContext
+} from './navigation/command-menu/index.js';
+export type {
+	CommandMenuContext,
+	CommandItemEntry
+} from './navigation/command-menu/index.js';
 
 // Feedback Components
 export { Badge } from './feedback/badge/index.js';
@@ -117,6 +140,17 @@ export {
 } from './display/tree-view/index.js';
 export type { TreeViewContext } from './display/tree-view/index.js';
 export { Timeline, TimelineItem } from './display/timeline/index.js';
+export {
+	Carousel,
+	CarouselSlides,
+	CarouselSlide,
+	CarouselPrev,
+	CarouselNext,
+	CarouselIndicators,
+	getCarouselContext,
+	setCarouselContext
+} from './display/carousel/index.js';
+export type { CarouselContext } from './display/carousel/index.js';
 
 // Overlay Components
 export {
