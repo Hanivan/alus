@@ -358,6 +358,36 @@
 			description: 'Bell button with unread badge, max cap, and aria-live announcer',
 			href: '/components/notification-bell',
 			kanji: '鈴'
+		},
+		{
+			title: 'IconButton',
+			description: 'Icon-only button with required aria-label and toggle aria-pressed support',
+			href: '/components/icon-button',
+			kanji: '押'
+		},
+		{
+			title: 'ExternalLink',
+			description: 'Anchor with target=_blank, rel=noopener, and sr-only new-tab announcement',
+			href: '/components/external-link',
+			kanji: '外'
+		},
+		{
+			title: 'Kbd',
+			description: 'Semantic <kbd> wrapper for keyboard shortcuts with key arrays',
+			href: '/components/kbd',
+			kanji: '鍵'
+		},
+		{
+			title: 'AspectRatio',
+			description: 'Constant width/height container using CSS aspect-ratio',
+			href: '/components/aspect-ratio',
+			kanji: '割'
+		},
+		{
+			title: 'Callout',
+			description: 'Highlighted info box with title, icon, variants, and role=note',
+			href: '/components/callout',
+			kanji: '枠'
 		}
 	];
 

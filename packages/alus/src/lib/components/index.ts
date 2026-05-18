@@ -31,6 +31,7 @@ export { SearchInput } from './form/search-input/index.js';
 export { NumberInput } from './form/number-input/index.js';
 export { InputGroup, InputAddon } from './form/input-group/index.js';
 export { Rating } from './form/rating/index.js';
+export { IconButton } from './form/icon-button/index.js';
 
 // Navigation Components
 export {
@@ -60,6 +61,7 @@ export type {
 export { Breadcrumb, BreadcrumbItem, BreadcrumbSeparator } from './navigation/breadcrumb/index.js';
 export { Pagination } from './navigation/pagination/index.js';
 export { Link } from './navigation/link/index.js';
+export { ExternalLink } from './navigation/external-link/index.js';
 export {
 	Menu,
 	MenuTrigger,
@@ -100,6 +102,7 @@ export { Spinner } from './feedback/spinner/index.js';
 export { Skeleton } from './feedback/skeleton/index.js';
 export { Progress } from './feedback/progress/index.js';
 export { Alert } from './feedback/alert/index.js';
+export { Callout } from './feedback/callout/index.js';
 export { LiveRegion } from './feedback/live-region/index.js';
 export { NotificationBell } from './feedback/notification-bell/index.js';
 export {
@@ -122,6 +125,8 @@ export type {
 
 // Display Components
 export { Divider } from './display/divider/index.js';
+export { Kbd } from './display/kbd/index.js';
+export { AspectRatio } from './display/aspect-ratio/index.js';
 export { Avatar } from './display/avatar/index.js';
 export {
 	Card,
