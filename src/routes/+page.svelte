@@ -340,6 +340,24 @@
 			description: 'Compare slider revealing one layer over another with role=slider',
 			href: '/components/compare',
 			kanji: '比'
+		},
+		{
+			title: 'LiveRegion',
+			description: 'Screen-reader announcer with polite/assertive politeness levels',
+			href: '/components/live-region',
+			kanji: '声'
+		},
+		{
+			title: 'Toast',
+			description: 'Portal toast stack with variants, action, persistent, and auto-dismiss',
+			href: '/components/toast',
+			kanji: '告'
+		},
+		{
+			title: 'NotificationBell',
+			description: 'Bell button with unread badge, max cap, and aria-live announcer',
+			href: '/components/notification-bell',
+			kanji: '鈴'
 		}
 	];
 
