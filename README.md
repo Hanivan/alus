@@ -108,6 +108,9 @@ pnpm --filter alus-ui-mcp build  # Compile MCP to dist/ (tsup)
 pnpm build                       # Build showcase app (Cloudflare)
 pnpm --filter alus-ui build      # Build component library
 
+# Deploying
+wrangler deploy                  # Deploy showcase app + /mcp to Cloudflare
+
 # Quality
 pnpm check     # svelte-check type checking
 pnpm lint      # Prettier + ESLint

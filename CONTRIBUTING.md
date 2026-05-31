@@ -328,6 +328,32 @@ Claude Code remote config:
 }
 ```
 
+## (>\_<) Deploying
+
+### Cloudflare Workers (showcase app + `/mcp` endpoint)
+
+Prereqs: `wrangler login` done, `alus.lkmn.link` custom domain set in `wrangler.jsonc`.
+
+```bash
+pnpm build        # builds .svelte-kit/cloudflare/
+pnpm preview      # wrangler dev — local Cloudflare Worker preview
+```
+
+```bash
+# deploy to production
+wrangler deploy
+```
+
+Or via the npm script alias:
+
+```bash
+pnpm run deploy   # if configured — otherwise run wrangler deploy directly
+```
+
+After deploy, verify:
+- Showcase app: `https://alus.lkmn.link`
+- MCP endpoint: `https://alus.lkmn.link/mcp` (POST only — browser GET redirects to GitHub)
+
 ## (>\_<) Releasing
 
 ### Component library (`alus-ui`)
