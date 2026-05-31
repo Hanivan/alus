@@ -335,19 +335,9 @@ Claude Code remote config:
 Prereqs: `wrangler login` done, `alus.lkmn.link` custom domain set in `wrangler.jsonc`.
 
 ```bash
-pnpm build        # builds .svelte-kit/cloudflare/
-pnpm preview      # wrangler dev — local Cloudflare Worker preview
-```
-
-```bash
-# deploy to production
-wrangler deploy
-```
-
-Or via the npm script alias:
-
-```bash
-pnpm run deploy   # if configured — otherwise run wrangler deploy directly
+pnpm build                   # builds .svelte-kit/cloudflare/
+pnpm preview                 # wrangler dev — local Cloudflare Worker preview
+pnpm deploy                  # build + deploy to production
 ```
 
 After deploy, verify:

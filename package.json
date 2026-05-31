@@ -9,6 +9,7 @@
 		"predev:showcase": "wrangler types",
 		"prebuild": "wrangler types",
 		"build": "vite build",
+		"deploy": "pnpm build && pnpm exec wrangler deploy",
 		"preview": "wrangler dev",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",

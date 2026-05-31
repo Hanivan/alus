@@ -109,7 +109,7 @@ pnpm build                       # Build showcase app (Cloudflare)
 pnpm --filter alus-ui build      # Build component library
 
 # Deploying
-wrangler deploy                  # Deploy showcase app + /mcp to Cloudflare
+pnpm deploy                      # Build + deploy showcase app + /mcp to Cloudflare
 
 # Quality
 pnpm check     # svelte-check type checking
