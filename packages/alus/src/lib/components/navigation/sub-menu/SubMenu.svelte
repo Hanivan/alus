@@ -209,7 +209,7 @@
 		>
 			{#each items as it, i (i)}
 				{#if it.separator}
-					<hr role="separator" class={separatorClass} />
+					<hr class={separatorClass} />
 				{:else if item}
 					<!-- svelte-ignore a11y_click_events_have_key_events -->
 					<div

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
-	import { resolve } from '$app/paths';
 
 	type Target = '_self' | '_blank' | '_parent' | '_top';
 
@@ -48,7 +47,7 @@
 </script>
 
 <a
-	href={resolve(href)}
+	{href}
 	{id}
 	class={className}
 	target={computedTarget}

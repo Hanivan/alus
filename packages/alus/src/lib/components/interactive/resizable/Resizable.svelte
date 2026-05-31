@@ -116,6 +116,7 @@
 	data-dragging={dragging || undefined}
 >
 	{#if children}{@render children()}{/if}
+	<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 	<div
 		role="separator"
 		tabindex={disabled ? -1 : 0}

@@ -45,6 +45,13 @@ export default defineConfig(
 		}
 	},
 	{
+		// Library components are unstyled primitives — consumers pass hrefs from their own context.
+		files: ['packages/alus/src/lib/components/**/*.svelte'],
+		rules: {
+			'svelte/no-navigation-without-resolve': 'off'
+		}
+	},
+	{
 		// Demo/showcase route pages embed raw code snippets in template literals that
 		// contain `<\/script>` — the backslash is required to prevent Svelte's pre-parser
 		// from treating it as the closing tag of the real <script> block.
