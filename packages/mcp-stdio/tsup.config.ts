@@ -10,5 +10,5 @@ export default defineConfig({
 	banner: {
 		js: '#!/usr/bin/env node',
 	},
-	noExternal: ['@alus-ui/mcp-server'],
+	noExternal: ['@alus-ui/mcp-server', '@tmcp/transport-stdio', 'tmcp', 'valibot', '@tmcp/adapter-valibot'],
 });

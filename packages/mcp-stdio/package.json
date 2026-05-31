@@ -48,15 +48,13 @@
 		"release:minor": "release-it minor",
 		"release:major": "release-it major"
 	},
-	"dependencies": {
+	"devDependencies": {
 		"@alus-ui/mcp-server": "workspace:*",
 		"@tmcp/transport-stdio": "latest",
-		"tmcp": "latest"
-	},
-	"devDependencies": {
 		"@release-it/conventional-changelog": "latest",
 		"publint": "latest",
 		"release-it": "latest",
+		"tmcp": "latest",
 		"tsup": "latest",
 		"tsx": "latest",
 		"typescript": "^6.0.2"

@@ -172,26 +172,25 @@ importers:
         version: 5.9.3
 
   packages/mcp-stdio:
-    dependencies:
+    devDependencies:
       '@alus-ui/mcp-server':
         specifier: workspace:*
         version: link:../mcp-server
-      '@tmcp/transport-stdio':
-        specifier: latest
-        version: 0.4.3(tmcp@1.19.4(typescript@6.0.3))
-      tmcp:
-        specifier: latest
-        version: 1.19.4(typescript@6.0.3)
-    devDependencies:
       '@release-it/conventional-changelog':
         specifier: latest
         version: 11.0.1(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.4.0)(release-it@20.2.0(@types/node@22.19.17))
+      '@tmcp/transport-stdio':
+        specifier: latest
+        version: 0.4.3(tmcp@1.19.4(typescript@6.0.3))
       publint:
         specifier: latest
         version: 0.3.21
       release-it:
         specifier: latest
         version: 20.2.0(@types/node@22.19.17)
+      tmcp:
+        specifier: latest
+        version: 1.19.4(typescript@6.0.3)
       tsup:
         specifier: latest
         version: 8.5.1(jiti@2.6.1)(postcss@8.5.10)(tsx@4.22.3)(typescript@6.0.3)
