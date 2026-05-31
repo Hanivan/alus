@@ -1,0 +1,70 @@
+{
+	"name": "alus-ui-mcp",
+	"version": "0.0.1",
+	"description": "MCP stdio server for the alus-ui Svelte 5 component library — gives LLMs direct access to component source, demos, exports, and utilities",
+	"license": "MIT",
+	"type": "module",
+	"author": {
+		"name": "Hanivan Rizky",
+		"email": "hanivan20@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Hanivan/alus.git"
+	},
+	"homepage": "https://github.com/Hanivan/alus#readme",
+	"bugs": {
+		"url": "https://github.com/Hanivan/alus/issues"
+	},
+	"keywords": [
+		"mcp",
+		"model-context-protocol",
+		"svelte",
+		"svelte5",
+		"ui-components",
+		"alus-ui",
+		"llm",
+		"claude",
+		"cursor",
+		"ai"
+	],
+	"bin": {
+		"alus-mcp": "./dist/index.js"
+	},
+	"files": [
+		"dist",
+		"!dist/**/*.test.*",
+		"!dist/**/*.spec.*"
+	],
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsx watch src/index.ts",
+		"start": "tsx src/index.ts",
+		"prepublishOnly": "npm run build",
+		"release": "release-it",
+		"release:dry": "release-it --dry-run",
+		"release:patch": "release-it patch",
+		"release:minor": "release-it minor",
+		"release:major": "release-it major"
+	},
+	"dependencies": {
+		"@alus-ui/mcp-server": "workspace:*",
+		"@tmcp/transport-stdio": "latest",
+		"tmcp": "latest"
+	},
+	"devDependencies": {
+		"@release-it/conventional-changelog": "latest",
+		"publint": "latest",
+		"release-it": "latest",
+		"tsup": "latest",
+		"tsx": "latest",
+		"typescript": "^6.0.2"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"engines": {
+		"node": ">=18.0.0",
+		"pnpm": ">=8.0.0"
+	}
+}

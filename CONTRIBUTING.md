@@ -1,406 +1,362 @@
 # Contributing to alus-ui
 
-Thank you for your interest in contributing to alus-ui! This document provides guidelines and instructions for contributing to the project.
-
 ## \(^o^)/ Getting Started
 
 ### Prerequisites
 
 - Node.js >= 18
-- pnpm >= 8
-- Git
+- pnpm >= 11
 
-### Setup Development Environment
+### Setup
 
-1. **Fork and clone the repository**
-
-   ```bash
-   git clone https://github.com/Hanivan/alus.git
-   cd alus-svelte
-   ```
-
-2. **Install dependencies**
-
-   ```bash
-   pnpm install
-   ```
-
-3. **Start development servers**
-   ```bash
-   pnpm dev
-   ```
-   This starts both the library watcher and showcase application.
+```bash
+git clone https://github.com/Hanivan/alus.git
+cd alus
+pnpm install
+pnpm dev
+```
 
 ## (・\_・) Development Workflow
 
 ### 1. Choose What to Work On
 
-- Check [Component Roadmap](docs/todos/ui-components-roadmap.md) for planned components
-- Look at [GitHub Issues](https://github.com/Hanivan/alus/issues) for specific tasks
-- Start with good first issues if you're new
+- [Component Roadmap](docs/todos/ui-components-roadmap.md)
+- [GitHub Issues](https://github.com/Hanivan/alus/issues)
 
 ### 2. Create a Branch
 
 ```bash
-git checkout -b feature/your-component-name
-# or
+git checkout -b feat/your-component-name
 git checkout -b fix/issue-description
 ```
 
-### 3. Implement Your Changes
+### 3. Implement Changes
 
 #### Adding a New Component
 
-1. **Create component structure** in `packages/alus/src/lib/components/`
+**Directory structure** (mandatory):
 
-   ```
-   components/
-   └── form/          # or feedback/, navigation/, etc.
-       └── yourcomponent/
-           ├── YourComponent.svelte
-           └── index.ts
-   ```
-
-2. **Follow component template** — components MUST use the shared ARIA helpers, never construct ARIA attributes by hand:
-
-   ```svelte
-   <script lang="ts">
-   	import {
-   		labelAttrs,
-   		interactiveStateAttrs,
-   		widgetAttrs,
-   		mergeAttrs
-   	} from '$utils/a11y/index.js';
-
-   	interface Props {
-   		children?: import('svelte').Snippet;
-   		class?: string;
-   		disabled?: boolean;
-   		'aria-label'?: string;
-   		'aria-labelledby'?: string;
-   		'aria-describedby'?: string;
-   	}
-
-   	let {
-   		children,
-   		class: className = '',
-   		disabled = false,
-   		'aria-label': ariaLabel,
-   		'aria-labelledby': ariaLabelledby,
-   		'aria-describedby': ariaDescribedby
-   	}: Props = $props();
-
-   	const ariaAttrs = $derived(
-   		mergeAttrs(
-   			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby }),
-   			interactiveStateAttrs({ disabled })
-   		)
-   	);
-   </script>
-
-   <button type="button" class={className} {disabled} {...ariaAttrs}>
-   	{#if children}{@render children()}{/if}
-   </button>
-   ```
-
-3. **Export from index files**
-   - Create `packages/alus/src/lib/components/{category}/{component}/index.ts` (**must** be `.ts`, not `.js`):
-     ```ts
-     export { default as YourComponent } from './YourComponent.svelte';
-     ```
-   - Re-export from `packages/alus/src/lib/components/index.ts`
-
-4. **Add a demo** at `src/routes/components/{component}/+page.svelte` following the Japanese-aesthetic template documented in `CLAUDE.md` (hanko-seal + kanji + `japanese-border`).
-
-#### Component Requirements
-
-All components must be:
-
-- (^\_^) **Unstyled** - No default colors, spacing, or styling assumptions
-- (^\_^) **Accessible** - WCAG 2.1 AA compliant with proper ARIA
-- (^\_^) **Type-safe** - Full TypeScript support
-- (^\_^) **Keyboard-friendly** - Complete keyboard navigation
-- (^\_^) **Screen reader support** - Proper labels and announcements
-- (^\_^) **Svelte 5 runes** - Use `$props`, `$derived`, `$state`
-
-### 4. Test Your Changes
-
-```bash
-# Type checking
-pnpm check
-
-# Run tests (Vitest)
-pnpm test
-
-# Linting
-pnpm lint
-
-# Format code
-pnpm format
+```
+packages/alus/src/lib/components/{category}/{component-lowercase}/
+├── ComponentName.svelte
+└── index.ts               # must be .ts, NOT .js
 ```
 
-### 5. Commit Your Changes
+**`index.ts`** format:
 
-Follow [Conventional Commits](https://www.conventionalcommits.org/) — release-it parses these to bump the version and write the changelog.
-
-```bash
-git commit -m "feat: add Checkbox component"          # → minor bump, "Features" section
-git commit -m "fix: correct aria-label on Button"     # → patch bump, "Bug Fixes" section
-git commit -m "refactor: simplify menu focus logic"   # → patch bump, "Refactors" section
-git commit -m "docs: update README with new examples" # → patch bump, "Documentation" section
-git commit -m "feat!: rename Switch prop 'on' → 'checked'  # → major bump (breaking)
+```ts
+export { default as ComponentName } from './ComponentName.svelte';
 ```
 
-`chore:` / `ci:` / `style:` are hidden from the changelog and don't trigger a bump.
+**Component template** — always use ARIA helpers, never inline `aria-*`:
 
-### 6. Create Pull Request
+```svelte
+<script lang="ts">
+  import { labelAttrs, interactiveStateAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-1. Push your branch to GitHub
-2. Create a pull request with:
-   - Clear description of changes
-   - Link to related issues
-   - Screenshots for UI changes
-   - Usage examples
+  interface Props {
+    children?: import('svelte').Snippet;
+    class?: string;
+    disabled?: boolean;
+    'aria-label'?: string;
+    'aria-labelledby'?: string;
+    'aria-describedby'?: string;
+  }
+
+  let {
+    children,
+    class: className = '',
+    disabled = false,
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledby,
+    'aria-describedby': ariaDescribedby,
+  }: Props = $props();
+
+  const ariaAttrs = $derived(
+    mergeAttrs(
+      labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby }),
+      interactiveStateAttrs({ disabled })
+    )
+  );
+</script>
+
+<button type="button" class={className} {disabled} {...ariaAttrs}>
+  {#if children}{@render children()}{/if}
+</button>
+```
+
+**Checklist:**
+
+1. Create `.svelte` + `index.ts` in `packages/alus/src/lib/components/{category}/{name}/`
+2. Re-export from `packages/alus/src/lib/components/index.ts`
+3. Add demo at `src/routes/components/{name}/+page.svelte` (see Japanese aesthetic template in `CLAUDE.md`)
+4. All components must be: unstyled, WCAG 2.1 AA, Svelte 5 runes, TypeScript, keyboard accessible
+
+### 4. Test
+
+```bash
+pnpm check    # type checking
+pnpm test     # Vitest
+pnpm lint     # Prettier + ESLint
+pnpm format   # format
+```
+
+### 5. Commit
+
+Follow [Conventional Commits](https://www.conventionalcommits.org/) — release-it parses these for version bumps and changelog:
+
+| Prefix | Bump | Changelog section |
+|---|---|---|
+| `feat:` | minor | Features |
+| `fix:` | patch | Bug Fixes |
+| `refactor:` | patch | Refactors |
+| `docs:` | patch | Documentation |
+| `feat!:` / `fix!:` | major | Breaking Changes |
+| `chore:` `ci:` `style:` | — | hidden |
+
+### 6. Pull Request
+
+- Clear description + link to issues
+- Screenshots for UI changes
 
 ## (・\_・) Coding Standards
 
-### TypeScript
+### Svelte 5 Runes Only
 
-- Use strict type checking
-- Define interfaces for component props
-- Export types for public APIs
-- Use proper type imports
-
-```typescript
-// Good
-import type { HTMLAttributes } from 'svelte/elements';
-interface Props {
-	disabled?: boolean;
-	class?: string;
-}
-
-// Bad
-let disabled: boolean | undefined = $props();
-```
-
-### Svelte 5 Runes
-
-Always use Svelte 5 runes syntax. No legacy mode anywhere in the codebase.
+No legacy mode anywhere:
 
 ```svelte
-<script lang="ts">
-	// Good — runes
-	let { count = 0 }: Props = $props();
-	let doubled = $derived(count * 2);
-	let message = $state('hello');
+<!-- Good -->
+let { count = 0 }: Props = $props();
+let doubled = $derived(count * 2);
 
-	// Bad — legacy
-	export let count = 0;
-	$: doubled = count * 2;
-</script>
+<!-- Bad -->
+export let count = 0;
+$: doubled = count * 2;
 ```
 
-### Effects and listeners
+### Effects and Listeners
 
-- **No `onMount` / `onDestroy`.** Use `$effect(() => { ...; return cleanup; })`.
-- **No raw `addEventListener` / `removeEventListener` on `document` or `window`.** Use `useEventListener` from `runed` with a gated getter so attach/detach is reactive:
+- **No `onMount` / `onDestroy`** — use `$effect(() => { ...; return cleanup; })`
+- **No raw `addEventListener` on `document` / `window`** — use `useEventListener` from `runed` with a gated target getter:
 
-  ```ts
-  import { useEventListener } from 'runed';
+```ts
+import { useEventListener } from 'runed';
 
-  useEventListener(
-  	() => (open ? document : null),
-  	'keydown',
-  	(e) => {
-  		if (e.key === 'Escape') close();
-  	}
-  );
-  ```
-
-Listeners on a local node inside an `Attachment` are fine to keep inline.
+useEventListener(
+  () => (open ? document : null),
+  'keydown',
+  (e) => { if (e.key === 'Escape') close(); }
+);
+```
 
 ### Accessibility
 
-Every component must include:
+1. Semantic HTML
+2. All ARIA via `labelAttrs` / `validationAttrs` / `interactiveStateAttrs` / `widgetAttrs` / `mergeAttrs` — never inline strings
+3. ARIA value types from `$types/index.ts` (derived from `svelte/elements`) — never redeclare literal unions
+4. Keyboard: Enter, Space, Escape, Arrow keys, Home/End, Tab
+5. Focus: `trap` + `focusFirst` for modals; roving tabindex for composite widgets; visible indicators
+6. Screen reader: `<VisuallyHidden>` for SR-only text — never inline `style="position:absolute…"` or `sr-only`
+7. Form validation: `validationAttrs({ invalid, required, errormessage })`
+8. Virtualised lists: emit `aria-setsize` + `aria-posinset`
 
-1. **Semantic HTML** — Use proper elements
-2. **ARIA via the shared helpers** — never inline `aria-*` strings; route everything through `labelAttrs` / `validationAttrs` / `interactiveStateAttrs` / `widgetAttrs` / `mergeAttrs` from `$utils/a11y`
-3. **ARIA value types** from `$types/index.ts` — derived from `svelte/elements` (`AriaBoolean`, `AriaTristate`, `AriaHaspopup`, `AriaLive`, `AriaCurrent`, `AriaRelevant`, `AriaOrientation`). Never redeclare literal unions.
-4. **Keyboard support** — Enter, Space, Escape, Arrow keys, Home/End, Tab
-5. **Focus management** — `trap` + `focusFirst` for modals, roving tabindex for composite widgets, visible focus indicators
-6. **Screen reader support** — labels, live regions via `<VisuallyHidden role="status" aria-live="polite">` (never inline `style="position:absolute…"` or Tailwind `sr-only`)
-7. **Form validation** — `aria-invalid` + `aria-errormessage` via `validationAttrs`
-8. **Virtualised / paginated content** — emit `aria-setsize` + `aria-posinset` (see VirtualList, StepperStep)
+### Unstyled
 
-```svelte
-<script lang="ts">
-	import {
-		labelAttrs,
-		validationAttrs,
-		interactiveStateAttrs,
-		widgetAttrs,
-		mergeAttrs
-	} from '$utils/a11y/index.js';
-
-	const ariaAttrs = $derived(
-		mergeAttrs(
-			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby }),
-			validationAttrs({ invalid, required, errormessage }),
-			interactiveStateAttrs({ disabled, pressed }),
-			widgetAttrs({ controls, haspopup, orientation })
-		)
-	);
-</script>
-
-<button type="button" {...ariaAttrs}>{label}</button>
-```
-
-### Code Style
-
-- Use Prettier for formatting
-- Follow ESLint rules
-- Keep components focused and simple
-- Write clear, self-documenting code
-- Add comments for complex logic
+- No default colors, spacing, or layout
+- Works with Tailwind, CSS variables, plain CSS
+- Never use `--cream` as background for white text (SubMenu incident)
 
 ## (・\_・) Testing
 
-The project uses Vitest for unit testing with browser testing support via `@vitest/browser-playwright`.
-
-### Unit Tests
-
-Create tests alongside components:
+Uses Vitest + `@vitest/browser-playwright`:
 
 ```typescript
-// YourComponent.svelte.spec.ts
 import { describe, it, expect } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import YourComponent from './YourComponent.svelte';
 
 describe('YourComponent', () => {
-	it('renders correctly', () => {
-		const { getByRole } = render(YourComponent);
-		expect(getByRole('button')).toBeTruthy();
-	});
+  it('renders correctly', () => {
+    const { getByRole } = render(YourComponent);
+    expect(getByRole('button')).toBeTruthy();
+  });
 });
 ```
 
-### Browser Tests
+## (^\_^) MCP Development
 
-Test keyboard navigation and screen reader support:
+The MCP server lives in `packages/mcp-server` and is wired into the showcase app via `src/hooks.server.ts`.
 
-```typescript
-import { page } from 'vitest/browser';
+### Structure
 
-it('handles keyboard interaction', async () => {
-	const { getByRole } = render(YourComponent);
-	const button = getByRole('button');
+```
+packages/mcp-server/src/
+├── constants.ts                   # ALUS_ROOT, component paths, CATEGORIES
+├── lib/fs.ts                      # list_all_components, read_component_source, truncate
+├── index.ts                       # re-exports server + AlusMcp type
+└── mcp/
+    ├── index.ts                   # McpServer instance (tmcp + ValibotJsonSchemaAdapter)
+    └── handlers/
+        ├── index.ts               # setup_tools() — registers all tools
+        └── tools/
+            ├── index.ts           # barrel export
+            ├── list-components.ts
+            ├── get-component.ts
+            ├── search-components.ts
+            ├── get-component-demo.ts
+            ├── list-exports.ts
+            └── get-utils.ts
 
-	await page.element(button).click();
-	// Assert behavior
+packages/mcp-stdio/src/
+└── index.ts                       # StdioTransport entry (tsx shebang)
+
+src/
+├── lib/mcp/index.ts               # HttpTransport for /mcp endpoint
+└── hooks.server.ts                # SvelteKit handle hook — routes /mcp
+```
+
+### Adding a Tool
+
+1. Create `packages/mcp-server/src/mcp/handlers/tools/{name}.ts`:
+
+```ts
+import * as v from 'valibot';
+import { tool } from 'tmcp/utils';
+import type { AlusMcp } from '../../index.js';
+
+const schema = v.object({
+  query: v.pipe(v.string(), v.description('...')),
 });
+
+export function my_tool(server: AlusMcp) {
+  server.tool(
+    {
+      name: 'alus_my_tool',
+      description: 'What this tool does.',
+      schema,
+      annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: false },
+    },
+    async (params) => {
+      try {
+        return tool.text('result');
+      } catch (e) {
+        return tool.error((e as Error).message);
+      }
+    },
+  );
+}
 ```
 
-## 📖 Documentation
+2. Export from `packages/mcp-server/src/mcp/handlers/tools/index.ts` — `setup_tools()` picks it up automatically.
 
-### Component Documentation
+### Running Locally
 
-Each component should have:
+**Stdio (for Claude Code / MCP Inspector):**
 
-1. **Usage examples** in showcase app
-2. **Props documentation** in component file or README
-3. **Accessibility notes** if complex behavior
-4. **TypeScript types** exported for users
-
-```svelte
-<!--
-	Checkbox
-
-	Accessible checkbox component with keyboard support.
-
-	Props:
-	- checked: boolean - Current checked state
-	- disabled: boolean - Disable the checkbox
-	- aria-label: string - Accessibility label
-
-	Events:
-	- change: Dispatched when value changes
-
-	Usage:
-	<Checkbox bind:checked={value} />
--->
+```bash
+pnpm --filter alus-ui-mcp run start   # tsx, no build needed
+pnpm --filter alus-ui-mcp run dev     # watch mode
 ```
 
-## (☆^\_☆) Design Principles
+**Build compiled binary:**
 
-### Unstyled Philosophy
+```bash
+pnpm --filter alus-ui-mcp run build   # outputs dist/index.js via tsup
+```
 
-- **No default colors** - Let users control appearance
-- **No layout assumptions** - Don't force responsive behavior
-- **Utility-friendly** - Works with Tailwind, CSS-in-JS, plain CSS
-- **Theme-agnostic** - Support light/dark mode via CSS variables
+**Test via MCP Inspector:**
 
-### Accessibility First
+```bash
+pnpm dlx @modelcontextprotocol/inspector pnpm --filter alus-ui-mcp run start
+```
 
-- **Keyboard navigation** - All features accessible via keyboard
-- **Screen readers** - Proper ARIA and semantic HTML
-- **Focus indicators** - Visible focus states
-- **Error handling** - Clear error messages and states
-- **WCAG 2.1 AA** - Meet accessibility standards
+**HTTP (via showcase dev server):**
 
-## (x_x) Reporting Issues
+```bash
+pnpm dev:showcase
+# /mcp is live at http://localhost:5173/mcp
+# Note: browser GET redirects to GitHub — use an MCP client (POST) to interact
+```
 
-When reporting bugs:
+### Claude Code Config
 
-1. **Search existing issues** first
-2. **Use issue templates** if available
-3. **Provide reproduction** - Code snippet or reproduction link
-4. **Describe expected vs actual** behavior
-5. **Include environment info** - Browser, OS, Svelte version
+Add to `~/.claude/settings.json` or `.claude/settings.json`:
 
-## (º_º) Discussion
+```json
+{
+  "mcpServers": {
+    "alus-ui": {
+      "command": "pnpm",
+      "args": ["--filter", "alus-ui-mcp", "run", "start"],
+      "cwd": "/path/to/alus"
+    }
+  }
+}
+```
 
-For questions and discussions:
+### Remote Endpoint
 
-- Start a [GitHub Discussion](https://github.com/Hanivan/alus/discussions)
-- Join our community chat (if available)
-- Check existing documentation first
+The production Cloudflare deployment exposes:
 
-## (ಠ_ಠ) Code of Conduct
+```
+https://alus.lkmn.link/mcp
+```
 
-Be respectful, inclusive, and constructive:
+Claude Code remote config:
 
-- Respect differing opinions
-- Provide constructive feedback
-- Accept feedback gracefully
-- Focus on what's best for the community
-
-## \(^\_^)/ Recognition
-
-Contributors will be:
-
-- Listed in contributors section
-- Credited in release notes
-- Acknowledged in significant contributions
-
-Thank you for contributing to alus-ui! (♡˙︶˙♡)
+```json
+{
+  "mcpServers": {
+    "alus-ui": {
+      "url": "https://alus.lkmn.link/mcp"
+    }
+  }
+}
+```
 
 ## (>\_<) Releasing
 
-Maintainers cut releases with [release-it](https://github.com/release-it/release-it). See `packages/alus/README.md#releasing` for the full pipeline. TL;DR:
+### Component library (`alus-ui`)
 
 ```bash
 cd packages/alus
-pnpm release:dry      # preview
-pnpm release          # interactive
+pnpm release:dry    # preview bump, changelog, tag
+pnpm release        # interactive
+pnpm release:patch  # 0.1.0 → 0.1.1
+pnpm release:minor  # 0.1.0 → 0.2.0
+pnpm release:major  # 0.1.0 → 1.0.0
 ```
 
-Versions auto-bump from conventional commits. Tag format: `v<version>`.
+Prereqs: clean `main`, `npm whoami` succeeds, `GITHUB_TOKEN` exported. Pipeline: `pnpm check` → version bump → `pnpm build` → `CHANGELOG.md` → commit → tag → push → GitHub release → `npm publish`.
 
-## (・\_・) Additional Resources
+### MCP CLI (`alus-ui-mcp`)
 
-- [Svelte 5 Documentation](https://svelte.dev/docs)
-- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
-- [ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)
-- [Component Roadmap](docs/todos/ui-components-roadmap.md)
-- [Project CLAUDE.md](CLAUDE.md) — full conventions reference
+```bash
+cd packages/mcp-stdio
+pnpm release:dry     # preview bump, changelog, tag
+pnpm release         # interactive
+pnpm release:patch   # 0.0.1 → 0.0.2
+pnpm release:minor   # 0.0.1 → 0.1.0
+pnpm release:major   # 0.0.1 → 1.0.0
+```
+
+Prereqs: clean `main`, `npm whoami` succeeds, `GITHUB_TOKEN` exported. Pipeline: version bump → `pnpm build` (tsup bundles to `dist/`) → `CHANGELOG.md` → commit → tag `mcp-vX.Y.Z` → push → GitHub release → `npm publish`.
+
+## (x_x) Reporting Issues
+
+1. Search existing issues first
+2. Include: reproduction snippet, expected vs actual, browser/OS/Svelte version
+
+## (ಠ_ಠ) Code of Conduct
+
+Respectful, inclusive, constructive.
+
+## (・\_・) Resources
+
+- [Svelte 5 Docs](https://svelte.dev/docs)
+- [WCAG 2.1](https://www.w3.org/WAI/WCAG21/quickref/)
+- [ARIA APG](https://www.w3.org/WAI/ARIA/apg/)
+- [tmcp](https://github.com/tmcp/tmcp)
+- [Model Context Protocol](https://modelcontextprotocol.io)
+- [CLAUDE.md](CLAUDE.md) — full project conventions (authoritative)

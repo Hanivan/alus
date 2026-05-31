@@ -1,0 +1,17 @@
+{
+	"name": "@alus-ui/mcp-server",
+	"version": "0.0.1",
+	"private": true,
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts"
+	},
+	"dependencies": {
+		"tmcp": "latest",
+		"@tmcp/adapter-valibot": "latest",
+		"valibot": "latest"
+	},
+	"devDependencies": {
+		"typescript": "^5"
+	}
+}

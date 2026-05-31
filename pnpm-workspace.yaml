@@ -4,3 +4,7 @@ allowBuilds:
   esbuild: true
   sharp: true
   workerd: true
+peerDependencyRules:
+  allowedVersions:
+    '@tailwindcss/typography>tailwindcss': '4'
+    'svelte2tsx>typescript': '6'

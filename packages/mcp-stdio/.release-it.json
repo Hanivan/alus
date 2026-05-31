@@ -1,0 +1,44 @@
+{
+	"$schema": "https://unpkg.com/release-it/schema/release-it.json",
+	"git": {
+		"commitMessage": "chore(mcp-release): v${version}",
+		"tagName": "mcp-v${version}",
+		"tagAnnotation": "alus-ui-mcp v${version}",
+		"requireCleanWorkingDir": true,
+		"requireBranch": "main",
+		"push": true
+	},
+	"github": {
+		"release": true,
+		"releaseName": "alus-ui-mcp v${version}",
+		"autoGenerate": false
+	},
+	"npm": {
+		"publish": true,
+		"publishPath": "."
+	},
+	"hooks": {
+		"after:bump": "pnpm build"
+	},
+	"plugins": {
+		"@release-it/conventional-changelog": {
+			"preset": {
+				"name": "conventionalcommits",
+				"types": [
+					{ "type": "feat", "section": "Features" },
+					{ "type": "fix", "section": "Bug Fixes" },
+					{ "type": "perf", "section": "Performance" },
+					{ "type": "refactor", "section": "Refactors" },
+					{ "type": "docs", "section": "Documentation" },
+					{ "type": "test", "section": "Tests" },
+					{ "type": "build", "section": "Build" },
+					{ "type": "ci", "hidden": true },
+					{ "type": "chore", "hidden": true },
+					{ "type": "style", "hidden": true }
+				]
+			},
+			"infile": "CHANGELOG.md",
+			"header": "# Changelog"
+		}
+	}
+}
