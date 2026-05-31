@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.1](https://github.com/Hanivan/alus/compare/mcp-v0.3.0...mcp-v0.3.1) (2026-05-31)
+
+### Bug Fixes
+
+* **lint:** fix all 190 ESLint errors and configure ignore patterns ([1c045da](https://github.com/Hanivan/alus/commit/1c045dad8f6743b38a9d4cc70524290a05f27867))
+* **lint:** implement svelte/no-navigation-without-resolve across all routes and components ([5b2cd39](https://github.com/Hanivan/alus/commit/5b2cd395088e5bf3c45e61a2705d56f61aaeaf89))
+* resolve build warnings and remove SvelteKit dep from library components ([19e1e6d](https://github.com/Hanivan/alus/commit/19e1e6d4a5872d0ba243009cf2e0ac1908c45ef8))
+* use semantic HTML tags and fix HttpTransport type ([f57176d](https://github.com/Hanivan/alus/commit/f57176d0448c661569dd485406225b124c6cc7e6))
+
 ## [0.3.0](https://github.com/Hanivan/alus/compare/mcp-v0.2.0...mcp-v0.3.0) (2026-05-31)
 
 ### Features
