@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.0](https://github.com/Hanivan/alus/compare/mcp-v0.1.0...mcp-v0.2.0) (2026-05-31)
+
+### Bug Fixes
+
+* bundle all deps into dist to fix npx workspace:* error ([cd0bb6f](https://github.com/Hanivan/alus/commit/cd0bb6fede67dfc2c9f33ff12b05ebca300b183a))
+
 ## [0.1.0](https://github.com/Hanivan/alus/compare/v0.1.3...mcp-v0.1.0) (2026-05-31)
 
 ### Features
