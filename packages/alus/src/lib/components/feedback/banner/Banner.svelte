@@ -54,7 +54,7 @@
 </script>
 
 {#if open}
-	<div
+	<section
 		{role}
 		aria-live={live ?? (role === 'alert' ? 'assertive' : role === 'status' ? 'polite' : undefined)}
 		data-variant={variant}
@@ -71,5 +71,5 @@
 		{#if dismissible}
 			<button type="button" aria-label="Dismiss banner" onclick={dismiss}>×</button>
 		{/if}
-	</div>
+	</section>
 {/if}

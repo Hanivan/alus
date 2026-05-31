@@ -47,8 +47,7 @@
 	const inferredLabel = $derived(`${label}: ${value}${trendText}`);
 </script>
 
-<div
-	role="group"
+<article
 	class={className}
 	data-trend={trend}
 	{...mergeAttrs(
@@ -73,4 +72,4 @@
 		{#if hint}<div class={hintClass}>{hint}</div>{/if}
 	</div>
 	{#if actions}{@render actions()}{/if}
-</div>
+</article>
