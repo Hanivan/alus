@@ -279,21 +279,34 @@ pnpm dev:showcase
 # Note: browser GET redirects to GitHub — use an MCP client (POST) to interact
 ```
 
-### Claude Code Config
+### Claude Code Config (contributors)
 
-Add to `~/.claude/settings.json` or `.claude/settings.json`:
+This config is for working inside the alus repo. Build the MCP package first:
+
+```bash
+pnpm --filter alus-ui-mcp build
+```
+
+Then add to `.mcp.json` at your project root:
 
 ```json
 {
   "mcpServers": {
     "alus-ui": {
-      "command": "pnpm",
-      "args": ["--filter", "alus-ui-mcp", "run", "start"],
-      "cwd": "/path/to/alus"
+      "type": "stdio",
+      "command": "node",
+      "args": ["${HOME}/path/to/alus/packages/mcp-stdio/dist/index.js"],
+      "env": {
+        "ALUS_ROOT": "${HOME}/path/to/alus"
+      }
     }
   }
 }
 ```
+
+Replace `path/to/alus` with your clone path. `${HOME}` is expanded by Claude Code — `cwd` is not supported in `.mcp.json`.
+
+Library users (not contributing to alus) should use `npx alus-ui-mcp` instead — see [packages/mcp-stdio/README.md](packages/mcp-stdio/README.md).
 
 ### Remote Endpoint
 

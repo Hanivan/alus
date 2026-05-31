@@ -143,28 +143,42 @@ alus-ui ships an MCP server that gives LLMs direct access to component source, d
 | `alus_list_exports` | Show full public API (`components/index.ts`) |
 | `alus_get_utils` | Read a11y/form utility module source |
 
-### Claude Code (stdio)
+### Claude Code — library users (recommended)
+
+Add to `.mcp.json` at your project root:
 
 ```json
 {
   "mcpServers": {
     "alus-ui": {
-      "command": "pnpm",
-      "args": ["--filter", "alus-ui-mcp", "run", "start"],
-      "cwd": "/path/to/alus"
+      "type": "stdio",
+      "command": "npx",
+      "args": ["alus-ui-mcp"]
     }
   }
 }
 ```
 
-Or after publishing:
+### Claude Code — alus monorepo contributors only
+
+Build first:
+
+```bash
+pnpm --filter alus-ui-mcp build
+```
+
+Then add to `.mcp.json` at your project root (replace `path/to/alus`):
 
 ```json
 {
   "mcpServers": {
     "alus-ui": {
-      "command": "npx",
-      "args": ["alus-ui-mcp"]
+      "type": "stdio",
+      "command": "node",
+      "args": ["${HOME}/path/to/alus/packages/mcp-stdio/dist/index.js"],
+      "env": {
+        "ALUS_ROOT": "${HOME}/path/to/alus"
+      }
     }
   }
 }

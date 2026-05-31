@@ -14,28 +14,15 @@ npx alus-ui-mcp
 
 ### Claude Code
 
-Add to `~/.claude/settings.json`:
+Add to `.mcp.json` at your project root:
 
 ```json
 {
   "mcpServers": {
     "alus-ui": {
+      "type": "stdio",
       "command": "npx",
       "args": ["alus-ui-mcp"]
-    }
-  }
-}
-```
-
-Or if working inside the alus monorepo:
-
-```json
-{
-  "mcpServers": {
-    "alus-ui": {
-      "command": "pnpm",
-      "args": ["--filter", "alus-ui-mcp", "run", "start"],
-      "cwd": "/path/to/alus"
     }
   }
 }
@@ -65,32 +52,6 @@ The production Cloudflare deployment exposes `/mcp`. Point your client to:
 | `alus_get_component_demo` | Read showcase demo page |
 | `alus_list_exports` | Show full public API (`components/index.ts`) |
 | `alus_get_utils` | Read a11y/form utility module source |
-
-## Development
-
-```bash
-# from repo root
-pnpm --filter alus-ui-mcp run start   # run stdio server (tsx, no build)
-pnpm --filter alus-ui-mcp run dev     # watch mode (tsx)
-pnpm --filter alus-ui-mcp run build   # compile to dist/ via tsup
-```
-
-## Releasing
-
-```bash
-cd packages/mcp-stdio
-pnpm release:dry     # preview bump, changelog, tag
-pnpm release         # interactive
-pnpm release:patch   # 0.0.1 → 0.0.2
-pnpm release:minor   # 0.0.1 → 0.1.0
-pnpm release:major   # 0.0.1 → 1.0.0
-```
-
-Prereqs: clean `main`, `npm whoami` succeeds, `GITHUB_TOKEN` exported. Pipeline: version bump → `pnpm build` → `CHANGELOG.md` → commit → tag `mcp-vX.Y.Z` → push → GitHub release → `npm publish`.
-
-## Environment
-
-`ALUS_ROOT` — override the alus repo root path (default: auto-detected from package location).
 
 ## License
 

@@ -4,7 +4,7 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "concurrently --kill-others \"pnpm --filter alus-ui dev\" \"pnpm dev:showcase\"",
+		"dev": "concurrently --kill-others \"pnpm --filter alus-ui dev\" \"pnpm dev:showcase\" \"pnpm --filter alus-ui-mcp run dev:build\"",
 		"dev:showcase": "vite dev",
 		"predev:showcase": "wrangler types",
 		"prebuild": "wrangler types",

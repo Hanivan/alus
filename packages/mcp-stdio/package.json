@@ -38,6 +38,7 @@
 	],
 	"scripts": {
 		"build": "tsup",
+		"dev:build": "tsup --watch",
 		"dev": "tsx watch src/index.ts",
 		"start": "tsx src/index.ts",
 		"prepublishOnly": "npm run build",
