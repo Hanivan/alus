@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { CaretLeft, CaretRight, House } from 'phosphor-svelte';
 	import { Breadcrumb, BreadcrumbItem, BreadcrumbSeparator } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
@@ -17,7 +18,7 @@
 </svelte:head>
 
 <a
-	href="/"
+	href={resolve('/')}
 	class="mb-8 inline-flex items-center gap-2 text-(--indigo-dye) transition-colors duration-300 hover:text-(--vermilion)"
 >
 	<CaretLeft class="h-5 w-5" />
@@ -47,11 +48,17 @@
 
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<Breadcrumb listClass="flex flex-wrap items-center gap-2 text-sm">
-				<BreadcrumbItem href="/" linkClass="text-(--indigo-dye) hover:text-(--vermilion)">
+				<BreadcrumbItem
+					href={resolve('/')}
+					linkClass="text-(--indigo-dye) hover:text-(--vermilion)"
+				>
 					Home
 				</BreadcrumbItem>
 				<BreadcrumbSeparator class="text-(--charcoal)/30">/</BreadcrumbSeparator>
-				<BreadcrumbItem href="/components" linkClass="text-(--indigo-dye) hover:text-(--vermilion)">
+				<BreadcrumbItem
+					href={resolve('/components')}
+					linkClass="text-(--indigo-dye) hover:text-(--vermilion)"
+				>
 					Components
 				</BreadcrumbItem>
 				<BreadcrumbSeparator class="text-(--charcoal)/30">/</BreadcrumbSeparator>
@@ -69,7 +76,7 @@
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<Breadcrumb listClass="flex flex-wrap items-center gap-2 text-sm">
 				<BreadcrumbItem
-					href="/"
+					href={resolve('/')}
 					linkClass="inline-flex items-center gap-1 text-(--indigo-dye) hover:text-(--vermilion)"
 				>
 					<House class="h-4 w-4" />
@@ -78,7 +85,10 @@
 				<BreadcrumbSeparator class="text-(--charcoal)/30">
 					<CaretRight class="h-3 w-3" />
 				</BreadcrumbSeparator>
-				<BreadcrumbItem href="/docs" linkClass="text-(--indigo-dye) hover:text-(--vermilion)">
+				<BreadcrumbItem
+					href={resolve('/docs')}
+					linkClass="text-(--indigo-dye) hover:text-(--vermilion)"
+				>
 					Docs
 				</BreadcrumbItem>
 				<BreadcrumbSeparator class="text-(--charcoal)/30">

@@ -2,6 +2,7 @@
 	import { CaretLeft, House, Compass, BookOpen, Gear } from 'phosphor-svelte';
 	import { Navigation } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
+	import { resolve } from '$app/paths';
 
 	const code = `<Navigation aria-label="Primary">
 	<a href="/" aria-current="page">Home</a>
@@ -15,7 +16,7 @@
 </svelte:head>
 
 <a
-	href="/"
+	href={resolve('/')}
 	class="mb-8 inline-flex items-center gap-2 text-(--indigo-dye) transition-colors duration-300 hover:text-(--vermilion)"
 >
 	<CaretLeft class="h-5 w-5" />
@@ -45,26 +46,26 @@
 				class="flex items-center gap-1 rounded border border-(--charcoal)/15 bg-white p-1"
 			>
 				<a
-					href="/"
+					href={resolve('/')}
 					aria-current="page"
 					class="inline-flex items-center gap-2 rounded px-3 py-1.5 text-sm text-(--ink) aria-[current=page]:bg-(--indigo-dye) aria-[current=page]:text-white"
 				>
 					<House class="h-4 w-4" />Home
 				</a>
 				<a
-					href="/components"
+					href={resolve('/components')}
 					class="inline-flex items-center gap-2 rounded px-3 py-1.5 text-sm text-(--ink) hover:bg-(--cream)"
 				>
 					<Compass class="h-4 w-4" />Components
 				</a>
 				<a
-					href="/docs"
+					href={resolve('/docs')}
 					class="inline-flex items-center gap-2 rounded px-3 py-1.5 text-sm text-(--ink) hover:bg-(--cream)"
 				>
 					<BookOpen class="h-4 w-4" />Docs
 				</a>
 				<a
-					href="/settings"
+					href={resolve('/settings')}
 					class="inline-flex items-center gap-2 rounded px-3 py-1.5 text-sm text-(--ink) hover:bg-(--cream)"
 				>
 					<Gear class="h-4 w-4" />Settings

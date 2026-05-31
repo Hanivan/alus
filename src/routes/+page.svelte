@@ -11,6 +11,7 @@
 	} from 'alus-ui';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
+	import { resolve } from '$app/paths';
 
 	type Category =
 		| 'Form'
@@ -710,7 +711,11 @@
 		if (current === slug) return;
 		const url = new URL(page.url);
 		url.searchParams.set('c', slug);
-		goto(url, { replaceState: true, noScroll: true, keepFocus: true });
+		goto(resolve(url.pathname + url.search), {
+			replaceState: true,
+			noScroll: true,
+			keepFocus: true
+		});
 	});
 
 	// Hash deep-link: #input → switch to that card's category, scroll, flash
@@ -786,7 +791,7 @@
 
 	async function pick(href: string) {
 		paletteOpen = false;
-		await goto(href);
+		await goto(resolve(href));
 	}
 
 	const grouped = $derived(
@@ -972,7 +977,7 @@
 				{@const slug = comp.href.split('/').pop()}
 				<a
 					id="card-{slug}"
-					href={comp.href}
+					href={resolve(comp.href)}
 					data-card={slug}
 					class="card group relative block overflow-hidden border border-(--indigo-dye)/15 bg-white p-5 transition-all duration-300 hover:border-(--vermilion) hover:shadow-[4px_4px_0_0_var(--indigo-dye)] focus-visible:border-(--vermilion) focus-visible:shadow-[4px_4px_0_0_var(--indigo-dye)] focus-visible:outline-none"
 					style="animation: fadeInUp 0.4s ease-out {Math.min(index, 12) * 0.04}s both;"

@@ -2,6 +2,7 @@
 	import { CaretLeft, Check } from 'phosphor-svelte';
 	import { Stepper, StepperStep, Button } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
+	import { resolve } from '$app/paths';
 
 	const code = `<Stepper value={1} steps={3}>
 	<StepperStep index={0}>Account</StepperStep>
@@ -23,7 +24,7 @@
 </svelte:head>
 
 <a
-	href="/"
+	href={resolve('/')}
 	class="mb-8 inline-flex items-center gap-2 text-(--indigo-dye) transition-colors duration-300 hover:text-(--vermilion)"
 >
 	<CaretLeft class="h-5 w-5" />

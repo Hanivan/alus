@@ -2,6 +2,7 @@
 	import { CaretLeft, Bell, BellRinging } from 'phosphor-svelte';
 	import { NotificationBell, Button } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
+	import { resolve } from '$app/paths';
 
 	const code = `<NotificationBell count={3} max={99} onclick={open}>
 	{#snippet children({ hasUnread })}
@@ -19,7 +20,7 @@
 </svelte:head>
 
 <a
-	href="/"
+	href={resolve('/')}
 	class="mb-8 inline-flex items-center gap-2 text-(--indigo-dye) transition-colors duration-300 hover:text-(--vermilion)"
 >
 	<CaretLeft class="h-5 w-5" />

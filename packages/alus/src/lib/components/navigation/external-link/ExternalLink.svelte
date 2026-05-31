@@ -30,7 +30,7 @@
 <a
 	{href}
 	target={newTab ? '_blank' : undefined}
-	rel={newTab ? 'noopener noreferrer' : undefined}
+	rel="external noopener noreferrer"
 	class={className}
 	aria-label={ariaLabel}
 	aria-describedby={ariaDescribedby}

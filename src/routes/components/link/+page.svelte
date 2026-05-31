@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { CaretLeft, ArrowSquareOut } from 'phosphor-svelte';
 	import { Link } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
@@ -12,7 +13,7 @@
 </svelte:head>
 
 <a
-	href="/"
+	href={resolve('/')}
 	class="mb-8 inline-flex items-center gap-2 text-(--indigo-dye) transition-colors duration-300 hover:text-(--vermilion)"
 >
 	<CaretLeft class="h-5 w-5" />
@@ -42,7 +43,7 @@
 
 		<div class="japanese-border space-y-4 bg-white/50 p-8 backdrop-blur-sm">
 			<p>
-				<Link href="/" class="text-(--indigo-dye) underline hover:text-(--vermilion)">
+				<Link href={resolve('/')} class="text-(--indigo-dye) underline hover:text-(--vermilion)">
 					Internal link
 				</Link>
 				— points within the app.
@@ -59,7 +60,7 @@
 			</p>
 			<p>
 				<Link
-					href="/components"
+					href={resolve('/components')}
 					current="page"
 					class="text-(--vermilion) underline aria-[current=page]:font-semibold"
 				>

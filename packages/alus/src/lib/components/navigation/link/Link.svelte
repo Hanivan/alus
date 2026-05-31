@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { resolve } from '$app/paths';
 
 	type Target = '_self' | '_blank' | '_parent' | '_top';
 
@@ -36,7 +37,6 @@
 	}: Props = $props();
 
 	let isExternal = $derived(external ?? (typeof href === 'string' && /^https?:\/\//i.test(href)));
-
 	let computedTarget = $derived(target ?? (isExternal ? '_blank' : undefined));
 	let computedRel = $derived(rel ?? (isExternal ? 'noopener noreferrer' : undefined));
 
@@ -48,7 +48,7 @@
 </script>
 
 <a
-	{href}
+	href={resolve(href)}
 	{id}
 	class={className}
 	target={computedTarget}

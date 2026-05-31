@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
+	import { resolve } from '$app/paths';
 	import { Textarea } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
 	import { Textarea } from 'alus-ui';
+	import { resolve } from '$app/paths';
 	let bio = $state('');
 <\/script>
 
@@ -25,7 +27,7 @@
 </svelte:head>
 
 <a
-	href="/"
+	href={resolve('/')}
 	class="mb-8 inline-flex items-center gap-2 text-(--indigo-dye) transition-colors duration-300 hover:text-(--vermilion)"
 >
 	<CaretLeft class="h-5 w-5" />

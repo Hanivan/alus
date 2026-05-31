@@ -2,6 +2,7 @@
 	import { CaretLeft, Check, Circle, CircleNotch } from 'phosphor-svelte';
 	import { Timeline, TimelineItem } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
+	import { resolve } from '$app/paths';
 
 	const code = `<Timeline aria-label="Project milestones">
 	<TimelineItem status="completed" time="Q1" datetime="2026-01-01">
@@ -19,7 +20,7 @@
 </svelte:head>
 
 <a
-	href="/"
+	href={resolve('/')}
 	class="mb-8 inline-flex items-center gap-2 text-(--indigo-dye) transition-colors duration-300 hover:text-(--vermilion)"
 >
 	<CaretLeft class="h-5 w-5" />

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { CaretLeft, CaretDown } from 'phosphor-svelte';
 	import { Dropdown, DropdownTrigger, DropdownContent, DropdownItem } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
@@ -20,7 +21,7 @@
 </svelte:head>
 
 <a
-	href="/"
+	href={resolve('/')}
 	class="mb-8 inline-flex items-center gap-2 text-(--indigo-dye) transition-colors duration-300 hover:text-(--vermilion)"
 >
 	<CaretLeft class="h-5 w-5" />

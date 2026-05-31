@@ -2,6 +2,7 @@
 	import { CaretLeft } from 'phosphor-svelte';
 	import { SplitView, SplitViewPane, SplitViewHandle } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
+	import { resolve } from '$app/paths';
 
 	const code = `<SplitView bind:size={pct} min={20} max={80} orientation="horizontal" aria-label="Editor">
 	<SplitViewPane side="first">Left</SplitViewPane>
@@ -18,7 +19,7 @@
 </svelte:head>
 
 <a
-	href="/"
+	href={resolve('/')}
 	class="mb-8 inline-flex items-center gap-2 text-(--indigo-dye) transition-colors duration-300 hover:text-(--vermilion)"
 >
 	<CaretLeft class="h-5 w-5" />

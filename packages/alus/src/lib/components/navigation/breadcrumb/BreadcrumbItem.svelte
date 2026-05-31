@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+
 	interface Props {
 		children?: import('svelte').Snippet;
 		href?: string;
@@ -16,7 +18,7 @@
 			{#if children}{@render children()}{/if}
 		</span>
 	{:else}
-		<a {href} class={linkClass}>
+		<a href={resolve(href!)} class={linkClass}>
 			{#if children}{@render children()}{/if}
 		</a>
 	{/if}

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
+	import { resolve } from '$app/paths';
 
 	let { children } = $props();
 </script>
@@ -11,7 +12,7 @@
 	<!-- Minimal Header -->
 	<header class="border-b border-(--indigo-dye)/10 bg-white/50 backdrop-blur-sm">
 		<div class="mx-auto max-w-6xl px-6 py-4">
-			<a href="/" class="group inline-flex items-center gap-3">
+			<a href={resolve('/')} class="group inline-flex items-center gap-3">
 				<div
 					class="flex h-10 w-10 items-center justify-center rounded-full bg-(--indigo-dye) transition-colors duration-300 group-hover:bg-(--vermilion)"
 				>
