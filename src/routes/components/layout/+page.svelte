@@ -62,7 +62,7 @@
 		<h2 class="font-display mb-6 text-2xl text-(--ink)">Stack — vertical</h2>
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<Stack gap="0.75rem" align="stretch">
-				{#each tiles.slice(0, 4) as n}
+				{#each tiles.slice(0, 4) as n, i (i)}
 					<div class="{card} h-12">{n}</div>
 				{/each}
 			</Stack>
@@ -73,7 +73,7 @@
 		<h2 class="font-display mb-6 text-2xl text-(--ink)">Stack — horizontal with wrap</h2>
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<Stack direction="horizontal" gap="0.5rem" wrap>
-				{#each tiles as n}
+				{#each tiles as n, i (i)}
 					<div class="{card} h-12 w-24">{n}</div>
 				{/each}
 			</Stack>
@@ -110,7 +110,7 @@
 		<h2 class="font-display mb-6 text-2xl text-(--ink)">Grid — fixed columns</h2>
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<Grid cols={4} gap="0.75rem">
-				{#each tiles as n}
+				{#each tiles as n, i (i)}
 					<div class="{card} h-20">{n}</div>
 				{/each}
 			</Grid>
@@ -121,7 +121,7 @@
 		<h2 class="font-display mb-6 text-2xl text-(--ink)">Grid — auto-fill with minColWidth</h2>
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<Grid minColWidth="140px" gap="0.75rem">
-				{#each tiles as n}
+				{#each tiles as n, i (i)}
 					<div class="{card} h-20">{n}</div>
 				{/each}
 			</Grid>
@@ -148,7 +148,7 @@
 		<h2 class="font-display mb-6 text-2xl text-(--ink)">Columns — multi-column text flow</h2>
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<Columns count={3} gap="2rem" class="text-sm text-(--charcoal)/80">
-				{#each paragraphs as p, i}
+				{#each paragraphs as p, i (i)}
 					<p class="mb-3" style={i === 0 ? '' : 'break-inside:avoid;'}>{p}</p>
 				{/each}
 			</Columns>

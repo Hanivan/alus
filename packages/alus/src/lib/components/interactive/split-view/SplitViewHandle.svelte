@@ -74,12 +74,7 @@
 		const horiz = ctx.orientation() === 'horizontal';
 		const incKey = horiz ? 'ArrowRight' : 'ArrowDown';
 		const decKey = horiz ? 'ArrowLeft' : 'ArrowUp';
-		let delta = 0;
-		if (e.key === incKey) delta = step;
-		else if (e.key === decKey) delta = -step;
-		else if (e.key === 'PageDown') delta = largeStep;
-		else if (e.key === 'PageUp') delta = -largeStep;
-		else if (e.key === 'Home') {
+		if (e.key === 'Home') {
 			e.preventDefault();
 			ctx.setSize(ctx.min());
 			return;
@@ -87,16 +82,18 @@
 			e.preventDefault();
 			ctx.setSize(ctx.max());
 			return;
-		} else {
-			return;
 		}
+		let delta;
+		if (e.key === incKey) delta = step;
+		else if (e.key === decKey) delta = -step;
+		else if (e.key === 'PageDown') delta = largeStep;
+		else if (e.key === 'PageUp') delta = -largeStep;
+		else return;
 		e.preventDefault();
 		ctx.setSize(ctx.size() + delta);
 	}
 </script>
 
-<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div
 	{@attach attach}
 	role="separator"

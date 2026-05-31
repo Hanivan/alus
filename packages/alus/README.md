@@ -19,8 +19,8 @@ npm install alus-ui
 
 ```svelte
 <script lang="ts">
-  import { Button, Input } from 'alus-ui';
-  let name = $state('');
+	import { Button, Input } from 'alus-ui';
+	let name = $state('');
 </script>
 
 <Input bind:value={name} placeholder="Enter your name" aria-label="Name input" />
@@ -50,12 +50,10 @@ Components are unstyled — bring your own styles via Tailwind CSS or plain CSS:
 
 ```svelte
 <script lang="ts">
-  import { Button } from 'alus-ui';
+	import { Button } from 'alus-ui';
 </script>
 
-<Button class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
-  Submit
-</Button>
+<Button class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">Submit</Button>
 ```
 
 ## Accessibility
@@ -89,7 +87,13 @@ Form components additionally accept `required`, `aria-invalid`, `aria-errormessa
 ## Utilities
 
 ```ts
-import { labelAttrs, validationAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from 'alus-ui/a11y';
+import {
+	labelAttrs,
+	validationAttrs,
+	interactiveStateAttrs,
+	widgetAttrs,
+	mergeAttrs
+} from 'alus-ui/a11y';
 import { trap, focusFirst } from 'alus-ui/a11y';
 ```
 

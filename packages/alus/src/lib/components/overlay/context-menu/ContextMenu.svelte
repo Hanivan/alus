@@ -203,7 +203,7 @@
 			onkeydown={onMenuKey}
 			{@attach menuRef}
 		>
-			{#each items as it, i}
+			{#each items as it, i (i)}
 				{#if it.separator}
 					<div role="separator" class={separatorClass}></div>
 				{:else if item}

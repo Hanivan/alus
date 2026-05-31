@@ -84,7 +84,7 @@
 				aria-label="Size"
 				class="flex gap-6"
 			>
-				{#each ['s', 'm', 'l', 'xl'] as s}
+				{#each ['s', 'm', 'l', 'xl'] as s, i (i)}
 					<label class="flex items-center gap-2 text-(--charcoal) uppercase">
 						<Radio name="size" value={s} bind:group={size} class="accent-(--vermilion)" />
 						<span>{s}</span>

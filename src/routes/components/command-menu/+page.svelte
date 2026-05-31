@@ -117,127 +117,111 @@
 						</CommandMenuEmpty>
 
 						<CommandMenuGroup class="mb-1">
-							{#snippet children()}
-								<div
-									class="font-display px-2 py-1 text-xs tracking-widest text-(--bamboo) uppercase"
-								>
-									Files
-								</div>
-								<CommandMenuItem
-									value="New file"
-									keywords="create document 新規 ファイル 作成"
-									onSelect={() => handle('New file')}
-									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
-								>
-									<File class="h-4 w-4 text-(--indigo-dye)" />
-									<span>New file</span>
-									<kbd class="ml-auto font-mono text-xs text-(--charcoal)/50">⌘N</kbd>
-								</CommandMenuItem>
-								<CommandMenuItem
-									value="Open folder"
-									keywords="directory browse フォルダ 開く"
-									onSelect={() => handle('Open folder')}
-									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
-								>
-									<Folder class="h-4 w-4 text-(--indigo-dye)" />
-									<span>Open folder</span>
-									<kbd class="ml-auto font-mono text-xs text-(--charcoal)/50">⌘O</kbd>
-								</CommandMenuItem>
-							{/snippet}
+							<div class="font-display px-2 py-1 text-xs tracking-widest text-(--bamboo) uppercase">
+								Files
+							</div>
+							<CommandMenuItem
+								value="New file"
+								keywords="create document 新規 ファイル 作成"
+								onSelect={() => handle('New file')}
+								class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
+							>
+								<File class="h-4 w-4 text-(--indigo-dye)" />
+								<span>New file</span>
+								<kbd class="ml-auto font-mono text-xs text-(--charcoal)/50">⌘N</kbd>
+							</CommandMenuItem>
+							<CommandMenuItem
+								value="Open folder"
+								keywords="directory browse フォルダ 開く"
+								onSelect={() => handle('Open folder')}
+								class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
+							>
+								<Folder class="h-4 w-4 text-(--indigo-dye)" />
+								<span>Open folder</span>
+								<kbd class="ml-auto font-mono text-xs text-(--charcoal)/50">⌘O</kbd>
+							</CommandMenuItem>
 						</CommandMenuGroup>
 
 						<CommandMenuGroup>
-							{#snippet children()}
-								<div
-									class="font-display px-2 py-1 text-xs tracking-widest text-(--bamboo) uppercase"
-								>
-									Account
-								</div>
-								<CommandMenuItem
-									value="Profile"
-									keywords="account user me プロフィール 自分"
-									onSelect={() => handle('Profile')}
-									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
-								>
-									<User class="h-4 w-4 text-(--indigo-dye)" />
-									<span>View profile</span>
-								</CommandMenuItem>
-								<CommandMenuItem
-									value="Settings"
-									keywords="preferences config gear 設定 環境"
-									onSelect={() => handle('Settings')}
-									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
-								>
-									<Gear class="h-4 w-4 text-(--indigo-dye)" />
-									<span>Settings</span>
-									<kbd class="ml-auto font-mono text-xs text-(--charcoal)/50">⌘,</kbd>
-								</CommandMenuItem>
-							{/snippet}
+							<div class="font-display px-2 py-1 text-xs tracking-widest text-(--bamboo) uppercase">
+								Account
+							</div>
+							<CommandMenuItem
+								value="Profile"
+								keywords="account user me プロフィール 自分"
+								onSelect={() => handle('Profile')}
+								class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
+							>
+								<User class="h-4 w-4 text-(--indigo-dye)" />
+								<span>View profile</span>
+							</CommandMenuItem>
+							<CommandMenuItem
+								value="Settings"
+								keywords="preferences config gear 設定 環境"
+								onSelect={() => handle('Settings')}
+								class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
+							>
+								<Gear class="h-4 w-4 text-(--indigo-dye)" />
+								<span>Settings</span>
+								<kbd class="ml-auto font-mono text-xs text-(--charcoal)/50">⌘,</kbd>
+							</CommandMenuItem>
 						</CommandMenuGroup>
 
 						<CommandMenuGroup>
-							{#snippet children()}
-								<div
-									class="font-display px-2 py-1 text-xs tracking-widest text-(--bamboo) uppercase"
-								>
-									Theme
-								</div>
-								<CommandMenuItem
-									value="Light theme"
-									keywords="day bright sun 明るい 太陽 昼"
-									onSelect={() => handle('Light theme')}
-									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
-								>
-									<Sun class="h-4 w-4 text-(--muted-gold)" />
-									<span>Switch to light</span>
-								</CommandMenuItem>
-								<CommandMenuItem
-									value="Dark theme"
-									keywords="night moon 暗い 夜 月"
-									onSelect={() => handle('Dark theme')}
-									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
-								>
-									<Moon class="h-4 w-4 text-(--indigo-dye)" />
-									<span>Switch to dark</span>
-								</CommandMenuItem>
-							{/snippet}
+							<div class="font-display px-2 py-1 text-xs tracking-widest text-(--bamboo) uppercase">
+								Theme
+							</div>
+							<CommandMenuItem
+								value="Light theme"
+								keywords="day bright sun 明るい 太陽 昼"
+								onSelect={() => handle('Light theme')}
+								class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
+							>
+								<Sun class="h-4 w-4 text-(--muted-gold)" />
+								<span>Switch to light</span>
+							</CommandMenuItem>
+							<CommandMenuItem
+								value="Dark theme"
+								keywords="night moon 暗い 夜 月"
+								onSelect={() => handle('Dark theme')}
+								class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
+							>
+								<Moon class="h-4 w-4 text-(--indigo-dye)" />
+								<span>Switch to dark</span>
+							</CommandMenuItem>
 						</CommandMenuGroup>
 
 						<CommandMenuGroup>
-							{#snippet children()}
-								<div
-									class="font-display px-2 py-1 text-xs tracking-widest text-(--bamboo) uppercase"
-								>
-									Actions
-								</div>
-								<CommandMenuItem
-									value="Open terminal"
-									keywords="shell command line cli 端末 ターミナル"
-									onSelect={() => handle('Open terminal')}
-									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
-								>
-									<Terminal class="h-4 w-4 text-(--indigo-dye)" />
-									<span>Open terminal</span>
-								</CommandMenuItem>
-								<CommandMenuItem
-									value="Reload"
-									keywords="refresh restart 更新 再読み込み"
-									onSelect={() => handle('Reload')}
-									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
-								>
-									<ArrowsClockwise class="h-4 w-4 text-(--indigo-dye)" />
-									<span>Reload window</span>
-								</CommandMenuItem>
-								<CommandMenuItem
-									value="Clear cache"
-									keywords="delete trash purge 削除 消去 ゴミ箱"
-									onSelect={() => handle('Clear cache')}
-									class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
-								>
-									<Trash class="h-4 w-4 text-(--vermilion)" />
-									<span>Clear cache</span>
-								</CommandMenuItem>
-							{/snippet}
+							<div class="font-display px-2 py-1 text-xs tracking-widest text-(--bamboo) uppercase">
+								Actions
+							</div>
+							<CommandMenuItem
+								value="Open terminal"
+								keywords="shell command line cli 端末 ターミナル"
+								onSelect={() => handle('Open terminal')}
+								class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
+							>
+								<Terminal class="h-4 w-4 text-(--indigo-dye)" />
+								<span>Open terminal</span>
+							</CommandMenuItem>
+							<CommandMenuItem
+								value="Reload"
+								keywords="refresh restart 更新 再読み込み"
+								onSelect={() => handle('Reload')}
+								class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
+							>
+								<ArrowsClockwise class="h-4 w-4 text-(--indigo-dye)" />
+								<span>Reload window</span>
+							</CommandMenuItem>
+							<CommandMenuItem
+								value="Clear cache"
+								keywords="delete trash purge 削除 消去 ゴミ箱"
+								onSelect={() => handle('Clear cache')}
+								class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
+							>
+								<Trash class="h-4 w-4 text-(--vermilion)" />
+								<span>Clear cache</span>
+							</CommandMenuItem>
 						</CommandMenuGroup>
 					</CommandMenuList>
 				</CommandMenuContent>

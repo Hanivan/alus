@@ -27,14 +27,14 @@ src/
 
 ## Tools
 
-| Tool | Description |
-|---|---|
-| `alus_list_components` | List all components, optionally filtered by category |
-| `alus_get_component` | Read full source of a component (`.svelte` + `index.ts`) |
-| `alus_search_components` | Full-text search across all component source files |
-| `alus_get_component_demo` | Read showcase demo page for a component |
-| `alus_list_exports` | Show full `components/index.ts` public API |
-| `alus_get_utils` | Read a11y/form utility module source |
+| Tool                      | Description                                              |
+| ------------------------- | -------------------------------------------------------- |
+| `alus_list_components`    | List all components, optionally filtered by category     |
+| `alus_get_component`      | Read full source of a component (`.svelte` + `index.ts`) |
+| `alus_search_components`  | Full-text search across all component source files       |
+| `alus_get_component_demo` | Read showcase demo page for a component                  |
+| `alus_list_exports`       | Show full `components/index.ts` public API               |
+| `alus_get_utils`          | Read a11y/form utility module source                     |
 
 ## Adding a Tool
 
@@ -46,25 +46,25 @@ import { tool } from 'tmcp/utils';
 import type { AlusMcp } from '../../index.js';
 
 const schema = v.object({
-  query: v.pipe(v.string(), v.description('...')),
+	query: v.pipe(v.string(), v.description('...'))
 });
 
 export function my_tool(server: AlusMcp) {
-  server.tool(
-    {
-      name: 'alus_my_tool',
-      description: 'What this does.',
-      schema,
-      annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: false },
-    },
-    async (params) => {
-      try {
-        return tool.text('result');
-      } catch (e) {
-        return tool.error((e as Error).message);
-      }
-    },
-  );
+	server.tool(
+		{
+			name: 'alus_my_tool',
+			description: 'What this does.',
+			schema,
+			annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: false }
+		},
+		async (params) => {
+			try {
+				return tool.text('result');
+			} catch (e) {
+				return tool.error((e as Error).message);
+			}
+		}
+	);
 }
 ```
 

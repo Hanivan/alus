@@ -159,108 +159,106 @@
 			</div>
 		{/snippet}
 
-		{#snippet children()}
-			<section class="mb-12">
-				<h2 class="font-display mb-6 text-2xl text-(--ink)">Placement</h2>
-				<div class="japanese-border bg-white/50 p-6 backdrop-blur-sm">
-					<div role="radiogroup" aria-label="Toast placement" class="grid grid-cols-3 gap-2">
-						{#each placements as p}
-							<button
-								type="button"
-								role="radio"
-								aria-checked={placement === p.value}
-								onclick={() => (placement = p.value)}
-								class="rounded border px-3 py-2 text-sm transition-colors"
-								style={placement === p.value
-									? 'background:var(--indigo-dye);border-color:var(--indigo-dye);color:white;'
-									: 'border-color:rgba(45,45,45,0.2);color:var(--ink);'}
-							>
-								{p.label}
-							</button>
-						{/each}
-					</div>
-					<p class="mt-3 font-mono text-xs text-(--charcoal)/60">
-						current: <code>{placement}</code>
-					</p>
+		<section class="mb-12">
+			<h2 class="font-display mb-6 text-2xl text-(--ink)">Placement</h2>
+			<div class="japanese-border bg-white/50 p-6 backdrop-blur-sm">
+				<div role="radiogroup" aria-label="Toast placement" class="grid grid-cols-3 gap-2">
+					{#each placements as p, i (i)}
+						<button
+							type="button"
+							role="radio"
+							aria-checked={placement === p.value}
+							onclick={() => (placement = p.value)}
+							class="rounded border px-3 py-2 text-sm transition-colors"
+							style={placement === p.value
+								? 'background:var(--indigo-dye);border-color:var(--indigo-dye);color:white;'
+								: 'border-color:rgba(45,45,45,0.2);color:var(--ink);'}
+						>
+							{p.label}
+						</button>
+					{/each}
 				</div>
-			</section>
-
-			<section class="mb-16">
-				<h2 class="font-display mb-8 text-2xl text-(--ink)">Trigger variants</h2>
-
-				<div class="japanese-border flex flex-wrap gap-3 bg-white/50 p-8 backdrop-blur-sm">
-					<Button
-						onclick={() =>
-							tt.addToast({
-								data: {
-									title: 'Saved',
-									description: 'Settings synced to the cloud.',
-									variant: 'success'
-								}
-							})}
-						class="rounded border border-(--matcha) bg-(--matcha) px-4 py-2 text-sm text-white"
-					>
-						Success
-					</Button>
-					<Button
-						onclick={() =>
-							tt.addToast({
-								type: 'assertive',
-								data: {
-									title: 'Heads up',
-									description: 'Token expires in 5 minutes.',
-									variant: 'warning'
-								}
-							})}
-						class="rounded border border-(--muted-gold) bg-(--muted-gold) px-4 py-2 text-sm text-(--ink)"
-					>
-						Warning
-					</Button>
-					<Button
-						onclick={() =>
-							tt.addToast({
-								type: 'assertive',
-								data: {
-									title: 'Upload failed',
-									description: 'Could not reach the server.',
-									variant: 'error',
-									action: {
-										label: 'Retry',
-										onClick: () => tt.addToast({ data: { title: 'Retrying…', variant: 'info' } })
-									}
-								}
-							})}
-						class="rounded border border-(--vermilion) bg-(--vermilion) px-4 py-2 text-sm text-white"
-					>
-						Error + action
-					</Button>
-					<Button
-						onclick={() =>
-							tt.addToast({
-								closeDelay: 0,
-								data: {
-									title: 'Persistent',
-									description: 'Stays until dismissed.',
-									variant: 'info'
-								}
-							})}
-						class="rounded border border-(--indigo-dye) px-4 py-2 text-sm text-(--indigo-dye)"
-					>
-						Persistent
-					</Button>
-					<Button
-						onclick={() => tt.clear()}
-						class="rounded border border-(--charcoal)/30 px-4 py-2 text-sm text-(--charcoal)"
-					>
-						Clear all
-					</Button>
-				</div>
-
-				<p class="mt-4 font-mono text-sm text-(--charcoal)/60">
-					Hover any toast to pause its timer. Switch tabs to pause all.
+				<p class="mt-3 font-mono text-xs text-(--charcoal)/60">
+					current: <code>{placement}</code>
 				</p>
-			</section>
-		{/snippet}
+			</div>
+		</section>
+
+		<section class="mb-16">
+			<h2 class="font-display mb-8 text-2xl text-(--ink)">Trigger variants</h2>
+
+			<div class="japanese-border flex flex-wrap gap-3 bg-white/50 p-8 backdrop-blur-sm">
+				<Button
+					onclick={() =>
+						tt.addToast({
+							data: {
+								title: 'Saved',
+								description: 'Settings synced to the cloud.',
+								variant: 'success'
+							}
+						})}
+					class="rounded border border-(--matcha) bg-(--matcha) px-4 py-2 text-sm text-white"
+				>
+					Success
+				</Button>
+				<Button
+					onclick={() =>
+						tt.addToast({
+							type: 'assertive',
+							data: {
+								title: 'Heads up',
+								description: 'Token expires in 5 minutes.',
+								variant: 'warning'
+							}
+						})}
+					class="rounded border border-(--muted-gold) bg-(--muted-gold) px-4 py-2 text-sm text-(--ink)"
+				>
+					Warning
+				</Button>
+				<Button
+					onclick={() =>
+						tt.addToast({
+							type: 'assertive',
+							data: {
+								title: 'Upload failed',
+								description: 'Could not reach the server.',
+								variant: 'error',
+								action: {
+									label: 'Retry',
+									onClick: () => tt.addToast({ data: { title: 'Retrying…', variant: 'info' } })
+								}
+							}
+						})}
+					class="rounded border border-(--vermilion) bg-(--vermilion) px-4 py-2 text-sm text-white"
+				>
+					Error + action
+				</Button>
+				<Button
+					onclick={() =>
+						tt.addToast({
+							closeDelay: 0,
+							data: {
+								title: 'Persistent',
+								description: 'Stays until dismissed.',
+								variant: 'info'
+							}
+						})}
+					class="rounded border border-(--indigo-dye) px-4 py-2 text-sm text-(--indigo-dye)"
+				>
+					Persistent
+				</Button>
+				<Button
+					onclick={() => tt.clear()}
+					class="rounded border border-(--charcoal)/30 px-4 py-2 text-sm text-(--charcoal)"
+				>
+					Clear all
+				</Button>
+			</div>
+
+			<p class="mt-4 font-mono text-sm text-(--charcoal)/60">
+				Hover any toast to pause its timer. Switch tabs to pause all.
+			</p>
+		</section>
 	</Toaster>
 
 	<DemoFooter

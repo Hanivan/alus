@@ -86,13 +86,7 @@
 		if (disabled) return;
 		const incKey = axis === 'x' ? 'ArrowRight' : 'ArrowDown';
 		const decKey = axis === 'x' ? 'ArrowLeft' : 'ArrowUp';
-		let delta = 0;
-
-		if (e.key === incKey) delta = step;
-		else if (e.key === decKey) delta = -step;
-		else if (e.key === 'PageDown') delta = largeStep;
-		else if (e.key === 'PageUp') delta = -largeStep;
-		else if (e.key === 'Home') {
+		if (e.key === 'Home') {
 			e.preventDefault();
 			commit(minSize);
 			return;
@@ -100,9 +94,13 @@
 			e.preventDefault();
 			if (Number.isFinite(maxSize)) commit(maxSize);
 			return;
-		} else {
-			return;
 		}
+		let delta;
+		if (e.key === incKey) delta = step;
+		else if (e.key === decKey) delta = -step;
+		else if (e.key === 'PageDown') delta = largeStep;
+		else if (e.key === 'PageUp') delta = -largeStep;
+		else return;
 
 		e.preventDefault();
 		commit(size + delta);
@@ -118,8 +116,6 @@
 	data-dragging={dragging || undefined}
 >
 	{#if children}{@render children()}{/if}
-	<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 	<div
 		role="separator"
 		tabindex={disabled ? -1 : 0}

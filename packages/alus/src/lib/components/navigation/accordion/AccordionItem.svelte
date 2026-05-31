@@ -12,9 +12,6 @@
 
 	const root = getAccordionRoot();
 
-	let triggerId = $derived(`${root.baseId}-trigger-${value}`);
-	let contentId = $derived(`${root.baseId}-content-${value}`);
-
 	setAccordionItem({
 		get value() {
 			return value;

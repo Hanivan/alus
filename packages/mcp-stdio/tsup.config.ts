@@ -8,7 +8,13 @@ export default defineConfig({
 	minify: false,
 	clean: true,
 	banner: {
-		js: '#!/usr/bin/env node',
+		js: '#!/usr/bin/env node'
 	},
-	noExternal: ['@alus-ui/mcp-server', '@tmcp/transport-stdio', 'tmcp', 'valibot', '@tmcp/adapter-valibot'],
+	noExternal: [
+		'@alus-ui/mcp-server',
+		'@tmcp/transport-stdio',
+		'tmcp',
+		'valibot',
+		'@tmcp/adapter-valibot'
+	]
 });

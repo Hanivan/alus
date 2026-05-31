@@ -84,9 +84,7 @@
 					class="relative rounded-full border border-(--charcoal)/15 bg-white p-3 text-(--ink) hover:border-(--vermilion)"
 					badgeClass="absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-(--vermilion) px-1 text-[10px] font-bold text-white"
 				>
-					{#snippet children()}
-						<BellRinging class="h-6 w-6" weight="duotone" />
-					{/snippet}
+					<BellRinging class="h-6 w-6" weight="duotone" />
 				</NotificationBell>
 				<span class="font-mono text-xs text-(--charcoal)/60">count: {big} (capped)</span>
 				<Button
@@ -104,9 +102,7 @@
 					class="relative rounded-full border border-(--charcoal)/15 bg-white p-3 text-(--charcoal)/50"
 					badgeClass="absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-(--charcoal)/20 px-1 text-[10px] font-bold text-(--ink)"
 				>
-					{#snippet children()}
-						<Bell class="h-6 w-6" />
-					{/snippet}
+					<Bell class="h-6 w-6" />
 				</NotificationBell>
 				<span class="font-mono text-xs text-(--charcoal)/60">count: 0 (showZero)</span>
 			</div>

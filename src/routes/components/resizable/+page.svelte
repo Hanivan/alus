@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CaretLeft, DotsSixVertical, DotsSix } from 'phosphor-svelte';
+	import { CaretLeft } from 'phosphor-svelte';
 	import { Resizable } from 'alus-ui';
 	import DemoFooter from '$components/DemoFooter.svelte';
 

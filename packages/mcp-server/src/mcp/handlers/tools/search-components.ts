@@ -9,7 +9,7 @@ const schema = v.object({
 	query: v.pipe(v.string(), v.minLength(2), v.description('Case-insensitive search string')),
 	category: v.optional(v.picklist(CATEGORIES)),
 	limit: v.optional(v.pipe(v.number(), v.integer(), v.minValue(1), v.maxValue(50)), 20),
-	response_format: v.optional(v.picklist(['markdown', 'json']), 'markdown'),
+	response_format: v.optional(v.picklist(['markdown', 'json']), 'markdown')
 });
 
 export function search_components(server: AlusMcp) {
@@ -19,7 +19,7 @@ export function search_components(server: AlusMcp) {
 			description:
 				'Full-text search across all alus-ui component source files. Useful for finding which component uses a specific prop, ARIA pattern, utility function, or type. Returns matches with ±2 lines of context.',
 			schema,
-			annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: false },
+			annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: false }
 		},
 		async ({ query, category, limit = 20, response_format = 'markdown' }) => {
 			try {
@@ -56,7 +56,7 @@ export function search_components(server: AlusMcp) {
 									category: entry.category,
 									file,
 									line: i + 1,
-									context: lines.slice(start, end + 1).join('\n'),
+									context: lines.slice(start, end + 1).join('\n')
 								});
 								if (hits.length >= limit) break;
 							}
@@ -77,13 +77,15 @@ export function search_components(server: AlusMcp) {
 						'```svelte',
 						h.context,
 						'```',
-						'',
+						''
 					);
 				}
-				return tool.text(truncate(lines.join('\n'), 'Narrow with category or a more specific query.'));
+				return tool.text(
+					truncate(lines.join('\n'), 'Narrow with category or a more specific query.')
+				);
 			} catch (e) {
 				return tool.error((e as Error).message);
 			}
-		},
+		}
 	);
 }

@@ -23,8 +23,6 @@
 	const hasChildren = $derived(!!children);
 	const expanded = $derived(ctx.isExpanded(id));
 	const selected = $derived(ctx.isSelected(id));
-	const focused = $derived(ctx.focused() === id);
-
 	let itemEl = $state<HTMLLIElement | null>(null);
 
 	function onClick(e: MouseEvent) {
@@ -47,7 +45,6 @@
 	}
 </script>
 
-<!-- svelte-ignore a11y_click_events_have_key_events -->
 <li
 	bind:this={itemEl}
 	role="treeitem"

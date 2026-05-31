@@ -8,7 +8,10 @@ import type { AlusMcp } from '../../index.js';
 const MODULES = ['aria', 'focus', 'id', 'keyboard', 'index', 'form/state'] as const;
 
 const schema = v.object({
-	module: v.picklist(MODULES, 'Utility module — one of: aria, focus, id, keyboard, index, form/state'),
+	module: v.picklist(
+		MODULES,
+		'Utility module — one of: aria, focus, id, keyboard, index, form/state'
+	)
 });
 
 export function get_utils(server: AlusMcp) {
@@ -18,7 +21,7 @@ export function get_utils(server: AlusMcp) {
 			description:
 				'Read source of an alus-ui utility module (a11y helpers, form state). Available: aria, focus, id, keyboard, index, form/state.',
 			schema,
-			annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: false },
+			annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: false }
 		},
 		async ({ module }) => {
 			try {
@@ -30,17 +33,17 @@ export function get_utils(server: AlusMcp) {
 							: `${UTILS_ROOT}/a11y/${module}.ts`;
 
 				const bundled_key =
-					module === 'index' ? 'utils/a11y/index.ts'
-					: module === 'form/state' ? 'utils/form/state.ts'
-					: `utils/a11y/${module}.ts`;
+					module === 'index'
+						? 'utils/a11y/index.ts'
+						: module === 'form/state'
+							? 'utils/form/state.ts'
+							: `utils/a11y/${module}.ts`;
 
-				const content =
-					read_bundled_file(bundled_key) ??
-					(await readFile(fs_path, 'utf-8'));
+				const content = read_bundled_file(bundled_key) ?? (await readFile(fs_path, 'utf-8'));
 				return tool.text(`\`\`\`typescript\n${content}\n\`\`\``);
 			} catch (e) {
 				return tool.error((e as Error).message);
 			}
-		},
+		}
 	);
 }

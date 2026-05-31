@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { CaretLeft, CalendarBlank } from 'phosphor-svelte';
 	import { DateRangePicker } from 'alus-ui';
-	import { type DateValue, getLocalTimeZone, today } from '@internationalized/date';
+	import { type DateValue } from '@internationalized/date';
 	import DemoFooter from '$components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
@@ -12,9 +12,6 @@
 <\/script>
 
 <DateRangePicker bind:start bind:end placeholder="Pick dates…" aria-label="Trip dates" />`;
-
-	const tz = getLocalTimeZone();
-	const now = today(tz);
 
 	let start = $state<DateValue | null>(null);
 	let end = $state<DateValue | null>(null);

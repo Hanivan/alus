@@ -19,7 +19,7 @@ export async function list_all_components(): Promise<ComponentEntry[]> {
 			category: c.category as Category,
 			dir: `${COMPONENTS_DIR}/${c.category}/${c.slug}`,
 			files: Object.keys(c.files),
-			_bundled_files: c.files,
+			_bundled_files: c.files
 		}));
 	}
 

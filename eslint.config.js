@@ -12,6 +12,7 @@ const gitignorePath = path.resolve(import.meta.dirname, '.gitignore');
 
 export default defineConfig(
 	includeIgnoreFile(gitignorePath),
+	{ ignores: ['**/.svelte-kit/**', '**/dist/**'] },
 	js.configs.recommended,
 	ts.configs.recommended,
 	svelte.configs.recommended,
@@ -39,6 +40,18 @@ export default defineConfig(
 	{
 		// Override or add rule settings here, such as:
 		// 'svelte/button-has-type': 'error'
-		rules: {}
+		rules: {
+			'svelte/no-navigation-without-resolve': 'off',
+			'svelte/no-at-html-tags': 'off'
+		}
+	},
+	{
+		// Demo/showcase route pages embed raw code snippets in template literals that
+		// contain `<\/script>` — the backslash is required to prevent Svelte's pre-parser
+		// from treating it as the closing tag of the real <script> block.
+		files: ['src/routes/**/*.svelte'],
+		rules: {
+			'no-useless-escape': 'off'
+		}
 	}
 );

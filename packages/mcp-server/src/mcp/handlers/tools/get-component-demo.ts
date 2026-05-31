@@ -9,8 +9,10 @@ import type { AlusMcp } from '../../index.js';
 const schema = v.object({
 	name: v.pipe(
 		v.string(),
-		v.description("Component route folder name, lowercase hyphenated (e.g. 'button', 'date-picker')"),
-	),
+		v.description(
+			"Component route folder name, lowercase hyphenated (e.g. 'button', 'date-picker')"
+		)
+	)
 });
 
 export function get_component_demo(server: AlusMcp) {
@@ -20,7 +22,7 @@ export function get_component_demo(server: AlusMcp) {
 			description:
 				'Read the SvelteKit showcase demo page for a component. Shows real usage with props, events, and the Japanese Creative aesthetic. Path: src/routes/components/{name}/+page.svelte.',
 			schema,
-			annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: false },
+			annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: false }
 		},
 		async ({ name }) => {
 			try {
@@ -39,7 +41,11 @@ export function get_component_demo(server: AlusMcp) {
 								.map((k) => k.split('/')[1]!)
 								.filter(Boolean);
 						} else {
-							try { available = await readdir(ROUTES_DIR); } catch { /* ignore */ }
+							try {
+								available = await readdir(ROUTES_DIR);
+							} catch {
+								/* ignore */
+							}
 						}
 						const hint = available.length
 							? ` Available: ${available.slice(0, 10).join(', ')}${available.length > 10 ? '…' : ''}`
@@ -51,12 +57,12 @@ export function get_component_demo(server: AlusMcp) {
 				return tool.text(
 					truncate(
 						`# Demo: ${name}\n\`\`\`svelte\n${content}\n\`\`\``,
-						'Use alus_get_component for source.',
-					),
+						'Use alus_get_component for source.'
+					)
 				);
 			} catch (e) {
 				return tool.error((e as Error).message);
 			}
-		},
+		}
 	);
 }

@@ -18,7 +18,7 @@
 
 {#if keys && keys.length > 0}
 	<kbd class={className} aria-label={ariaLabel ?? keys.join(' then ')}>
-		{#each keys as key, i}
+		{#each keys as key, i (i)}
 			<kbd>{key}</kbd>{#if i < keys.length - 1}<span aria-hidden="true">{separator}</span>{/if}
 		{/each}
 	</kbd>

@@ -9,27 +9,59 @@ const ALUS_ROOT = process.env.ALUS_ROOT ?? resolve(PKG_DIR, '../..');
 const COMPONENTS_DIR = `${ALUS_ROOT}/packages/alus/src/lib/components`;
 const ROUTES_DIR = `${ALUS_ROOT}/src/routes/components`;
 const UTILS_ROOT = `${ALUS_ROOT}/packages/alus/src/lib/utils`;
-const CATEGORIES = ['form', 'navigation', 'feedback', 'display', 'overlay', 'layout', 'interactive', 'utility'];
-const UTIL_MODULES = ['a11y/aria', 'a11y/focus', 'a11y/id', 'a11y/keyboard', 'a11y/index', 'form/state'];
+const CATEGORIES = [
+	'form',
+	'navigation',
+	'feedback',
+	'display',
+	'overlay',
+	'layout',
+	'interactive',
+	'utility'
+];
+const UTIL_MODULES = [
+	'a11y/aria',
+	'a11y/focus',
+	'a11y/id',
+	'a11y/keyboard',
+	'a11y/index',
+	'form/state'
+];
 const OUT = `${PKG_DIR}/src/generated/data.ts`;
 
 async function read_file_safe(path: string): Promise<string | null> {
-	try { return await readFile(path, 'utf-8'); } catch { return null; }
+	try {
+		return await readFile(path, 'utf-8');
+	} catch {
+		return null;
+	}
 }
 
 async function read_dir_safe(path: string): Promise<string[]> {
-	try { return await readdir(path); } catch { return []; }
+	try {
+		return await readdir(path);
+	} catch {
+		return [];
+	}
 }
 
-const components: Array<{ name: string; category: string; slug: string; files: Record<string, string> }> = [];
+const components: Array<{
+	name: string;
+	category: string;
+	slug: string;
+	files: Record<string, string>;
+}> = [];
 for (const category of CATEGORIES) {
 	const items = await read_dir_safe(`${COMPONENTS_DIR}/${category}`);
 	for (const slug of items) {
 		const comp_dir = `${COMPONENTS_DIR}/${category}/${slug}`;
 		const dir_files = await read_dir_safe(comp_dir);
-		const src_files = dir_files.filter(f => f.endsWith('.svelte') || f.endsWith('.ts'));
+		const src_files = dir_files.filter((f) => f.endsWith('.svelte') || f.endsWith('.ts'));
 		if (!src_files.length) continue;
-		const name = slug.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join('');
+		const name = slug
+			.split('-')
+			.map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+			.join('');
 		const files: Record<string, string> = {};
 		for (const f of src_files) {
 			const content = await read_file_safe(`${comp_dir}/${f}`);
@@ -78,4 +110,6 @@ export const BUNDLED_DATA: {
 `;
 
 await writeFile(OUT, output, 'utf-8');
-console.log(`✓ bundled ${components.length} components, ${Object.keys(extra_files).length} extra files → src/generated/data.ts`);
+console.log(
+	`✓ bundled ${components.length} components, ${Object.keys(extra_files).length} extra files → src/generated/data.ts`
+);

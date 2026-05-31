@@ -101,7 +101,7 @@
 
 	<div class="japanese-border bg-linear-to-br from-white to-(--cream) p-8">
 		<ul class="space-y-4">
-			{#each a11y as item}
+			{#each a11y as item, i (i)}
 				<li class="flex items-start gap-3">
 					<span class="mt-0.5 text-(--matcha)">✓</span>
 					<span class="text-(--charcoal)/80">{@html item}</span>

@@ -43,7 +43,7 @@
 
 	function onKeydown(e: KeyboardEvent) {
 		if (readonly || disabled) return;
-		let next = value;
+		let next: number;
 		switch (e.key) {
 			case 'ArrowRight':
 			case 'ArrowUp':
@@ -98,7 +98,7 @@
 	onkeydown={onKeydown}
 	{...ariaAttrs}
 >
-	{#each Array(max) as _, i (i)}
+	{#each Array.from({ length: max }, (_, n) => n) as i (i)}
 		{@const idx = i + 1}
 		{@const filled = idx <= displayed}
 		<button

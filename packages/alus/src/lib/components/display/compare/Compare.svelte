@@ -136,12 +136,7 @@
 		if (disabled) return;
 		const incKey = horiz ? 'ArrowRight' : 'ArrowDown';
 		const decKey = horiz ? 'ArrowLeft' : 'ArrowUp';
-		let delta = 0;
-		if (e.key === incKey) delta = step;
-		else if (e.key === decKey) delta = -step;
-		else if (e.key === 'PageDown') delta = largeStep;
-		else if (e.key === 'PageUp') delta = -largeStep;
-		else if (e.key === 'Home') {
+		if (e.key === 'Home') {
 			e.preventDefault();
 			setPosition(min);
 			return;
@@ -149,9 +144,13 @@
 			e.preventDefault();
 			setPosition(max);
 			return;
-		} else {
-			return;
 		}
+		let delta;
+		if (e.key === incKey) delta = step;
+		else if (e.key === decKey) delta = -step;
+		else if (e.key === 'PageDown') delta = largeStep;
+		else if (e.key === 'PageUp') delta = -largeStep;
+		else return;
 		e.preventDefault();
 		setPosition(position + delta);
 	}
@@ -189,8 +188,6 @@
 		{@render after()}
 	</div>
 
-	<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 	<div
 		role="slider"
 		tabindex={disabled ? -1 : 0}

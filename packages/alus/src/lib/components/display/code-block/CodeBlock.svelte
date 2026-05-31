@@ -55,6 +55,7 @@
 				class={lineNumbersClass}
 				aria-hidden="true"
 				data-line-numbers
-				>{#each lines as _, i}{i + 1}{#if i < lines.length - 1}{'\n'}{/if}{/each}</span
+				>{#each Array.from({ length: lines.length }, (_, n) => n) as i (i)}{i +
+						1}{#if i < lines.length - 1}{/if}{/each}</span
 			><code class={codeClass}>{code}</code>{:else}<code class={codeClass}>{code}</code>{/if}</pre>
 </div>

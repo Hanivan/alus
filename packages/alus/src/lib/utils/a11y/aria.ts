@@ -5,10 +5,7 @@ import type {
 	LabelConfig,
 	ValidationConfig,
 	InteractiveStateConfig,
-	WidgetConfig,
-	AriaHaspopup,
-	AriaLive,
-	AriaOrientation
+	WidgetConfig
 } from '$types/index.js';
 
 /**

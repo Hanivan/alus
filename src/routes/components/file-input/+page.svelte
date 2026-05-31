@@ -82,7 +82,7 @@
 					</button>
 					{#if f?.length}
 						<ul class="mt-3 space-y-1 text-sm text-(--charcoal)/70">
-							{#each Array.from(f) as file}
+							{#each Array.from(f) as file, i (i)}
 								<li>{file.name}</li>
 							{/each}
 						</ul>

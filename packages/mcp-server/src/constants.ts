@@ -18,7 +18,7 @@ export const CATEGORIES = [
 	'overlay',
 	'layout',
 	'interactive',
-	'utility',
+	'utility'
 ] as const;
 
 export type Category = (typeof CATEGORIES)[number];

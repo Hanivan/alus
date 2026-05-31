@@ -11,12 +11,12 @@
 
 A monorepo containing:
 
-| Package | Description |
-|---|---|
-| `packages/alus` | Component library — published as [`alus-ui`](https://www.npmjs.com/package/alus-ui) |
-| `packages/mcp-server` | MCP tool definitions (`@alus-ui/mcp-server`, private) |
-| `packages/mcp-stdio` | MCP stdio CLI entry — published as [`alus-ui-mcp`](https://www.npmjs.com/package/alus-ui-mcp) |
-| `/` (root) | SvelteKit showcase app — deployed on Cloudflare, serves `/mcp` HTTP endpoint |
+| Package               | Description                                                                                   |
+| --------------------- | --------------------------------------------------------------------------------------------- |
+| `packages/alus`       | Component library — published as [`alus-ui`](https://www.npmjs.com/package/alus-ui)           |
+| `packages/mcp-server` | MCP tool definitions (`@alus-ui/mcp-server`, private)                                         |
+| `packages/mcp-stdio`  | MCP stdio CLI entry — published as [`alus-ui-mcp`](https://www.npmjs.com/package/alus-ui-mcp) |
+| `/` (root)            | SvelteKit showcase app — deployed on Cloudflare, serves `/mcp` HTTP endpoint                  |
 
 ### Features
 
@@ -36,8 +36,8 @@ pnpm add alus-ui
 
 ```svelte
 <script lang="ts">
-  import { Button, Input } from 'alus-ui';
-  let name = $state('');
+	import { Button, Input } from 'alus-ui';
+	let name = $state('');
 </script>
 
 <Input bind:value={name} placeholder="Enter your name" aria-label="Name input" />
@@ -90,6 +90,7 @@ pnpm dev
 ```
 
 `pnpm dev` starts:
+
 - **Library watcher** — `packages/alus` in watch mode
 - **Showcase app** — `http://localhost:5173`
 
@@ -137,14 +138,14 @@ alus-ui ships an MCP server that gives LLMs direct access to component source, d
 
 ### Tools
 
-| Tool | Description |
-|---|---|
-| `alus_list_components` | Browse all 150+ components by category |
-| `alus_get_component` | Read full `.svelte` + `index.ts` source |
-| `alus_search_components` | Full-text search across all source files |
-| `alus_get_component_demo` | Read showcase demo pages |
-| `alus_list_exports` | Show full public API (`components/index.ts`) |
-| `alus_get_utils` | Read a11y/form utility module source |
+| Tool                      | Description                                  |
+| ------------------------- | -------------------------------------------- |
+| `alus_list_components`    | Browse all 150+ components by category       |
+| `alus_get_component`      | Read full `.svelte` + `index.ts` source      |
+| `alus_search_components`  | Full-text search across all source files     |
+| `alus_get_component_demo` | Read showcase demo pages                     |
+| `alus_list_exports`       | Show full public API (`components/index.ts`) |
+| `alus_get_utils`          | Read a11y/form utility module source         |
 
 ### Claude Code — library users (recommended)
 
@@ -152,13 +153,13 @@ Add to `.mcp.json` at your project root:
 
 ```json
 {
-  "mcpServers": {
-    "alus-ui": {
-      "type": "stdio",
-      "command": "npx",
-      "args": ["alus-ui-mcp"]
-    }
-  }
+	"mcpServers": {
+		"alus-ui": {
+			"type": "stdio",
+			"command": "npx",
+			"args": ["alus-ui-mcp"]
+		}
+	}
 }
 ```
 
@@ -174,16 +175,16 @@ Then add to `.mcp.json` at your project root (replace `path/to/alus`):
 
 ```json
 {
-  "mcpServers": {
-    "alus-ui": {
-      "type": "stdio",
-      "command": "node",
-      "args": ["${HOME}/path/to/alus/packages/mcp-stdio/dist/index.js"],
-      "env": {
-        "ALUS_ROOT": "${HOME}/path/to/alus"
-      }
-    }
-  }
+	"mcpServers": {
+		"alus-ui": {
+			"type": "stdio",
+			"command": "node",
+			"args": ["${HOME}/path/to/alus/packages/mcp-stdio/dist/index.js"],
+			"env": {
+				"ALUS_ROOT": "${HOME}/path/to/alus"
+			}
+		}
+	}
 }
 ```
 
@@ -201,12 +202,10 @@ See [MCP Development](#mcp-development) for details.
 
 ```svelte
 <script lang="ts">
-  import { Button } from 'alus-ui';
+	import { Button } from 'alus-ui';
 </script>
 
-<Button class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
-  Submit
-</Button>
+<Button class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">Submit</Button>
 ```
 
 ## (>\_<) Publishing

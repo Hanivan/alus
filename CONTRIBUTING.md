@@ -52,36 +52,36 @@ export { default as ComponentName } from './ComponentName.svelte';
 
 ```svelte
 <script lang="ts">
-  import { labelAttrs, interactiveStateAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { labelAttrs, interactiveStateAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-  interface Props {
-    children?: import('svelte').Snippet;
-    class?: string;
-    disabled?: boolean;
-    'aria-label'?: string;
-    'aria-labelledby'?: string;
-    'aria-describedby'?: string;
-  }
+	interface Props {
+		children?: import('svelte').Snippet;
+		class?: string;
+		disabled?: boolean;
+		'aria-label'?: string;
+		'aria-labelledby'?: string;
+		'aria-describedby'?: string;
+	}
 
-  let {
-    children,
-    class: className = '',
-    disabled = false,
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledby,
-    'aria-describedby': ariaDescribedby,
-  }: Props = $props();
+	let {
+		children,
+		class: className = '',
+		disabled = false,
+		'aria-label': ariaLabel,
+		'aria-labelledby': ariaLabelledby,
+		'aria-describedby': ariaDescribedby
+	}: Props = $props();
 
-  const ariaAttrs = $derived(
-    mergeAttrs(
-      labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby }),
-      interactiveStateAttrs({ disabled })
-    )
-  );
+	const ariaAttrs = $derived(
+		mergeAttrs(
+			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby }),
+			interactiveStateAttrs({ disabled })
+		)
+	);
 </script>
 
 <button type="button" class={className} {disabled} {...ariaAttrs}>
-  {#if children}{@render children()}{/if}
+	{#if children}{@render children()}{/if}
 </button>
 ```
 
@@ -105,14 +105,14 @@ pnpm format   # format
 
 Follow [Conventional Commits](https://www.conventionalcommits.org/) — release-it parses these for version bumps and changelog:
 
-| Prefix | Bump | Changelog section |
-|---|---|---|
-| `feat:` | minor | Features |
-| `fix:` | patch | Bug Fixes |
-| `refactor:` | patch | Refactors |
-| `docs:` | patch | Documentation |
-| `feat!:` / `fix!:` | major | Breaking Changes |
-| `chore:` `ci:` `style:` | — | hidden |
+| Prefix                  | Bump  | Changelog section |
+| ----------------------- | ----- | ----------------- |
+| `feat:`                 | minor | Features          |
+| `fix:`                  | patch | Bug Fixes         |
+| `refactor:`             | patch | Refactors         |
+| `docs:`                 | patch | Documentation     |
+| `feat!:` / `fix!:`      | major | Breaking Changes  |
+| `chore:` `ci:` `style:` | —     | hidden            |
 
 ### 6. Pull Request
 
@@ -127,12 +127,10 @@ No legacy mode anywhere:
 
 ```svelte
 <!-- Good -->
-let { count = 0 }: Props = $props();
-let doubled = $derived(count * 2);
+let {(count = 0)}: Props = $props(); let doubled = $derived(count * 2);
 
 <!-- Bad -->
-export let count = 0;
-$: doubled = count * 2;
+export let count = 0; $: doubled = count * 2;
 ```
 
 ### Effects and Listeners
@@ -144,9 +142,11 @@ $: doubled = count * 2;
 import { useEventListener } from 'runed';
 
 useEventListener(
-  () => (open ? document : null),
-  'keydown',
-  (e) => { if (e.key === 'Escape') close(); }
+	() => (open ? document : null),
+	'keydown',
+	(e) => {
+		if (e.key === 'Escape') close();
+	}
 );
 ```
 
@@ -177,10 +177,10 @@ import { render } from 'vitest-browser-svelte';
 import YourComponent from './YourComponent.svelte';
 
 describe('YourComponent', () => {
-  it('renders correctly', () => {
-    const { getByRole } = render(YourComponent);
-    expect(getByRole('button')).toBeTruthy();
-  });
+	it('renders correctly', () => {
+		const { getByRole } = render(YourComponent);
+		expect(getByRole('button')).toBeTruthy();
+	});
 });
 ```
 
@@ -226,25 +226,25 @@ import { tool } from 'tmcp/utils';
 import type { AlusMcp } from '../../index.js';
 
 const schema = v.object({
-  query: v.pipe(v.string(), v.description('...')),
+	query: v.pipe(v.string(), v.description('...'))
 });
 
 export function my_tool(server: AlusMcp) {
-  server.tool(
-    {
-      name: 'alus_my_tool',
-      description: 'What this tool does.',
-      schema,
-      annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: false },
-    },
-    async (params) => {
-      try {
-        return tool.text('result');
-      } catch (e) {
-        return tool.error((e as Error).message);
-      }
-    },
-  );
+	server.tool(
+		{
+			name: 'alus_my_tool',
+			description: 'What this tool does.',
+			schema,
+			annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: false }
+		},
+		async (params) => {
+			try {
+				return tool.text('result');
+			} catch (e) {
+				return tool.error((e as Error).message);
+			}
+		}
+	);
 }
 ```
 
@@ -291,16 +291,16 @@ Then add to `.mcp.json` at your project root:
 
 ```json
 {
-  "mcpServers": {
-    "alus-ui": {
-      "type": "stdio",
-      "command": "node",
-      "args": ["${HOME}/path/to/alus/packages/mcp-stdio/dist/index.js"],
-      "env": {
-        "ALUS_ROOT": "${HOME}/path/to/alus"
-      }
-    }
-  }
+	"mcpServers": {
+		"alus-ui": {
+			"type": "stdio",
+			"command": "node",
+			"args": ["${HOME}/path/to/alus/packages/mcp-stdio/dist/index.js"],
+			"env": {
+				"ALUS_ROOT": "${HOME}/path/to/alus"
+			}
+		}
+	}
 }
 ```
 
@@ -320,11 +320,11 @@ Claude Code remote config:
 
 ```json
 {
-  "mcpServers": {
-    "alus-ui": {
-      "url": "https://alus.lkmn.link/mcp"
-    }
-  }
+	"mcpServers": {
+		"alus-ui": {
+			"url": "https://alus.lkmn.link/mcp"
+		}
+	}
 }
 ```
 
@@ -341,6 +341,7 @@ pnpm deploy                  # build + deploy to production
 ```
 
 After deploy, verify:
+
 - Showcase app: `https://alus.lkmn.link`
 - MCP endpoint: `https://alus.lkmn.link/mcp` (POST only — browser GET redirects to GitHub)
 

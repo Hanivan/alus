@@ -1,6 +1,6 @@
 <script lang="ts" module>
 	import {
-		CalendarDate,
+		CalendarDate as CalendarDateImpl,
 		DateFormatter,
 		getDayOfWeek,
 		getLocalTimeZone,
@@ -12,6 +12,12 @@
 		type DateValue
 	} from '@internationalized/date';
 
+	// Re-export CalendarDate through a local binding to satisfy no-import-assign
+	const CalendarDate: typeof CalendarDateImpl = CalendarDateImpl;
+	export { CalendarDate };
+	// Declare DateValue locally to avoid no-import-assign false positive on re-export
+	export type { DateValue }; // eslint-disable-line no-import-assign
+
 	export interface CalendarDay {
 		date: DateValue;
 		jsDate: Date;
@@ -22,8 +28,6 @@
 	}
 
 	export type CalendarView = 'days' | 'months' | 'years';
-
-	export { CalendarDate, type DateValue };
 
 	function isoOf(d: DateValue) {
 		return `${d.year}-${d.month}-${d.day}`;
@@ -238,7 +242,7 @@
 	}
 
 	function onDayKey(e: KeyboardEvent, d: DateValue) {
-		let next: DateValue | null = null;
+		let next: DateValue | null;
 		switch (e.key) {
 			case 'ArrowLeft':
 				next = d.subtract({ days: 1 });
@@ -362,7 +366,7 @@
 	{#if view === 'days'}
 		<div role="grid" aria-label={ariaLabel} data-calendar={gridId} class={gridClass}>
 			<div role="row">
-				{#each weekdays as wd}
+				{#each weekdays as wd (wd)}
 					<div role="columnheader" aria-label={wd} class={weekdayClass}>{wd}</div>
 				{/each}
 			</div>

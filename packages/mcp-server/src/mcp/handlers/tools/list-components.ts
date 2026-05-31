@@ -5,14 +5,12 @@ import { list_all_components } from '../../../lib/fs.js';
 import type { AlusMcp } from '../../index.js';
 
 const schema = v.object({
-	category: v.optional(
-		v.picklist(CATEGORIES, 'Must be one of the alus-ui component categories'),
-	),
-	response_format: v.optional(v.picklist(['markdown', 'json']), 'markdown'),
+	category: v.optional(v.picklist(CATEGORIES, 'Must be one of the alus-ui component categories')),
+	response_format: v.optional(v.picklist(['markdown', 'json']), 'markdown')
 });
 
 export async function list_components_handler(
-	params: v.InferInput<typeof schema>,
+	params: v.InferInput<typeof schema>
 ): Promise<string> {
 	const { category, response_format = 'markdown' } = params;
 	const all = await list_all_components();
@@ -25,11 +23,11 @@ export async function list_components_handler(
 				components: filtered.map((c) => ({
 					name: c.name,
 					category: c.category,
-					dir: c.dir.replace(`${COMPONENTS_DIR}/`, ''),
-				})),
+					dir: c.dir.replace(`${COMPONENTS_DIR}/`, '')
+				}))
 			},
 			null,
-			2,
+			2
 		);
 	}
 
@@ -51,7 +49,7 @@ export function list_components(server: AlusMcp) {
 			description:
 				'List all components in the alus-ui Svelte 5 library grouped by category. Call this first to discover component names before using alus_get_component. Optionally filter by category.',
 			schema,
-			annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: false },
+			annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: false }
 		},
 		async (params) => {
 			try {
@@ -59,6 +57,6 @@ export function list_components(server: AlusMcp) {
 			} catch (e) {
 				return tool.error((e as Error).message);
 			}
-		},
+		}
 	);
 }

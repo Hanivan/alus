@@ -10,7 +10,7 @@ export function list_exports(server: AlusMcp) {
 			name: 'alus_list_exports',
 			description:
 				'Return the full contents of packages/alus/src/lib/components/index.ts — the canonical public API of alus-ui with exact import paths, exported types, and context helpers.',
-			annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: false },
+			annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: false }
 		},
 		async () => {
 			try {
@@ -21,6 +21,6 @@ export function list_exports(server: AlusMcp) {
 			} catch (e) {
 				return tool.error((e as Error).message);
 			}
-		},
+		}
 	);
 }

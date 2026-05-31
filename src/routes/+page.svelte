@@ -857,7 +857,7 @@
 				</p>
 
 				<div class="animate-fade-in-up animation-delay-400 flex flex-wrap items-center gap-3">
-					{#each features as feature}
+					{#each features as feature, i (i)}
 						<div class="japanese-border bg-white/50 px-4 py-2 backdrop-blur-sm">
 							<span class="text-sm text-(--charcoal)/80">
 								<span class="font-display text-(--bamboo)">{feature.kanji}</span>
@@ -1067,33 +1067,31 @@
 
 			{#each grouped as g (g.cat.id)}
 				<CommandMenuGroup class="mb-1">
-					{#snippet children()}
-						<div
-							class="font-display flex items-center gap-2 px-2 py-1 text-xs tracking-widest text-(--bamboo) uppercase"
+					<div
+						class="font-display flex items-center gap-2 px-2 py-1 text-xs tracking-widest text-(--bamboo) uppercase"
+					>
+						<span class="font-display text-(--indigo-dye)/60">{g.cat.kanji}</span>
+						<span>{g.cat.label}</span>
+					</div>
+					{#each g.items as c (c.href)}
+						<CommandMenuItem
+							value={c.title}
+							keywords="{c.description} {c.kanji} {c.category}"
+							onSelect={() => pick(c.href)}
+							class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
 						>
-							<span class="font-display text-(--indigo-dye)/60">{g.cat.kanji}</span>
-							<span>{g.cat.label}</span>
-						</div>
-						{#each g.items as c (c.href)}
-							<CommandMenuItem
-								value={c.title}
-								keywords="{c.description} {c.kanji} {c.category}"
-								onSelect={() => pick(c.href)}
-								class="flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-sm transition-colors data-highlighted:bg-(--cream)"
-							>
-								<span class="font-display w-6 shrink-0 text-(--indigo-dye)/70">{c.kanji}</span>
-								<span class="flex-1 truncate text-(--ink)">{c.title}</span>
-								{#if c.is_new}
-									<span
-										class="rounded-full bg-(--vermilion)/10 px-2 py-0.5 text-[10px] font-medium text-(--vermilion)"
-									>
-										新
-									</span>
-								{/if}
-								<CaretRight class="h-3 w-3 text-(--charcoal)/30" />
-							</CommandMenuItem>
-						{/each}
-					{/snippet}
+							<span class="font-display w-6 shrink-0 text-(--indigo-dye)/70">{c.kanji}</span>
+							<span class="flex-1 truncate text-(--ink)">{c.title}</span>
+							{#if c.is_new}
+								<span
+									class="rounded-full bg-(--vermilion)/10 px-2 py-0.5 text-[10px] font-medium text-(--vermilion)"
+								>
+									新
+								</span>
+							{/if}
+							<CaretRight class="h-3 w-3 text-(--charcoal)/30" />
+						</CommandMenuItem>
+					{/each}
 				</CommandMenuGroup>
 			{/each}
 		</CommandMenuList>

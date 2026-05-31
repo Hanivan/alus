@@ -56,7 +56,7 @@
 	onkeydown={onKeydown}
 	bind:this={listEl}
 >
-	{#each Array(ctx.count()) as _, i (i)}
+	{#each Array.from({ length: ctx.count() }, (_, idx) => idx) as i (i)}
 		{@const active = ctx.index() === i}
 		<button
 			type="button"

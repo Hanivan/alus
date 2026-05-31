@@ -80,7 +80,7 @@
 
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<Accordion type="multiple" bind:value={multi} class="divide-y divide-(--indigo-dye)/10">
-				{#each ['One', 'Two', 'Three'] as label, i}
+				{#each ['One', 'Two', 'Three'] as label, i (i)}
 					<AccordionItem value={`m${i}`}>
 						<AccordionTrigger class="py-4 text-left text-(--ink) hover:text-(--vermilion)">
 							{label}

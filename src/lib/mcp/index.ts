@@ -9,7 +9,7 @@ export async function get_http_transport(): Promise<HttpTransport<{ alus_root?: 
 		http_transport = new HttpTransport(server, {
 			cors: true,
 			path: '/mcp',
-			disableSse: true,
+			disableSse: true
 		});
 		return http_transport;
 	} catch {

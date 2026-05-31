@@ -77,6 +77,9 @@
 	let listEl = $state<HTMLUListElement | null>(null);
 	let highlighted = $state(0);
 
+	// Seed the input value from an initially-provided selected option
+	if (selected && !value) value = selected.label;
+
 	const filtered = $derived.by(() => {
 		const q = value.trim().toLowerCase();
 		if (q.length < minLength) return [];

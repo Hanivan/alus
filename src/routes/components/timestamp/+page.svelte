@@ -51,7 +51,7 @@
 		<h2 class="font-display mb-6 text-2xl text-(--ink)">Relative</h2>
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<ul class="divide-y divide-(--charcoal)/10">
-				{#each samples as s}
+				{#each samples as s, i (i)}
 					<li class="flex items-center justify-between py-3">
 						<span class="text-(--ink)">{s.label}</span>
 						<Timestamp value={s.value} class="font-mono text-sm text-(--charcoal)/70" />

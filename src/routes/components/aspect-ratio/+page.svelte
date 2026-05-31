@@ -49,7 +49,7 @@
 		<div
 			class="japanese-border grid grid-cols-2 gap-6 bg-white/50 p-8 backdrop-blur-sm md:grid-cols-3 lg:grid-cols-5"
 		>
-			{#each ratios as r}
+			{#each ratios as r, i (i)}
 				<div class="flex flex-col items-center gap-2">
 					<AspectRatio
 						ratio={r.value}

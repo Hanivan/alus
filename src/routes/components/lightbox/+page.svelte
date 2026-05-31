@@ -71,7 +71,7 @@
 	<section class="mb-16">
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<div class="grid grid-cols-3 gap-2">
-				{#each images as img, i}
+				{#each images as img, i (i)}
 					<button
 						class="overflow-hidden rounded border border-(--charcoal)/15"
 						onclick={() => openAt(i)}

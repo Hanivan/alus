@@ -100,7 +100,7 @@
 				</TableCaption>
 				<TableHead>
 					<TableRow>
-						{#each [{ k: 'name', label: 'Name' }, { k: 'role', label: 'Role' }, { k: 'score', label: 'Score' }] as col}
+						{#each [{ k: 'name', label: 'Name' }, { k: 'role', label: 'Role' }, { k: 'score', label: 'Score' }] as col (col.k)}
 							<TableHeader
 								scope="col"
 								sort={sortKey === col.k ? sortDir : 'none'}

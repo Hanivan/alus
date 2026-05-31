@@ -67,7 +67,7 @@
 						>
 							<CaretLeft class="h-4 w-4" />
 						</button>
-						{#each pages as item}
+						{#each pages as item, i (i)}
 							{#if item === 'ellipsis'}
 								<span class="px-2 text-(--charcoal)/40">…</span>
 							{:else}

@@ -91,10 +91,8 @@
 						separatorClass="my-1 h-px bg-(--charcoal)/15"
 						class="flex items-center justify-between rounded px-3 py-1.5 text-sm text-(--ink) hover:bg-(--cream) data-highlighted:bg-(--indigo-dye) data-highlighted:text-white data-[state=open]:bg-(--indigo-dye)/10"
 					>
-						{#snippet children()}
-							<span>New</span>
-							<CaretRight class="h-3 w-3" />
-						{/snippet}
+						<span>New</span>
+						<CaretRight class="h-3 w-3" />
 						{#snippet item({ item })}
 							{#if item.label}
 								{@const Icon = iconMap[item.label]}

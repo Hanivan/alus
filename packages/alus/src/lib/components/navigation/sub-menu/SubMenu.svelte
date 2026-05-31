@@ -207,7 +207,7 @@
 			onkeydown={onPanelKey}
 			{@attach panelRef}
 		>
-			{#each items as it, i}
+			{#each items as it, i (i)}
 				{#if it.separator}
 					<hr role="separator" class={separatorClass} />
 				{:else if item}

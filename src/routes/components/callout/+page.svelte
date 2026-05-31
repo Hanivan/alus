@@ -85,7 +85,7 @@
 		<h2 class="font-display mb-8 text-2xl text-(--ink)">Variants</h2>
 
 		<div class="japanese-border space-y-4 bg-white/50 p-8 backdrop-blur-sm">
-			{#each items as item}
+			{#each items as item, i (i)}
 				{@const Icon = icon(item.variant)}
 				<Callout
 					variant={item.variant}

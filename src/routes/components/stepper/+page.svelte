@@ -49,7 +49,7 @@
 
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<Stepper bind:current aria-label="Onboarding" class="mb-8 flex items-center gap-2">
-				{#each steps as step, i}
+				{#each steps as step, i (i)}
 					<StepperStep index={i} class="flex flex-1 items-center gap-3">
 						{#snippet children({ status })}
 							<span
