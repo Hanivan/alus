@@ -167,6 +167,9 @@ importers:
         specifier: latest
         version: 1.4.1(typescript@6.0.3)
     devDependencies:
+      '@types/node':
+        specifier: ^22
+        version: 22.19.17
       tsx:
         specifier: latest
         version: 4.22.3
@@ -185,6 +188,9 @@ importers:
       '@tmcp/transport-stdio':
         specifier: latest
         version: 0.4.3(tmcp@1.19.4(typescript@6.0.3))
+      '@types/node':
+        specifier: ^22
+        version: 22.19.17
       publint:
         specifier: latest
         version: 0.3.21

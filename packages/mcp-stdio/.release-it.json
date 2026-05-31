@@ -18,6 +18,7 @@
 		"publishPath": "."
 	},
 	"hooks": {
+		"before:init": ["pnpm check"],
 		"after:bump": "pnpm build"
 	},
 	"plugins": {
