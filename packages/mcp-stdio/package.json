@@ -1,6 +1,6 @@
 {
 	"name": "alus-ui-mcp",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"description": "MCP stdio server for the alus-ui Svelte 5 component library — gives LLMs direct access to component source, demos, exports, and utilities",
 	"license": "MIT",
 	"type": "module",

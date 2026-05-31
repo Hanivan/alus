@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.0](https://github.com/Hanivan/alus/compare/mcp-v0.2.0...mcp-v0.3.0) (2026-05-31)
+
+### Features
+
+* **mcp:** pre-bundle component data at build time for npx usage ([0d080bc](https://github.com/Hanivan/alus/commit/0d080bc3cda02c86dcece8856274aa884f61d7d1))
+
 ## [0.2.0](https://github.com/Hanivan/alus/compare/mcp-v0.1.0...mcp-v0.2.0) (2026-05-31)
 
 ### Bug Fixes
