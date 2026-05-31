@@ -40,7 +40,12 @@ export function search_components(server: AlusMcp) {
 					if (hits.length >= limit) break;
 					for (const file of entry.files) {
 						if (hits.length >= limit) break;
-						const content = await readFile(`${entry.dir}/${file}`, 'utf-8');
+						let content: string;
+						if (entry._bundled_files) {
+							content = entry._bundled_files[file] ?? '';
+						} else {
+							content = await readFile(`${entry.dir}/${file}`, 'utf-8');
+						}
 						const lines = content.split('\n');
 						for (let i = 0; i < lines.length; i++) {
 							if (lines[i]!.toLowerCase().includes(needle)) {

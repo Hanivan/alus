@@ -6,12 +6,16 @@
 	"exports": {
 		".": "./src/index.ts"
 	},
+	"scripts": {
+		"bundle:data": "tsx scripts/bundle-data.ts"
+	},
 	"dependencies": {
 		"tmcp": "latest",
 		"@tmcp/adapter-valibot": "latest",
 		"valibot": "latest"
 	},
 	"devDependencies": {
-		"typescript": "^5"
+		"tsx": "latest",
+		"typescript": "^6.0.2"
 	}
 }

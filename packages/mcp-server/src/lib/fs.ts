@@ -1,14 +1,28 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { CATEGORIES, COMPONENTS_DIR, CHARACTER_LIMIT, type Category } from '../constants.js';
+import { BUNDLED_DATA } from '../generated/data.js';
 
 export interface ComponentEntry {
 	name: string;
 	category: Category;
 	dir: string;
 	files: string[];
+	_bundled_files?: Record<string, string>;
 }
 
+const USE_FS = !!process.env.ALUS_ROOT || !BUNDLED_DATA;
+
 export async function list_all_components(): Promise<ComponentEntry[]> {
+	if (!USE_FS && BUNDLED_DATA) {
+		return BUNDLED_DATA.components.map((c) => ({
+			name: c.name,
+			category: c.category as Category,
+			dir: `${COMPONENTS_DIR}/${c.category}/${c.slug}`,
+			files: Object.keys(c.files),
+			_bundled_files: c.files,
+		}));
+	}
+
 	const entries: ComponentEntry[] = [];
 	for (const category of CATEGORIES) {
 		const cat_dir = `${COMPONENTS_DIR}/${category}`;
@@ -41,10 +55,20 @@ export async function list_all_components(): Promise<ComponentEntry[]> {
 export async function read_component_source(entry: ComponentEntry): Promise<string> {
 	const parts: string[] = [];
 	for (const file of entry.files) {
-		const content = await readFile(`${entry.dir}/${file}`, 'utf-8');
+		let content: string;
+		if (entry._bundled_files) {
+			content = entry._bundled_files[file] ?? '';
+		} else {
+			content = await readFile(`${entry.dir}/${file}`, 'utf-8');
+		}
 		parts.push(`// FILE: ${file}\n${content}`);
 	}
 	return parts.join('\n\n');
+}
+
+export function read_bundled_file(key: string): string | null {
+	if (BUNDLED_DATA) return BUNDLED_DATA.files[key] ?? null;
+	return null;
 }
 
 export function truncate(text: string, hint: string): string {

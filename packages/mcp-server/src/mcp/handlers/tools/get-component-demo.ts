@@ -2,7 +2,8 @@ import * as v from 'valibot';
 import { tool } from 'tmcp/utils';
 import { readFile, readdir } from 'node:fs/promises';
 import { ROUTES_DIR } from '../../../constants.js';
-import { truncate } from '../../../lib/fs.js';
+import { read_bundled_file, truncate } from '../../../lib/fs.js';
+import { BUNDLED_DATA } from '../../../generated/data.js';
 import type { AlusMcp } from '../../index.js';
 
 const schema = v.object({
@@ -23,20 +24,30 @@ export function get_component_demo(server: AlusMcp) {
 		},
 		async ({ name }) => {
 			try {
-				const demo_path = `${ROUTES_DIR}/${name.toLowerCase()}/+page.svelte`;
-				let content: string;
-				try {
-					content = await readFile(demo_path, 'utf-8');
-				} catch {
-					let available: string[] = [];
+				const slug = name.toLowerCase();
+				const bundled_key = `demos/${slug}/+page.svelte`;
+				let content: string | null = read_bundled_file(bundled_key);
+
+				if (!content) {
 					try {
-						available = await readdir(ROUTES_DIR);
-					} catch { /* ignore */ }
-					const hint = available.length
-						? ` Available: ${available.slice(0, 10).join(', ')}${available.length > 10 ? '…' : ''}`
-						: '';
-					return tool.text(`Demo not found for '${name}'.${hint}`);
+						content = await readFile(`${ROUTES_DIR}/${slug}/+page.svelte`, 'utf-8');
+					} catch {
+						let available: string[] = [];
+						if (BUNDLED_DATA) {
+							available = Object.keys(BUNDLED_DATA.files)
+								.filter((k) => k.startsWith('demos/'))
+								.map((k) => k.split('/')[1]!)
+								.filter(Boolean);
+						} else {
+							try { available = await readdir(ROUTES_DIR); } catch { /* ignore */ }
+						}
+						const hint = available.length
+							? ` Available: ${available.slice(0, 10).join(', ')}${available.length > 10 ? '…' : ''}`
+							: '';
+						return tool.text(`Demo not found for '${name}'.${hint}`);
+					}
 				}
+
 				return tool.text(
 					truncate(
 						`# Demo: ${name}\n\`\`\`svelte\n${content}\n\`\`\``,

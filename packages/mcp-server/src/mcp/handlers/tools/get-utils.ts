@@ -2,12 +2,13 @@ import * as v from 'valibot';
 import { tool } from 'tmcp/utils';
 import { readFile } from 'node:fs/promises';
 import { UTILS_ROOT } from '../../../constants.js';
+import { read_bundled_file } from '../../../lib/fs.js';
 import type { AlusMcp } from '../../index.js';
 
 const MODULES = ['aria', 'focus', 'id', 'keyboard', 'index', 'form/state'] as const;
 
 const schema = v.object({
-	module: v.picklist(MODULES, "Utility module — one of: aria, focus, id, keyboard, index, form/state"),
+	module: v.picklist(MODULES, 'Utility module — one of: aria, focus, id, keyboard, index, form/state'),
 });
 
 export function get_utils(server: AlusMcp) {
@@ -21,13 +22,21 @@ export function get_utils(server: AlusMcp) {
 		},
 		async ({ module }) => {
 			try {
-				const path =
+				const fs_path =
 					module === 'index'
 						? `${UTILS_ROOT}/a11y/index.ts`
 						: module === 'form/state'
 							? `${UTILS_ROOT}/form/state.ts`
 							: `${UTILS_ROOT}/a11y/${module}.ts`;
-				const content = await readFile(path, 'utf-8');
+
+				const bundled_key =
+					module === 'index' ? 'utils/a11y/index.ts'
+					: module === 'form/state' ? 'utils/form/state.ts'
+					: `utils/a11y/${module}.ts`;
+
+				const content =
+					read_bundled_file(bundled_key) ??
+					(await readFile(fs_path, 'utf-8'));
 				return tool.text(`\`\`\`typescript\n${content}\n\`\`\``);
 			} catch (e) {
 				return tool.error((e as Error).message);

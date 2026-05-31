@@ -159,17 +159,20 @@ importers:
     dependencies:
       '@tmcp/adapter-valibot':
         specifier: latest
-        version: 0.1.6(tmcp@1.19.4(typescript@5.9.3))(valibot@1.4.1(typescript@5.9.3))
+        version: 0.1.6(tmcp@1.19.4(typescript@6.0.3))(valibot@1.4.1(typescript@6.0.3))
       tmcp:
         specifier: latest
-        version: 1.19.4(typescript@5.9.3)
+        version: 1.19.4(typescript@6.0.3)
       valibot:
         specifier: latest
-        version: 1.4.1(typescript@5.9.3)
+        version: 1.4.1(typescript@6.0.3)
     devDependencies:
+      tsx:
+        specifier: latest
+        version: 4.22.3
       typescript:
-        specifier: ^5
-        version: 5.9.3
+        specifier: ^6.0.2
+        version: 6.0.3
 
   packages/mcp-stdio:
     devDependencies:
@@ -3156,11 +3159,6 @@ packages:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
       typescript: '>=4.8.4 <6.1.0'
 
-  typescript@5.9.3:
-    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
-    engines: {node: '>=14.17'}
-    hasBin: true
-
   typescript@6.0.3:
     resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
     engines: {node: '>=14.17'}
@@ -4353,12 +4351,12 @@ snapshots:
     dependencies:
       svelte: 5.55.4(@typescript-eslint/types@8.58.2)
 
-  '@tmcp/adapter-valibot@0.1.6(tmcp@1.19.4(typescript@5.9.3))(valibot@1.4.1(typescript@5.9.3))':
+  '@tmcp/adapter-valibot@0.1.6(tmcp@1.19.4(typescript@6.0.3))(valibot@1.4.1(typescript@6.0.3))':
     dependencies:
       '@standard-schema/spec': 1.1.0
-      '@valibot/to-json-schema': 1.7.0(valibot@1.4.1(typescript@5.9.3))
-      tmcp: 1.19.4(typescript@5.9.3)
-      valibot: 1.4.1(typescript@5.9.3)
+      '@valibot/to-json-schema': 1.7.0(valibot@1.4.1(typescript@6.0.3))
+      tmcp: 1.19.4(typescript@6.0.3)
+      valibot: 1.4.1(typescript@6.0.3)
 
   '@tmcp/session-manager@0.2.2(tmcp@1.19.4(typescript@6.0.3))':
     dependencies:
@@ -4497,9 +4495,9 @@ snapshots:
       '@typescript-eslint/types': 8.58.2
       eslint-visitor-keys: 5.0.1
 
-  '@valibot/to-json-schema@1.7.0(valibot@1.4.1(typescript@5.9.3))':
+  '@valibot/to-json-schema@1.7.0(valibot@1.4.1(typescript@6.0.3))':
     dependencies:
-      valibot: 1.4.1(typescript@5.9.3)
+      valibot: 1.4.1(typescript@6.0.3)
 
   '@vitest/browser-playwright@4.1.4(playwright@1.59.1)(vite@8.0.8(@types/node@22.19.17)(esbuild@0.28.0)(jiti@2.6.1)(tsx@4.22.3))(vitest@4.1.4)':
     dependencies:
@@ -6024,16 +6022,6 @@ snapshots:
 
   tinyrainbow@3.1.0: {}
 
-  tmcp@1.19.4(typescript@5.9.3):
-    dependencies:
-      '@standard-schema/spec': 1.1.0
-      json-rpc-2.0: 1.7.1
-      sqids: 0.3.0
-      uri-template-matcher: 1.1.2
-      valibot: 1.4.1(typescript@5.9.3)
-    transitivePeerDependencies:
-      - typescript
-
   tmcp@1.19.4(typescript@6.0.3):
     dependencies:
       '@standard-schema/spec': 1.1.0
@@ -6109,8 +6097,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  typescript@5.9.3: {}
-
   typescript@6.0.3: {}
 
   ufo@1.6.4: {}
@@ -6139,10 +6125,6 @@ snapshots:
   url-join@5.0.0: {}
 
   util-deprecate@1.0.2: {}
-
-  valibot@1.4.1(typescript@5.9.3):
-    optionalDependencies:
-      typescript: 5.9.3
 
   valibot@1.4.1(typescript@6.0.3):
     optionalDependencies:

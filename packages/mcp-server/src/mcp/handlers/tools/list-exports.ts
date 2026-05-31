@@ -1,6 +1,7 @@
 import { tool } from 'tmcp/utils';
 import { readFile } from 'node:fs/promises';
 import { COMPONENTS_DIR } from '../../../constants.js';
+import { read_bundled_file } from '../../../lib/fs.js';
 import type { AlusMcp } from '../../index.js';
 
 export function list_exports(server: AlusMcp) {
@@ -13,7 +14,9 @@ export function list_exports(server: AlusMcp) {
 		},
 		async () => {
 			try {
-				const content = await readFile(`${COMPONENTS_DIR}/index.ts`, 'utf-8');
+				const content =
+					read_bundled_file('components/index.ts') ??
+					(await readFile(`${COMPONENTS_DIR}/index.ts`, 'utf-8'));
 				return tool.text(`\`\`\`typescript\n${content}\n\`\`\``);
 			} catch (e) {
 				return tool.error((e as Error).message);
