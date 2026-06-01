@@ -6,6 +6,7 @@
 [![Svelte 5](https://img.shields.io/badge/Svelte-5.55-orange)](https://svelte.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue)](https://www.typescriptlang.org/)
 [![npm](https://img.shields.io/badge/npm-alus--ui-critical)](https://www.npmjs.com/package/alus-ui)
+[![MCP](https://img.shields.io/badge/MCP-alus--ui--mcp-blue)](https://www.npmjs.com/package/alus-ui-mcp)
 
 ## Installation
 
@@ -43,6 +44,23 @@ The canonical export list is `src/lib/components/index.ts`.
 Date components use [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/) for locale/timezone/non-Gregorian-calendar correctness.
 
 **Out of scope** (use external libs): `RichTextEditor`, `DataGrid`, `Chart`, `VideoPlayer`, `AudioPlayer`, `MapView`.
+
+## MCP Server
+
+Give AI assistants direct access to component source, demos, exports, and utilities via the [Model Context Protocol](https://modelcontextprotocol.io/).
+
+```json
+{
+  "mcpServers": {
+    "alus-ui": {
+      "command": "npx",
+      "args": ["-y", "alus-ui-mcp"]
+    }
+  }
+}
+```
+
+[![npm](https://img.shields.io/npm/v/alus-ui-mcp)](https://www.npmjs.com/package/alus-ui-mcp)
 
 ## Styling
 
