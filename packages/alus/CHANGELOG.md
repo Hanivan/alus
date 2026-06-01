@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.1](https://github.com/Hanivan/alus/compare/v0.2.0...v0.2.1) (2026-06-01)
+
+### Documentation
+
+* **alus:** add MCP server badge and setup section to README ([4f545cd](https://github.com/Hanivan/alus/commit/4f545cd14e37a4471a9a803a6b5578fe3e5ab9a4))
+
 ## [0.2.0](https://github.com/Hanivan/alus/compare/v0.1.3...v0.2.0) (2026-05-31)
 
 ### Features
