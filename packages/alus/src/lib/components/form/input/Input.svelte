@@ -34,6 +34,10 @@
 		'aria-required'?: AriaBoolean;
 		'aria-errormessage'?: string;
 		tabindex?: number;
+		autofocus?: boolean;
+		spellcheck?: boolean;
+		enterkeyhint?: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
+		list?: string;
 	}
 
 	let {
@@ -66,7 +70,11 @@
 		'aria-invalid': ariaInvalid,
 		'aria-required': ariaRequired,
 		'aria-errormessage': ariaErrormessage,
-		tabindex
+		tabindex,
+		autofocus,
+		spellcheck,
+		enterkeyhint,
+		list
 	}: Props = $props();
 
 	// Build ARIA attributes using reusable utilities
@@ -84,6 +92,7 @@
 	);
 </script>
 
+<!-- svelte-ignore a11y_autofocus -->
 <input
 	{type}
 	{placeholder}
@@ -109,5 +118,9 @@
 	{onkeydown}
 	{onkeyup}
 	{tabindex}
+	{autofocus}
+	{spellcheck}
+	{enterkeyhint}
+	{list}
 	{...ariaAttrs}
 />

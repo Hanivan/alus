@@ -85,6 +85,21 @@
 	}
 
 	function onKeydown(e: KeyboardEvent) {
+		// type-ahead: first-char match, wraps from current position
+		const char = e.key.length === 1 ? e.key.toLowerCase() : '';
+		if (char) {
+			e.preventDefault();
+			const opts = ctx.options().filter((o) => !o.disabled);
+			const cur = opts.findIndex((o) => o.value === ctx.highlighted());
+			const after = [...opts.slice(cur + 1), ...opts.slice(0, cur + 1)];
+			const match = after.find((o) => o.el.textContent?.trim().toLowerCase().startsWith(char));
+			if (match) {
+				ctx.setHighlighted(match.value);
+				match.el.scrollIntoView({ block: 'nearest' });
+			}
+			return;
+		}
+
 		switch (e.key) {
 			case 'ArrowDown':
 				e.preventDefault();

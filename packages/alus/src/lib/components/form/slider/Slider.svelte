@@ -24,6 +24,7 @@
 		'aria-valuetext'?: string;
 		oninput?: (event: Event) => void;
 		onchange?: (event: Event) => void;
+		onkeydown?: (event: KeyboardEvent) => void;
 	}
 
 	let {
@@ -42,8 +43,11 @@
 		'aria-describedby': ariaDescribedby,
 		'aria-valuetext': ariaValuetext,
 		oninput,
-		onchange
+		onchange,
+		onkeydown
 	}: Props = $props();
+
+	let pageStep = $derived(Math.max(1, Math.round((max - min) / 10)));
 
 	let ariaAttrs: Record<string, string> = $derived(
 		mergeAttrs(
@@ -59,6 +63,17 @@
 			})
 		)
 	);
+
+	function handleKeydown(e: KeyboardEvent) {
+		if (e.key === 'PageUp') {
+			e.preventDefault();
+			value = Math.min(max, value + pageStep);
+		} else if (e.key === 'PageDown') {
+			e.preventDefault();
+			value = Math.max(min, value - pageStep);
+		}
+		onkeydown?.(e);
+	}
 </script>
 
 <input
@@ -74,5 +89,6 @@
 	class={className}
 	{oninput}
 	{onchange}
+	onkeydown={handleKeydown}
 	{...ariaAttrs}
 />

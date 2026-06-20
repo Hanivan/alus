@@ -63,7 +63,12 @@
 	let ariaAttrs: Record<string, string> = $derived(
 		mergeAttrs(
 			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby }),
-			widgetAttrs({ orientation })
+			widgetAttrs({
+				orientation,
+				valuenow: current + 1,
+				valuemin: 1,
+				valuemax: total
+			})
 		)
 	);
 </script>

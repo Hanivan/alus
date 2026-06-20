@@ -19,6 +19,7 @@
 		mergeAttrs
 	} from '$utils/a11y/index.js';
 	import Portal from '../../utility/portal/Portal.svelte';
+	import VisuallyHidden from '../../utility/visually-hidden/VisuallyHidden.svelte';
 
 	interface Props {
 		options: AutoCompleteOption<T>[];
@@ -30,6 +31,7 @@
 		required?: boolean;
 		minLength?: number;
 		maxResults?: number;
+		noResultsText?: string;
 		filter?: (option: AutoCompleteOption<T>, query: string) => boolean;
 		class?: string;
 		inputClass?: string;
@@ -56,6 +58,7 @@
 		required = false,
 		minLength = 0,
 		maxResults = 50,
+		noResultsText = 'No results',
 		filter,
 		class: className = '',
 		inputClass = '',
@@ -213,6 +216,10 @@
 </script>
 
 <div class={className}>
+	<!-- Live region announces empty/no-results state to screen readers -->
+	<VisuallyHidden as="div" role="status" aria-live="polite" aria-atomic={true}>
+		{#if showEmpty}{noResultsText}{/if}
+	</VisuallyHidden>
 	<input
 		type="text"
 		role="combobox"
@@ -223,6 +230,7 @@
 		{placeholder}
 		{value}
 		aria-autocomplete="list"
+		aria-owns={listId}
 		class={inputClass}
 		oninput={onInputEvent}
 		onkeydown={onKeydown}
@@ -266,7 +274,7 @@
 						{#if empty}
 							{@render empty({ query: value })}
 						{:else}
-							No results.
+							{noResultsText}
 						{/if}
 					</li>
 				{/if}

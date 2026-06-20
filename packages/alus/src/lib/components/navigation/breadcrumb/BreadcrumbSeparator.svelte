@@ -7,6 +7,6 @@
 	let { children, class: className = '' }: Props = $props();
 </script>
 
-<li class={className} aria-hidden="true" role="presentation">
+<span aria-hidden="true" class={className}>
 	{#if children}{@render children()}{:else}/{/if}
-</li>
+</span>

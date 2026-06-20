@@ -27,6 +27,8 @@
 		swatchClass?: string;
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
+		swatchesLabel?: string;
+		nativeInputLabel?: string;
 		onChange?: (value: string) => void;
 	}
 
@@ -43,6 +45,8 @@
 		swatchClass = '',
 		'aria-label': ariaLabel = 'Color',
 		'aria-labelledby': ariaLabelledby,
+		swatchesLabel = 'Color swatches',
+		nativeInputLabel = 'Color',
 		onChange
 	}: Props = $props();
 
@@ -126,7 +130,7 @@
 	{#if showNative}
 		<input
 			type="color"
-			aria-label={`${ariaLabel} picker`}
+			aria-label={nativeInputLabel}
 			{disabled}
 			{value}
 			class={nativeClass}
@@ -150,7 +154,7 @@
 			class={swatchesClass}
 			role="listbox"
 			tabindex="-1"
-			aria-label="Color swatches"
+			aria-label={swatchesLabel}
 			bind:this={swatchListEl}
 			onkeydown={onSwatchKeydown}
 		>

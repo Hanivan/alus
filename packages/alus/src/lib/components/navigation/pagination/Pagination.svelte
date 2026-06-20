@@ -11,6 +11,7 @@
 					next: () => void;
 					canPrev: boolean;
 					canNext: boolean;
+					isCurrentPage: (p: number) => boolean;
 				}
 			]
 		>;
@@ -80,6 +81,16 @@
 
 <nav class={className} aria-label={ariaLabel}>
 	{#if children}
-		{@render children({ page, totalPages, pages, goto, prev, next, canPrev, canNext })}
+		{@render children({
+			page,
+			totalPages,
+			pages,
+			goto,
+			prev,
+			next,
+			canPrev,
+			canNext,
+			isCurrentPage: (p) => p === page
+		})}
 	{/if}
 </nav>

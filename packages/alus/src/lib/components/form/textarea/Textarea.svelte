@@ -30,6 +30,9 @@
 		'aria-required'?: AriaBoolean;
 		'aria-errormessage'?: string;
 		tabindex?: number;
+		autofocus?: boolean;
+		spellcheck?: boolean;
+		enterkeyhint?: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
 	}
 
 	let {
@@ -59,7 +62,10 @@
 		'aria-invalid': ariaInvalid,
 		'aria-required': ariaRequired,
 		'aria-errormessage': ariaErrormessage,
-		tabindex
+		tabindex,
+		autofocus,
+		spellcheck,
+		enterkeyhint
 	}: Props = $props();
 
 	let ariaAttrs: Record<string, string> = $derived(
@@ -78,6 +84,7 @@
 	let style = $derived(resize ? `resize:${resize};` : undefined);
 </script>
 
+<!-- svelte-ignore a11y_autofocus -->
 <textarea
 	bind:value
 	{placeholder}
@@ -100,5 +107,8 @@
 	{onblur}
 	{onkeydown}
 	{tabindex}
+	{autofocus}
+	{spellcheck}
+	{enterkeyhint}
 	{...ariaAttrs}
 ></textarea>

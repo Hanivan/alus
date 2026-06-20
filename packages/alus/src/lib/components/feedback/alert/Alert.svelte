@@ -53,6 +53,7 @@
 	<div
 		{role}
 		aria-live={role === 'alert' ? 'assertive' : 'polite'}
+		aria-atomic="true"
 		data-variant={variant}
 		class={className}
 		{...ariaAttrs}

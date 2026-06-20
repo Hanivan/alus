@@ -72,7 +72,7 @@
 	let highlighted = $state<unknown>(undefined);
 	let triggerEl = $state<HTMLElement | null>(null);
 	let contentEl = $state<HTMLElement | null>(null);
-	let opts = $state<SelectOptionEntry[]>([]);
+	let opts: SelectOptionEntry[] = [];
 
 	const triggerId = generateCounterId('select-trigger');
 	const contentId = generateCounterId('select-content');

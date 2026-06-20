@@ -51,12 +51,12 @@ Give AI assistants direct access to component source, demos, exports, and utilit
 
 ```json
 {
-  "mcpServers": {
-    "alus-ui": {
-      "command": "npx",
-      "args": ["-y", "alus-ui-mcp"]
-    }
-  }
+	"mcpServers": {
+		"alus-ui": {
+			"command": "npx",
+			"args": ["-y", "alus-ui-mcp"]
+		}
+	}
 }
 ```
 

@@ -6,6 +6,8 @@
 		files?: FileList | null;
 		accept?: string;
 		multiple?: boolean;
+		capture?: 'user' | 'environment';
+		webkitdirectory?: boolean;
 		disabled?: boolean;
 		required?: boolean;
 		name?: string;
@@ -24,6 +26,8 @@
 		files = $bindable(null),
 		accept,
 		multiple = false,
+		capture,
+		webkitdirectory,
 		disabled = false,
 		required = false,
 		name,
@@ -65,6 +69,8 @@
 		{name}
 		{accept}
 		{multiple}
+		{capture}
+		{webkitdirectory}
 		{disabled}
 		{required}
 		class="sr-only"
@@ -80,6 +86,8 @@
 		{name}
 		{accept}
 		{multiple}
+		{capture}
+		{webkitdirectory}
 		{disabled}
 		{required}
 		class={className}

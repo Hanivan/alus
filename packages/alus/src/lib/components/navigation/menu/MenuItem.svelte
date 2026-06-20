@@ -8,9 +8,18 @@
 		class?: string;
 		disabled?: boolean;
 		onSelect?: () => void;
+		role?: 'menuitem' | 'menuitemcheckbox' | 'menuitemradio';
+		checked?: boolean;
 	}
 
-	let { children, class: className = '', disabled = false, onSelect }: Props = $props();
+	let {
+		children,
+		class: className = '',
+		disabled = false,
+		onSelect,
+		role = 'menuitem',
+		checked
+	}: Props = $props();
 
 	const ctx = getMenuContext();
 
@@ -47,10 +56,17 @@
 			activate();
 		}
 	}
+
+	const ariaAttrs = $derived(
+		interactiveStateAttrs({
+			disabled,
+			checked: role === 'menuitemcheckbox' || role === 'menuitemradio' ? checked : undefined
+		})
+	);
 </script>
 
 <div
-	role="menuitem"
+	{role}
 	tabindex="-1"
 	data-highlighted={highlighted || undefined}
 	data-disabled={disabled || undefined}
@@ -58,7 +74,7 @@
 	onclick={activate}
 	onpointerenter={onPointerEnter}
 	onkeydown={onKeydown}
-	{...interactiveStateAttrs({ disabled })}
+	{...ariaAttrs}
 	{@attach itemRef}
 >
 	{#if children}{@render children({ highlighted })}{/if}

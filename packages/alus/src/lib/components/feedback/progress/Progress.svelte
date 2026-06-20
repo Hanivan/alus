@@ -24,7 +24,7 @@
 		class: className = '',
 		indicatorClass = '',
 		id,
-		'aria-label': ariaLabel,
+		'aria-label': ariaLabel = 'Progress',
 		'aria-labelledby': ariaLabelledby,
 		'aria-describedby': ariaDescribedby
 	}: Props = $props();

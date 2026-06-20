@@ -24,6 +24,19 @@
 	const expanded = $derived(ctx.isExpanded(id));
 	const selected = $derived(ctx.isSelected(id));
 	let itemEl = $state<HTMLLIElement | null>(null);
+	let setsize = $state(1);
+	let posinset = $state(1);
+
+	$effect(() => {
+		if (!itemEl) return;
+		const parent = itemEl.parentElement;
+		if (!parent) return;
+		const siblings = Array.from(parent.children).filter(
+			(c) => c.getAttribute('role') === 'treeitem'
+		);
+		setsize = siblings.length;
+		posinset = siblings.indexOf(itemEl) + 1;
+	});
 
 	function onClick(e: MouseEvent) {
 		if (disabled) return;
@@ -61,7 +74,7 @@
 			selected: selected || undefined,
 			disabled
 		}),
-		widgetAttrs({ level })
+		widgetAttrs({ level, setsize, posinset })
 	)}
 >
 	{#if label}{@render label({ expanded, selected })}{/if}

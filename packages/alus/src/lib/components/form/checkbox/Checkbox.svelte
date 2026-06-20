@@ -55,7 +55,8 @@
 		mergeAttrs(
 			labelAttrs({ label: ariaLabel, labelledby: ariaLabelledby, describedby: ariaDescribedby }),
 			interactiveStateAttrs({
-				disabled
+				disabled,
+				checked: indeterminate ? 'mixed' : undefined
 			}),
 			validationAttrs({
 				invalid: ariaInvalid === 'false' ? false : ariaInvalid === 'true' ? true : ariaInvalid,

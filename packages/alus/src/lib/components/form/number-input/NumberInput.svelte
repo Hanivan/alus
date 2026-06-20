@@ -26,6 +26,7 @@
 		'aria-errormessage'?: string;
 		oninput?: (event: Event) => void;
 		onchange?: (value: number | null) => void;
+		autofocus?: boolean;
 	}
 
 	let {
@@ -50,7 +51,8 @@
 		'aria-invalid': ariaInvalid,
 		'aria-errormessage': ariaErrormessage,
 		oninput,
-		onchange
+		onchange,
+		autofocus
 	}: Props = $props();
 
 	let ariaAttrs: Record<string, string> = $derived(
@@ -100,6 +102,7 @@
 		>
 			−
 		</button>
+		<!-- svelte-ignore a11y_autofocus -->
 		<input
 			type="number"
 			{id}
@@ -111,6 +114,8 @@
 			{readonly}
 			{required}
 			{placeholder}
+			inputmode="numeric"
+			{autofocus}
 			value={value ?? ''}
 			class={inputClass}
 			oninput={handleInput}

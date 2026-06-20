@@ -4,28 +4,28 @@
 
 ### Documentation
 
-* **alus:** add MCP server badge and setup section to README ([4f545cd](https://github.com/Hanivan/alus/commit/4f545cd14e37a4471a9a803a6b5578fe3e5ab9a4))
+- **alus:** add MCP server badge and setup section to README ([4f545cd](https://github.com/Hanivan/alus/commit/4f545cd14e37a4471a9a803a6b5578fe3e5ab9a4))
 
 ## [0.2.0](https://github.com/Hanivan/alus/compare/v0.1.3...v0.2.0) (2026-05-31)
 
 ### Features
 
-* add MCP server packages and HTTP endpoint for alus-ui ([56485d7](https://github.com/Hanivan/alus/commit/56485d714a15119f4f3bb17138cb781bc01fe1bb))
-* **mcp:** pre-bundle component data at build time for npx usage ([0d080bc](https://github.com/Hanivan/alus/commit/0d080bc3cda02c86dcece8856274aa884f61d7d1))
+- add MCP server packages and HTTP endpoint for alus-ui ([56485d7](https://github.com/Hanivan/alus/commit/56485d714a15119f4f3bb17138cb781bc01fe1bb))
+- **mcp:** pre-bundle component data at build time for npx usage ([0d080bc](https://github.com/Hanivan/alus/commit/0d080bc3cda02c86dcece8856274aa884f61d7d1))
 
 ### Bug Fixes
 
-* bundle all deps into dist to fix npx workspace:* error ([cd0bb6f](https://github.com/Hanivan/alus/commit/cd0bb6fede67dfc2c9f33ff12b05ebca300b183a))
-* fix MCP stdio transport and update dev/docs config ([fd89705](https://github.com/Hanivan/alus/commit/fd897054ea4f353113174129c1bd33f3601ccfa3))
-* lazy-load MCP server to prevent CF Workers crash on node:fs imports ([c51db1e](https://github.com/Hanivan/alus/commit/c51db1e0e9f725d480e1992cfc0566a4eb7947db))
-* **lint:** fix all 190 ESLint errors and configure ignore patterns ([1c045da](https://github.com/Hanivan/alus/commit/1c045dad8f6743b38a9d4cc70524290a05f27867))
-* **lint:** implement svelte/no-navigation-without-resolve across all routes and components ([5b2cd39](https://github.com/Hanivan/alus/commit/5b2cd395088e5bf3c45e61a2705d56f61aaeaf89))
-* resolve build warnings and remove SvelteKit dep from library components ([19e1e6d](https://github.com/Hanivan/alus/commit/19e1e6d4a5872d0ba243009cf2e0ac1908c45ef8))
-* use semantic HTML tags and fix HttpTransport type ([f57176d](https://github.com/Hanivan/alus/commit/f57176d0448c661569dd485406225b124c6cc7e6))
+- bundle all deps into dist to fix npx workspace:\* error ([cd0bb6f](https://github.com/Hanivan/alus/commit/cd0bb6fede67dfc2c9f33ff12b05ebca300b183a))
+- fix MCP stdio transport and update dev/docs config ([fd89705](https://github.com/Hanivan/alus/commit/fd897054ea4f353113174129c1bd33f3601ccfa3))
+- lazy-load MCP server to prevent CF Workers crash on node:fs imports ([c51db1e](https://github.com/Hanivan/alus/commit/c51db1e0e9f725d480e1992cfc0566a4eb7947db))
+- **lint:** fix all 190 ESLint errors and configure ignore patterns ([1c045da](https://github.com/Hanivan/alus/commit/1c045dad8f6743b38a9d4cc70524290a05f27867))
+- **lint:** implement svelte/no-navigation-without-resolve across all routes and components ([5b2cd39](https://github.com/Hanivan/alus/commit/5b2cd395088e5bf3c45e61a2705d56f61aaeaf89))
+- resolve build warnings and remove SvelteKit dep from library components ([19e1e6d](https://github.com/Hanivan/alus/commit/19e1e6d4a5872d0ba243009cf2e0ac1908c45ef8))
+- use semantic HTML tags and fix HttpTransport type ([f57176d](https://github.com/Hanivan/alus/commit/f57176d0448c661569dd485406225b124c6cc7e6))
 
 ### Documentation
 
-* add Cloudflare deploy instructions ([6805266](https://github.com/Hanivan/alus/commit/680526678b5443b29f578ed46e58db0c65164af1))
+- add Cloudflare deploy instructions ([6805266](https://github.com/Hanivan/alus/commit/680526678b5443b29f578ed46e58db0c65164af1))
 
 ## [0.1.3](https://github.com/Hanivan/alus/compare/v0.1.2...v0.1.3) (2026-05-18)
 
