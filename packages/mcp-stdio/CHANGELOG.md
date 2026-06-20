@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.2](https://github.com/Hanivan/alus/compare/mcp-v0.3.1...mcp-v0.3.2) (2026-06-20)
+
+### Bug Fixes
+
+* **a11y:** patch missing attrs, ARIA, and WCAG gaps across components ([ce3f431](https://github.com/Hanivan/alus/commit/ce3f43118b1ae9fb1e4d350e8f5b9cb76052eb25))
+
+## [0.2.1](https://github.com/Hanivan/alus/compare/mcp-v0.3.1...mcp-v0.3.2) (2026-06-01)
+
+### Documentation
+
+* **alus:** add MCP server badge and setup section to README ([4f545cd](https://github.com/Hanivan/alus/commit/4f545cd14e37a4471a9a803a6b5578fe3e5ab9a4))
+
 ## [0.3.1](https://github.com/Hanivan/alus/compare/mcp-v0.3.0...mcp-v0.3.1) (2026-05-31)
 
 ### Bug Fixes
