@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.2](https://github.com/Hanivan/alus/compare/v0.2.1...v0.2.2) (2026-06-20)
+
+### Bug Fixes
+
+* **a11y:** patch missing attrs, ARIA, and WCAG gaps across components ([ce3f431](https://github.com/Hanivan/alus/commit/ce3f43118b1ae9fb1e4d350e8f5b9cb76052eb25))
+
 ## [0.2.1](https://github.com/Hanivan/alus/compare/v0.2.0...v0.2.1) (2026-06-01)
 
 ### Documentation
