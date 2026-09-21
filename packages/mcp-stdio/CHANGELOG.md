@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.4.0](https://github.com/Hanivan/alus/compare/mcp-v0.3.2...mcp-v0.4.0) (2026-09-21)
+
+### ⚠ BREAKING CHANGES
+
+* **alus:** eleven callbacks renamed to the library's `onValueChange`
+convention.
+
+- `Switch`: `onchange` -> `onCheckedChange` (receives a boolean)
+- `FileInput`: `onchange` -> `onFilesChange` (receives a FileList)
+- `NumberInput`: `onchange` -> `onValueChange` (receives a number)
+- `ColorPicker`, `DateRange`, `DateRangePicker`, `TimePicker`, `Compare`:
+  `onChange` -> `onValueChange`
+- `Calendar`, `DatePicker`, `AutoComplete`: `onSelect` -> `onValueChange`
+
+`onSelect` on `CommandMenu`, `CommandMenuItem` and `ContextMenu` is
+deliberately unchanged, matching cmdk.
+
+Also bumps alus-ui to 0.3.0, regenerates the MCP server's component data,
+and adds a 16-test browser suite covering the passthrough contract.
+
+### Features
+
+* **alus:** HTML attribute and event handler passthrough on 141 components ([1429239](https://github.com/Hanivan/alus/commit/1429239bb17430b70eef16c40e5426542cfc259f))
+
 ## [0.3.2](https://github.com/Hanivan/alus/compare/mcp-v0.3.1...mcp-v0.3.2) (2026-06-20)
 
 ### Bug Fixes
