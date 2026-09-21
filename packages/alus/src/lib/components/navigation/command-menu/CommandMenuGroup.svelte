@@ -17,15 +17,16 @@
 </script>
 
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { generateCounterId } from '$utils/a11y/id.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
+		// Read by the `{#if heading}` markup (and by the `aria-labelledby` ternary) — rule 3.
 		heading?: string;
-	}
+	};
 
-	let { children, class: className = '', heading }: Props = $props();
+	let { children, class: className = '', heading, ...rest }: Props = $props();
 	const headingId = generateCounterId('cmdk-group-heading');
 
 	let trackers = $state<Array<() => boolean>>([]);
@@ -43,6 +44,7 @@
 </script>
 
 <div
+	{...rest}
 	role="group"
 	aria-labelledby={heading ? headingId : undefined}
 	class={className}

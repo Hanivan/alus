@@ -206,7 +206,7 @@
 			{ name: 'secondStep', type: 'number', default: 'step' },
 			{ name: 'disabled', type: 'boolean', default: 'false' },
 			{ name: 'required', type: 'boolean', default: 'false' },
-			{ name: 'onChange', type: '(t: Time) => void', default: 'undefined' }
+			{ name: 'onValueChange', type: '(t: Time) => void', default: 'undefined' }
 		]}
 		a11y={[
 			'<code class="rounded bg-(--cream) px-1">role="group"</code> with <code class="rounded bg-(--cream) px-1">aria-label</code>',

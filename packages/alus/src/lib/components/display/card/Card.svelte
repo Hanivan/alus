@@ -25,14 +25,14 @@
 
 <script lang="ts">
 	import { generateCounterId } from '$utils/a11y/id.js';
+	import type { HTMLAttributes } from 'svelte/elements';
 
-	interface Props {
+	type Props = Omit<HTMLAttributes<HTMLElement>, 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		as?: 'article' | 'section' | 'div';
-	}
+	};
 
-	let { children, class: className = '', as = 'article' }: Props = $props();
+	let { children, class: className = '', as = 'article', ...rest }: Props = $props();
 
 	let hasTitle = $state(false);
 	let hasDescription = $state(false);
@@ -52,6 +52,7 @@
 
 <svelte:element
 	this={as}
+	{...rest}
 	class={className}
 	aria-labelledby={hasTitle ? titleId : undefined}
 	aria-describedby={hasDescription ? descriptionId : undefined}

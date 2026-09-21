@@ -272,7 +272,7 @@
 			{ name: 'closeOnSelect', type: 'boolean', default: 'true' },
 			{ name: 'required', type: 'boolean', default: 'false' },
 			{ name: 'isDateDisabled', type: '(d) => boolean', default: 'undefined' },
-			{ name: 'onSelect', type: '(d: DateValue) => void', default: 'undefined' }
+			{ name: 'onValueChange', type: '(d: DateValue) => void', default: 'undefined' }
 		]}
 		a11y={[
 			'Trigger uses <code class="rounded bg-(--cream) px-1">aria-haspopup="dialog"</code> + <code class="rounded bg-(--cream) px-1">aria-expanded</code> + <code class="rounded bg-(--cream) px-1">aria-controls</code>',

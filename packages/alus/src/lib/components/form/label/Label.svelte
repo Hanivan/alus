@@ -1,24 +1,22 @@
 <script lang="ts">
-	interface Props {
+	import type { HTMLLabelAttributes } from 'svelte/elements';
+
+	interface Props extends Omit<HTMLLabelAttributes, 'children'> {
 		children?: import('svelte').Snippet;
-		for?: string;
-		class?: string;
-		id?: string;
 		required?: boolean;
 		requiredIndicator?: import('svelte').Snippet;
 	}
 
 	let {
 		children,
-		for: htmlFor,
 		class: className = '',
-		id,
 		required = false,
-		requiredIndicator
+		requiredIndicator,
+		...rest
 	}: Props = $props();
 </script>
 
-<label for={htmlFor} {id} class={className}>
+<label {...rest} class={className}>
 	{#if children}{@render children()}{/if}
 	{#if required}
 		{#if requiredIndicator}

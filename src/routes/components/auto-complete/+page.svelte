@@ -244,7 +244,7 @@
 				description: 'Custom option renderer'
 			},
 			{ name: 'empty', type: 'Snippet<[{ query }]>', default: 'undefined' },
-			{ name: 'onSelect', type: '(o) => void', default: 'undefined' },
+			{ name: 'onValueChange', type: '(o) => void', default: 'undefined' },
 			{ name: 'onInput', type: '(v: string) => void', default: 'undefined' }
 		]}
 		a11y={[

@@ -10,6 +10,7 @@
 
 <script lang="ts" generics="T extends Record<string, unknown> = Record<string, unknown>">
 	import { untrack } from 'svelte';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import Portal from '../../utility/portal/Portal.svelte';
 	import {
 		Toaster as ToasterClass,
@@ -20,7 +21,10 @@
 		type TabHiddenBehavior
 	} from './toast.svelte.js';
 
-	interface Props {
+	// 'type' is omitted as well as 'children': HTMLOlAttributes narrows it to '1'|'a'|'A'|'i'|'I',
+	// which intersects with ToastType ('polite'|'assertive') to undefined — silently, so a
+	// consumer's type="polite" would be a compile error that no gate here reports.
+	type Props = Omit<SvelteHTMLElements['ol'], 'children' | 'type'> & {
 		children?: import('svelte').Snippet;
 		toast: import('svelte').Snippet<[Toast<T>]>;
 		toaster?: ToasterClass<T>;
@@ -29,10 +33,9 @@
 		hover?: HoverBehavior;
 		tabHidden?: TabHiddenBehavior;
 		placement?: Placement;
-		class?: string;
 		'aria-label'?: string;
 		live?: 'polite' | 'assertive';
-	}
+	};
 
 	let {
 		children,
@@ -45,7 +48,8 @@
 		placement = 'bottom-right',
 		class: className = '',
 		'aria-label': ariaLabel = 'Notifications',
-		live = 'polite'
+		live = 'polite',
+		...rest
 	}: Props = $props();
 
 	const t = untrack(
@@ -58,6 +62,7 @@
 
 <Portal>
 	<ol
+		{...rest}
 		role="region"
 		aria-label={ariaLabel}
 		aria-live={live}

@@ -1,9 +1,13 @@
 <script lang="ts">
 	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
 	type Variant = 'info' | 'success' | 'warning' | 'error' | 'announcement';
 
-	interface Props {
+	// 'title' is omitted as well as 'children': the component declares `title?: Snippet`
+	// while `HTMLAttributes.title` is `string`, so the intersection is `never` — a
+	// consumer's snippet could never be passed, silently.
+	type Props = Omit<SvelteHTMLElements['section'], 'children' | 'title'> & {
 		children?: import('svelte').Snippet;
 		title?: import('svelte').Snippet;
 		icon?: import('svelte').Snippet;
@@ -13,14 +17,9 @@
 		dismissible?: boolean;
 		role?: 'status' | 'alert' | 'region';
 		live?: 'polite' | 'assertive' | 'off';
-		class?: string;
 		titleClass?: string;
-		style?: string;
-		'aria-label'?: string;
-		'aria-labelledby'?: string;
-		'aria-describedby'?: string;
 		ondismiss?: () => void;
-	}
+	};
 
 	let {
 		children,
@@ -38,7 +37,8 @@
 		'aria-label': ariaLabel,
 		'aria-labelledby': ariaLabelledby,
 		'aria-describedby': ariaDescribedby,
-		ondismiss
+		ondismiss,
+		...rest
 	}: Props = $props();
 
 	const ariaAttrs = $derived(
@@ -55,6 +55,7 @@
 
 {#if open}
 	<section
+		{...rest}
 		{role}
 		aria-live={live ?? (role === 'alert' ? 'assertive' : role === 'status' ? 'polite' : undefined)}
 		data-variant={variant}

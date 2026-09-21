@@ -1,15 +1,17 @@
 <script lang="ts">
+	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import { getTabsContext, TAB_LIST_ATTR, TAB_ATTR } from './context.js';
 	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-	interface Props {
+	interface Props extends Omit<HTMLButtonAttributes, 'children'> {
 		children?: import('svelte').Snippet<[{ selected: boolean }]>;
+		// Not a DOM attribute: identifies which tab this is in the Tabs context.
 		value: string;
+		// Read by `activate`, `onKeydown`, `data-disabled` and the `ariaAttrs` derivation — rule 2.
 		disabled?: boolean;
-		class?: string;
 	}
 
-	let { children, value, disabled = false, class: className = '' }: Props = $props();
+	let { children, value, disabled = false, class: className = '', ...rest }: Props = $props();
 
 	const ctx = getTabsContext();
 
@@ -70,6 +72,7 @@
 </script>
 
 <button
+	{...rest}
 	id={tabId}
 	type="button"
 	role="tab"

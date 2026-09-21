@@ -1,19 +1,20 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { getTabsContext, TAB_LIST_ATTR } from './context.js';
 	import { labelAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
-	}
+	};
 
 	let {
 		children,
 		class: className = '',
 		'aria-label': ariaLabel,
-		'aria-labelledby': ariaLabelledby
+		'aria-labelledby': ariaLabelledby,
+		...rest
 	}: Props = $props();
 
 	const ctx = getTabsContext();
@@ -21,6 +22,7 @@
 </script>
 
 <div
+	{...rest}
 	role="tablist"
 	class={className}
 	{...mergeAttrs(

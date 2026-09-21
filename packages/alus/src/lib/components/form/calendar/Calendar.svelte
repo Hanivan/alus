@@ -36,9 +36,10 @@
 
 <script lang="ts">
 	import { generateCounterId } from '$utils/a11y/id.js';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import VisuallyHidden from '../../utility/visually-hidden/VisuallyHidden.svelte';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		value?: DateValue | null;
 		viewDate?: DateValue;
 		view?: CalendarView;
@@ -51,7 +52,6 @@
 		isDateDisabled?: (date: DateValue) => boolean;
 		dayDataAttrs?: (day: CalendarDay) => Record<string, string | undefined>;
 		onDayHover?: (date: DateValue) => void;
-		class?: string;
 		headerClass?: string;
 		gridClass?: string;
 		weekdayClass?: string;
@@ -60,9 +60,9 @@
 		yearClass?: string;
 		'aria-label'?: string;
 		day?: import('svelte').Snippet<[{ day: CalendarDay }]>;
-		onSelect?: (date: DateValue) => void;
+		onValueChange?: (date: DateValue) => void;
 		onViewChange?: (viewDate: DateValue) => void;
-	}
+	};
 
 	let {
 		value = $bindable(null),
@@ -86,8 +86,9 @@
 		yearClass = '',
 		'aria-label': ariaLabel = 'Calendar',
 		day,
-		onSelect,
-		onViewChange
+		onValueChange,
+		onViewChange,
+		...rest
 	}: Props = $props();
 
 	const gridId = generateCounterId('calendar-grid');
@@ -228,7 +229,7 @@
 		if (isDisabled(d)) return;
 		value = d;
 		if (d.month !== viewDate.month || d.year !== viewDate.year) setView(d);
-		onSelect?.(d);
+		onValueChange?.(d);
 	}
 
 	function focusDate(d: DateValue) {
@@ -309,7 +310,7 @@
 	const yearLabelText = $derived(yearOnlyFormatter.format(viewDate.toDate(timeZone)));
 </script>
 
-<div class={className} role="group" aria-label={ariaLabel} data-view={view}>
+<div {...rest} class={className} role="group" aria-label={ariaLabel} data-view={view}>
 	<div class={headerClass}>
 		<button
 			type="button"

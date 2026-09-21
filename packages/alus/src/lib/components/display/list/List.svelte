@@ -1,27 +1,14 @@
 <script lang="ts">
-	interface Props {
-		children?: import('svelte').Snippet;
-		class?: string;
-		as?: 'ul' | 'ol';
-		'aria-label'?: string;
-		'aria-labelledby'?: string;
-	}
+	import type { HTMLAttributes } from 'svelte/elements';
 
-	let {
-		children,
-		class: className = '',
-		as = 'ul',
-		'aria-label': ariaLabel,
-		'aria-labelledby': ariaLabelledby
-	}: Props = $props();
+	type Props = Omit<HTMLAttributes<HTMLElement>, 'children'> & {
+		children?: import('svelte').Snippet;
+		as?: 'ul' | 'ol';
+	};
+
+	let { children, class: className = '', as = 'ul', ...rest }: Props = $props();
 </script>
 
-<svelte:element
-	this={as}
-	role="list"
-	class={className}
-	aria-label={ariaLabel}
-	aria-labelledby={ariaLabelledby}
->
+<svelte:element this={as} {...rest} role="list" class={className}>
 	{#if children}{@render children()}{/if}
 </svelte:element>

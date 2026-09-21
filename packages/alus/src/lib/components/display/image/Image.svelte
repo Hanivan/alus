@@ -1,12 +1,12 @@
 <script lang="ts">
-	interface Props {
+	import type { HTMLImgAttributes } from 'svelte/elements';
+
+	// 'placeholder' is omitted as well as 'children': the component declares
+	// `placeholder?: Snippet` while `HTMLAttributes.placeholder` is `string`, so the
+	// intersection is `never` — a consumer's snippet could never be passed, silently.
+	interface Props extends Omit<HTMLImgAttributes, 'children' | 'placeholder'> {
 		src: string;
 		alt: string;
-		class?: string;
-		loading?: 'lazy' | 'eager';
-		decoding?: 'auto' | 'async' | 'sync';
-		width?: number | string;
-		height?: number | string;
 		decorative?: boolean;
 		fallback?: import('svelte').Snippet;
 		placeholder?: import('svelte').Snippet;
@@ -26,7 +26,8 @@
 		fallback,
 		placeholder,
 		onLoad,
-		onError
+		onError,
+		...rest
 	}: Props = $props();
 
 	let status = $state<'loading' | 'loaded' | 'error'>('loading');
@@ -49,6 +50,7 @@
 		{@render placeholder()}
 	{/if}
 	<img
+		{...rest}
 		{src}
 		alt={decorative ? '' : alt}
 		aria-hidden={decorative || undefined}

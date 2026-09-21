@@ -12,8 +12,9 @@
 	import { trap, focusFirst } from '$utils/a11y/index.js';
 	import Portal from '../../utility/portal/Portal.svelte';
 	import Calendar from '../calendar/Calendar.svelte';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		value?: DateValue | null;
 		open?: boolean;
 		min?: DateValue;
@@ -26,7 +27,6 @@
 		required?: boolean;
 		closeOnSelect?: boolean;
 		isDateDisabled?: (date: DateValue) => boolean;
-		class?: string;
 		inputClass?: string;
 		popoverClass?: string;
 		calendarClass?: string;
@@ -38,8 +38,8 @@
 		yearClass?: string;
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
-		onSelect?: (date: DateValue) => void;
-	}
+		onValueChange?: (date: DateValue) => void;
+	};
 
 	let {
 		value = $bindable(null),
@@ -66,7 +66,8 @@
 		yearClass = '',
 		'aria-label': ariaLabel,
 		'aria-labelledby': ariaLabelledby,
-		onSelect
+		onValueChange,
+		...rest
 	}: Props = $props();
 
 	const popId = generateCounterId('datepicker-pop');
@@ -93,7 +94,7 @@
 
 	function onPick(d: DateValue) {
 		value = d;
-		onSelect?.(d);
+		onValueChange?.(d);
 		if (closeOnSelect) {
 			open = false;
 			triggerEl?.focus();
@@ -154,7 +155,7 @@
 	};
 </script>
 
-<div class={className}>
+<div {...rest} class={className}>
 	<button
 		type="button"
 		{disabled}
@@ -196,7 +197,7 @@
 					{locale}
 					{timeZone}
 					{isDateDisabled}
-					onSelect={onPick}
+					onValueChange={onPick}
 					class={calendarClass}
 					{headerClass}
 					{gridClass}

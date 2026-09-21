@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
+
 	type Size = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
 
 	const sizeMap: Record<Size, string> = {
@@ -10,14 +12,13 @@
 		full: '100%'
 	};
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
 		maxWidth?: Size | string;
 		padding?: string | number;
 		center?: boolean;
-		class?: string;
 		style?: string;
-	}
+	};
 
 	let {
 		children,
@@ -25,7 +26,8 @@
 		padding = '1rem',
 		center = true,
 		class: className = '',
-		style: extraStyle = ''
+		style: extraStyle = '',
+		...rest
 	}: Props = $props();
 
 	function toCssValue(v: string | number): string {
@@ -40,6 +42,6 @@
 	const style = $derived(`${baseStyle}${extraStyle}`);
 </script>
 
-<div class={className} {style} data-max-width={maxWidth}>
+<div {...rest} class={className} {style} data-max-width={maxWidth}>
 	{#if children}{@render children()}{/if}
 </div>

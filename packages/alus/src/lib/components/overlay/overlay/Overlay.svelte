@@ -1,17 +1,17 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { useEventListener } from 'runed';
 	import Portal from '../../utility/portal/Portal.svelte';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
 		open?: boolean;
 		closeOnEscape?: boolean;
 		closeOnOutsideClick?: boolean;
 		portal?: boolean;
-		class?: string;
 		style?: string;
 		onOpenChange?: (open: boolean) => void;
-	}
+	};
 
 	let {
 		children,
@@ -21,7 +21,8 @@
 		portal = true,
 		class: className = '',
 		style,
-		onOpenChange
+		onOpenChange,
+		...rest
 	}: Props = $props();
 
 	function setOpen(v: boolean) {
@@ -47,9 +48,7 @@
 </script>
 
 {#snippet inner()}
-	<!-- svelte-ignore a11y_click_events_have_key_events -->
-	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<div class={className} {style} data-overlay onclick={onBackdropClick}>
+	<div {...rest} class={className} {style} data-overlay onclick={onBackdropClick}>
 		{#if children}{@render children()}{/if}
 	</div>
 {/snippet}

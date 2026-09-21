@@ -1,14 +1,21 @@
 <script lang="ts">
-	interface Props {
+	import type { HTMLAnchorAttributes } from 'svelte/elements';
+
+	interface Props extends Omit<HTMLAnchorAttributes, 'children'> {
 		children?: import('svelte').Snippet;
 		icon?: import('svelte').Snippet;
+		// Kept required: the link is useless without a destination, so this stays a
+		// consumer-side requirement. A declared member wins over the inherited optional one
+		// (`HTMLAnchorAttributes.href` is `string | undefined | null`), and `string` is
+		// assignable to it, so the narrowing is legal.
 		href: string;
 		newTab?: boolean;
+		// Read by the `{#if newTab && announceNewTab}` markup — rule 3.
 		announceNewTab?: boolean;
-		class?: string;
-		'aria-label'?: string;
-		'aria-describedby'?: string;
-		onclick?: (e: MouseEvent) => void;
+		// `aria-label` and `aria-describedby` are NOT declared: both were verbatim, no-default
+		// passthroughs (the value only ever came from the consumer), so they are deleted and
+		// `rest` delivers them to the same `<a>` with identical effect. The `srOnlyStyle` span
+		// is a child, not the host, so nothing below depends on the declaration.
 	}
 
 	let {
@@ -18,9 +25,7 @@
 		newTab = true,
 		announceNewTab = true,
 		class: className = '',
-		'aria-label': ariaLabel,
-		'aria-describedby': ariaDescribedby,
-		onclick
+		...rest
 	}: Props = $props();
 
 	const srOnlyStyle =
@@ -28,14 +33,12 @@
 </script>
 
 <a
+	{...rest}
 	{href}
 	target={newTab ? '_blank' : undefined}
 	rel="external noopener noreferrer"
 	class={className}
-	aria-label={ariaLabel}
-	aria-describedby={ariaDescribedby}
 	data-external
-	{onclick}
 >
 	{#if children}{@render children()}{/if}
 	{#if icon}{@render icon()}{/if}

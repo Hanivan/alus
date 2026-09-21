@@ -1,13 +1,13 @@
 <script lang="ts">
+	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import { getAccordionRoot, getAccordionItem } from './context.js';
 	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-	interface Props {
+	interface Props extends Omit<HTMLButtonAttributes, 'children'> {
 		children?: import('svelte').Snippet<[{ open: boolean }]>;
-		class?: string;
 	}
 
-	let { children, class: className = '' }: Props = $props();
+	let { children, class: className = '', ...rest }: Props = $props();
 
 	const root = getAccordionRoot();
 	const item = getAccordionItem();
@@ -63,6 +63,7 @@
 </script>
 
 <button
+	{...rest}
 	id={item.triggerId}
 	type="button"
 	data-state={open ? 'open' : 'closed'}

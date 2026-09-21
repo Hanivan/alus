@@ -1,17 +1,19 @@
 <script lang="ts" generics="T">
 	import type { Attachment } from 'svelte/attachments';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		items: T[];
 		itemHeight: number;
 		overscan?: number;
-		class?: string;
 		innerClass?: string;
 		itemClass?: string;
+		// The host writes its own `style` and merges this value into it, so the prop stays
+		// declared and destructured: deleting it would strand a consumer's `style`, because the
+		// computed attribute after `{...rest}` overwrites whatever `rest` had set.
 		style?: string;
-		'aria-label'?: string;
 		item: import('svelte').Snippet<[{ item: T; index: number; style: string }]>;
-	}
+	};
 
 	let {
 		items,
@@ -21,8 +23,8 @@
 		innerClass = '',
 		itemClass = '',
 		style,
-		'aria-label': ariaLabel,
-		item
+		item,
+		...rest
 	}: Props = $props();
 
 	let scrollTop = $state(0);
@@ -62,10 +64,10 @@
 </script>
 
 <div
+	{...rest}
 	class={className}
 	style={`overflow:auto; position:relative; ${style ?? ''}`}
 	role="list"
-	aria-label={ariaLabel}
 	{@attach containerRef}
 >
 	<div class={innerClass} style={`position:relative; height:${totalHeight}px;`}>

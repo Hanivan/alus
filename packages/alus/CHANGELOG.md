@@ -1,10 +1,80 @@
 # Changelog
 
+## 0.3.0
+
+### BREAKING CHANGES
+
+- **`Switch`**: `onchange` renamed to `onCheckedChange`. The prop receives a `boolean`, not a DOM event. Migrate `onchange={(checked) => …}` to `onCheckedChange={(checked) => …}`.
+- **`FileInput`**: `onchange` renamed to `onFilesChange`. The prop receives a `FileList`. Migrate `onchange={(files) => …}` to `onFilesChange={(files) => …}`.
+- **`NumberInput`**: `onchange` renamed to `onValueChange`. The prop receives a `number`. Migrate `onchange={(value) => …}` to `onValueChange={(value) => …}`.
+
+  These three redefined a native handler name with custom semantics, which is incompatible with the attribute passthrough below.
+
+  **Native-event caveat:** `NumberInput` and `Switch` forward a native `onchange` to their host, so passing `onchange` reaches it. `FileInput` does **not** — its host `<input>` sets `onchange={handleChange}` itself and `rest` is spread first, so a consumer-supplied `onchange` is overridden and never called.
+
+- **`ColorPicker`, `DateRange`, `DateRangePicker`, `TimePicker`, `Compare`**: `onChange` renamed to `onValueChange`.
+- **`Calendar`, `DatePicker`, `AutoComplete`**: `onSelect` renamed to `onValueChange`.
+
+  These eight passed a value under a name that did not match the library's own convention (`onValueChange` is already used by `Rating`, `Select`, `Accordion`, and `Slider`) or shadcn-svelte's. They are pure renames — behaviour is unchanged. `onSelect` on `CommandMenu`, `CommandMenuItem`, and `ContextMenu` is deliberately unchanged, matching cmdk; on those components `onSelect` is a field of an item descriptor rather than a value-carrying prop.
+
+### Added
+
+- HTML attribute and event handler passthrough on 141 components. Every component that renders a host element now forwards unknown attributes and handlers to it:
+  - arbitrary `on*` event handlers — `onblur`, `onfocus`, `ondblclick`, `oncontextmenu`, `onpointerdown`, `onwheel`, and any other DOM event **the component does not already handle on that element**
+  - arbitrary `data-*` attributes, for test hooks (`data-testid`) and analytics markers
+  - native attributes that were previously not declared as props — `id`, `name`, `form`, `tabindex`, `autofocus`, `spellcheck`, `enterkeyhint`, `min`, `max`, `step`, `pattern`, `list`, and others
+  - `class` on the components that did not previously declare it, and `style` on the majority that did not
+  - a spread props object, so wrapper and design-system layers can pass props through
+
+  `{...rest}` is applied before the component's own attributes, so a component's computed `role`, `aria-*`, and default values still win. Consumer-supplied values win for anything the component does not set.
+
+  **The one exception is an event handler the component sets on that same element.** `rest` is spread first, so the component's handler wins and a consumer's handler for that same event is **silently never called**. This affects **35 of the 141** components — measured 2026-09-21 by parsing every element that receives `{...rest}` and listing the `on*` attributes it already sets. The other **106** forward every event they do not handle themselves.
+
+  | Component                                                                                                                                                   | Handler it owns                                                              | Consequence                                                       |
+  | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+  | `FileInput`                                                                                                                                                 | `onchange`                                                                   | a consumer's `onchange` fires **0** times                         |
+  | `Switch`                                                                                                                                                    | `onclick`, `onkeydown`                                                       | consumer `onclick`/`onkeydown` discarded                          |
+  | `Image`                                                                                                                                                     | `onload`, `onerror`                                                          | consumer `onload`/`onerror` discarded                             |
+  | `Draggable`, `Droppable`                                                                                                                                    | `ondragstart`/`ondragend`; `ondragover`/`ondrop`/`ondragenter`/`ondragleave` | the drag interaction is the component's                           |
+  | `Compare`, `Swipeable`, `SplitViewHandle`                                                                                                                   | `onpointerdown`/`onpointermove`/`onpointerup`/`onpointercancel`              | the pointer gesture is the component's                            |
+  | `ContextMenu`                                                                                                                                               | `oncontextmenu`                                                              | consumer `oncontextmenu` discarded                                |
+  | `CarouselNext`, `CarouselPrev`, `ModalClose`, `ModalTrigger`, `Tab`, `AccordionTrigger`, `MenuTrigger`, `SelectTrigger`, `CommandMenuTrigger`               | `onclick`                                                                    | consumer `onclick` discarded — use the component's own callback   |
+  | `CarouselIndicators`, `Rating`, `TreeView`, `TreeItem`, `MenuItem`, `SelectOption`, `CommandMenuItem`, `CommandMenuInput`, `SubMenu`, `Overlay`, `Carousel` | assorted keyboard/pointer handlers                                           | see the component's source                                        |
+  | `TooltipTrigger`                                                                                                                                            | `onpointerenter`, `onpointerleave`, `onfocus`, `onblur`, `onkeydown`         | the entire open/close interaction is the component's              |
+  | `TooltipContent`                                                                                                                                            | `onpointerenter`, `onpointerleave`                                           | keeps the tooltip open while hovered                              |
+  | `PopoverTrigger`                                                                                                                                            | `onclick`                                                                    | consumer `onclick` discarded — use the component's own open state |
+  | `MenuContent`, `SelectContent`                                                                                                                              | `onkeydown`                                                                  | roving-tabindex navigation is the component's                     |
+  | `DateRange`                                                                                                                                                 | `onpointerleave`                                                             | clears the hover-preview range                                    |
+
+  **Two components handle an event AND still call yours.** `ToggleButton` declares `onclick` as a prop, destructures it out of `rest`, and invokes it from its own handler (`ToggleButton.svelte:44`); `Slider` does the same for `onkeydown` (`Slider.svelte:68`). A consumer's handler runs on both, after the component's own logic — so neither is in the table above. They are the only two that work this way.
+
+  Every component still accepts the full attribute surface (`data-*`, `id`, `class`, `style`, ARIA, and all non-handler attributes); only the handler attributes listed above are shadowed on the 35 components above.
+
+  **`style` merges rather than replaces on the thirteen components whose receiving element writes its own** — `FileInput`, `SelectContent`, `MenuContent`, `PopoverContent`, `TooltipContent`, `Textarea`, `AspectRatio`, `Compare`, `TableCaption`, `LiveRegion`, `Resizable`, `SplitViewPane`, `VisuallyHidden`. On these, a consumer's `style` is appended to the component's own value instead of being dropped. `class` still replaces everywhere (unchanged behaviour).
+
+### Notes
+
+- **`Input` no longer accepts a `children` prop.** `Input` declares `Omit<HTMLInputAttributes, 'children'>`; the inherited `children` slot was silently accepted and silently ignored. It is now a type error. No consumer in this repo passes one. The same `Omit` is applied to every component in this release, so any component whose `children` you relied on being _ignored_ now rejects it instead.
+
+- **`buildAriaAttrs` (exported helper) now drops `null` alongside `undefined`.** Passing `null` for an `aria-*` key used to stringify it and render the literal text `"null"`; it now removes the attribute, matching Svelte's own semantics. This is a behaviour change on public API (`alus-ui` re-exports it from `$utils/a11y`), so it is called out here. Consumers who relied on the previous stringification should pass a string instead.
+
+- **A consumer-supplied `aria-*` that the component derives to `undefined` is REMOVED, not just overridden.** `{...rest}` goes first, so a component-owned attribute wins — but where the component computes the value as `undefined`, Svelte does not fall back to the consumer's: `if (value == null) element.removeAttribute(attribute)`. So passing `aria-disabled="true"` to `NotificationBell`, whose host writes `aria-disabled={disabled || undefined}`, yields **no** `aria-disabled` attribute at all. The same shape appears on `Badge` and `Alert`. This is the sanctioned consequence of the component-wins contract, not a defect — the supported route is the component's own prop (`disabled`), which carries the same meaning.
+
+- **`VisuallyHidden` deleted five declared props** — `role`, `aria-live`, `aria-atomic`, `aria-relevant`, `aria-label` — which now arrive through `{...rest}` instead of an explicit declaration. Every inherited type is equal-or-wider than what it replaced, so no existing call site breaks. Not a breaking change; listed here as a prop-surface change.
+
+- **`Droppable` and `VirtualList` no longer declare `aria-label` explicitly** — both now inherit it from their native attribute base and receive it through `{...rest}`. Behaviour-preserving for consumers who pass `aria-label`; listed as a prop-surface change, not a behaviour change.
+
+- **Known issue, pre-existing and out of scope for this release: `Droppable` renders `aria-dropeffect`** at five sites (`interactive/droppable/Droppable.svelte:89,103,117,131,145`). `aria-dropeffect` is deprecated in ARIA 1.1 and implemented by no assistive technology. This predates the attribute-passthrough work in this release and removing it is an accessibility behaviour change, not an attribute-passthrough change — it is recorded here so it is not mistaken for a regression introduced by this branch.
+
+- Nine components are unaffected and do not forward attributes, because they render no host element: `CommandMenu`, `Menu`, `Modal`, `Popover`, `Tooltip`, `Conditional`, `Select`, `Dialog`, `Drawer`. The six content components reach the DOM through `ModalContent`, `DrawerContent`, `PopoverContent`, `TooltipContent`, `MenuContent`, and `CommandMenuContent`, which do forward, and `Select`'s consumers reach it through `SelectTrigger` / `SelectContent` / `SelectOption`.
+
+- **Four components forward in some branches and not others**, because their host element is conditional. In the branch that renders no host, attributes passed through `rest` are silently discarded — there is nowhere to put them. This is a known ceiling, not a defect: hoisting the host outside the branch would change the DOM for existing consumers. `NumberInput` and `SearchInput` render their wrapper `div` only in the `{:else}` branch, so a consumer passing a `children` snippet gets no host; `Portal` renders its `div` only when `disabled` is false; and `Image` renders no host in its `error` + `fallback` branch. Prefer the component's own props over `rest` for anything load-bearing on these four.
+
 ## [0.2.2](https://github.com/Hanivan/alus/compare/v0.2.1...v0.2.2) (2026-06-20)
 
 ### Bug Fixes
 
-* **a11y:** patch missing attrs, ARIA, and WCAG gaps across components ([ce3f431](https://github.com/Hanivan/alus/commit/ce3f43118b1ae9fb1e4d350e8f5b9cb76052eb25))
+- **a11y:** patch missing attrs, ARIA, and WCAG gaps across components ([ce3f431](https://github.com/Hanivan/alus/commit/ce3f43118b1ae9fb1e4d350e8f5b9cb76052eb25))
 
 ## [0.2.1](https://github.com/Hanivan/alus/compare/v0.2.0...v0.2.1) (2026-06-01)
 

@@ -1,11 +1,15 @@
 <script lang="ts">
 	import { useDebounce } from 'runed';
+	import type { HTMLInputAttributes } from 'svelte/elements';
 	import { getCommandMenuContext } from './CommandMenu.svelte';
 
-	interface Props {
-		class?: string;
-		placeholder?: string;
+	interface Props extends Omit<HTMLInputAttributes, 'children'> {
+		// Not a native attribute — the debounce interval the component itself implements.
 		debounceMs?: number;
+		// Kept: the default `'Search commands'` is the combobox's only accessible name. It is
+		// also the input's *default* accessible name, which a consumer's `aria-label` supplied
+		// through `rest` can no longer override (this host hardcodes `role="combobox"`, which
+		// takes its name from the author).
 		'aria-label'?: string;
 	}
 
@@ -13,7 +17,8 @@
 		class: className = '',
 		placeholder = 'Type a command or search...',
 		debounceMs = 0,
-		'aria-label': ariaLabel = 'Search commands'
+		'aria-label': ariaLabel = 'Search commands',
+		...rest
 	}: Props = $props();
 
 	const ctx = getCommandMenuContext();
@@ -70,6 +75,7 @@
 </script>
 
 <input
+	{...rest}
 	type="text"
 	id={ctx.inputId}
 	role="combobox"

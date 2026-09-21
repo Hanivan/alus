@@ -9,17 +9,18 @@
 
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { tick } from 'svelte';
 	import { useEventListener } from 'runed';
 	import { generateCounterId } from '$utils/a11y/id.js';
 	import Portal from '../../utility/portal/Portal.svelte';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
 		items: ContextMenuItemEntry[];
 		open?: boolean;
+		// Read by `onContext` / `onKeydownTrigger` — rule 2.
 		disabled?: boolean;
-		class?: string;
 		menuClass?: string;
 		itemClass?: string;
 		separatorClass?: string;
@@ -27,7 +28,7 @@
 		'aria-label'?: string;
 		item?: import('svelte').Snippet<[{ item: ContextMenuItemEntry; index: number }]>;
 		onOpenChange?: (open: boolean) => void;
-	}
+	};
 
 	let {
 		children,
@@ -41,7 +42,8 @@
 		style,
 		'aria-label': ariaLabel = 'Context menu',
 		item,
-		onOpenChange
+		onOpenChange,
+		...rest
 	}: Props = $props();
 
 	const menuId = generateCounterId('contextmenu');
@@ -180,8 +182,8 @@
 	};
 </script>
 
-<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
+	{...rest}
 	class={className}
 	{style}
 	oncontextmenu={onContext}

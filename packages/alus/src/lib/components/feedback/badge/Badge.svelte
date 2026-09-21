@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import type { AriaLive } from '$types/index.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['span'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		// Accessibility attributes
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
@@ -15,7 +15,7 @@
 		variant?: 'default' | 'success' | 'warning' | 'error' | 'info';
 		// State
 		disabled?: boolean;
-	}
+	};
 
 	let {
 		children,
@@ -26,7 +26,8 @@
 		'aria-live': ariaLive,
 		'aria-hidden': ariaHidden,
 		variant = 'default',
-		disabled = false
+		disabled = false,
+		...rest
 	}: Props = $props();
 
 	// Build ARIA attributes using reusable utilities
@@ -40,6 +41,7 @@
 </script>
 
 <span
+	{...rest}
 	class={className}
 	data-variant={variant}
 	data-disabled={disabled ? '' : undefined}

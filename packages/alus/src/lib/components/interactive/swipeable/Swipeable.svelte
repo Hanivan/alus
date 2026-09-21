@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
+
 	export type SwipeDirection = 'left' | 'right' | 'up' | 'down';
 
 	interface SwipeInfo {
@@ -11,9 +13,8 @@
 		duration: number;
 	}
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		threshold?: number;
 		velocityThreshold?: number;
 		disabled?: boolean;
@@ -27,7 +28,7 @@
 		onSwipeRight?: () => void;
 		onSwipeUp?: () => void;
 		onSwipeDown?: () => void;
-	}
+	};
 
 	let {
 		children,
@@ -44,7 +45,8 @@
 		onSwipeLeft,
 		onSwipeRight,
 		onSwipeUp,
-		onSwipeDown
+		onSwipeDown,
+		...rest
 	}: Props = $props();
 
 	let startX = 0;
@@ -129,8 +131,8 @@
 </script>
 
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div
+	{...rest}
 	class={className}
 	role="region"
 	aria-label={ariaLabel}

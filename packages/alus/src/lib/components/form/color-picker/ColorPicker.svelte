@@ -14,23 +14,23 @@
 </script>
 
 <script lang="ts">
-	interface Props {
+	import type { SvelteHTMLElements } from 'svelte/elements';
+
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		value?: string;
 		swatches?: string[];
 		showInput?: boolean;
 		showNative?: boolean;
 		disabled?: boolean;
-		class?: string;
 		nativeClass?: string;
 		inputClass?: string;
 		swatchesClass?: string;
 		swatchClass?: string;
 		'aria-label'?: string;
-		'aria-labelledby'?: string;
 		swatchesLabel?: string;
 		nativeInputLabel?: string;
-		onChange?: (value: string) => void;
-	}
+		onValueChange?: (value: string) => void;
+	};
 
 	let {
 		value = $bindable('#000000'),
@@ -44,10 +44,10 @@
 		swatchesClass = '',
 		swatchClass = '',
 		'aria-label': ariaLabel = 'Color',
-		'aria-labelledby': ariaLabelledby,
 		swatchesLabel = 'Color swatches',
 		nativeInputLabel = 'Color',
-		onChange
+		onValueChange,
+		...rest
 	}: Props = $props();
 
 	let textValue = $state(value);
@@ -58,7 +58,7 @@
 
 	function setHex(hex: string) {
 		value = hex;
-		onChange?.(hex);
+		onValueChange?.(hex);
 	}
 
 	function onNative(e: Event) {
@@ -121,10 +121,10 @@
 </script>
 
 <div
+	{...rest}
 	class={className}
 	role="group"
 	aria-label={ariaLabel}
-	aria-labelledby={ariaLabelledby}
 	aria-disabled={disabled || undefined}
 >
 	{#if showNative}

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import {
 		labelAttrs,
 		validationAttrs,
@@ -6,15 +7,16 @@
 		mergeAttrs
 	} from '$utils/a11y/index.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet<[{ value: string; clear: () => void }]>;
 		value?: string;
+		// `placeholder`, `name` and `id` are consumed by the inner `<input>`, not by the host
+		// `<div>` — rule 3, so they stay declared and keep reaching it.
 		placeholder?: string;
-		disabled?: boolean;
-		required?: boolean;
 		name?: string;
 		id?: string;
-		class?: string;
+		disabled?: boolean;
+		required?: boolean;
 		inputClass?: string;
 		clearLabel?: string;
 		'aria-label'?: string;
@@ -23,7 +25,7 @@
 		oninput?: (event: Event) => void;
 		onchange?: (event: Event) => void;
 		onclear?: () => void;
-	}
+	};
 
 	let {
 		children,
@@ -41,7 +43,8 @@
 		'aria-describedby': ariaDescribedby,
 		oninput,
 		onchange,
-		onclear
+		onclear,
+		...rest
 	}: Props = $props();
 
 	let ariaAttrs: Record<string, string> = $derived(
@@ -58,10 +61,15 @@
 	}
 </script>
 
+<!--
+	`rest` lands on the wrapper `div`, which exists only in the `{:else}` branch. A consumer
+	passing a `children` snippet gets no host element and therefore no `data-*`/`style` — the
+	same accepted ceiling as `NumberInput` (PATTERN.md rule 7). Not restructured.
+-->
 {#if children}
 	{@render children({ value, clear })}
 {:else}
-	<div class={className} role="search">
+	<div {...rest} class={className} role="search">
 		<input
 			type="search"
 			{id}

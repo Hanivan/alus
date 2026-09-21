@@ -9,6 +9,7 @@
 
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { computePosition, autoUpdate, flip, shift, offset } from '@floating-ui/dom';
 	import { useEventListener } from 'runed';
 	import { getMenuContext, type MenuItemEntry } from '../menu/Menu.svelte';
@@ -16,17 +17,20 @@
 	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 	import Portal from '../../utility/portal/Portal.svelte';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
+		// Read by the `{:else}` fallback branch of the trigger content — rule 3.
 		label?: string;
+		// Not a DOM attribute: the menu entries the component itself renders.
 		items: SubMenuItem[];
+		// Read by `triggerRef`, `enabledIndices` and the `ariaAttrs` derivation — rule 2.
 		disabled?: boolean;
-		class?: string;
+		// Consumed by the inner panel / item nodes, not by the host trigger — rule 3.
 		menuClass?: string;
 		itemClass?: string;
 		separatorClass?: string;
 		children?: import('svelte').Snippet<[{ highlighted: boolean; open: boolean }]>;
 		item?: import('svelte').Snippet<[{ item: SubMenuItem; index: number }]>;
-	}
+	};
 
 	let {
 		label,
@@ -37,7 +41,8 @@
 		itemClass = '',
 		separatorClass = '',
 		children,
-		item
+		item,
+		...rest
 	}: Props = $props();
 
 	const ctx = getMenuContext();
@@ -175,7 +180,13 @@
 	);
 </script>
 
+<!--
+	`{...rest}` lands on the trigger below, which writes no `style`. The literal
+	`style="position:fixed; top:0; left:0;"` lives on the panel `div` inside `<Portal>`, a
+	different element that `rest` never reaches — so no style merge applies here.
+-->
 <div
+	{...rest}
 	role="menuitem"
 	tabindex="-1"
 	data-highlighted={parentHighlighted || undefined}

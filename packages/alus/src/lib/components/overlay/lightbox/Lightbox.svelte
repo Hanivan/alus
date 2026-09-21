@@ -8,22 +8,21 @@
 
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { useEventListener } from 'runed';
 	import { trap, focusFirst } from '$utils/a11y/index.js';
 	import { generateCounterId } from '$utils/a11y/id.js';
 	import Portal from '../../utility/portal/Portal.svelte';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		images: LightboxImage[];
 		index?: number;
 		open?: boolean;
 		closeOnEscape?: boolean;
 		closeOnOutsideClick?: boolean;
 		loop?: boolean;
-		class?: string;
 		backdropClass?: string;
 		imageClass?: string;
-		style?: string;
 		controls?: import('svelte').Snippet<
 			[
 				{
@@ -40,7 +39,7 @@
 		caption?: import('svelte').Snippet<[{ image: LightboxImage; index: number; total: number }]>;
 		onOpenChange?: (open: boolean) => void;
 		onIndexChange?: (index: number) => void;
-	}
+	};
 
 	let {
 		images,
@@ -56,7 +55,8 @@
 		controls,
 		caption,
 		onOpenChange,
-		onIndexChange
+		onIndexChange,
+		...rest
 	}: Props = $props();
 
 	const titleId = generateCounterId('lightbox-title');
@@ -135,6 +135,7 @@
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div class={backdropClass} data-lightbox-backdrop onclick={onBackdrop}>
 			<div
+				{...rest}
 				role="dialog"
 				aria-modal="true"
 				aria-labelledby={titleId}

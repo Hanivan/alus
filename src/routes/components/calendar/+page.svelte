@@ -218,7 +218,7 @@
 		<div class="japanese-border bg-white/50 p-8 backdrop-blur-sm">
 			<Calendar
 				value={null}
-				onSelect={toggleRange}
+				onValueChange={toggleRange}
 				class="inline-block rounded border border-(--charcoal)/15 bg-white p-3 text-sm text-(--ink)"
 				headerClass={baseHeader}
 				gridClass={baseGrid}
@@ -280,7 +280,7 @@
 			},
 			{ name: 'onDayHover', type: '(d: DateValue) => void', default: 'undefined' },
 			{ name: 'day', type: 'Snippet<[{ day: CalendarDay }]>', default: 'undefined' },
-			{ name: 'onSelect', type: '(d: DateValue) => void', default: 'undefined' }
+			{ name: 'onValueChange', type: '(d: DateValue) => void', default: 'undefined' }
 		]}
 		a11y={[
 			'<code class="rounded bg-(--cream) px-1">role="grid"</code> + <code class="rounded bg-(--cream) px-1">role="gridcell"</code> + <code class="rounded bg-(--cream) px-1">aria-selected</code>',

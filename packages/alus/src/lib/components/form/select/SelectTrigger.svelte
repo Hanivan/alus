@@ -1,20 +1,14 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import { getSelectContext } from './Select.svelte';
 
-	interface Props {
+	interface Props extends Omit<HTMLButtonAttributes, 'children'> {
 		children?: import('svelte').Snippet;
-		class?: string;
 		disabled?: boolean;
-		'aria-label'?: string;
 	}
 
-	let {
-		children,
-		class: className = '',
-		disabled = false,
-		'aria-label': ariaLabel
-	}: Props = $props();
+	let { children, class: className = '', disabled = false, ...rest }: Props = $props();
 
 	const ctx = getSelectContext();
 
@@ -50,6 +44,7 @@
 </script>
 
 <button
+	{...rest}
 	type="button"
 	id={ctx.triggerId}
 	class={className}
@@ -58,7 +53,6 @@
 	aria-expanded={ctx.open()}
 	aria-controls={ctx.contentId}
 	aria-labelledby={ctx.labelId()}
-	aria-label={ariaLabel}
 	onclick={onClick}
 	onkeydown={onKeydown}
 	{@attach triggerRef}

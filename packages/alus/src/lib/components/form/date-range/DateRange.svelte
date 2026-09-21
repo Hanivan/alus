@@ -14,8 +14,9 @@
 
 <script lang="ts">
 	import Calendar, { type CalendarDay, type CalendarView } from '../calendar/Calendar.svelte';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		start?: DateValue | null;
 		end?: DateValue | null;
 		viewDate?: DateValue;
@@ -28,7 +29,6 @@
 		disabled?: boolean;
 		numberOfMonths?: 1 | 2;
 		isDateDisabled?: (date: DateValue) => boolean;
-		class?: string;
 		monthsClass?: string;
 		calendarClass?: string;
 		headerClass?: string;
@@ -38,8 +38,8 @@
 		monthClass?: string;
 		yearClass?: string;
 		'aria-label'?: string;
-		onChange?: (range: DateRangeValue) => void;
-	}
+		onValueChange?: (range: DateRangeValue) => void;
+	};
 
 	let {
 		start = $bindable(null),
@@ -64,7 +64,8 @@
 		monthClass = '',
 		yearClass = '',
 		'aria-label': ariaLabel = 'Date range',
-		onChange
+		onValueChange,
+		...rest
 	}: Props = $props();
 
 	let hovered = $state<DateValue | null>(null);
@@ -76,7 +77,7 @@
 		if (!start || (start && end)) {
 			start = d;
 			end = null;
-			onChange?.({ start, end });
+			onValueChange?.({ start, end });
 			return;
 		}
 		if (d.compare(start) < 0) {
@@ -85,7 +86,7 @@
 		} else {
 			end = d;
 		}
-		onChange?.({ start, end });
+		onValueChange?.({ start, end });
 	}
 
 	function dayAttrs(d: CalendarDay): Record<string, string | undefined> {
@@ -109,7 +110,13 @@
 	}
 </script>
 
-<div class={className} role="group" aria-label={ariaLabel} onpointerleave={() => (hovered = null)}>
+<div
+	{...rest}
+	class={className}
+	role="group"
+	aria-label={ariaLabel}
+	onpointerleave={() => (hovered = null)}
+>
 	<div class={monthsClass}>
 		<Calendar
 			value={null}
@@ -124,7 +131,7 @@
 			{isDateDisabled}
 			dayDataAttrs={dayAttrs}
 			onDayHover={onHover}
-			onSelect={pick}
+			onValueChange={pick}
 			class={calendarClass}
 			{headerClass}
 			{gridClass}
@@ -148,7 +155,7 @@
 				{isDateDisabled}
 				dayDataAttrs={dayAttrs}
 				onDayHover={onHover}
-				onSelect={pick}
+				onValueChange={pick}
 				class={calendarClass}
 				{headerClass}
 				{gridClass}

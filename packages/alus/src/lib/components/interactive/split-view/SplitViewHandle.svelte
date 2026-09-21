@@ -1,22 +1,23 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { getSplitViewContext } from './SplitView.svelte';
 	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-	interface Props {
-		class?: string;
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		step?: number;
 		largeStep?: number;
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
-	}
+	};
 
 	let {
 		class: className = '',
 		step = 2,
 		largeStep = 10,
 		'aria-label': ariaLabel = 'Resize panes',
-		'aria-labelledby': ariaLabelledby
+		'aria-labelledby': ariaLabelledby,
+		...rest
 	}: Props = $props();
 
 	const ctx = getSplitViewContext();
@@ -96,7 +97,7 @@
 
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 <div
-	{@attach attach}
+	{...rest}
 	role="separator"
 	tabindex={ctx.disabled() ? -1 : 0}
 	data-dragging={ctx.dragging() || undefined}
@@ -118,4 +119,5 @@
 			controls: `${ctx.firstPaneId} ${ctx.secondPaneId}`
 		})
 	)}
+	{@attach attach}
 ></div>

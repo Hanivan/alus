@@ -1,15 +1,16 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import { getModalContext } from './Modal.svelte';
 	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-	interface Props {
+	interface Props extends Omit<HTMLButtonAttributes, 'children'> {
 		children?: import('svelte').Snippet<[{ open: boolean }]>;
-		class?: string;
+		// Read by `openModal` and fed to the `ariaAttrs` derivation — rule 2.
 		disabled?: boolean;
 	}
 
-	let { children, class: className = '', disabled = false }: Props = $props();
+	let { children, class: className = '', disabled = false, ...rest }: Props = $props();
 
 	const ctx = getModalContext();
 
@@ -32,6 +33,7 @@
 </script>
 
 <button
+	{...rest}
 	type="button"
 	data-state={ctx.open() ? 'open' : 'closed'}
 	{disabled}

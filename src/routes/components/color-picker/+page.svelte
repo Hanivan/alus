@@ -223,7 +223,7 @@
 			{ name: 'showNative', type: 'boolean', default: 'true' },
 			{ name: 'disabled', type: 'boolean', default: 'false' },
 			{ name: 'aria-label', type: 'string', default: "'Color'" },
-			{ name: 'onChange', type: '(v: string) => void', default: 'undefined' }
+			{ name: 'onValueChange', type: '(v: string) => void', default: 'undefined' }
 		]}
 		a11y={[
 			'<code class="rounded bg-(--cream) px-1">role="group"</code> wraps the native input + text + swatches',

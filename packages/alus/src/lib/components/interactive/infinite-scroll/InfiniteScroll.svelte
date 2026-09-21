@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import VisuallyHidden from '../../utility/visually-hidden/VisuallyHidden.svelte';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
 		sentinel?: import('svelte').Snippet<[{ loading: boolean; done: boolean }]>;
 		loading?: boolean;
@@ -10,10 +11,9 @@
 		rootMargin?: string;
 		threshold?: number;
 		disabled?: boolean;
-		class?: string;
 		style?: string;
 		onLoad?: () => void | Promise<void>;
-	}
+	};
 
 	let {
 		children,
@@ -25,7 +25,8 @@
 		disabled = false,
 		class: className = '',
 		style,
-		onLoad
+		onLoad,
+		...rest
 	}: Props = $props();
 
 	const sentinelRef: Attachment<HTMLDivElement> = (node) => {
@@ -51,7 +52,7 @@
 	};
 </script>
 
-<div class={className} {style}>
+<div {...rest} class={className} {style}>
 	{#if children}{@render children()}{/if}
 	<div data-infinite-sentinel aria-hidden="true" {@attach sentinelRef}>
 		{#if sentinel}{@render sentinel({ loading, done: !hasMore })}{/if}

@@ -1,15 +1,16 @@
 <script lang="ts">
 	import { untrack } from 'svelte';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { getCarouselContext } from './Carousel.svelte';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		index: number;
 		children?: import('svelte').Snippet<[{ active: boolean }]>;
-		class?: string;
+		// Kept: the markup computes the slide's accessible name from it.
 		label?: string;
-	}
+	};
 
-	let { index, children, class: className = '', label }: Props = $props();
+	let { index, children, class: className = '', label, ...rest }: Props = $props();
 
 	const ctx = getCarouselContext();
 	const active = $derived(ctx.index() === index);
@@ -23,6 +24,7 @@
 </script>
 
 <div
+	{...rest}
 	role="group"
 	aria-roledescription="slide"
 	aria-label={label ?? `Slide ${index + 1} of ${ctx.count()}`}

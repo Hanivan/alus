@@ -1,15 +1,17 @@
 <script lang="ts">
 	import { getStepperContext } from './Stepper.svelte';
 	import { interactiveStateAttrs, labelAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import type { HTMLLiAttributes } from 'svelte/elements';
 
-	interface Props {
+	interface Props extends Omit<HTMLLiAttributes, 'children'> {
+		// Not a DOM attribute: the step's position, registered with the Stepper context.
 		index: number;
 		children?: import('svelte').Snippet<[{ status: 'completed' | 'current' | 'upcoming' }]>;
-		class?: string;
+		// Read by `clickable`/`onClick`/`onKeydown` and `data-disabled` — rule 2/3.
 		disabled?: boolean;
 	}
 
-	let { index, children, class: className = '', disabled = false }: Props = $props();
+	let { index, children, class: className = '', disabled = false, ...rest }: Props = $props();
 
 	const ctx = getStepperContext();
 	const status: 'completed' | 'current' | 'upcoming' = $derived(
@@ -32,6 +34,7 @@
 </script>
 
 <li
+	{...rest}
 	class={className}
 	data-status={status}
 	data-disabled={disabled || undefined}

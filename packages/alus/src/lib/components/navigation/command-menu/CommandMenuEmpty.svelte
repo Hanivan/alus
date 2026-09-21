@@ -1,18 +1,18 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { getCommandMenuContext } from './CommandMenu.svelte';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
-	}
+	};
 
-	let { children, class: className = '' }: Props = $props();
+	let { children, class: className = '', ...rest }: Props = $props();
 	const ctx = getCommandMenuContext();
 	const empty = $derived(ctx.query().trim() !== '' && ctx.filteredItems().length === 0);
 </script>
 
 {#if empty}
-	<div role="status" aria-live="polite" class={className}>
+	<div {...rest} role="status" aria-live="polite" class={className}>
 		{#if children}{@render children()}{/if}
 	</div>
 {/if}

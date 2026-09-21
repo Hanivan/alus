@@ -5,27 +5,20 @@
 		validationAttrs,
 		mergeAttrs
 	} from '$utils/a11y/index.js';
+	import type { HTMLInputAttributes } from 'svelte/elements';
 	import type { AriaBoolean } from '$types/index.js';
 
-	interface Props {
+	interface Props extends Omit<HTMLInputAttributes, 'children'> {
 		children?: import('svelte').Snippet;
-		class?: string;
 		disabled?: boolean;
 		indeterminate?: boolean;
 		required?: boolean;
-		readonly?: boolean;
-		id?: string;
-		name?: string;
-		value?: string;
-		form?: string;
 		checked?: boolean;
 		// Accessibility attributes
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
 		'aria-describedby'?: string;
 		'aria-invalid'?: AriaBoolean;
-		onchange?: (event: Event) => void;
-		oninput?: (event: Event) => void;
 	}
 
 	let {
@@ -34,18 +27,12 @@
 		disabled = false,
 		indeterminate = false,
 		required = false,
-		readonly = false,
-		id,
-		name,
-		value,
-		form,
 		checked = $bindable(),
 		'aria-label': ariaLabel,
 		'aria-labelledby': ariaLabelledby,
 		'aria-describedby': ariaDescribedby,
 		'aria-invalid': ariaInvalid,
-		onchange,
-		oninput
+		...rest
 	}: Props = $props();
 
 	let checkbox = $state<HTMLInputElement>();
@@ -74,19 +61,13 @@
 </script>
 
 <input
+	{...rest}
 	bind:this={checkbox}
 	type="checkbox"
 	bind:checked
-	{id}
 	{disabled}
 	{required}
-	{readonly}
-	{name}
-	{value}
-	{form}
 	class={className}
-	{onchange}
-	{oninput}
 	{...ariaAttrs}
 />
 

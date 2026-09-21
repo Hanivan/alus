@@ -1,9 +1,10 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	type Side = 'right' | 'bottom' | 'left' | 'top';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
 		size?: number;
 		minSize?: number;
@@ -12,12 +13,12 @@
 		step?: number;
 		largeStep?: number;
 		disabled?: boolean;
-		class?: string;
 		handleClass?: string;
+		style?: string;
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
 		onResize?: (size: number) => void;
-	}
+	};
 
 	let {
 		children,
@@ -30,9 +31,11 @@
 		disabled = false,
 		class: className = '',
 		handleClass = '',
+		style: extraStyle = '',
 		'aria-label': ariaLabel = 'Resize',
 		'aria-labelledby': ariaLabelledby,
-		onResize
+		onResize,
+		...rest
 	}: Props = $props();
 
 	const axis = $derived<'x' | 'y'>(side === 'left' || side === 'right' ? 'x' : 'y');
@@ -106,10 +109,15 @@
 		commit(size + delta);
 	}
 
-	const containerStyle = $derived(axis === 'x' ? `width:${size}px` : `height:${size}px`);
+	// The host writes its own `style`, so a consumer's `style` must be appended rather than
+	// dropped: `{...rest}` goes first, which would otherwise discard it silently.
+	const containerStyle = $derived(
+		`${axis === 'x' ? `width:${size}px` : `height:${size}px`}${extraStyle}`
+	);
 </script>
 
 <div
+	{...rest}
 	class={className}
 	style={containerStyle}
 	data-side={side}

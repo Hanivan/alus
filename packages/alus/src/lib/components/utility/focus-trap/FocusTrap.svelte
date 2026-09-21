@@ -1,21 +1,22 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { trap, focusFirst } from '$utils/a11y/index.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		active?: boolean;
 		autoFocus?: boolean;
 		restoreFocus?: boolean;
-	}
+	};
 
 	let {
 		children,
 		class: className = '',
 		active = true,
 		autoFocus = true,
-		restoreFocus = true
+		restoreFocus = true,
+		...rest
 	}: Props = $props();
 
 	const trapAttach: Attachment<HTMLDivElement> = (node) => {
@@ -34,6 +35,6 @@
 	};
 </script>
 
-<div class={className} {@attach trapAttach}>
+<div {...rest} class={className} {@attach trapAttach}>
 	{#if children}{@render children()}{/if}
 </div>

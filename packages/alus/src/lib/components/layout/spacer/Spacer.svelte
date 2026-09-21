@@ -1,18 +1,20 @@
 <script lang="ts">
-	interface Props {
+	import type { SvelteHTMLElements } from 'svelte/elements';
+
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		size?: string | number;
 		grow?: boolean;
 		axis?: 'horizontal' | 'vertical' | 'both';
-		class?: string;
 		style?: string;
-	}
+	};
 
 	let {
 		size,
 		grow = true,
 		axis = 'both',
 		class: className = '',
-		style: extraStyle = ''
+		style: extraStyle = '',
+		...rest
 	}: Props = $props();
 
 	function toCssValue(v: string | number): string {
@@ -32,4 +34,4 @@
 	const style = $derived(`${baseStyle}${extraStyle}`);
 </script>
 
-<div class={className} {style} aria-hidden="true" data-axis={axis}></div>
+<div {...rest} class={className} {style} aria-hidden="true" data-axis={axis}></div>

@@ -1,13 +1,20 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { getCarouselContext } from './Carousel.svelte';
 
-	interface Props {
-		class?: string;
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		item?: import('svelte').Snippet<[{ index: number; active: boolean }]>;
+		// Kept: the destructure default below is the tablist's only accessible name, so
+		// deleting it would silently drop `aria-label="Choose slide"` from the DOM.
 		'aria-label'?: string;
-	}
+	};
 
-	let { class: className = '', item, 'aria-label': ariaLabel = 'Choose slide' }: Props = $props();
+	let {
+		class: className = '',
+		item,
+		'aria-label': ariaLabel = 'Choose slide',
+		...rest
+	}: Props = $props();
 	const ctx = getCarouselContext();
 
 	let listEl: HTMLDivElement | null = $state(null);
@@ -49,6 +56,7 @@
 </script>
 
 <div
+	{...rest}
 	role="tablist"
 	tabindex="-1"
 	aria-label={ariaLabel}

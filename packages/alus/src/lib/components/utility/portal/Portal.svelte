@@ -1,11 +1,13 @@
 <script lang="ts">
-	interface Props {
+	import type { SvelteHTMLElements } from 'svelte/elements';
+
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
 		target?: HTMLElement | string;
 		disabled?: boolean;
-	}
+	};
 
-	let { children, target, disabled = false }: Props = $props();
+	let { children, target, disabled = false, ...rest }: Props = $props();
 
 	let node: HTMLDivElement | undefined = $state();
 
@@ -30,7 +32,7 @@
 {#if disabled}
 	{#if children}{@render children()}{/if}
 {:else}
-	<div bind:this={node}>
+	<div {...rest} bind:this={node}>
 		{#if children}{@render children()}{/if}
 	</div>
 {/if}

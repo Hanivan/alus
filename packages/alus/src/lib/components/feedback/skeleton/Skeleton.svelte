@@ -1,17 +1,18 @@
 <script lang="ts">
 	import { labelAttrs, interactiveStateAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
-	interface Props {
-		class?: string;
+	type Props = Omit<SvelteHTMLElements['span'], 'children'> & {
 		'aria-label'?: string;
 		/** When true (default) acts as live status; set false for purely decorative skeletons */
 		announce?: boolean;
-	}
+	};
 
 	let {
 		class: className = '',
 		'aria-label': ariaLabel = 'Loading',
-		announce = true
+		announce = true,
+		...rest
 	}: Props = $props();
 
 	let ariaAttrs: Record<string, string> = $derived(
@@ -22,7 +23,7 @@
 </script>
 
 {#if announce}
-	<span class={className} role="status" {...ariaAttrs}></span>
+	<span {...rest} class={className} role="status" {...ariaAttrs}></span>
 {:else}
-	<span class={className} aria-hidden="true"></span>
+	<span {...rest} class={className} aria-hidden="true"></span>
 {/if}

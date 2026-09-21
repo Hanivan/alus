@@ -1,14 +1,14 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { generateCounterId } from '$utils/a11y/id.js';
 	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		value?: number;
 		max?: number;
 		readonly?: boolean;
 		disabled?: boolean;
 		name?: string;
-		class?: string;
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
 		onValueChange?: (v: number) => void;
@@ -16,7 +16,7 @@
 		item?: import('svelte').Snippet<
 			[{ index: number; filled: boolean; displayed: number; value: number; max: number }]
 		>;
-	}
+	};
 
 	let {
 		value = $bindable(0),
@@ -29,7 +29,8 @@
 		'aria-labelledby': ariaLabelledby,
 		onValueChange,
 		onHoverChange,
-		item
+		item,
+		...rest
 	}: Props = $props();
 
 	const groupId = generateCounterId('rating');
@@ -89,6 +90,7 @@
 </script>
 
 <div
+	{...rest}
 	role="slider"
 	tabindex={disabled ? -1 : 0}
 	aria-readonly={readonly || undefined}

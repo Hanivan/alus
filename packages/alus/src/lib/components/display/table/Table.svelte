@@ -1,9 +1,9 @@
 <script lang="ts">
+	import type { HTMLTableAttributes } from 'svelte/elements';
 	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-	interface Props {
+	interface Props extends Omit<HTMLTableAttributes, 'children'> {
 		children?: import('svelte').Snippet;
-		class?: string;
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
 		'aria-describedby'?: string;
@@ -14,7 +14,8 @@
 		class: className = '',
 		'aria-label': ariaLabel,
 		'aria-labelledby': ariaLabelledby,
-		'aria-describedby': ariaDescribedby
+		'aria-describedby': ariaDescribedby,
+		...rest
 	}: Props = $props();
 
 	let ariaAttrs: Record<string, string> = $derived(
@@ -24,6 +25,6 @@
 	);
 </script>
 
-<table class={className} {...ariaAttrs}>
+<table {...rest} class={className} {...ariaAttrs}>
 	{#if children}{@render children()}{/if}
 </table>

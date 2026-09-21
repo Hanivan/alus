@@ -1,14 +1,12 @@
 <script lang="ts">
-	interface Props {
+	import type { SvelteHTMLElements } from 'svelte/elements';
+
+	type Props = Omit<SvelteHTMLElements['td'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
-		colspan?: number;
-		rowspan?: number;
-		headers?: string;
-	}
-	let { children, class: className = '', colspan, rowspan, headers }: Props = $props();
+	};
+	let { children, class: className = '', ...rest }: Props = $props();
 </script>
 
-<td class={className} {colspan} {rowspan} {headers}>
+<td {...rest} class={className}>
 	{#if children}{@render children()}{/if}
 </td>

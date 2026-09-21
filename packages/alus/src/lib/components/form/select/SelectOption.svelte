@@ -1,16 +1,16 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { generateCounterId } from '$utils/a11y/id.js';
 	import { getSelectContext } from './Select.svelte';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet<[{ selected: boolean; highlighted: boolean }]>;
 		value: unknown;
-		class?: string;
 		disabled?: boolean;
-	}
+	};
 
-	let { children, value, class: className = '', disabled = false }: Props = $props();
+	let { children, value, class: className = '', disabled = false, ...rest }: Props = $props();
 
 	const ctx = getSelectContext();
 	const id = generateCounterId('select-option');
@@ -43,6 +43,7 @@
 </script>
 
 <div
+	{...rest}
 	{id}
 	role="option"
 	tabindex="-1"

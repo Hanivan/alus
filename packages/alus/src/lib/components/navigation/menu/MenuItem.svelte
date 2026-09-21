@@ -1,16 +1,22 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { getMenuContext, type MenuItemEntry } from './Menu.svelte';
 	import { interactiveStateAttrs } from '$utils/a11y/index.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet<[{ highlighted: boolean }]>;
-		class?: string;
+		// Read inside `onPointerEnter`/`activate` and registered with the context — rule 2.
 		disabled?: boolean;
+		// Not a native attribute: the component's own selection callback.
 		onSelect?: () => void;
+		// Kept: the explicit `{role}` attribute this file already emits, and the `ariaAttrs`
+		// derivation reads `role`. The union is a subset of `AriaRole` (which ends in
+		// `(string & {})`), so the inherited declaration cannot collapse it.
 		role?: 'menuitem' | 'menuitemcheckbox' | 'menuitemradio';
+		// Read by the `ariaAttrs` derivation — rule 2.
 		checked?: boolean;
-	}
+	};
 
 	let {
 		children,
@@ -18,7 +24,8 @@
 		disabled = false,
 		onSelect,
 		role = 'menuitem',
-		checked
+		checked,
+		...rest
 	}: Props = $props();
 
 	const ctx = getMenuContext();
@@ -66,6 +73,7 @@
 </script>
 
 <div
+	{...rest}
 	{role}
 	tabindex="-1"
 	data-highlighted={highlighted || undefined}

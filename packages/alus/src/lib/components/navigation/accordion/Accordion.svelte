@@ -1,18 +1,20 @@
 <script lang="ts">
 	import { untrack } from 'svelte';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { setAccordionRoot, type AccordionType } from './context.js';
 	import { generateCounterId } from '$utils/a11y/id.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
 		type?: AccordionType;
 		value?: string[];
 		collapsible?: boolean;
 		disabled?: boolean;
-		class?: string;
+		// `id` is read once (under `untrack`) to seed `baseId`, so it is referenced outside the
+		// destructure and stays declared — `rest` must not also carry it.
 		id?: string;
 		onValueChange?: (v: string[]) => void;
-	}
+	};
 
 	let {
 		children,
@@ -22,7 +24,8 @@
 		disabled = false,
 		class: className = '',
 		id,
-		onValueChange
+		onValueChange,
+		...rest
 	}: Props = $props();
 
 	const baseId = untrack(() => id ?? generateCounterId('accordion'));
@@ -57,6 +60,6 @@
 	});
 </script>
 
-<div class={className} data-accordion-root={baseId} data-disabled={disabled || undefined}>
+<div {...rest} class={className} data-accordion-root={baseId} data-disabled={disabled || undefined}>
 	{#if children}{@render children()}{/if}
 </div>

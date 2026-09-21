@@ -5,22 +5,19 @@
 		validationAttrs,
 		mergeAttrs
 	} from '$utils/a11y/index.js';
+	import type { HTMLButtonAttributes } from 'svelte/elements';
 
-	interface Props {
+	interface Props extends Omit<HTMLButtonAttributes, 'children'> {
 		children?: import('svelte').Snippet<[{ checked: boolean }]>;
 		checked?: boolean;
-		class?: string;
 		disabled?: boolean;
 		required?: boolean;
 		invalid?: boolean;
 		errormessage?: string;
-		name?: string;
-		id?: string;
-		value?: string;
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
 		'aria-describedby'?: string;
-		onchange?: (checked: boolean) => void;
+		onCheckedChange?: (checked: boolean) => void;
 	}
 
 	let {
@@ -32,12 +29,12 @@
 		invalid = false,
 		errormessage,
 		name,
-		id,
 		value = 'on',
 		'aria-label': ariaLabel,
 		'aria-labelledby': ariaLabelledby,
 		'aria-describedby': ariaDescribedby,
-		onchange
+		onCheckedChange,
+		...rest
 	}: Props = $props();
 
 	let ariaAttrs: Record<string, string> = $derived(
@@ -51,7 +48,7 @@
 	function toggle() {
 		if (disabled) return;
 		checked = !checked;
-		onchange?.(checked);
+		onCheckedChange?.(checked);
 	}
 
 	function onKeydown(e: KeyboardEvent) {
@@ -64,9 +61,9 @@
 </script>
 
 <button
+	{...rest}
 	type="button"
 	role="switch"
-	{id}
 	class={className}
 	{disabled}
 	data-state={checked ? 'checked' : 'unchecked'}

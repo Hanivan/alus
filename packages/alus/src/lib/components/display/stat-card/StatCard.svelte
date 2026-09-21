@@ -1,10 +1,11 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { generateCounterId } from '$utils/a11y/id.js';
 	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	type Trend = 'up' | 'down' | 'flat';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['article'], 'children'> & {
 		label: string;
 		value: string | number;
 		valueClass?: string;
@@ -15,12 +16,11 @@
 		icon?: import('svelte').Snippet;
 		actions?: import('svelte').Snippet;
 		change_snippet?: import('svelte').Snippet<[{ trend: Trend; change: string | number }]>;
-		class?: string;
 		hintClass?: string;
 		changeClass?: string;
 		'aria-label'?: string;
 		'aria-describedby'?: string;
-	}
+	};
 
 	let {
 		label,
@@ -37,7 +37,8 @@
 		hintClass = '',
 		changeClass = '',
 		'aria-label': ariaLabel,
-		'aria-describedby': ariaDescribedby
+		'aria-describedby': ariaDescribedby,
+		...rest
 	}: Props = $props();
 
 	const labelId = generateCounterId('stat-label');
@@ -48,6 +49,7 @@
 </script>
 
 <article
+	{...rest}
 	class={className}
 	data-trend={trend}
 	{...mergeAttrs(

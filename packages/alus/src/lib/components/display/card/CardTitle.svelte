@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { untrack } from 'svelte';
+	import type { HTMLAttributes } from 'svelte/elements';
 	import { getCardContext } from './Card.svelte';
 
-	interface Props {
+	type Props = Omit<HTMLAttributes<HTMLElement>, 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-	}
+	};
 
-	let { children, class: className = '', as = 'h3' }: Props = $props();
+	let { children, class: className = '', as = 'h3', ...rest }: Props = $props();
 
 	const ctx = getCardContext();
 
@@ -20,6 +20,6 @@
 	});
 </script>
 
-<svelte:element this={as} id={ctx.titleId} class={className}>
+<svelte:element this={as} {...rest} id={ctx.titleId} class={className}>
 	{#if children}{@render children()}{/if}
 </svelte:element>

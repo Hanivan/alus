@@ -1,12 +1,13 @@
 <script lang="ts">
-	interface Props {
-		children?: import('svelte').Snippet;
-		class?: string;
-	}
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
-	let { children, class: className = '' }: Props = $props();
+	type Props = Omit<SvelteHTMLElements['span'], 'children'> & {
+		children?: import('svelte').Snippet;
+	};
+
+	let { children, class: className = '', ...rest }: Props = $props();
 </script>
 
-<span aria-hidden="true" class={className}>
+<span {...rest} aria-hidden="true" class={className}>
 	{#if children}{@render children()}{:else}/{/if}
 </span>

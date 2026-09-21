@@ -1,19 +1,18 @@
 <script lang="ts">
 	import { labelAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet<[{ percent: number; indeterminate: boolean }]>;
 		value?: number;
 		max?: number;
 		min?: number;
 		indeterminate?: boolean;
-		class?: string;
 		indicatorClass?: string;
-		id?: string;
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
 		'aria-describedby'?: string;
-	}
+	};
 
 	let {
 		children,
@@ -26,7 +25,8 @@
 		id,
 		'aria-label': ariaLabel = 'Progress',
 		'aria-labelledby': ariaLabelledby,
-		'aria-describedby': ariaDescribedby
+		'aria-describedby': ariaDescribedby,
+		...rest
 	}: Props = $props();
 
 	let percent = $derived(
@@ -46,6 +46,7 @@
 </script>
 
 <div
+	{...rest}
 	{id}
 	role="progressbar"
 	class={className}

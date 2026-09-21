@@ -1,21 +1,17 @@
 <script lang="ts">
 	import { labelAttrs, interactiveStateAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import type { HTMLButtonAttributes } from 'svelte/elements';
 
-	interface Props {
+	interface Props extends Omit<HTMLButtonAttributes, 'children'> {
 		children?: import('svelte').Snippet;
 		'aria-label': string;
 		'aria-labelledby'?: string;
 		'aria-describedby'?: string;
 		'aria-pressed'?: boolean;
 		'aria-expanded'?: boolean;
-		'aria-controls'?: string;
-		'aria-haspopup'?: boolean | 'true' | 'false' | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog';
 		type?: 'button' | 'submit' | 'reset';
 		disabled?: boolean;
-		class?: string;
 		style?: string;
-		onclick?: (e: MouseEvent) => void;
-		onkeydown?: (e: KeyboardEvent) => void;
 	}
 
 	let {
@@ -25,14 +21,11 @@
 		'aria-describedby': ariaDescribedby,
 		'aria-pressed': ariaPressed,
 		'aria-expanded': ariaExpanded,
-		'aria-controls': ariaControls,
-		'aria-haspopup': ariaHaspopup,
 		type = 'button',
 		disabled = false,
 		class: className = '',
 		style,
-		onclick,
-		onkeydown
+		...rest
 	}: Props = $props();
 
 	const ariaAttrs = $derived(
@@ -43,16 +36,6 @@
 	);
 </script>
 
-<button
-	{type}
-	{disabled}
-	class={className}
-	{style}
-	aria-controls={ariaControls}
-	aria-haspopup={ariaHaspopup}
-	{onclick}
-	{onkeydown}
-	{...ariaAttrs}
->
+<button {...rest} {type} {disabled} class={className} {style} {...ariaAttrs}>
 	{#if children}{@render children()}{/if}
 </button>

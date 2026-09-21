@@ -1,18 +1,24 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { getCommandMenuContext } from './CommandMenu.svelte';
 	import { labelAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		'aria-label'?: string;
-	}
+	};
 
-	let { children, class: className = '', 'aria-label': ariaLabel = 'Commands' }: Props = $props();
+	let {
+		children,
+		class: className = '',
+		'aria-label': ariaLabel = 'Commands',
+		...rest
+	}: Props = $props();
 	const ctx = getCommandMenuContext();
 </script>
 
 <div
+	{...rest}
 	role="listbox"
 	id={ctx.listId}
 	class={className}

@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { untrack } from 'svelte';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
 	type Mode = 'absolute' | 'relative' | 'both';
 	type Style = 'long' | 'short' | 'narrow';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['time'], 'children'> & {
 		value: Date | string | number;
 		mode?: Mode;
 		relativeStyle?: Style;
@@ -12,9 +13,8 @@
 		locale?: string;
 		dateOptions?: Intl.DateTimeFormatOptions;
 		separator?: string;
-		class?: string;
 		'aria-label'?: string;
-	}
+	};
 
 	let {
 		value,
@@ -25,7 +25,8 @@
 		dateOptions = { dateStyle: 'medium', timeStyle: 'short' },
 		separator = ' · ',
 		class: className = '',
-		'aria-label': ariaLabel
+		'aria-label': ariaLabel,
+		...rest
 	}: Props = $props();
 
 	let now = $state(Date.now());
@@ -74,6 +75,6 @@
 	const iso = $derived(date.toISOString());
 </script>
 
-<time datetime={iso} title={absolute} class={className} aria-label={ariaLabel ?? text}>
+<time {...rest} datetime={iso} title={absolute} class={className} aria-label={ariaLabel ?? text}>
 	{text}
 </time>

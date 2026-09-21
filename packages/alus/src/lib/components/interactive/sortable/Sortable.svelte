@@ -1,9 +1,10 @@
 <script lang="ts" generics="T">
 	import { tick } from 'svelte';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { labelAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 	import VisuallyHidden from '../../utility/visually-hidden/VisuallyHidden.svelte';
 
-	interface Props<U> {
+	type Props<U> = Omit<SvelteHTMLElements['ul'], 'children'> & {
 		items: U[];
 		getKey?: (item: U, index: number) => string;
 		item: import('svelte').Snippet<
@@ -21,10 +22,9 @@
 		onReorder?: (items: U[]) => void;
 		orientation?: 'vertical' | 'horizontal';
 		disabled?: boolean;
-		class?: string;
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
-	}
+	};
 
 	let {
 		items = $bindable<T[]>(),
@@ -35,7 +35,8 @@
 		disabled = false,
 		class: className = '',
 		'aria-label': ariaLabel,
-		'aria-labelledby': ariaLabelledby
+		'aria-labelledby': ariaLabelledby,
+		...rest
 	}: Props<T> = $props();
 
 	let draggingIndex = $state<number | null>(null);
@@ -163,6 +164,7 @@
 </script>
 
 <ul
+	{...rest}
 	bind:this={listEl}
 	role="list"
 	data-orientation={orientation}

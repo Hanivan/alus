@@ -1,14 +1,14 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import VisuallyHidden from '../../utility/visually-hidden/VisuallyHidden.svelte';
 
-	interface Props {
-		class?: string;
+	type Props = Omit<SvelteHTMLElements['span'], 'children'> & {
 		label?: string;
-	}
+	};
 
-	let { class: className = '', label = 'Loading' }: Props = $props();
+	let { class: className = '', label = 'Loading', ...rest }: Props = $props();
 </script>
 
-<span role="status" aria-live="polite" class={className}>
+<span {...rest} role="status" aria-live="polite" class={className}>
 	<VisuallyHidden>{label}</VisuallyHidden>
 </span>

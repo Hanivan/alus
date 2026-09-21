@@ -271,74 +271,84 @@ export interface FormFieldConfig {
 
 /**
  * Accessible label configuration
+ *
+ * Fields accept `null` because consumers forward values straight from the native
+ * `aria-*` props, whose types include `null` (Svelte uses `null` to remove an
+ * attribute). `buildAriaAttrs` treats `null` as "omit this attribute".
  */
 export interface LabelConfig {
 	/** Direct label for screen readers */
-	label?: string;
+	label?: string | null;
 	/** ID of element that labels this component */
-	labelledby?: string;
+	labelledby?: string | null;
 	/** ID of element that describes this component */
-	describedby?: string;
+	describedby?: string | null;
 }
 
 /**
  * Validation state configuration
+ *
+ * See {@link LabelConfig} for why these accept `null`.
  */
 export interface ValidationConfig {
 	/** Whether the value is invalid */
-	invalid?: boolean;
+	invalid?: boolean | null;
 	/** Whether the field is required */
-	required?: boolean;
+	required?: boolean | null;
 	/** ID of element containing error message */
-	errormessage?: string;
+	errormessage?: string | null;
 }
 
 /**
  * Interactive state configuration
+ *
+ * See {@link LabelConfig} for why these accept `null`.
  */
 export interface InteractiveStateConfig {
 	/** Toggle button pressed state */
-	pressed?: boolean | 'mixed';
+	pressed?: boolean | 'mixed' | null;
 	/** Expanded/collapsed state */
-	expanded?: boolean;
+	expanded?: boolean | null;
 	/** Checkbox/switch checked state */
-	checked?: boolean | 'mixed';
+	checked?: boolean | 'mixed' | null;
 	/** Listbox/tab/option selected state */
-	selected?: AriaBoolean;
+	selected?: AriaBoolean | null;
 	/** Disabled state */
-	disabled?: boolean;
+	disabled?: boolean | null;
 	/** Busy/loading state */
-	busy?: boolean;
+	busy?: boolean | null;
 	/** Current item within container (nav/breadcrumb/stepper) */
-	current?: AriaCurrent;
+	current?: AriaCurrent | null;
 }
 
 /**
  * Widget-specific configuration
+ *
+ * See {@link LabelConfig} for why these accept `null`.
  */
 export interface WidgetConfig {
 	/** Element that this controls */
-	controls?: string;
+	controls?: string | null;
 	/** Popup behavior */
-	haspopup?: AriaHaspopup;
+	haspopup?: AriaHaspopup | null;
 	/** Current value within a range */
-	valuenow?: number;
+	valuenow?: number | null;
 	/** Text representation of value */
-	valuetext?: string;
+	valuetext?: string | null;
 	/** Minimum value */
-	valuemin?: number;
+	valuemin?: number | null;
 	/** Maximum value */
-	valuemax?: number;
+	valuemax?: number | null;
 	/** Live region behavior */
-	live?: AriaLive;
+	live?: AriaLive | null;
 	/** Element ID that receives focus */
-	activedescendant?: string;
+	activedescendant?: string | null;
 	/** Current position in a list */
-	posinset?: number;
+	posinset?: number | null;
 	/** Total items in a list */
-	setsize?: number;
+	setsize?: number | null;
 	/** Heading level */
-	level?: number;
+	level?: number | null;
 	/** Orientation */
-	orientation?: AriaOrientation;
+	orientation?: AriaOrientation | null;
 }

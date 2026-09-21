@@ -1,24 +1,24 @@
 <script lang="ts">
 	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
 	type Variant = 'info' | 'success' | 'warning' | 'error';
 
-	interface Props {
+	// 'title' is omitted as well as 'children': the component declares `title?: Snippet`
+	// while `HTMLAttributes.title` is `string`, so the intersection is `never` — a
+	// consumer's snippet could never be passed, silently.
+	type Props = Omit<SvelteHTMLElements['div'], 'children' | 'title'> & {
 		children?: import('svelte').Snippet;
 		title?: import('svelte').Snippet;
 		actions?: import('svelte').Snippet;
 		icon?: import('svelte').Snippet;
 		variant?: Variant;
-		class?: string;
 		titleClass?: string;
 		dismissible?: boolean;
 		open?: boolean;
 		role?: 'alert' | 'status';
-		'aria-label'?: string;
-		'aria-labelledby'?: string;
-		'aria-describedby'?: string;
 		ondismiss?: () => void;
-	}
+	};
 
 	let {
 		children,
@@ -34,7 +34,8 @@
 		'aria-label': ariaLabel,
 		'aria-labelledby': ariaLabelledby,
 		'aria-describedby': ariaDescribedby,
-		ondismiss
+		ondismiss,
+		...rest
 	}: Props = $props();
 
 	let ariaAttrs: Record<string, string> = $derived(
@@ -51,6 +52,7 @@
 
 {#if open}
 	<div
+		{...rest}
 		{role}
 		aria-live={role === 'alert' ? 'assertive' : 'polite'}
 		aria-atomic="true"

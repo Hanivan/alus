@@ -1,30 +1,25 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['fieldset'], 'children'> & {
 		children?: import('svelte').Snippet;
 		legend?: import('svelte').Snippet;
-		class?: string;
 		legendClass?: string;
-		disabled?: boolean;
-		name?: string;
-		id?: string;
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
 		'aria-describedby'?: string;
-	}
+	};
 
 	let {
 		children,
 		legend,
 		class: className = '',
 		legendClass = '',
-		disabled = false,
-		name,
-		id,
 		'aria-label': ariaLabel,
 		'aria-labelledby': ariaLabelledby,
-		'aria-describedby': ariaDescribedby
+		'aria-describedby': ariaDescribedby,
+		...rest
 	}: Props = $props();
 
 	let ariaAttrs: Record<string, string> = $derived(
@@ -34,7 +29,7 @@
 	);
 </script>
 
-<fieldset {disabled} {name} {id} class={className} {...ariaAttrs}>
+<fieldset {...rest} class={className} {...ariaAttrs}>
 	{#if legend}
 		<legend class={legendClass}>{@render legend()}</legend>
 	{/if}

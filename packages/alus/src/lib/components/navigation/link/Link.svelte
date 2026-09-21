@@ -1,22 +1,31 @@
 <script lang="ts">
 	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import type { HTMLAnchorAttributes } from 'svelte/elements';
 
 	type Target = '_self' | '_blank' | '_parent' | '_top';
 
-	interface Props {
+	interface Props extends Omit<HTMLAnchorAttributes, 'children'> {
 		children?: import('svelte').Snippet;
+		// Required, and re-declared for exactly that reason: `HTMLAnchorAttributes.href` is
+		// `string | undefined | null`, so leaving `href` to the native type would silently make it
+		// optional — `<Link>go</Link>` would compile and render an `<a>` with no destination,
+		// where HEAD made it an error. A declared member wins over the inherited optional one.
 		href: string;
 		external?: boolean;
+		// `target` and `rel` stay declared because the script reads each of them — they feed the
+		// `computedTarget`/`computedRel` fallbacks. That is rule 2, so they must not also travel
+		// in `rest`. `target` is a narrow union, but it is a *subset* of
+		// `HTMLAttributeAnchorTarget` (which ends in `(string & {})`), so the inherited
+		// declaration cannot collapse it.
 		target?: Target;
 		rel?: string;
 		current?: 'page' | 'step' | 'location' | 'date' | 'time' | 'true' | 'false';
+		// Computed in the markup (`download === true ? '' : …`), so it stays under rule 3.
 		download?: string | boolean;
-		class?: string;
 		id?: string;
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
 		'aria-describedby'?: string;
-		onclick?: (event: MouseEvent) => void;
 	}
 
 	let {
@@ -32,7 +41,7 @@
 		'aria-label': ariaLabel,
 		'aria-labelledby': ariaLabelledby,
 		'aria-describedby': ariaDescribedby,
-		onclick
+		...rest
 	}: Props = $props();
 
 	let isExternal = $derived(external ?? (typeof href === 'string' && /^https?:\/\//i.test(href)));
@@ -47,6 +56,7 @@
 </script>
 
 <a
+	{...rest}
 	{href}
 	{id}
 	class={className}
@@ -55,7 +65,6 @@
 	aria-current={current}
 	data-external={isExternal || undefined}
 	download={download === true ? '' : (download as string | undefined)}
-	{onclick}
 	{...ariaAttrs}
 >
 	{#if children}{@render children()}{/if}

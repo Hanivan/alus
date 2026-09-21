@@ -1,19 +1,19 @@
 <script lang="ts">
 	import { getTreeViewContext } from './TreeView.svelte';
 	import { getContext, setContext } from 'svelte';
+	import type { HTMLLiAttributes } from 'svelte/elements';
 	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
 	const LEVEL_KEY = Symbol('alus-ui:tree-item-level');
 
-	interface Props {
+	interface Props extends Omit<HTMLLiAttributes, 'children'> {
 		id: string;
 		label?: import('svelte').Snippet<[{ expanded: boolean; selected: boolean }]>;
 		children?: import('svelte').Snippet;
-		class?: string;
 		disabled?: boolean;
 	}
 
-	let { id, label, children, class: className = '', disabled = false }: Props = $props();
+	let { id, label, children, class: className = '', disabled = false, ...rest }: Props = $props();
 
 	const ctx = getTreeViewContext();
 	const parentLevel = getContext<number>(LEVEL_KEY) ?? 0;
@@ -59,6 +59,7 @@
 </script>
 
 <li
+	{...rest}
 	bind:this={itemEl}
 	role="treeitem"
 	class={className}

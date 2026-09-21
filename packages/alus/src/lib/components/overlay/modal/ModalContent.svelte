@@ -1,19 +1,19 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { trap, focusFirst } from '$utils/a11y/index.js';
 	import { getModalContext } from './Modal.svelte';
 	import Portal from '../../utility/portal/Portal.svelte';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		backdropClass?: string;
 		closeOnEscape?: boolean;
 		closeOnOutsideClick?: boolean;
 		trapFocus?: boolean;
 		restoreFocus?: boolean;
 		autoFocus?: boolean;
-	}
+	};
 
 	let {
 		children,
@@ -23,7 +23,8 @@
 		closeOnOutsideClick = true,
 		trapFocus = true,
 		restoreFocus = true,
-		autoFocus = true
+		autoFocus = true,
+		...rest
 	}: Props = $props();
 
 	const ctx = getModalContext();
@@ -67,6 +68,7 @@
 			<!-- svelte-ignore a11y_no_static_element_interactions -->
 			<div data-modal-backdrop class={backdropClass} onclick={onBackdropClick}>
 				<div
+					{...rest}
 					id={ctx.contentId}
 					role={ctx.role()}
 					aria-modal="true"
@@ -81,6 +83,7 @@
 			</div>
 		{:else}
 			<div
+				{...rest}
 				id={ctx.contentId}
 				role={ctx.role()}
 				aria-labelledby={ctx.hasTitle() ? ctx.titleId : undefined}

@@ -1,13 +1,14 @@
 <script lang="ts">
-	interface Props {
+	import type { SvelteHTMLElements } from 'svelte/elements';
+
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
 		count?: number;
 		width?: string;
 		gap?: string | number;
 		balance?: boolean;
-		class?: string;
 		style?: string;
-	}
+	};
 
 	let {
 		children,
@@ -16,7 +17,8 @@
 		gap = '1rem',
 		balance = true,
 		class: className = '',
-		style: extraStyle = ''
+		style: extraStyle = '',
+		...rest
 	}: Props = $props();
 
 	function toCssValue(v: string | number): string {
@@ -35,6 +37,6 @@
 	const style = $derived(`${baseStyle}${extraStyle}`);
 </script>
 
-<div class={className} {style}>
+<div {...rest} class={className} {style}>
 	{#if children}{@render children()}{/if}
 </div>

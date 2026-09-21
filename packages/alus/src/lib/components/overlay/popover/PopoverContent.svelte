@@ -1,14 +1,14 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { computePosition, autoUpdate, flip, shift, offset, size } from '@floating-ui/dom';
 	import { useEventListener } from 'runed';
 	import { trap, focusFirst } from '$utils/a11y/index.js';
 	import { getPopoverContext } from './Popover.svelte';
 	import Portal from '../../utility/portal/Portal.svelte';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		placement?:
 			| 'top'
 			| 'bottom'
@@ -29,7 +29,7 @@
 		trapFocus?: boolean;
 		restoreFocus?: boolean;
 		autoFocus?: boolean;
-	}
+	};
 
 	let {
 		children,
@@ -41,7 +41,9 @@
 		closeOnOutsideClick = true,
 		trapFocus = false,
 		restoreFocus = true,
-		autoFocus = false
+		autoFocus = false,
+		style: extraStyle = '',
+		...rest
 	}: Props = $props();
 
 	const ctx = getPopoverContext();
@@ -116,12 +118,13 @@
 {#if ctx.open()}
 	<Portal>
 		<div
+			{...rest}
 			id={ctx.contentId}
 			role="dialog"
 			aria-labelledby={ctx.triggerId}
 			tabindex="-1"
 			class={className}
-			style="position:fixed; top:0; left:0;"
+			style="position:fixed; top:0; left:0;{extraStyle}"
 			{@attach contentRef}
 		>
 			{#if children}{@render children()}{/if}

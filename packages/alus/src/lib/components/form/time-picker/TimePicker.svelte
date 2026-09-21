@@ -21,8 +21,9 @@
 		interactiveStateAttrs,
 		mergeAttrs
 	} from '$utils/a11y/index.js';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		value?: Time | null;
 		hour12?: boolean;
 		showSeconds?: boolean;
@@ -31,15 +32,14 @@
 		secondStep?: number;
 		disabled?: boolean;
 		required?: boolean;
-		class?: string;
 		fieldClass?: string;
 		separatorClass?: string;
 		periodClass?: string;
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
 		'aria-describedby'?: string;
-		onChange?: (value: Time) => void;
-	}
+		onValueChange?: (value: Time) => void;
+	};
 
 	let {
 		value = $bindable(null),
@@ -57,7 +57,8 @@
 		'aria-label': ariaLabel,
 		'aria-labelledby': ariaLabelledby,
 		'aria-describedby': ariaDescribedby,
-		onChange
+		onValueChange,
+		...rest
 	}: Props = $props();
 
 	const mStep = $derived(minuteStep ?? step);
@@ -75,7 +76,7 @@
 
 	function emit(next: Time) {
 		value = next;
-		onChange?.(next);
+		onValueChange?.(next);
 	}
 
 	function setHour(h: number) {
@@ -154,7 +155,7 @@
 	);
 </script>
 
-<div class={className} role="group" data-required={required || undefined} {...ariaAttrs}>
+<div {...rest} class={className} role="group" data-required={required || undefined} {...ariaAttrs}>
 	<input
 		type="text"
 		inputmode="numeric"

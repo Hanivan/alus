@@ -31,18 +31,18 @@
 
 <script lang="ts">
 	import { untrack } from 'svelte';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['ul'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		defaultExpanded?: string[];
 		selected?: string | null;
 		onSelectChange?: (id: string | null) => void;
 		onExpandChange?: (id: string, expanded: boolean) => void;
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
-	}
+	};
 
 	let {
 		children,
@@ -52,7 +52,8 @@
 		onSelectChange,
 		onExpandChange,
 		'aria-label': ariaLabel,
-		'aria-labelledby': ariaLabelledby
+		'aria-labelledby': ariaLabelledby,
+		...rest
 	}: Props = $props();
 
 	const expanded = new SvelteSet<string>(untrack(() => defaultExpanded));
@@ -177,6 +178,6 @@
 	);
 </script>
 
-<ul bind:this={rootEl} role="tree" class={className} onkeydown={onKeydown} {...ariaAttrs}>
+<ul {...rest} bind:this={rootEl} role="tree" class={className} onkeydown={onKeydown} {...ariaAttrs}>
 	{#if children}{@render children()}{/if}
 </ul>

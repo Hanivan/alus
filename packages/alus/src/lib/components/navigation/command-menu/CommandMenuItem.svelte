@@ -1,18 +1,20 @@
 <script lang="ts">
 	import { untrack } from 'svelte';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { generateCounterId } from '$utils/a11y/id.js';
 	import { interactiveStateAttrs } from '$utils/a11y/index.js';
 	import { getCommandMenuContext } from './CommandMenu.svelte';
 	import { getCommandMenuGroupContext } from './CommandMenuGroup.svelte';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet<[{ highlighted: boolean }]>;
-		class?: string;
 		value: string;
+		// Read inside the `$effect` (registered with the context) — rule 2.
 		keywords?: string;
 		disabled?: boolean;
+		// Not a native attribute: the component's own selection callback.
 		onSelect?: () => void;
-	}
+	};
 
 	let {
 		children,
@@ -20,7 +22,8 @@
 		value,
 		keywords = '',
 		disabled = false,
-		onSelect
+		onSelect,
+		...rest
 	}: Props = $props();
 
 	const ctx = getCommandMenuContext();
@@ -54,6 +57,7 @@
 
 {#if visible}
 	<div
+		{...rest}
 		{id}
 		role="option"
 		tabindex="-1"

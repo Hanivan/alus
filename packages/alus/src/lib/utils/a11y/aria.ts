@@ -9,8 +9,12 @@ import type {
 } from '$types/index.js';
 
 /**
- * Builds ARIA attributes object from a partial record, filtering out undefined values
- * and converting boolean/number/undefined values to strings for HTML attributes
+ * Builds ARIA attributes object from a partial record, filtering out undefined/null
+ * values and converting boolean/number/undefined values to strings for HTML attributes
+ *
+ * `null` is dropped along with `undefined`, matching Svelte's own semantics: `null`
+ * on an attribute removes it. Passing `null` through to `String()` would render the
+ * literal text `"null"`, which is an accessibility defect.
  *
  * @example
  * ```ts
@@ -24,11 +28,11 @@ import type {
  * ```
  */
 export function buildAriaAttrs(
-	attrs: Record<string, string | number | boolean | undefined>
+	attrs: Record<string, string | number | boolean | null | undefined>
 ): Record<string, string> {
 	const result: Record<string, string> = {};
 	for (const [key, value] of Object.entries(attrs)) {
-		if (value !== undefined) {
+		if (value !== undefined && value !== null) {
 			result[key] = String(value);
 		}
 	}

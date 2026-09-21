@@ -138,7 +138,7 @@
 			{ name: 'separator', type: 'string', default: "'–'" },
 			{ name: 'closeOnSelect', type: 'boolean', default: 'true' },
 			{ name: 'placeholder', type: 'string', default: "'Select range…'" },
-			{ name: 'onChange', type: '(r: DateRangeValue) => void', default: 'undefined' }
+			{ name: 'onValueChange', type: '(r: DateRangeValue) => void', default: 'undefined' }
 		]}
 		a11y={[
 			'Trigger button advertises a dialog popover (<code class="rounded bg-(--cream) px-1">aria-haspopup="dialog"</code>)',

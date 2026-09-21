@@ -1,17 +1,17 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { trap } from '$utils/a11y/index.js';
 	import { getCommandMenuContext } from './CommandMenu.svelte';
 	import Portal from '../../utility/portal/Portal.svelte';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		backdropClass?: string;
 		closeOnEscape?: boolean;
 		closeOnOutsideClick?: boolean;
 		'aria-label'?: string;
-	}
+	};
 
 	let {
 		children,
@@ -19,7 +19,8 @@
 		backdropClass = '',
 		closeOnEscape = true,
 		closeOnOutsideClick = true,
-		'aria-label': ariaLabel = 'Command menu'
+		'aria-label': ariaLabel = 'Command menu',
+		...rest
 	}: Props = $props();
 
 	const ctx = getCommandMenuContext();
@@ -65,6 +66,7 @@
 	<Portal>
 		<div data-cmdk-backdrop class={backdropClass}>
 			<div
+				{...rest}
 				role="dialog"
 				aria-modal="true"
 				aria-label={ariaLabel}

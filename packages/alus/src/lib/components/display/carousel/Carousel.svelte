@@ -28,11 +28,11 @@
 
 <script lang="ts">
 	import { generateCounterId } from '$utils/a11y/id.js';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['section'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		index?: number;
 		loop?: boolean;
 		autoplay?: boolean | number;
@@ -40,7 +40,7 @@
 		onIndexChange?: (i: number) => void;
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
-	}
+	};
 
 	let {
 		children,
@@ -51,7 +51,8 @@
 		pauseOnHover = true,
 		onIndexChange,
 		'aria-label': ariaLabel = 'Carousel',
-		'aria-labelledby': ariaLabelledby
+		'aria-labelledby': ariaLabelledby,
+		...rest
 	}: Props = $props();
 
 	let count = $state(0);
@@ -117,6 +118,7 @@
 </script>
 
 <section
+	{...rest}
 	aria-roledescription="carousel"
 	class={className}
 	onpointerenter={onEnter}

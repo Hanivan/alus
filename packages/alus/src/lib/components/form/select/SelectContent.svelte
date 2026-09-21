@@ -1,23 +1,25 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { computePosition, autoUpdate, flip, shift, offset, size } from '@floating-ui/dom';
 	import { getSelectContext } from './Select.svelte';
 	import Portal from '../../utility/portal/Portal.svelte';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		placement?: 'top' | 'bottom' | 'top-start' | 'bottom-start' | 'top-end' | 'bottom-end';
 		offset?: number;
 		sameWidth?: boolean;
-	}
+	};
 
 	let {
 		children,
 		class: className = '',
 		placement = 'bottom-start',
 		offset: offsetPx = 4,
-		sameWidth = true
+		sameWidth = true,
+		style: extraStyle = '',
+		...rest
 	}: Props = $props();
 
 	const ctx = getSelectContext();
@@ -155,6 +157,7 @@
 {#if ctx.open()}
 	<Portal>
 		<div
+			{...rest}
 			id={ctx.contentId}
 			role="listbox"
 			tabindex="-1"
@@ -162,7 +165,7 @@
 			aria-multiselectable={ctx.multiple() ? true : undefined}
 			aria-activedescendant={activeId}
 			class={className}
-			style="position:fixed; top:0; left:0;"
+			style="position:fixed; top:0; left:0;{extraStyle}"
 			onkeydown={onKeydown}
 			{@attach contentRef}
 		>

@@ -1,13 +1,14 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { getAccordionItem } from './context.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
+		// Read by the `{#if open || forceMount}` markup — rule 3.
 		forceMount?: boolean;
-	}
+	};
 
-	let { children, class: className = '', forceMount = false }: Props = $props();
+	let { children, class: className = '', forceMount = false, ...rest }: Props = $props();
 
 	const item = getAccordionItem();
 	let open = $derived(item.open());
@@ -15,6 +16,7 @@
 
 {#if open || forceMount}
 	<div
+		{...rest}
 		id={item.contentId}
 		role="region"
 		aria-labelledby={item.triggerId}

@@ -1,10 +1,12 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
+
 	type Direction = 'row' | 'row-reverse' | 'column' | 'column-reverse';
 	type Align = 'start' | 'center' | 'end' | 'stretch' | 'baseline';
 	type Justify = 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly';
 	type Wrap = 'nowrap' | 'wrap' | 'wrap-reverse';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
 		direction?: Direction;
 		align?: Align;
@@ -12,9 +14,8 @@
 		wrap?: Wrap;
 		gap?: string | number;
 		inline?: boolean;
-		class?: string;
 		style?: string;
-	}
+	};
 
 	let {
 		children,
@@ -25,7 +26,8 @@
 		gap = 0,
 		inline = false,
 		class: className = '',
-		style: extraStyle = ''
+		style: extraStyle = '',
+		...rest
 	}: Props = $props();
 
 	function toCssValue(v: string | number): string {
@@ -61,6 +63,6 @@
 	const style = $derived(`${baseStyle}${extraStyle}`);
 </script>
 
-<div class={className} {style}>
+<div {...rest} class={className} {style}>
 	{#if children}{@render children()}{/if}
 </div>

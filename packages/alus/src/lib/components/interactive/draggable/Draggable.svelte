@@ -9,16 +9,18 @@
 </script>
 
 <script lang="ts" generics="T">
+	import type { HTMLAttributes } from 'svelte/elements';
 	import VisuallyHidden from '../../utility/visually-hidden/VisuallyHidden.svelte';
 
-	interface Props {
+	// Three branches with different host elements (`span` / `li` / `div`), so a single element
+	// type cannot describe the host — `HTMLAttributes<HTMLElement>` is the shared base.
+	type Props = Omit<HTMLAttributes<HTMLElement>, 'children'> & {
 		children?: import('svelte').Snippet<[{ dragging: boolean; grabbed: boolean }]>;
 		data: T;
 		type?: string;
 		disabled?: boolean;
 		effect?: 'copy' | 'move' | 'link' | 'none';
 		as?: 'div' | 'span' | 'li';
-		class?: string;
 		style?: string;
 		'aria-label'?: string;
 		onDragStart?: (e: DraggableEvent<T>) => void;
@@ -26,7 +28,7 @@
 		onKeyMove?: (dir: KeyMoveDirection) => void;
 		onKeyPickup?: () => void;
 		onKeyDrop?: () => void;
-	}
+	};
 
 	let {
 		children,
@@ -42,7 +44,8 @@
 		onDragEnd,
 		onKeyMove,
 		onKeyPickup,
-		onKeyDrop
+		onKeyDrop,
+		...rest
 	}: Props = $props();
 
 	let dragging = $state(false);
@@ -103,6 +106,7 @@
 
 {#if as === 'span'}
 	<span
+		{...rest}
 		class={className}
 		{style}
 		role="button"
@@ -120,8 +124,8 @@
 		{#if children}{@render children({ dragging, grabbed })}{/if}
 	</span>
 {:else if as === 'li'}
-	<!-- svelte-ignore a11y_no_noninteractive_element_to_interactive_role -->
 	<li
+		{...rest}
 		class={className}
 		{style}
 		role="button"
@@ -140,6 +144,7 @@
 	</li>
 {:else}
 	<div
+		{...rest}
 		class={className}
 		{style}
 		role="button"

@@ -1,19 +1,13 @@
 <script lang="ts">
-	interface Props {
-		children?: import('svelte').Snippet;
-		class?: string;
-		'aria-label'?: string;
-		'aria-labelledby'?: string;
-	}
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
-	let {
-		children,
-		class: className = '',
-		'aria-label': ariaLabel,
-		'aria-labelledby': ariaLabelledby
-	}: Props = $props();
+	type Props = Omit<SvelteHTMLElements['dl'], 'children'> & {
+		children?: import('svelte').Snippet;
+	};
+
+	let { children, class: className = '', ...rest }: Props = $props();
 </script>
 
-<dl class={className} aria-label={ariaLabel} aria-labelledby={ariaLabelledby}>
+<dl {...rest} class={className}>
 	{#if children}{@render children()}{/if}
 </dl>

@@ -1,14 +1,14 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { getAccordionRoot, setAccordionItem } from './context.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet<[{ open: boolean }]>;
 		value: string;
 		disabled?: boolean;
-		class?: string;
-	}
+	};
 
-	let { children, value, disabled = false, class: className = '' }: Props = $props();
+	let { children, value, disabled = false, class: className = '', ...rest }: Props = $props();
 
 	const root = getAccordionRoot();
 
@@ -30,6 +30,7 @@
 </script>
 
 <div
+	{...rest}
 	class={className}
 	data-state={open ? 'open' : 'closed'}
 	data-disabled={disabled || root.disabled() || undefined}

@@ -1,15 +1,14 @@
 <script lang="ts">
-	interface Props {
+	import type { SvelteHTMLElements } from 'svelte/elements';
+
+	type Props = Omit<SvelteHTMLElements['th'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		scope?: 'col' | 'row' | 'colgroup' | 'rowgroup';
 		sort?: 'ascending' | 'descending' | 'none' | 'other';
-		colspan?: number;
-		rowspan?: number;
-	}
-	let { children, class: className = '', scope = 'col', sort, colspan, rowspan }: Props = $props();
+	};
+	let { children, class: className = '', scope = 'col', sort, ...rest }: Props = $props();
 </script>
 
-<th class={className} {scope} aria-sort={sort} {colspan} {rowspan}>
+<th {...rest} class={className} {scope} aria-sort={sort}>
 	{#if children}{@render children()}{/if}
 </th>

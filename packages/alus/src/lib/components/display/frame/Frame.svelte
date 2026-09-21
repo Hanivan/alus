@@ -1,7 +1,9 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
+
 	type Fit = 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
 		width?: string | number;
 		height?: string | number;
@@ -11,10 +13,8 @@
 		maxHeight?: string | number;
 		fit?: Fit;
 		overflow?: 'visible' | 'hidden' | 'auto' | 'scroll';
-		class?: string;
 		style?: string;
-		'aria-label'?: string;
-	}
+	};
 
 	let {
 		children,
@@ -28,7 +28,7 @@
 		overflow = 'hidden',
 		class: className = '',
 		style: extraStyle = '',
-		'aria-label': ariaLabel
+		...rest
 	}: Props = $props();
 
 	function v(x: string | number | undefined): string {
@@ -52,7 +52,7 @@
 	const style = $derived(`${baseStyle}${extraStyle}`);
 </script>
 
-<div class={className} {style} aria-label={ariaLabel} data-frame>
+<div {...rest} class={className} {style} data-frame>
 	{#if fit && children}
 		<div style={`width:100%;height:100%;object-fit:${fit};`}>
 			{@render children()}

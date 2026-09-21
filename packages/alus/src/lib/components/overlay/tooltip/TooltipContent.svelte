@@ -1,12 +1,12 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { computePosition, autoUpdate, flip, shift, offset } from '@floating-ui/dom';
 	import { getTooltipContext } from './Tooltip.svelte';
 	import Portal from '../../utility/portal/Portal.svelte';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		placement?:
 			| 'top'
 			| 'bottom'
@@ -22,14 +22,16 @@
 			| 'right-end';
 		offset?: number;
 		interactive?: boolean;
-	}
+	};
 
 	let {
 		children,
 		class: className = '',
 		placement = 'top',
 		offset: offsetPx = 6,
-		interactive = false
+		interactive = false,
+		style: extraStyle = '',
+		...rest
 	}: Props = $props();
 
 	const ctx = getTooltipContext();
@@ -54,10 +56,11 @@
 {#if ctx.open()}
 	<Portal>
 		<div
+			{...rest}
 			id={ctx.contentId}
 			role="tooltip"
 			class={className}
-			style="position:fixed; top:0; left:0;{interactive ? '' : ' pointer-events:none;'}"
+			style="position:fixed; top:0; left:0;{interactive ? '' : ' pointer-events:none;'}{extraStyle}"
 			onpointerenter={interactive ? ctx.cancel : undefined}
 			onpointerleave={interactive ? ctx.scheduleClose : undefined}
 			{@attach contentRef}

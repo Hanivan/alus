@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { labelAttrs, interactiveStateAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['span'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		// Accessibility attributes
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
@@ -13,7 +13,7 @@
 		removable?: boolean;
 		// Events
 		onremove?: (event: MouseEvent) => void;
-	}
+	};
 
 	let {
 		children,
@@ -23,7 +23,8 @@
 		'aria-describedby': ariaDescribedby,
 		disabled = false,
 		removable = false,
-		onremove
+		onremove,
+		...rest
 	}: Props = $props();
 
 	// Build ARIA attributes using reusable utilities
@@ -35,7 +36,7 @@
 	);
 </script>
 
-<span class={className} data-removable={removable ? '' : undefined} {...ariaAttrs}>
+<span {...rest} class={className} data-removable={removable ? '' : undefined} {...ariaAttrs}>
 	{#if children}
 		{@render children()}
 	{/if}

@@ -1,12 +1,18 @@
 <script lang="ts">
-	interface Props {
+	import type { SvelteHTMLElements } from 'svelte/elements';
+
+	type Props = Omit<SvelteHTMLElements['tr'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		selected?: boolean;
-	}
-	let { children, class: className = '', selected }: Props = $props();
+	};
+	let { children, class: className = '', selected, ...rest }: Props = $props();
 </script>
 
-<tr class={className} aria-selected={selected || undefined} data-selected={selected || undefined}>
+<tr
+	{...rest}
+	class={className}
+	aria-selected={selected || undefined}
+	data-selected={selected || undefined}
+>
 	{#if children}{@render children()}{/if}
 </tr>

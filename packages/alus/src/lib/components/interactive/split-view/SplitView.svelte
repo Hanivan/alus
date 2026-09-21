@@ -29,20 +29,20 @@
 </script>
 
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { labelAttrs } from '$utils/a11y/index.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
 		size?: number;
 		min?: number;
 		max?: number;
 		orientation?: 'horizontal' | 'vertical';
 		disabled?: boolean;
-		class?: string;
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
 		onResize?: (size: number) => void;
-	}
+	};
 
 	let {
 		children,
@@ -54,7 +54,8 @@
 		class: className = '',
 		'aria-label': ariaLabel,
 		'aria-labelledby': ariaLabelledby,
-		onResize
+		onResize,
+		...rest
 	}: Props = $props();
 
 	let dragging = $state(false);
@@ -88,6 +89,7 @@
 </script>
 
 <div
+	{...rest}
 	class={className}
 	data-orientation={orientation}
 	data-dragging={dragging || undefined}

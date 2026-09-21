@@ -1,17 +1,27 @@
 <script lang="ts">
-	interface Props {
+	import type { HTMLLiAttributes } from 'svelte/elements';
+
+	interface Props extends Omit<HTMLLiAttributes, 'children'> {
 		children?: import('svelte').Snippet;
-		class?: string;
 		marker?: import('svelte').Snippet;
 		time?: string;
 		datetime?: string;
 		status?: 'completed' | 'current' | 'upcoming';
 	}
 
-	let { children, class: className = '', marker, time, datetime, status }: Props = $props();
+	let {
+		children,
+		class: className = '',
+		marker,
+		time,
+		datetime,
+		status,
+		...rest
+	}: Props = $props();
 </script>
 
 <li
+	{...rest}
 	role="listitem"
 	class={className}
 	data-status={status}

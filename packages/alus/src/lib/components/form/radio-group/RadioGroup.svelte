@@ -21,11 +21,11 @@
 </script>
 
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { labelAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		name: string;
 		value?: unknown;
 		disabled?: boolean;
@@ -34,7 +34,7 @@
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
 		'aria-describedby'?: string;
-	}
+	};
 
 	let {
 		children,
@@ -46,7 +46,8 @@
 		orientation = 'vertical',
 		'aria-label': ariaLabel,
 		'aria-labelledby': ariaLabelledby,
-		'aria-describedby': ariaDescribedby
+		'aria-describedby': ariaDescribedby,
+		...rest
 	}: Props = $props();
 
 	setRadioGroup({
@@ -65,6 +66,6 @@
 	);
 </script>
 
-<div role="radiogroup" class={className} {...ariaAttrs}>
+<div {...rest} role="radiogroup" class={className} {...ariaAttrs}>
 	{#if children}{@render children()}{/if}
 </div>

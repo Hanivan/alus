@@ -20,8 +20,9 @@
 	} from '$utils/a11y/index.js';
 	import Portal from '../../utility/portal/Portal.svelte';
 	import VisuallyHidden from '../../utility/visually-hidden/VisuallyHidden.svelte';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		options: AutoCompleteOption<T>[];
 		value?: string;
 		selected?: AutoCompleteOption<T> | null;
@@ -33,7 +34,6 @@
 		maxResults?: number;
 		noResultsText?: string;
 		filter?: (option: AutoCompleteOption<T>, query: string) => boolean;
-		class?: string;
 		inputClass?: string;
 		listClass?: string;
 		optionClass?: string;
@@ -44,9 +44,9 @@
 		option?: import('svelte').Snippet<
 			[{ option: AutoCompleteOption<T>; highlighted: boolean; index: number }]
 		>;
-		onSelect?: (option: AutoCompleteOption<T>) => void;
+		onValueChange?: (option: AutoCompleteOption<T>) => void;
 		onInput?: (value: string) => void;
-	}
+	};
 
 	let {
 		options,
@@ -69,8 +69,9 @@
 		'aria-labelledby': ariaLabelledby,
 		empty,
 		option,
-		onSelect,
-		onInput
+		onValueChange,
+		onInput,
+		...rest
 	}: Props = $props();
 
 	const listId = generateCounterId('autocomplete-list');
@@ -114,7 +115,7 @@
 		selected = o;
 		value = o.label;
 		open = false;
-		onSelect?.(o);
+		onValueChange?.(o);
 	}
 
 	function moveHighlight(dir: 1 | -1) {
@@ -215,7 +216,7 @@
 	);
 </script>
 
-<div class={className}>
+<div {...rest} class={className}>
 	<!-- Live region announces empty/no-results state to screen readers -->
 	<VisuallyHidden as="div" role="status" aria-live="polite" aria-atomic={true}>
 		{#if showEmpty}{noResultsText}{/if}

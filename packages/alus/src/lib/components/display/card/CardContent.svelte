@@ -1,12 +1,13 @@
 <script lang="ts">
-	interface Props {
-		children?: import('svelte').Snippet;
-		class?: string;
-	}
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
-	let { children, class: className = '' }: Props = $props();
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
+		children?: import('svelte').Snippet;
+	};
+
+	let { children, class: className = '', ...rest }: Props = $props();
 </script>
 
-<div class={className}>
+<div {...rest} class={className}>
 	{#if children}{@render children()}{/if}
 </div>

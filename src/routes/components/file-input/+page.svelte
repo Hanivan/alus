@@ -7,7 +7,7 @@
 	const code = `<FileInput
 	accept="image/*"
 	multiple
-	onChange={(files) => console.log(files)}
+	onFilesChange={(files) => console.log(files)}
 	aria-label="Upload photos"
 >
 	{#snippet trigger({ open })}
@@ -105,7 +105,7 @@
 			{ name: 'multiple', type: 'boolean', default: 'false' },
 			{ name: 'disabled', type: 'boolean', default: 'false' },
 			{ name: 'required', type: 'boolean', default: 'false' },
-			{ name: 'onChange', type: '(files: FileList) => void', default: 'undefined' },
+			{ name: 'onFilesChange', type: '(files: FileList | null) => void', default: 'undefined' },
 			{
 				name: 'trigger',
 				type: 'Snippet<[{ open: () => void; files: FileList | null }]>',

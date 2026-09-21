@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { untrack } from 'svelte';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { getCardContext } from './Card.svelte';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['p'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
-	}
+	};
 
-	let { children, class: className = '' }: Props = $props();
+	let { children, class: className = '', ...rest }: Props = $props();
 
 	const ctx = getCardContext();
 
@@ -19,6 +19,6 @@
 	});
 </script>
 
-<p id={ctx.descriptionId} class={className}>
+<p {...rest} id={ctx.descriptionId} class={className}>
 	{#if children}{@render children()}{/if}
 </p>

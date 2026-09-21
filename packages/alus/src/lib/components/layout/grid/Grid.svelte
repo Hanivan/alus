@@ -1,8 +1,10 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
+
 	type Align = 'start' | 'center' | 'end' | 'stretch';
 	type Justify = 'start' | 'center' | 'end' | 'stretch';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
 		cols?: number | string;
 		rows?: number | string;
@@ -13,9 +15,8 @@
 		align?: Align;
 		justify?: Justify;
 		inline?: boolean;
-		class?: string;
 		style?: string;
-	}
+	};
 
 	let {
 		children,
@@ -29,7 +30,8 @@
 		justify = 'stretch',
 		inline = false,
 		class: className = '',
-		style: extraStyle = ''
+		style: extraStyle = '',
+		...rest
 	}: Props = $props();
 
 	function toCssValue(v: string | number): string {
@@ -66,6 +68,6 @@
 	const style = $derived(`${baseStyle}${extraStyle}`);
 </script>
 
-<div class={className} {style}>
+<div {...rest} class={className} {style}>
 	{#if children}{@render children()}{/if}
 </div>

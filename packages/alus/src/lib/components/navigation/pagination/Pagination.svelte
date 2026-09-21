@@ -1,5 +1,7 @@
 <script lang="ts">
-	interface Props {
+	import type { SvelteHTMLElements } from 'svelte/elements';
+
+	type Props = Omit<SvelteHTMLElements['nav'], 'children'> & {
 		children?: import('svelte').Snippet<
 			[
 				{
@@ -19,10 +21,10 @@
 		total: number;
 		perPage?: number;
 		siblingCount?: number;
-		class?: string;
+		// Kept: the default `'Pagination'` is the nav's only accessible name.
 		'aria-label'?: string;
 		onPageChange?: (p: number) => void;
-	}
+	};
 
 	let {
 		children,
@@ -32,7 +34,8 @@
 		siblingCount = 1,
 		class: className = '',
 		'aria-label': ariaLabel = 'Pagination',
-		onPageChange
+		onPageChange,
+		...rest
 	}: Props = $props();
 
 	let totalPages = $derived(Math.max(1, Math.ceil(total / perPage)));
@@ -79,7 +82,7 @@
 	});
 </script>
 
-<nav class={className} aria-label={ariaLabel}>
+<nav {...rest} class={className} aria-label={ariaLabel}>
 	{#if children}
 		{@render children({
 			page,

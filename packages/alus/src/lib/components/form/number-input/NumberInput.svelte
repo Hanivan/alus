@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { labelAttrs, validationAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet<
 			[{ value: number | null; increment: () => void; decrement: () => void }]
 		>;
@@ -12,10 +13,12 @@
 		disabled?: boolean;
 		readonly?: boolean;
 		required?: boolean;
+		// `name` and `id` are consumed by the inner `<input type="number">`, not by the host
+		// `<div>`. `id` is inherited from `HTMLAttributes<HTMLDivElement>`; `name` is NOT, so it
+		// must stay declared or the destructure below fails with TS2339 and consumers can no
+		// longer set it. Both stay destructured so they keep reaching the inner input.
 		name?: string;
-		id?: string;
 		placeholder?: string;
-		class?: string;
 		inputClass?: string;
 		incrementLabel?: string;
 		decrementLabel?: string;
@@ -25,9 +28,9 @@
 		'aria-invalid'?: boolean;
 		'aria-errormessage'?: string;
 		oninput?: (event: Event) => void;
-		onchange?: (value: number | null) => void;
+		onValueChange?: (value: number | null) => void;
 		autofocus?: boolean;
-	}
+	};
 
 	let {
 		children,
@@ -51,8 +54,9 @@
 		'aria-invalid': ariaInvalid,
 		'aria-errormessage': ariaErrormessage,
 		oninput,
-		onchange,
-		autofocus
+		onValueChange,
+		autofocus,
+		...rest
 	}: Props = $props();
 
 	let ariaAttrs: Record<string, string> = $derived(
@@ -73,14 +77,14 @@
 		if (disabled || readonly) return;
 		const next = clamp((value ?? 0) + step);
 		value = next;
-		onchange?.(value);
+		onValueChange?.(value);
 	}
 
 	function decrement() {
 		if (disabled || readonly) return;
 		const next = clamp((value ?? 0) - step);
 		value = next;
-		onchange?.(value);
+		onValueChange?.(value);
 	}
 
 	function handleInput(e: Event) {
@@ -93,7 +97,7 @@
 {#if children}
 	{@render children({ value, increment, decrement })}
 {:else}
-	<div class={className}>
+	<div {...rest} class={className}>
 		<button
 			type="button"
 			aria-label={decrementLabel}

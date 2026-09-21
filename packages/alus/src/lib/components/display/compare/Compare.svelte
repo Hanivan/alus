@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		before: import('svelte').Snippet;
 		after: import('svelte').Snippet;
 		handle?: import('svelte').Snippet<[{ position: number; dragging: boolean }]>;
@@ -13,15 +14,15 @@
 		largeStep?: number;
 		orientation?: 'horizontal' | 'vertical';
 		disabled?: boolean;
-		class?: string;
+		style?: string;
 		beforeClass?: string;
 		afterClass?: string;
 		handleClass?: string;
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
 		'aria-valuetext'?: string;
-		onChange?: (position: number) => void;
-	}
+		onValueChange?: (position: number) => void;
+	};
 
 	let {
 		before,
@@ -35,13 +36,15 @@
 		orientation = 'horizontal',
 		disabled = false,
 		class: className = '',
+		style: extraStyle = '',
 		beforeClass = '',
 		afterClass = '',
 		handleClass = '',
 		'aria-label': ariaLabel = 'Before and after comparison',
 		'aria-labelledby': ariaLabelledby,
 		'aria-valuetext': ariaValuetext,
-		onChange
+		onValueChange,
+		...rest
 	}: Props = $props();
 
 	let dragging = $state(false);
@@ -59,7 +62,7 @@
 		const next = clamp(v);
 		if (next !== position) {
 			position = next;
-			onChange?.(next);
+			onValueChange?.(next);
 		}
 	}
 
@@ -168,18 +171,21 @@
 	);
 </script>
 
-<!-- svelte-ignore a11y_no_static_element_interactions -->
+<!-- No `svelte-ignore` for `a11y_no_static_element_interactions` here: `{...rest}` makes the
+     compiler treat the element as dynamic, which already suppresses that warning. Keeping the
+     comment would fail `svelte/no-unused-svelte-ignore`. -->
 <div
-	{@attach attach}
+	{...rest}
 	class={className}
 	data-orientation={orientation}
 	data-dragging={dragging || undefined}
 	data-disabled={disabled || undefined}
-	style="position:relative;overflow:hidden;touch-action:none;"
+	style="position:relative;overflow:hidden;touch-action:none;{extraStyle}"
 	onpointerdown={onTrackPointerDown}
 	onpointermove={onPointerMove}
 	onpointerup={onPointerUp}
 	onpointercancel={onPointerUp}
+	{@attach attach}
 >
 	<div class={beforeClass} data-layer="before" style="position:absolute;inset:0;">
 		{@render before()}

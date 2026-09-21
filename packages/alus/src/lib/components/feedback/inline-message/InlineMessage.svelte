@@ -1,16 +1,17 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
+
 	type Variant = 'info' | 'success' | 'warning' | 'error';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['span'], 'children'> & {
 		children?: import('svelte').Snippet;
 		icon?: import('svelte').Snippet;
 		variant?: Variant;
 		id?: string;
-		class?: string;
 		live?: 'polite' | 'assertive' | 'off';
 		role?: 'status' | 'alert' | undefined;
 		'aria-label'?: string;
-	}
+	};
 
 	let {
 		children,
@@ -20,7 +21,8 @@
 		class: className = '',
 		live,
 		role,
-		'aria-label': ariaLabel
+		'aria-label': ariaLabel,
+		...rest
 	}: Props = $props();
 
 	const effectiveRole = $derived(
@@ -30,6 +32,7 @@
 </script>
 
 <span
+	{...rest}
 	{id}
 	role={effectiveRole}
 	aria-live={effectiveLive}

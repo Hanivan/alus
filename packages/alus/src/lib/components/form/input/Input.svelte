@@ -1,80 +1,28 @@
 <script lang="ts">
 	import { labelAttrs, validationAttrs, mergeAttrs } from '$utils/a11y/index.js';
-	import type { InputType, InputMode, AutocompleteValue, AriaBoolean } from '$types/index.js';
+	import type { HTMLInputAttributes } from 'svelte/elements';
+	import type { AriaBoolean } from '$types/index.js';
 
-	interface Props {
-		type?: InputType;
-		placeholder?: string;
+	interface Props extends Omit<HTMLInputAttributes, 'children'> {
 		value?: string;
-		class?: string;
-		disabled?: boolean;
-		readonly?: boolean;
-		required?: boolean;
-		name?: string;
-		id?: string;
-		min?: number | string;
-		max?: number | string;
-		step?: number | string;
-		pattern?: string;
-		minlength?: number;
-		maxlength?: number;
-		autocomplete?: AutocompleteValue;
-		inputmode?: InputMode;
-		oninput?: (event: Event) => void;
-		onchange?: (event: Event) => void;
-		onfocus?: (event: FocusEvent) => void;
-		onblur?: (event: FocusEvent) => void;
-		onkeydown?: (event: KeyboardEvent) => void;
-		onkeyup?: (event: KeyboardEvent) => void;
-		// Accessibility attributes
-		'aria-label'?: string;
-		'aria-labelledby'?: string;
-		'aria-describedby'?: string;
 		'aria-invalid'?: AriaBoolean;
 		'aria-required'?: AriaBoolean;
 		'aria-errormessage'?: string;
-		tabindex?: number;
-		autofocus?: boolean;
-		spellcheck?: boolean;
-		enterkeyhint?: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
-		list?: string;
 	}
 
 	let {
 		type = 'text',
-		placeholder = '',
 		value = $bindable(),
 		class: className = '',
 		disabled = false,
-		readonly = false,
 		required = false,
-		name,
-		id,
-		min,
-		max,
-		step,
-		pattern,
-		minlength,
-		maxlength,
-		autocomplete,
-		inputmode,
-		oninput,
-		onchange,
-		onfocus,
-		onblur,
-		onkeydown,
-		onkeyup,
 		'aria-label': ariaLabel,
 		'aria-labelledby': ariaLabelledby,
 		'aria-describedby': ariaDescribedby,
 		'aria-invalid': ariaInvalid,
 		'aria-required': ariaRequired,
 		'aria-errormessage': ariaErrormessage,
-		tabindex,
-		autofocus,
-		spellcheck,
-		enterkeyhint,
-		list
+		...rest
 	}: Props = $props();
 
 	// Build ARIA attributes using reusable utilities
@@ -92,35 +40,4 @@
 	);
 </script>
 
-<!-- svelte-ignore a11y_autofocus -->
-<input
-	{type}
-	{placeholder}
-	bind:value
-	{disabled}
-	{readonly}
-	{required}
-	{name}
-	{id}
-	{min}
-	{max}
-	{step}
-	{pattern}
-	{minlength}
-	{maxlength}
-	{autocomplete}
-	{inputmode}
-	class={className}
-	{oninput}
-	{onchange}
-	{onfocus}
-	{onblur}
-	{onkeydown}
-	{onkeyup}
-	{tabindex}
-	{autofocus}
-	{spellcheck}
-	{enterkeyhint}
-	{list}
-	{...ariaAttrs}
-/>
+<input {...rest} {type} bind:value {disabled} {required} class={className} {...ariaAttrs} />

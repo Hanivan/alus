@@ -1,18 +1,19 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
+	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import { getCommandMenuContext } from './CommandMenu.svelte';
 	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-	interface Props {
+	interface Props extends Omit<HTMLButtonAttributes, 'children'> {
 		children?: import('svelte').Snippet;
-		class?: string;
 		'aria-label'?: string;
 	}
 
 	let {
 		children,
 		class: className = '',
-		'aria-label': ariaLabel = 'Open command menu'
+		'aria-label': ariaLabel = 'Open command menu',
+		...rest
 	}: Props = $props();
 
 	const ctx = getCommandMenuContext();
@@ -32,6 +33,7 @@
 </script>
 
 <button
+	{...rest}
 	type="button"
 	class={className}
 	onclick={() => ctx.setOpen(!ctx.open())}

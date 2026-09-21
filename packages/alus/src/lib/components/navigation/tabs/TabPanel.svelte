@@ -1,14 +1,16 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { getTabsContext } from './context.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
+		// Not a DOM attribute: pairs the panel with its Tab.
 		value: string;
-		class?: string;
+		// Read by the `{#if active || forceMount}` markup — rule 3.
 		forceMount?: boolean;
-	}
+	};
 
-	let { children, value, class: className = '', forceMount = false }: Props = $props();
+	let { children, value, class: className = '', forceMount = false, ...rest }: Props = $props();
 
 	const ctx = getTabsContext();
 	let active = $derived(ctx.value() === value);
@@ -18,6 +20,7 @@
 
 {#if active || forceMount}
 	<div
+		{...rest}
 		id={panelId}
 		role="tabpanel"
 		aria-labelledby={tabId}

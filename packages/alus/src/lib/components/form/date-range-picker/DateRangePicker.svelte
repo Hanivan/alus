@@ -12,8 +12,9 @@
 	import { trap, focusFirst } from '$utils/a11y/index.js';
 	import Portal from '../../utility/portal/Portal.svelte';
 	import DateRange, { type DateRangeValue } from '../date-range/DateRange.svelte';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		start?: DateValue | null;
 		end?: DateValue | null;
 		open?: boolean;
@@ -29,7 +30,6 @@
 		closeOnSelect?: boolean;
 		numberOfMonths?: 1 | 2;
 		isDateDisabled?: (date: DateValue) => boolean;
-		class?: string;
 		inputClass?: string;
 		popoverClass?: string;
 		rangeClass?: string;
@@ -43,8 +43,8 @@
 		yearClass?: string;
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
-		onChange?: (range: DateRangeValue) => void;
-	}
+		onValueChange?: (range: DateRangeValue) => void;
+	};
 
 	let {
 		start = $bindable(null),
@@ -76,7 +76,8 @@
 		yearClass = '',
 		'aria-label': ariaLabel,
 		'aria-labelledby': ariaLabelledby,
-		onChange
+		onValueChange,
+		...rest
 	}: Props = $props();
 
 	const popId = generateCounterId('daterange-pop');
@@ -99,7 +100,7 @@
 	}
 
 	function onRangeChange(r: DateRangeValue) {
-		onChange?.(r);
+		onValueChange?.(r);
 		if (closeOnSelect && r.start && r.end) {
 			open = false;
 			triggerEl?.focus();
@@ -160,7 +161,7 @@
 	};
 </script>
 
-<div class={className}>
+<div {...rest} class={className}>
 	<button
 		type="button"
 		{disabled}
@@ -203,7 +204,7 @@
 					{timeZone}
 					{numberOfMonths}
 					{isDateDisabled}
-					onChange={onRangeChange}
+					onValueChange={onRangeChange}
 					class={rangeClass}
 					{monthsClass}
 					{calendarClass}

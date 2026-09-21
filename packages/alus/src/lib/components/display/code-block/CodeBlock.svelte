@@ -1,5 +1,7 @@
 <script lang="ts">
-	interface Props {
+	import type { SvelteHTMLElements } from 'svelte/elements';
+
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		code: string;
 		language?: string;
 		filename?: string;
@@ -7,12 +9,11 @@
 		actions?: import('svelte').Snippet<
 			[{ code: string; copy: () => Promise<void>; copied: boolean }]
 		>;
-		class?: string;
 		preClass?: string;
 		codeClass?: string;
 		lineNumbersClass?: string;
 		'aria-label'?: string;
-	}
+	};
 
 	let {
 		code,
@@ -24,7 +25,8 @@
 		preClass = '',
 		codeClass = '',
 		lineNumbersClass = '',
-		'aria-label': ariaLabel
+		'aria-label': ariaLabel,
+		...rest
 	}: Props = $props();
 
 	let copied = $state(false);
@@ -44,7 +46,7 @@
 	}
 </script>
 
-<div class={className} data-language={language} data-filename={filename}>
+<div {...rest} class={className} data-language={language} data-filename={filename}>
 	{#if actions}
 		{@render actions({ code, copy, copied })}
 	{/if}

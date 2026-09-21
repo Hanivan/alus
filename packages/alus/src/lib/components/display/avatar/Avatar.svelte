@@ -1,15 +1,15 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-	interface Props {
-		class?: string;
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		src?: string;
 		alt?: string;
 		fallback?: string;
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 		// Accessibility attributes
 		'aria-label'?: string;
-	}
+	};
 
 	let {
 		class: className = '',
@@ -17,7 +17,8 @@
 		alt = '',
 		fallback,
 		size = 'md',
-		'aria-label': ariaLabel
+		'aria-label': ariaLabel,
+		...rest
 	}: Props = $props();
 
 	let imgError = $state(false);
@@ -37,7 +38,7 @@
 	}
 </script>
 
-<div class={className} data-size={size} {...ariaAttrs}>
+<div {...rest} class={className} data-size={size} {...ariaAttrs}>
 	{#if src && !imgError}
 		<img {src} {alt} aria-hidden="true" onerror={() => (imgError = true)} class="avatar-image" />
 	{:else if fallback}

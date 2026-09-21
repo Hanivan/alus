@@ -1,50 +1,29 @@
 <script lang="ts">
-	import type { AriaLive, AriaRelevant } from '$types/index.js';
+	import type { HTMLAttributes } from 'svelte/elements';
 
-	interface Props {
+	type Props = Omit<HTMLAttributes<HTMLElement>, 'children'> & {
 		children?: import('svelte').Snippet;
 		as?: 'span' | 'div';
-		role?: string;
-		'aria-live'?: AriaLive;
-		'aria-atomic'?: boolean | 'true' | 'false';
-		'aria-relevant'?: AriaRelevant;
-		'aria-label'?: string;
-	}
+		style?: string;
+	};
 
-	let {
-		children,
-		as = 'span',
-		role,
-		'aria-live': ariaLive,
-		'aria-atomic': ariaAtomic,
-		'aria-relevant': ariaRelevant,
-		'aria-label': ariaLabel
-	}: Props = $props();
+	let { children, as = 'span', style: extraStyle = '', ...rest }: Props = $props();
 
 	const hiddenStyle =
 		'position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;';
+
+	// The host writes its own `style`, so a consumer's `style` must be appended rather than
+	// dropped: `{...rest}` goes first, which would otherwise discard it silently. `hiddenStyle`
+	// is never empty, so no `undefined`-shape preservation is needed here.
+	const style = $derived(`${hiddenStyle}${extraStyle}`);
 </script>
 
 {#if as === 'div'}
-	<div
-		style={hiddenStyle}
-		{role}
-		aria-live={ariaLive}
-		aria-atomic={ariaAtomic}
-		aria-relevant={ariaRelevant}
-		aria-label={ariaLabel}
-	>
+	<div {...rest} {style}>
 		{#if children}{@render children()}{/if}
 	</div>
 {:else}
-	<span
-		style={hiddenStyle}
-		{role}
-		aria-live={ariaLive}
-		aria-atomic={ariaAtomic}
-		aria-relevant={ariaRelevant}
-		aria-label={ariaLabel}
-	>
+	<span {...rest} {style}>
 		{#if children}{@render children()}{/if}
 	</span>
 {/if}

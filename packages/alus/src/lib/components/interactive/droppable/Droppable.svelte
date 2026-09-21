@@ -7,19 +7,21 @@
 </script>
 
 <script lang="ts" generics="T">
-	interface Props {
+	import type { HTMLAttributes } from 'svelte/elements';
+
+	// Five branches with different host elements (`span` / `li` / `ul` / `section` / `div`), so a
+	// single element type cannot describe the host — `HTMLAttributes<HTMLElement>` is the base.
+	type Props = Omit<HTMLAttributes<HTMLElement>, 'children'> & {
 		children?: import('svelte').Snippet<[{ over: boolean }]>;
 		type?: string;
 		disabled?: boolean;
 		effect?: 'copy' | 'move' | 'link' | 'none';
 		as?: 'div' | 'span' | 'li' | 'ul' | 'section';
-		class?: string;
 		style?: string;
-		'aria-label'?: string;
 		onDrop?: (e: DroppableEvent<T>) => void;
 		onDragEnter?: (e: DragEvent) => void;
 		onDragLeave?: (e: DragEvent) => void;
-	}
+	};
 
 	let {
 		children,
@@ -29,10 +31,10 @@
 		as = 'div',
 		class: className = '',
 		style,
-		'aria-label': ariaLabel,
 		onDrop,
 		onDragEnter,
-		onDragLeave
+		onDragLeave,
+		...rest
 	}: Props = $props();
 
 	let over = $state(false);
@@ -79,12 +81,11 @@
 	{#if children}{@render children({ over })}{/if}
 {/snippet}
 
-<!-- svelte-ignore a11y_no_static_element_interactions -->
 {#if as === 'span'}
 	<span
+		{...rest}
 		class={className}
 		{style}
-		aria-label={ariaLabel}
 		aria-dropeffect={effect}
 		data-over={over ? '' : undefined}
 		ondragenter={enter}
@@ -96,9 +97,9 @@
 	</span>
 {:else if as === 'li'}
 	<li
+		{...rest}
 		class={className}
 		{style}
-		aria-label={ariaLabel}
 		aria-dropeffect={effect}
 		data-over={over ? '' : undefined}
 		ondragenter={enter}
@@ -110,9 +111,9 @@
 	</li>
 {:else if as === 'ul'}
 	<ul
+		{...rest}
 		class={className}
 		{style}
-		aria-label={ariaLabel}
 		aria-dropeffect={effect}
 		data-over={over ? '' : undefined}
 		ondragenter={enter}
@@ -124,9 +125,9 @@
 	</ul>
 {:else if as === 'section'}
 	<section
+		{...rest}
 		class={className}
 		{style}
-		aria-label={ariaLabel}
 		aria-dropeffect={effect}
 		data-over={over ? '' : undefined}
 		ondragenter={enter}
@@ -138,9 +139,9 @@
 	</section>
 {:else}
 	<div
+		{...rest}
 		class={className}
 		{style}
-		aria-label={ariaLabel}
 		aria-dropeffect={effect}
 		data-over={over ? '' : undefined}
 		ondragenter={enter}

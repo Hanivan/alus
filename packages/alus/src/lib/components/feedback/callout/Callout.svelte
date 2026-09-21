@@ -1,22 +1,22 @@
 <script lang="ts">
 	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 
 	type Variant = 'note' | 'info' | 'success' | 'warning' | 'error' | 'tip';
 
-	interface Props {
+	// 'title' is omitted as well as 'children': the component declares `title?: Snippet`
+	// while `HTMLAttributes.title` is `string`, so the intersection is `never` — a
+	// consumer's snippet could never be passed, silently.
+	type Props = Omit<SvelteHTMLElements['div'], 'children' | 'title'> & {
 		children?: import('svelte').Snippet;
 		title?: import('svelte').Snippet;
 		icon?: import('svelte').Snippet;
 		actions?: import('svelte').Snippet;
 		variant?: Variant;
-		class?: string;
 		style?: string;
 		titleClass?: string;
 		role?: 'note' | 'region' | 'group';
-		'aria-label'?: string;
-		'aria-labelledby'?: string;
-		'aria-describedby'?: string;
-	}
+	};
 
 	let {
 		children,
@@ -30,7 +30,8 @@
 		role = 'note',
 		'aria-label': ariaLabel,
 		'aria-labelledby': ariaLabelledby,
-		'aria-describedby': ariaDescribedby
+		'aria-describedby': ariaDescribedby,
+		...rest
 	}: Props = $props();
 
 	const ariaAttrs = $derived(
@@ -40,7 +41,7 @@
 	);
 </script>
 
-<div {role} data-variant={variant} class={className} {style} {...ariaAttrs}>
+<div {...rest} {role} data-variant={variant} class={className} {style} {...ariaAttrs}>
 	{#if icon}{@render icon()}{/if}
 	<div>
 		{#if title}

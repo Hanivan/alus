@@ -1,20 +1,21 @@
 <script lang="ts">
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['ol'], 'children'> & {
 		children?: import('svelte').Snippet;
-		class?: string;
 		orientation?: 'vertical' | 'horizontal';
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
-	}
+	};
 
 	let {
 		children,
 		class: className = '',
 		orientation = 'vertical',
 		'aria-label': ariaLabel,
-		'aria-labelledby': ariaLabelledby
+		'aria-labelledby': ariaLabelledby,
+		...rest
 	}: Props = $props();
 
 	let ariaAttrs: Record<string, string> = $derived(
@@ -22,6 +23,6 @@
 	);
 </script>
 
-<ol role="list" class={className} data-orientation={orientation} {...ariaAttrs}>
+<ol {...rest} role="list" class={className} data-orientation={orientation} {...ariaAttrs}>
 	{#if children}{@render children()}{/if}
 </ol>

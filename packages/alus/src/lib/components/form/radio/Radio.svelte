@@ -5,26 +5,24 @@
 		validationAttrs,
 		mergeAttrs
 	} from '$utils/a11y/index.js';
+	import type { HTMLInputAttributes } from 'svelte/elements';
 	import type { AriaBoolean } from '$types/index.js';
 
-	interface Props {
+	interface Props extends Omit<HTMLInputAttributes, 'children'> {
 		children?: import('svelte').Snippet;
-		class?: string;
+		value?: string;
+		// `bind:group` is a Svelte binding, not an attribute. `svelte/elements` *does* declare
+		// `group?: any` on HTMLInputAttributes (elements.d.ts:1098), so this is not a rule-6
+		// collision — `any` absorbs `unknown` either way. It is declared here because the
+		// component needs the prop, not because the native surface lacks the name.
+		group?: unknown;
 		disabled?: boolean;
 		required?: boolean;
-		readonly?: boolean;
-		id?: string;
-		name?: string;
-		value?: string;
-		form?: string;
-		group?: unknown;
 		// Accessibility attributes
 		'aria-label'?: string;
 		'aria-labelledby'?: string;
 		'aria-describedby'?: string;
 		'aria-invalid'?: AriaBoolean;
-		onchange?: (event: Event) => void;
-		oninput?: (event: Event) => void;
 	}
 
 	let {
@@ -32,18 +30,13 @@
 		class: className = '',
 		disabled = false,
 		required = false,
-		readonly = false,
-		id,
-		name,
 		value = '',
-		form,
 		group = $bindable(),
 		'aria-label': ariaLabel,
 		'aria-labelledby': ariaLabelledby,
 		'aria-describedby': ariaDescribedby,
 		'aria-invalid': ariaInvalid,
-		onchange,
-		oninput
+		...rest
 	}: Props = $props();
 
 	let radio = $state<HTMLInputElement>();
@@ -64,19 +57,14 @@
 </script>
 
 <input
+	{...rest}
 	bind:this={radio}
 	type="radio"
 	bind:group
-	{id}
 	{disabled}
 	{required}
-	{readonly}
-	{name}
 	{value}
-	{form}
 	class={className}
-	{onchange}
-	{oninput}
 	{...ariaAttrs}
 />
 

@@ -91,7 +91,7 @@
 			<DateRange
 				bind:start
 				bind:end
-				onChange={(r) => (lastChange = r)}
+				onValueChange={(r) => (lastChange = r)}
 				class="inline-block rounded border border-(--charcoal)/15 bg-white p-3 text-sm text-(--ink)"
 				{headerClass}
 				{gridClass}
@@ -106,7 +106,7 @@
 			</p>
 			{#if lastChange}
 				<p class="mt-1 text-xs text-(--charcoal)/50">
-					Last onChange: {fmt(lastChange.start)} → {fmt(lastChange.end)}
+					Last onValueChange: {fmt(lastChange.start)} → {fmt(lastChange.end)}
 				</p>
 			{/if}
 		</div>
@@ -166,7 +166,7 @@
 			{ name: 'locale', type: 'string', default: 'navigator.language' },
 			{ name: 'timeZone', type: 'string', default: 'getLocalTimeZone()' },
 			{ name: 'isDateDisabled', type: '(d) => boolean', default: 'undefined' },
-			{ name: 'onChange', type: '(r: DateRangeValue) => void', default: 'undefined' }
+			{ name: 'onValueChange', type: '(r: DateRangeValue) => void', default: 'undefined' }
 		]}
 		a11y={[
 			'<code class="rounded bg-(--cream) px-1">role="group"</code> wraps both Calendars',

@@ -1,17 +1,19 @@
 <script lang="ts">
 	import { untrack } from 'svelte';
+	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { setTabsContext } from './context.js';
 	import { generateCounterId } from '$utils/a11y/id.js';
 
-	interface Props {
+	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;
 		value?: string;
+		// Read by `setTabsContext` — rule 2.
 		orientation?: 'horizontal' | 'vertical';
 		activation?: 'automatic' | 'manual';
-		class?: string;
+		// Read once (under `untrack`) to seed `baseId` — rule 2.
 		id?: string;
 		onValueChange?: (v: string) => void;
-	}
+	};
 
 	let {
 		children,
@@ -20,7 +22,8 @@
 		activation = 'automatic',
 		class: className = '',
 		id,
-		onValueChange
+		onValueChange,
+		...rest
 	}: Props = $props();
 
 	const baseId = untrack(() => id ?? generateCounterId('tabs'));
@@ -37,6 +40,6 @@
 	});
 </script>
 
-<div class={className} data-orientation={orientation}>
+<div {...rest} class={className} data-orientation={orientation}>
 	{#if children}{@render children()}{/if}
 </div>
