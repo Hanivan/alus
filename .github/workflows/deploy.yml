@@ -1,0 +1,46 @@
+name: Deploy showcase
+
+# Every push to main: build alus-ui, check, test, deploy the showcase Worker (alus.lkmn.link).
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.claude/**'
+      - '.remember/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-showcase
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: production
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 12
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 26
+          check-latest: true
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # Showcase imports alus-ui from packages/alus/dist (gitignored).
+      - run: pnpm --filter alus-ui build
+      - run: pnpm check
+      # Browser specs (client project) need Chromium; skipped to save Actions minutes.
+      - run: pnpm test --run --project server
+      - run: pnpm run deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          WRANGLER_SEND_METRICS: false

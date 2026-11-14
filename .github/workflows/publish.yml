@@ -1,0 +1,102 @@
+name: Publish to npm
+
+# Manual only: run with "Use workflow from" = a tag made by `pnpm release` (release-it bumps, tags, pushes).
+#   v*      → alus-ui      (packages/alus)
+#   mcp-v*  → alus-ui-mcp  (packages/mcp-stdio)
+# Publishes via npm trusted publishing (OIDC + provenance), then creates the GitHub release.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write # npm trusted publishing + provenance
+    outputs:
+      tag: ${{ steps.pkg.outputs.tag }}
+    steps:
+      - name: Resolve package from tag
+        id: pkg
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          [ "$GITHUB_REF_TYPE" = tag ] || { echo "::error::Run from a tag (Use workflow from → Tags)"; exit 1; }
+          case "$TAG" in
+            mcp-v*) echo "dir=packages/mcp-stdio" >> "$GITHUB_OUTPUT"; echo "version=${TAG#mcp-v}" >> "$GITHUB_OUTPUT" ;;
+            v*)     echo "dir=packages/alus"      >> "$GITHUB_OUTPUT"; echo "version=${TAG#v}"     >> "$GITHUB_OUTPUT" ;;
+            *) echo "::error::Unknown tag $TAG (expected v* or mcp-v*)"; exit 1 ;;
+          esac
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 12
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 26
+          check-latest: true
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - run: pnpm install --frozen-lockfile
+
+      - name: Tag matches package.json version
+        working-directory: ${{ steps.pkg.outputs.dir }}
+        env:
+          WANT: ${{ steps.pkg.outputs.version }}
+        run: |
+          have=$(node -p "require('./package.json').version")
+          [ "$have" = "$WANT" ] || { echo "::error::tag says $WANT, package.json says $have"; exit 1; }
+
+      - name: Build + test alus-ui
+        if: steps.pkg.outputs.dir == 'packages/alus'
+        working-directory: packages/alus
+        run: |
+          pnpm exec playwright install --with-deps chromium-headless-shell
+          pnpm check
+          pnpm build
+          pnpm test
+
+      - name: Build alus-ui-mcp
+        if: steps.pkg.outputs.dir == 'packages/mcp-stdio'
+        working-directory: packages/mcp-stdio
+        run: |
+          pnpm --filter @alus-ui/mcp-server run bundle:data
+          pnpm check
+          pnpm build
+
+      # pnpm pack rewrites workspace: ranges; npm publish of the tarball does the OIDC handshake.
+      - name: Publish
+        working-directory: ${{ steps.pkg.outputs.dir }}
+        run: |
+          pnpm pack --out package.tgz
+          npm publish package.tgz --provenance --access public
+
+  release:
+    needs: publish
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    env:
+      TAG: ${{ needs.publish.outputs.tag }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Publish GitHub release
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then echo "release $TAG exists, skipping"; exit 0; fi
+          scripts/release-notes.sh "$TAG" > notes.md
+          gh release create "$TAG" --title "$TAG" --notes-file notes.md --verify-tag

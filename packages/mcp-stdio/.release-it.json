@@ -9,12 +9,12 @@
 		"push": true
 	},
 	"github": {
-		"release": true,
+		"release": false,
 		"releaseName": "alus-ui-mcp v${version}",
 		"autoGenerate": false
 	},
 	"npm": {
-		"publish": true,
+		"publish": false,
 		"publishPath": "."
 	},
 	"hooks": {
@@ -26,16 +26,46 @@
 			"preset": {
 				"name": "conventionalcommits",
 				"types": [
-					{ "type": "feat", "section": "Features" },
-					{ "type": "fix", "section": "Bug Fixes" },
-					{ "type": "perf", "section": "Performance" },
-					{ "type": "refactor", "section": "Refactors" },
-					{ "type": "docs", "section": "Documentation" },
-					{ "type": "test", "section": "Tests" },
-					{ "type": "build", "section": "Build" },
-					{ "type": "ci", "hidden": true },
-					{ "type": "chore", "hidden": true },
-					{ "type": "style", "hidden": true }
+					{
+						"type": "feat",
+						"section": "Features"
+					},
+					{
+						"type": "fix",
+						"section": "Bug Fixes"
+					},
+					{
+						"type": "perf",
+						"section": "Performance"
+					},
+					{
+						"type": "refactor",
+						"section": "Refactors"
+					},
+					{
+						"type": "docs",
+						"section": "Documentation"
+					},
+					{
+						"type": "test",
+						"section": "Tests"
+					},
+					{
+						"type": "build",
+						"section": "Build"
+					},
+					{
+						"type": "ci",
+						"hidden": true
+					},
+					{
+						"type": "chore",
+						"hidden": true
+					},
+					{
+						"type": "style",
+						"hidden": true
+					}
 				]
 			},
 			"infile": "CHANGELOG.md",
