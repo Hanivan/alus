@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.3.1](https://github.com/Hanivan/alus/compare/v0.3.0...v0.3.1) (2026-11-14)
+
+### ⚠ BREAKING CHANGES
+
+* bump deps to latest and migrate to SvelteKit 3
+
+* auto-deploy showcase and publish packages to npm ([08e4626](https://github.com/Hanivan/alus/commit/08e4626ada44ae21dca8e8f44f640ecdfde15978))
+* **mcp-release:** v0.4.0 ([aaaf2ed](https://github.com/Hanivan/alus/commit/aaaf2eded0d9bd07f193ea9d6cc09aefae474cbd))
+
+### Bug Fixes
+
+* **menu:** stop effect loop with multiple items; keep item order stable ([be6a26e](https://github.com/Hanivan/alus/commit/be6a26ef3caf04e057696bcbee2794880f4aefef))
+
+### Build
+
+* bump deps to latest and migrate to SvelteKit 3 ([9034c77](https://github.com/Hanivan/alus/commit/9034c77e3686084fd7982bcc6f2fed83db834f7a))
+
 ## [0.3.0](https://github.com/Hanivan/alus/compare/v0.2.2...v0.3.0) (2026-09-21)
 
 ### ⚠ BREAKING CHANGES
