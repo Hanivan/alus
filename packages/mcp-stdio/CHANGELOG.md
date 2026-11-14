@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.4.1](https://github.com/Hanivan/alus/compare/mcp-v0.4.0...mcp-v0.4.1) (2026-11-14)
+
+## [0.3.1](https://github.com/Hanivan/alus/compare/mcp-v0.4.0...mcp-v0.4.1) (2026-11-14)
+
+### ⚠ BREAKING CHANGES
+
+* bump deps to latest and migrate to SvelteKit 3
+
+* auto-deploy showcase and publish packages to npm ([08e4626](https://github.com/Hanivan/alus/commit/08e4626ada44ae21dca8e8f44f640ecdfde15978))
+* **release:** v0.3.1 ([fc881e0](https://github.com/Hanivan/alus/commit/fc881e0307f0fe6c5c573e077f62801bbcbd7a6d))
+
+### Bug Fixes
+
+* **menu:** stop effect loop with multiple items; keep item order stable ([be6a26e](https://github.com/Hanivan/alus/commit/be6a26ef3caf04e057696bcbee2794880f4aefef))
+
+### Build
+
+* bump deps to latest and migrate to SvelteKit 3 ([9034c77](https://github.com/Hanivan/alus/commit/9034c77e3686084fd7982bcc6f2fed83db834f7a))
+
 ## [0.4.0](https://github.com/Hanivan/alus/compare/mcp-v0.3.2...mcp-v0.4.0) (2026-09-21)
 
 ### ⚠ BREAKING CHANGES
