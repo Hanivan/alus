@@ -62,7 +62,9 @@
 		triggerEl = node;
 		entry = {
 			el: node,
-			disabled,
+			get disabled() {
+				return disabled;
+			},
 			onSelect: () => {
 				if (!open) openPanel();
 			}

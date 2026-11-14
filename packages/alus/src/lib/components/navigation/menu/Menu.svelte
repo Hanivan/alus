@@ -56,7 +56,9 @@
 	let lastActivatedIndex = $state<number>(-1);
 	let triggerEl = $state<HTMLElement | null>(null);
 	let contentEl = $state<HTMLElement | null>(null);
-	let items = $state<MenuItemEntry[]>([]);
+	// Plain array: only read in handlers/microtasks. $state here made every item's
+	// registering attachment invalidate the others (effect_update_depth_exceeded).
+	let items: MenuItemEntry[] = [];
 
 	const triggerId = generateCounterId('menu-trigger');
 	const contentId = generateCounterId('menu-content');

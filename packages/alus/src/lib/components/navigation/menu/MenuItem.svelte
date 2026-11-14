@@ -35,7 +35,16 @@
 
 	const itemRef: Attachment<HTMLDivElement> = (node) => {
 		el = node;
-		entry = { el: node, disabled, onSelect };
+		// Getters: the attachment reads no props, so it registers once and keeps its slot.
+		entry = {
+			el: node,
+			get disabled() {
+				return disabled;
+			},
+			get onSelect() {
+				return onSelect;
+			}
+		};
 		const unregister = ctx.registerItem(entry);
 		return () => {
 			unregister();
