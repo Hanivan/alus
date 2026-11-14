@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft, CaretDown } from 'phosphor-svelte';
 	import { Dropdown, DropdownTrigger, DropdownContent, DropdownItem } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<Dropdown>
 	<DropdownTrigger>Actions</DropdownTrigger>

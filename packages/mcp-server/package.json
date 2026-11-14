@@ -15,7 +15,7 @@
 		"valibot": "latest"
 	},
 	"devDependencies": {
-		"@types/node": "^22",
+		"@types/node": "^26",
 		"tsx": "latest",
 		"typescript": "^6.0.2"
 	}

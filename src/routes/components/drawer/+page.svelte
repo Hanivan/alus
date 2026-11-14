@@ -9,7 +9,7 @@
 		DrawerDescription,
 		DrawerClose
 	} from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<Drawer side="right">
 	<DrawerTrigger>Open</DrawerTrigger>

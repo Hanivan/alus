@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft, Info, CheckCircle, Warning, XCircle } from 'phosphor-svelte';
 	import { Alert } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<Alert variant="success" role="status" dismissible>
 	{#snippet title()}Saved{/snippet}

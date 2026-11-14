@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft } from 'phosphor-svelte';
 	import { AspectRatio } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<AspectRatio ratio={16 / 9}>
 	<img src="/photo.jpg" alt="" class="h-full w-full object-cover" />

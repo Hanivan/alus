@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { getSplitViewContext } from './SplitView.svelte';
-	import { labelAttrs } from '$utils/a11y/index.js';
+	import { labelAttrs } from '#lib/utils/a11y/index.js';
 
 	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;

@@ -2,7 +2,7 @@
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Progress } from 'alus-ui';
 	import { onMount } from 'svelte';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 	import { resolve } from '$app/paths';
 
 	const code = `<Progress

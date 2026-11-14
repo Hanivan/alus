@@ -1,7 +1,12 @@
 <script lang="ts">
-	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import {
+		labelAttrs,
+		interactiveStateAttrs,
+		widgetAttrs,
+		mergeAttrs
+	} from '#lib/utils/a11y/index.js';
 	import type { SvelteHTMLElements } from 'svelte/elements';
-	import type { AriaLive } from '$types/index.js';
+	import type { AriaLive } from '#lib/types/index.js';
 
 	type Props = Omit<SvelteHTMLElements['span'], 'children'> & {
 		children?: import('svelte').Snippet;

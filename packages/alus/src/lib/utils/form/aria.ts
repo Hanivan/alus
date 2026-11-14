@@ -3,7 +3,7 @@
  * @module form/aria
  */
 
-import { buildAriaAttrs } from '$utils/a11y/aria.js';
+import { buildAriaAttrs } from '#lib/utils/a11y/aria.js';
 
 /**
  * Props for a form field with label and error states

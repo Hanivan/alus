@@ -3,7 +3,7 @@
 	import { CaretLeft, CalendarBlank } from 'phosphor-svelte';
 	import { DateRangePicker } from 'alus-ui';
 	import { type DateValue } from '@internationalized/date';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
 	import { DateRangePicker } from 'alus-ui';

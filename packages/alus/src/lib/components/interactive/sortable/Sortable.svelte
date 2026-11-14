@@ -1,7 +1,7 @@
 <script lang="ts" generics="T">
 	import { tick } from 'svelte';
 	import type { SvelteHTMLElements } from 'svelte/elements';
-	import { labelAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { labelAttrs, widgetAttrs, mergeAttrs } from '#lib/utils/a11y/index.js';
 	import VisuallyHidden from '../../utility/visually-hidden/VisuallyHidden.svelte';
 
 	type Props<U> = Omit<SvelteHTMLElements['ul'], 'children'> & {

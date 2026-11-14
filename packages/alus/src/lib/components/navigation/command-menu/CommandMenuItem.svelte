@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { untrack } from 'svelte';
 	import type { SvelteHTMLElements } from 'svelte/elements';
-	import { generateCounterId } from '$utils/a11y/id.js';
-	import { interactiveStateAttrs } from '$utils/a11y/index.js';
+	import { generateCounterId } from '#lib/utils/a11y/id.js';
+	import { interactiveStateAttrs } from '#lib/utils/a11y/index.js';
 	import { getCommandMenuContext } from './CommandMenu.svelte';
 	import { getCommandMenuGroupContext } from './CommandMenuGroup.svelte';
 

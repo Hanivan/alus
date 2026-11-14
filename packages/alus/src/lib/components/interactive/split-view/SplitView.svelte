@@ -1,6 +1,6 @@
 <script lang="ts" module>
 	import { getContext, setContext } from 'svelte';
-	import { generateCounterId } from '$utils/a11y/id.js';
+	import { generateCounterId } from '#lib/utils/a11y/id.js';
 
 	const KEY = Symbol('alus-ui:split-view');
 
@@ -30,7 +30,7 @@
 
 <script lang="ts">
 	import type { SvelteHTMLElements } from 'svelte/elements';
-	import { labelAttrs } from '$utils/a11y/index.js';
+	import { labelAttrs } from '#lib/utils/a11y/index.js';
 
 	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;

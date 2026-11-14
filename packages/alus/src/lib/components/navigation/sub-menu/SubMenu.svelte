@@ -13,8 +13,8 @@
 	import { computePosition, autoUpdate, flip, shift, offset } from '@floating-ui/dom';
 	import { useEventListener } from 'runed';
 	import { getMenuContext, type MenuItemEntry } from '../menu/Menu.svelte';
-	import { generateCounterId } from '$utils/a11y/id.js';
-	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { generateCounterId } from '#lib/utils/a11y/id.js';
+	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '#lib/utils/a11y/index.js';
 	import Portal from '../../utility/portal/Portal.svelte';
 
 	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {

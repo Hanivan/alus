@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft, MapPin, MagnifyingGlass, CircleNotch } from 'phosphor-svelte';
 	import { AutoComplete, type AutoCompleteOption } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
 	import { AutoComplete, type AutoCompleteOption } from 'alus-ui';

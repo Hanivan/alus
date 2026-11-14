@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Button } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	let subscribed = $state(false);
 	let disabled = $state(false);

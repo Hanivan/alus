@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft, ArrowSquareOut } from 'phosphor-svelte';
 	import { ExternalLink } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<ExternalLink href="https://svelte.dev" class="text-(--indigo-dye) underline">
 	Svelte docs

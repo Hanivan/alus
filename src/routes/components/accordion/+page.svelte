@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft, Plus } from 'phosphor-svelte';
 	import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<Accordion type="single">
 	<AccordionItem value="a">

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Tag } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 	import { resolve } from '$app/paths';
 
 	const code = `<Tag removable onremove={() => remove(id)} aria-label="React tag">

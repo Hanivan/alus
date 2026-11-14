@@ -4,9 +4,9 @@
 		interactiveStateAttrs,
 		validationAttrs,
 		mergeAttrs
-	} from '$utils/a11y/index.js';
+	} from '#lib/utils/a11y/index.js';
 	import type { HTMLInputAttributes } from 'svelte/elements';
-	import type { AriaBoolean } from '$types/index.js';
+	import type { AriaBoolean } from '#lib/types/index.js';
 
 	interface Props extends Omit<HTMLInputAttributes, 'children'> {
 		children?: import('svelte').Snippet;

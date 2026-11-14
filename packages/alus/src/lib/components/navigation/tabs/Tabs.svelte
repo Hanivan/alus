@@ -2,7 +2,7 @@
 	import { untrack } from 'svelte';
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { setTabsContext } from './context.js';
-	import { generateCounterId } from '$utils/a11y/id.js';
+	import { generateCounterId } from '#lib/utils/a11y/id.js';
 
 	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;

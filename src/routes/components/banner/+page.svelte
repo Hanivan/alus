@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft, Info, CheckCircle, Warning, XCircle, Megaphone } from 'phosphor-svelte';
 	import { Banner, Button } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<Banner variant="warning" role="alert" dismissible bind:open={open}>
 	{#snippet icon()}<Warning class="h-5 w-5" />{/snippet}

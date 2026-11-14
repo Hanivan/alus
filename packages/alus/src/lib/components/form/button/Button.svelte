@@ -1,7 +1,12 @@
 <script lang="ts">
-	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import {
+		labelAttrs,
+		interactiveStateAttrs,
+		widgetAttrs,
+		mergeAttrs
+	} from '#lib/utils/a11y/index.js';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
-	import type { AriaBoolean, AriaTristate, AriaHaspopup } from '$types/index.js';
+	import type { AriaBoolean, AriaTristate, AriaHaspopup } from '#lib/types/index.js';
 
 	interface Props extends Omit<HTMLButtonAttributes, 'children'> {
 		children?: import('svelte').Snippet;

@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft, CircleNotch, WarningCircle, ArrowClockwise } from 'phosphor-svelte';
 	import { InfiniteScroll, Button } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<InfiniteScroll {hasMore} onLoad={loadMore}>
 	{#each items as item}

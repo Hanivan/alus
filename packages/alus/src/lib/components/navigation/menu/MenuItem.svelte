@@ -2,7 +2,7 @@
 	import type { Attachment } from 'svelte/attachments';
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { getMenuContext, type MenuItemEntry } from './Menu.svelte';
-	import { interactiveStateAttrs } from '$utils/a11y/index.js';
+	import { interactiveStateAttrs } from '#lib/utils/a11y/index.js';
 
 	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet<[{ highlighted: boolean }]>;

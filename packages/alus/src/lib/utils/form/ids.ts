@@ -3,7 +3,7 @@
  * @module form/ids
  */
 
-import { generateId } from '$utils/a11y/index.js';
+import { generateId } from '#lib/utils/a11y/index.js';
 
 /**
  * IDs for form field accessibility associations

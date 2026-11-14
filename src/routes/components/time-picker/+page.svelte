@@ -2,7 +2,7 @@
 	import { CaretLeft, Lock, WarningCircle, CheckCircle } from 'phosphor-svelte';
 	import { resolve } from '$app/paths';
 	import { TimePicker, type Time } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
 	import { TimePicker, type Time } from 'alus-ui';

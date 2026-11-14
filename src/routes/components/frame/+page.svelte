@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Frame } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<Frame width={280} height={160} overflow="auto">
 	<p>Long content scrolls inside the fixed box.</p>

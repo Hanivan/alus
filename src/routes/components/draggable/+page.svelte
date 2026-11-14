@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Draggable, Droppable } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<Droppable
 	type="application/x-card"

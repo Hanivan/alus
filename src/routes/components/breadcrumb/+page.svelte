@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft, CaretRight, House } from 'phosphor-svelte';
 	import { Breadcrumb, BreadcrumbItem, BreadcrumbSeparator } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<Breadcrumb>
 	<BreadcrumbItem href="/">Home</BreadcrumbItem>
@@ -56,7 +56,7 @@
 				</BreadcrumbItem>
 				<BreadcrumbSeparator class="text-(--charcoal)/30">/</BreadcrumbSeparator>
 				<BreadcrumbItem
-					href={resolve('/components')}
+					href={resolve('/components' as '/')}
 					linkClass="text-(--indigo-dye) hover:text-(--vermilion)"
 				>
 					Components
@@ -86,7 +86,7 @@
 					<CaretRight class="h-3 w-3" />
 				</BreadcrumbSeparator>
 				<BreadcrumbItem
-					href={resolve('/docs')}
+					href={resolve('/docs' as '/')}
 					linkClass="text-(--indigo-dye) hover:text-(--vermilion)"
 				>
 					Docs

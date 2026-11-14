@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Divider } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<Divider class="border-t border-gray-200" />
 <Divider orientation="vertical" class="h-6 border-l border-gray-200" />`;

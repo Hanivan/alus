@@ -9,7 +9,7 @@
 		DialogDescription,
 		DialogClose
 	} from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<Dialog>
 	<DialogTrigger>Open</DialogTrigger>

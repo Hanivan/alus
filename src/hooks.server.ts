@@ -1,6 +1,6 @@
-import { get_http_transport } from '$lib/mcp/index.js';
+import { get_http_transport } from '#lib/mcp/index.js';
 import { redirect } from '@sveltejs/kit';
-import type { Handle } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit/hooks';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	if (event.url.pathname !== '/mcp') return resolve(event);

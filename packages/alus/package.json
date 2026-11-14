@@ -67,29 +67,32 @@
 		"release:patch": "release-it patch",
 		"release:major": "release-it major"
 	},
+	"imports": {
+		"#lib/*": "./src/lib/*"
+	},
 	"peerDependencies": {
 		"@floating-ui/dom": "^1.7.6",
 		"svelte": "^5.0.0"
 	},
 	"dependencies": {
-		"@floating-ui/dom": "^1.7.6",
-		"@internationalized/date": "^3.12.1",
-		"runed": "^0.37.1"
+		"@floating-ui/dom": "^1.8.0",
+		"@internationalized/date": "^3.12.4",
+		"runed": "^0.38.0"
 	},
 	"devDependencies": {
-		"@release-it/conventional-changelog": "^11.0.0",
-		"@sveltejs/adapter-auto": "^7.0.1",
-		"@sveltejs/kit": "^2.57.0",
-		"@sveltejs/package": "^2.5.7",
-		"@sveltejs/vite-plugin-svelte": "^7.0.0",
-		"@vitest/browser-playwright": "^5.0.1",
-		"publint": "^0.3.18",
-		"release-it": "^20.0.1",
-		"svelte": "^5.55.2",
-		"svelte-check": "^4.4.6",
+		"@release-it/conventional-changelog": "^12.0.2",
+		"@sveltejs/adapter-auto": "^8.0.1",
+		"@sveltejs/kit": "^3.2.0",
+		"@sveltejs/package": "^3.0.2",
+		"@sveltejs/vite-plugin-svelte": "^7.3.1",
+		"@vitest/browser-playwright": "^5.1.0",
+		"publint": "^0.3.25",
+		"release-it": "^21.1.2",
+		"svelte": "^5.57.3",
+		"svelte-check": "^4.7.8",
 		"typescript": "^6.0.2",
-		"vite": "^8.0.7",
-		"vitest": "^5.0.1",
+		"vite": "^8.3.8",
+		"vitest": "^5.1.0",
 		"vitest-browser-svelte": "^3.1.0"
 	},
 	"publishConfig": {

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
 	import type { SvelteHTMLElements } from 'svelte/elements';
-	import { trap, focusFirst } from '$utils/a11y/index.js';
+	import { trap, focusFirst } from '#lib/utils/a11y/index.js';
 	import { getModalContext } from './Modal.svelte';
 	import Portal from '../../utility/portal/Portal.svelte';
 

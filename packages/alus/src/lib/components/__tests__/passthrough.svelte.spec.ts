@@ -1,11 +1,11 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { Button } from '$components/form/button/index.js';
-import { Input } from '$components/form/input/index.js';
-import { Switch } from '$components/form/switch/index.js';
-import { ColorPicker } from '$components/form/color-picker/index.js';
-import { Calendar } from '$components/form/calendar/index.js';
+import { Button } from '#lib/components/form/button/index.js';
+import { Input } from '#lib/components/form/input/index.js';
+import { Switch } from '#lib/components/form/switch/index.js';
+import { ColorPicker } from '#lib/components/form/color-picker/index.js';
+import { Calendar } from '#lib/components/form/calendar/index.js';
 import ModalFixture from './ModalFixture.svelte';
 
 describe('HTML attribute passthrough', () => {

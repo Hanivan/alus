@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft, Copy, Scissors, Clipboard, Trash, ArrowsClockwise } from 'phosphor-svelte';
 	import { ContextMenu, type ContextMenuItemEntry } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
 	import { ContextMenu, type ContextMenuItemEntry } from 'alus-ui';

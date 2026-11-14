@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { CaretLeft } from 'phosphor-svelte';
 	import { SplitView, SplitViewPane, SplitViewHandle } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 	import { resolve } from '$app/paths';
 
 	const code = `<SplitView bind:size={pct} min={20} max={80} orientation="horizontal" aria-label="Editor">

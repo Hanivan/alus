@@ -2,7 +2,7 @@
 	import { CaretLeft, CheckCircle, Warning, XCircle, Info, X } from 'phosphor-svelte';
 	import { resolve } from '$app/paths';
 	import { Toaster, createToaster, Button, type ToastPlacement } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
 	import { Toaster, createToaster } from 'alus-ui';

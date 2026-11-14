@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
 	import type { SvelteHTMLElements } from 'svelte/elements';
-	import { generateCounterId } from '$utils/a11y/id.js';
+	import { generateCounterId } from '#lib/utils/a11y/id.js';
 	import { getSelectContext } from './Select.svelte';
 
 	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {

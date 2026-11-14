@@ -4,7 +4,7 @@
 		interactiveStateAttrs,
 		validationAttrs,
 		mergeAttrs
-	} from '$utils/a11y/index.js';
+	} from '#lib/utils/a11y/index.js';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 
 	interface Props extends Omit<HTMLButtonAttributes, 'children'> {

@@ -709,12 +709,11 @@
 		const slug = slugify(active);
 		const current = page.url.searchParams.get('c');
 		if (current === slug) return;
-		const url = new URL(page.url);
+		const url = new URL(page.url.href);
 		url.searchParams.set('c', slug);
-		goto(resolve(url.pathname + url.search), {
-			replaceState: true,
-			noScroll: true,
-			keepFocus: true
+		goto(resolve((url.pathname + url.search) as '/'), {
+			replace: true,
+			reset: false
 		});
 	});
 
@@ -791,7 +790,7 @@
 
 	async function pick(href: string) {
 		paletteOpen = false;
-		await goto(resolve(href));
+		await goto(resolve(href as '/'));
 	}
 
 	const grouped = $derived(
@@ -918,7 +917,7 @@
 					aria-orientation="horizontal"
 					tabindex="-1"
 					onkeydown={onTablistKeydown}
-					class="flex snap-x snap-mandatory items-stretch gap-1.5 overflow-x-auto px-4 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+					class="flex snap-x snap-mandatory [scrollbar-width:none] items-stretch gap-1.5 overflow-x-auto px-4 py-3 [&::-webkit-scrollbar]:hidden"
 				>
 					{#each categories as cat (cat.id)}
 						{@const isActive = active === cat.id}
@@ -977,7 +976,7 @@
 				{@const slug = comp.href.split('/').pop()}
 				<a
 					id="card-{slug}"
-					href={resolve(comp.href)}
+					href={resolve(comp.href as '/')}
 					data-card={slug}
 					class="card group relative block overflow-hidden border border-(--indigo-dye)/15 bg-white p-5 transition-all duration-300 hover:border-(--vermilion) hover:shadow-[4px_4px_0_0_var(--indigo-dye)] focus-visible:border-(--vermilion) focus-visible:shadow-[4px_4px_0_0_var(--indigo-dye)] focus-visible:outline-none"
 					style="animation: fadeInUp 0.4s ease-out {Math.min(index, 12) * 0.04}s both;"

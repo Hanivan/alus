@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { labelAttrs, mergeAttrs } from '#lib/utils/a11y/index.js';
 	import type { SvelteHTMLElements } from 'svelte/elements';
 
 	type Variant = 'note' | 'info' | 'success' | 'warning' | 'error' | 'tip';

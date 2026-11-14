@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { getStepperContext } from './Stepper.svelte';
-	import { interactiveStateAttrs, labelAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import {
+		interactiveStateAttrs,
+		labelAttrs,
+		widgetAttrs,
+		mergeAttrs
+	} from '#lib/utils/a11y/index.js';
 	import type { HTMLLiAttributes } from 'svelte/elements';
 
 	interface Props extends Omit<HTMLLiAttributes, 'children'> {

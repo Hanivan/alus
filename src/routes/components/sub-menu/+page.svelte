@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { CaretLeft, CaretRight, File, Folder, Image, Code } from 'phosphor-svelte';
 	import { Menu, MenuTrigger, MenuContent, MenuItem, SubMenu, type SubMenuItem } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 	import { resolve } from '$app/paths';
 
 	const code = `<Menu>

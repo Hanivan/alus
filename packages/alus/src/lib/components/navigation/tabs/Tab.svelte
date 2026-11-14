@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import { getTabsContext, TAB_LIST_ATTR, TAB_ATTR } from './context.js';
-	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '#lib/utils/a11y/index.js';
 
 	interface Props extends Omit<HTMLButtonAttributes, 'children'> {
 		children?: import('svelte').Snippet<[{ selected: boolean }]>;

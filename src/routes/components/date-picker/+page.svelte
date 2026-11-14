@@ -3,7 +3,7 @@
 	import { CaretLeft, Calendar as CalIcon, Lock } from 'phosphor-svelte';
 	import { DatePicker } from 'alus-ui';
 	import { type DateValue, getLocalTimeZone, today } from '@internationalized/date';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
 	import { DatePicker } from 'alus-ui';

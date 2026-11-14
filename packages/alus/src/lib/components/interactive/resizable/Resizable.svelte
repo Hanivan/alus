@@ -1,6 +1,11 @@
 <script lang="ts">
 	import type { SvelteHTMLElements } from 'svelte/elements';
-	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import {
+		labelAttrs,
+		interactiveStateAttrs,
+		widgetAttrs,
+		mergeAttrs
+	} from '#lib/utils/a11y/index.js';
 
 	type Side = 'right' | 'bottom' | 'left' | 'top';
 

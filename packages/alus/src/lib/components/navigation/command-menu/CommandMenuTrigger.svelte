@@ -2,7 +2,12 @@
 	import type { Attachment } from 'svelte/attachments';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import { getCommandMenuContext } from './CommandMenu.svelte';
-	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import {
+		labelAttrs,
+		interactiveStateAttrs,
+		widgetAttrs,
+		mergeAttrs
+	} from '#lib/utils/a11y/index.js';
 
 	interface Props extends Omit<HTMLButtonAttributes, 'children'> {
 		children?: import('svelte').Snippet;

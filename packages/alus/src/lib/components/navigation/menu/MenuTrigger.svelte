@@ -2,7 +2,7 @@
 	import type { Attachment } from 'svelte/attachments';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import { getMenuContext } from './Menu.svelte';
-	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '#lib/utils/a11y/index.js';
 
 	interface Props extends Omit<HTMLButtonAttributes, 'children'> {
 		children?: import('svelte').Snippet<[{ open: boolean }]>;

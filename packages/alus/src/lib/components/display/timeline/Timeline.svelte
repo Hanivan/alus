@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { SvelteHTMLElements } from 'svelte/elements';
-	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { labelAttrs, mergeAttrs } from '#lib/utils/a11y/index.js';
 
 	type Props = Omit<SvelteHTMLElements['ol'], 'children'> & {
 		children?: import('svelte').Snippet;

@@ -24,7 +24,7 @@
 </script>
 
 <script lang="ts">
-	import { generateCounterId } from '$utils/a11y/id.js';
+	import { generateCounterId } from '#lib/utils/a11y/id.js';
 	import type { HTMLAttributes } from 'svelte/elements';
 
 	type Props = Omit<HTMLAttributes<HTMLElement>, 'children'> & {

@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft, ImageBroken } from 'phosphor-svelte';
 	import { Image } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<Image src="/photo.jpg" alt="Mount Fuji" loading="lazy">
 	{#snippet fallback()}

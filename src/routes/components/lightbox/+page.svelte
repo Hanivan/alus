@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft, X, CaretLeft as Prev, CaretRight as Next } from 'phosphor-svelte';
 	import { Lightbox, type LightboxImage } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
 	import { Lightbox, type LightboxImage } from 'alus-ui';

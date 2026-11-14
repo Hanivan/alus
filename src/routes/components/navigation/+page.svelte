@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { CaretLeft, House, Compass, BookOpen, Gear } from 'phosphor-svelte';
 	import { Navigation } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 	import { resolve } from '$app/paths';
 
 	const code = `<Navigation aria-label="Primary">
@@ -53,19 +53,19 @@
 					<House class="h-4 w-4" />Home
 				</a>
 				<a
-					href={resolve('/components')}
+					href={resolve('/components' as '/')}
 					class="inline-flex items-center gap-2 rounded px-3 py-1.5 text-sm text-(--ink) hover:bg-(--cream)"
 				>
 					<Compass class="h-4 w-4" />Components
 				</a>
 				<a
-					href={resolve('/docs')}
+					href={resolve('/docs' as '/')}
 					class="inline-flex items-center gap-2 rounded px-3 py-1.5 text-sm text-(--ink) hover:bg-(--cream)"
 				>
 					<BookOpen class="h-4 w-4" />Docs
 				</a>
 				<a
-					href={resolve('/settings')}
+					href={resolve('/settings' as '/')}
 					class="inline-flex items-center gap-2 rounded px-3 py-1.5 text-sm text-(--ink) hover:bg-(--cream)"
 				>
 					<Gear class="h-4 w-4" />Settings

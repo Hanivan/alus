@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft, Heart, Bell, Gear, Trash, Plus, Star } from 'phosphor-svelte';
 	import { IconButton } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<IconButton aria-label="Delete item" onclick={() => remove()}>
 	<Trash class="h-5 w-5" />

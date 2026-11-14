@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft, Info, CheckCircle, Warning, XCircle, Lightbulb, Note } from 'phosphor-svelte';
 	import { Callout } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<Callout variant="tip">
 	{#snippet title()}Tip{/snippet}

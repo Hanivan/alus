@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft, At, MagnifyingGlass, CurrencyDollar } from 'phosphor-svelte';
 	import { InputGroup, Input } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<InputGroup>
 	{#snippet prefix()}<span>$</span>{/snippet}

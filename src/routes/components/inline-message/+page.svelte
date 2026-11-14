@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft, Info, CheckCircle, Warning, XCircle } from 'phosphor-svelte';
 	import { InlineMessage, Input, Button } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<InlineMessage variant="error">
 	{#snippet icon()}<XCircle class="h-4 w-4" />{/snippet}

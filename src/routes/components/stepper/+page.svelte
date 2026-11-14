@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { CaretLeft, Check } from 'phosphor-svelte';
 	import { Stepper, StepperStep, Button } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 	import { resolve } from '$app/paths';
 
 	const code = `<Stepper value={1} steps={3}>

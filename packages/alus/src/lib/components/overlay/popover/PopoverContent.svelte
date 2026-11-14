@@ -3,7 +3,7 @@
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { computePosition, autoUpdate, flip, shift, offset, size } from '@floating-ui/dom';
 	import { useEventListener } from 'runed';
-	import { trap, focusFirst } from '$utils/a11y/index.js';
+	import { trap, focusFirst } from '#lib/utils/a11y/index.js';
 	import { getPopoverContext } from './Popover.svelte';
 	import Portal from '../../utility/portal/Portal.svelte';
 

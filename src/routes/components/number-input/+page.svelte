@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { CaretLeft, Plus, Minus } from 'phosphor-svelte';
 	import { NumberInput, Label } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 	import { resolve } from '$app/paths';
 
 	const code = `<script lang="ts">

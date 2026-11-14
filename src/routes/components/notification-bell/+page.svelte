@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { CaretLeft, Bell, BellRinging } from 'phosphor-svelte';
 	import { NotificationBell, Button } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 	import { resolve } from '$app/paths';
 
 	const code = `<NotificationBell count={3} max={99} onclick={open}>

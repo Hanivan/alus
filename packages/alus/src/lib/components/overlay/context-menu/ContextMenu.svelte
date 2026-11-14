@@ -12,7 +12,7 @@
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { tick } from 'svelte';
 	import { useEventListener } from 'runed';
-	import { generateCounterId } from '$utils/a11y/id.js';
+	import { generateCounterId } from '#lib/utils/a11y/id.js';
 	import Portal from '../../utility/portal/Portal.svelte';
 
 	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {

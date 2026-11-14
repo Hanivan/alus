@@ -40,7 +40,7 @@
 </script>
 
 <script lang="ts">
-	import { generateCounterId } from '$utils/a11y/id.js';
+	import { generateCounterId } from '#lib/utils/a11y/id.js';
 
 	interface Props {
 		children?: import('svelte').Snippet;

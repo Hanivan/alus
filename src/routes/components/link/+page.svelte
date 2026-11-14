@@ -2,9 +2,9 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft, ArrowSquareOut } from 'phosphor-svelte';
 	import { Link } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
-	const code = `<Link href="/docs" class="text-(--indigo-dye) underline">Docs</Link>
+	const code = `<Link href={resolve('/docs' as '/')} class="text-(--indigo-dye) underline">Docs</Link>
 <Link href="https://svelte.dev" class="text-(--indigo-dye) underline">External</Link>`;
 </script>
 
@@ -60,7 +60,7 @@
 			</p>
 			<p>
 				<Link
-					href={resolve('/components')}
+					href={resolve('/components' as '/')}
 					current="page"
 					class="text-(--vermilion) underline aria-[current=page]:font-semibold"
 				>

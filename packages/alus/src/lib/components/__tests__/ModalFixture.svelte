@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Modal from '$components/overlay/modal/Modal.svelte';
-	import ModalContent from '$components/overlay/modal/ModalContent.svelte';
+	import Modal from '#lib/components/overlay/modal/Modal.svelte';
+	import ModalContent from '#lib/components/overlay/modal/ModalContent.svelte';
 
 	let { open = true }: { open?: boolean } = $props();
 </script>

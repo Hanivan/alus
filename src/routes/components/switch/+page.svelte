@@ -2,7 +2,7 @@
 	import { CaretLeft } from 'phosphor-svelte';
 	import { resolve } from '$app/paths';
 	import { Switch, Label } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
 	import { Switch } from 'alus-ui';

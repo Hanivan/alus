@@ -10,14 +10,14 @@
 	import type { Attachment } from 'svelte/attachments';
 	import { computePosition, autoUpdate, flip, shift, offset, size } from '@floating-ui/dom';
 	import { useEventListener } from 'runed';
-	import { generateCounterId } from '$utils/a11y/id.js';
+	import { generateCounterId } from '#lib/utils/a11y/id.js';
 	import {
 		labelAttrs,
 		validationAttrs,
 		interactiveStateAttrs,
 		widgetAttrs,
 		mergeAttrs
-	} from '$utils/a11y/index.js';
+	} from '#lib/utils/a11y/index.js';
 	import Portal from '../../utility/portal/Portal.svelte';
 	import VisuallyHidden from '../../utility/visually-hidden/VisuallyHidden.svelte';
 	import type { SvelteHTMLElements } from 'svelte/elements';

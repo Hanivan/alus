@@ -6,7 +6,7 @@ import type {
 	ValidationConfig,
 	InteractiveStateConfig,
 	WidgetConfig
-} from '$types/index.js';
+} from '#lib/types/index.js';
 
 /**
  * Builds ARIA attributes object from a partial record, filtering out undefined/null

@@ -8,8 +8,8 @@
 		type DateValue
 	} from '@internationalized/date';
 	import { useEventListener } from 'runed';
-	import { generateCounterId } from '$utils/a11y/id.js';
-	import { trap, focusFirst } from '$utils/a11y/index.js';
+	import { generateCounterId } from '#lib/utils/a11y/id.js';
+	import { trap, focusFirst } from '#lib/utils/a11y/index.js';
 	import Portal from '../../utility/portal/Portal.svelte';
 	import DateRange, { type DateRangeValue } from '../date-range/DateRange.svelte';
 	import type { SvelteHTMLElements } from 'svelte/elements';

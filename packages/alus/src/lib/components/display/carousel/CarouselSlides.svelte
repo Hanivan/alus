@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { getCarouselContext } from './Carousel.svelte';
-	import { VisuallyHidden } from '$components/utility/visually-hidden/index.js';
+	import { VisuallyHidden } from '#lib/components/utility/visually-hidden/index.js';
 
 	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet;

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { SvelteHTMLElements } from 'svelte/elements';
-	import { generateCounterId } from '$utils/a11y/id.js';
-	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { generateCounterId } from '#lib/utils/a11y/id.js';
+	import { labelAttrs, mergeAttrs } from '#lib/utils/a11y/index.js';
 
 	type Trend = 'up' | 'down' | 'flat';
 

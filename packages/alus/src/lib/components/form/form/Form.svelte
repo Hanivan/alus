@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { HTMLFormAttributes } from 'svelte/elements';
-	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { labelAttrs, mergeAttrs } from '#lib/utils/a11y/index.js';
 
 	interface Props extends Omit<HTMLFormAttributes, 'children'> {
 		children?: import('svelte').Snippet;

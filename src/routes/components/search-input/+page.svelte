@@ -2,7 +2,7 @@
 	import { CaretLeft, MagnifyingGlass, X } from 'phosphor-svelte';
 	import { resolve } from '$app/paths';
 	import { SearchInput, Label } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
 	import { SearchInput } from 'alus-ui';

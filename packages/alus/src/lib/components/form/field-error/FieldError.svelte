@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { SvelteHTMLElements } from 'svelte/elements';
-	import type { AriaLive } from '$types/index.js';
+	import type { AriaLive } from '#lib/types/index.js';
 
 	type Props = Omit<SvelteHTMLElements['p'], 'children'> & {
 		children?: import('svelte').Snippet;

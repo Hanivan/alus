@@ -50,11 +50,7 @@
 		...rest
 	}: Props = $props();
 
-	let textValue = $state(value);
-
-	$effect(() => {
-		textValue = value;
-	});
+	let textValue = $derived(value);
 
 	function setHex(hex: string) {
 		value = hex;

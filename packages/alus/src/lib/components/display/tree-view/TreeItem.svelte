@@ -2,7 +2,7 @@
 	import { getTreeViewContext } from './TreeView.svelte';
 	import { getContext, setContext } from 'svelte';
 	import type { HTMLLiAttributes } from 'svelte/elements';
-	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { interactiveStateAttrs, widgetAttrs, mergeAttrs } from '#lib/utils/a11y/index.js';
 
 	const LEVEL_KEY = Symbol('alus-ui:tree-item-level');
 

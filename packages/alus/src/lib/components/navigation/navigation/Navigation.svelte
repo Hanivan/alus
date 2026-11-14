@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { labelAttrs, mergeAttrs } from '#lib/utils/a11y/index.js';
 	import type { SvelteHTMLElements } from 'svelte/elements';
-	import type { AriaCurrent } from '$types/index.js';
+	import type { AriaCurrent } from '#lib/types/index.js';
 
 	type Props = Omit<SvelteHTMLElements['nav'], 'children'> & {
 		children?: import('svelte').Snippet;

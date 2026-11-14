@@ -10,7 +10,7 @@
 		Heart
 	} from 'phosphor-svelte';
 	import { StatCard } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 	import { resolve } from '$app/paths';
 
 	const code = `<StatCard

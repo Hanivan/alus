@@ -3,7 +3,7 @@
 	import { CaretLeft } from 'phosphor-svelte';
 	import { DateRange, type DateRangeValue } from 'alus-ui';
 	import { type DateValue, getLocalTimeZone, today } from '@internationalized/date';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<script lang="ts">
 	import { DateRange } from 'alus-ui';

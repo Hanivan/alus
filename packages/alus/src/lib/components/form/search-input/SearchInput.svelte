@@ -5,7 +5,7 @@
 		validationAttrs,
 		interactiveStateAttrs,
 		mergeAttrs
-	} from '$utils/a11y/index.js';
+	} from '#lib/utils/a11y/index.js';
 
 	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		children?: import('svelte').Snippet<[{ value: string; clear: () => void }]>;

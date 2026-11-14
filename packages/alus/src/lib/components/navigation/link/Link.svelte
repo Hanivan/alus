@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { labelAttrs, mergeAttrs } from '#lib/utils/a11y/index.js';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
 
 	type Target = '_self' | '_blank' | '_parent' | '_top';

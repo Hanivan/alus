@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { CaretLeft } from 'phosphor-svelte';
 	import { Form, Input, Textarea, Button, FieldError } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 
 	const code = `<Form onsubmit={(data) => console.log(data)} class="space-y-3">
 	<Input name="email" type="email" required placeholder="Email" />

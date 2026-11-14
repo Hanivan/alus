@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { CaretLeft, Plus, Trash, Shuffle } from 'phosphor-svelte';
 	import { VirtualList } from 'alus-ui';
-	import DemoFooter from '$components/DemoFooter.svelte';
+	import DemoFooter from '#lib/components/DemoFooter.svelte';
 	import { resolve } from '$app/paths';
 
 	const code = `<VirtualList items={rows} itemHeight={56} overscan={4} aria-label="Rows">

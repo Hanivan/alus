@@ -5,7 +5,7 @@
 		widgetAttrs,
 		interactiveStateAttrs,
 		mergeAttrs
-	} from '$utils/a11y/index.js';
+	} from '#lib/utils/a11y/index.js';
 	import type { HTMLInputAttributes } from 'svelte/elements';
 
 	interface Props extends Omit<HTMLInputAttributes, 'children'> {

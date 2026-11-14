@@ -4,6 +4,13 @@ allowBuilds:
   esbuild: true
   sharp: true
   workerd: true
+minimumReleaseAgeExclude:
+  - '@eslint/config-array@0.23.6'
+  - eslint@10.15.0
+  - miniflare@5.20261113.0-beta
+  - playwright-core@1.65.1
+  - playwright@1.65.1
+  - wrangler@4.162.0
 peerDependencyRules:
   allowedVersions:
     '@tailwindcss/typography>tailwindcss': '4'

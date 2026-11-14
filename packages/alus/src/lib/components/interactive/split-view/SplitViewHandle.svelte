@@ -2,7 +2,12 @@
 	import type { Attachment } from 'svelte/attachments';
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { getSplitViewContext } from './SplitView.svelte';
-	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import {
+		labelAttrs,
+		interactiveStateAttrs,
+		widgetAttrs,
+		mergeAttrs
+	} from '#lib/utils/a11y/index.js';
 
 	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {
 		step?: number;

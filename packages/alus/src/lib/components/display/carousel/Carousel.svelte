@@ -27,9 +27,9 @@
 </script>
 
 <script lang="ts">
-	import { generateCounterId } from '$utils/a11y/id.js';
+	import { generateCounterId } from '#lib/utils/a11y/id.js';
 	import type { SvelteHTMLElements } from 'svelte/elements';
-	import { labelAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { labelAttrs, mergeAttrs } from '#lib/utils/a11y/index.js';
 
 	type Props = Omit<SvelteHTMLElements['section'], 'children'> & {
 		children?: import('svelte').Snippet;

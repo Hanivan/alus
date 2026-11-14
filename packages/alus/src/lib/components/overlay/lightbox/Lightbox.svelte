@@ -10,8 +10,8 @@
 	import type { Attachment } from 'svelte/attachments';
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { useEventListener } from 'runed';
-	import { trap, focusFirst } from '$utils/a11y/index.js';
-	import { generateCounterId } from '$utils/a11y/id.js';
+	import { trap, focusFirst } from '#lib/utils/a11y/index.js';
+	import { generateCounterId } from '#lib/utils/a11y/id.js';
 	import Portal from '../../utility/portal/Portal.svelte';
 
 	type Props = Omit<SvelteHTMLElements['div'], 'children'> & {

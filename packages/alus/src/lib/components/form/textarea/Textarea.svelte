@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { labelAttrs, validationAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { labelAttrs, validationAttrs, mergeAttrs } from '#lib/utils/a11y/index.js';
 	import type { HTMLTextareaAttributes } from 'svelte/elements';
-	import type { AriaBoolean } from '$types/index.js';
+	import type { AriaBoolean } from '#lib/types/index.js';
 
 	interface Props extends Omit<HTMLTextareaAttributes, 'children'> {
 		value?: string;

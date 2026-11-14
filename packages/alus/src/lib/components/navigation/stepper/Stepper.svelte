@@ -23,7 +23,7 @@
 </script>
 
 <script lang="ts">
-	import { labelAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { labelAttrs, widgetAttrs, mergeAttrs } from '#lib/utils/a11y/index.js';
 	import type { SvelteHTMLElements } from 'svelte/elements';
 
 	type Props = Omit<SvelteHTMLElements['ol'], 'children'> & {

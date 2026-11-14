@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { HTMLAttributes } from 'svelte/elements';
-	import { labelAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import { labelAttrs, widgetAttrs, mergeAttrs } from '#lib/utils/a11y/index.js';
 
 	// Two branches with different host elements (`hr` / `span`), so a single element type
 	// cannot describe the host — `HTMLAttributes<HTMLElement>` is the shared base.
