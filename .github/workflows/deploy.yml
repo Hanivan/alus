@@ -48,6 +48,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       # Showcase imports alus-ui from packages/alus/dist (gitignored).
       - run: pnpm --filter alus-ui build
+      # Gitignored worker-configuration.d.ts (referenced by tsconfig types); prebuild makes it too, but check runs first.
+      - run: pnpm exec wrangler types
       - run: pnpm check
       # Browser specs (client project) need Chromium; skipped to save Actions minutes.
       - run: pnpm test --run --project server
