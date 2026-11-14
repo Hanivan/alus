@@ -45,7 +45,7 @@ Date components use **`@internationalized/date`** for locale/timezone/non-Gregor
 - **Package Manager**: pnpm (workspace monorepo)
 - **Framework**: SvelteKit (root), Svelte Package (alus-ui library)
 - **Add-ons**: prettier, eslint, vitest, tailwindcss, sveltekit-adapter, mcp
-- **Deployment**: Netlify adapter
+- **Deployment**: Cloudflare Workers (`@sveltejs/adapter-cloudflare`, `wrangler.jsonc`)
 - **Styling**: Tailwind CSS v4 with @tailwindcss/vite, `@tailwindcss/forms` + `@tailwindcss/typography` plugins
 
 ---
@@ -212,8 +212,7 @@ pnpm check:watch      # Watch mode for type checking
 
 ### Root Application (`/`)
 
-- `vite.config.ts` - Vite config with Tailwind CSS Vite plugin, Vitest config for client/server tests
-- `svelte.config.js` - SvelteKit config with Netlify adapter, path aliases ($components, $utils, $types)
+- `vite.config.ts` - Tailwind + Vitest config; SvelteKit 3 config passed via `sveltekit({...})` (no `svelte.config.js`)
 - `src/routes/+page.svelte` - Main showcase page demonstrating all components
 - `src/routes/demo/` - Demo pages for specific components
 - `src/lib/components/` - Showcase-specific components (Navbar, Footer)
@@ -227,16 +226,12 @@ pnpm check:watch      # Watch mode for type checking
   - `id.ts` - ID generation utilities
   - `keyboard.ts` - Keyboard event utilities
 - `src/lib/types/` - TypeScript type definitions
-- `svelte.config.js` - Package config (forces runes mode)
+- `src/app.html` - required by SvelteKit 3 `svelte-kit sync`, even for the library (not published)
 - `vite.config.ts` - Build configuration for library
 
-### Path Aliases (configured in svelte.config.js)
+### Imports
 
-```typescript
-$components → src/lib/components
-$utils → src/lib/utils
-$types → src/lib/types
-```
+Subpath imports in each `package.json`: `"#lib/*": "./src/lib/*"`. Use `#lib/utils/a11y/index.js`, `#lib/components/...`. No `$lib`/`$utils`/`$components`/`$types` aliases (SvelteKit 3 removed `alias`).
 
 ---
 
@@ -282,7 +277,12 @@ export { default as ComponentName } from './ComponentName.svelte';
 
 ```svelte
 <script lang="ts">
-	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import {
+		labelAttrs,
+		interactiveStateAttrs,
+		widgetAttrs,
+		mergeAttrs
+	} from '#lib/utils/a11y/index.js';
 
 	interface Props {
 		children?: import('svelte').Snippet;
@@ -343,22 +343,27 @@ The getter target (`open ? document : null`) drives reactive attach/detach — n
 
 ### ARIA Helper Utilities (`src/lib/utils/a11y/aria.ts`)
 
-| Utility                           | Purpose                                     | Example                                                                                                                                       |
-| --------------------------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `labelAttrs()`                    | Label/description associations              | `labelAttrs({ label, labelledby, describedby })`                                                                                              |
-| `validationAttrs()`               | Form validation states                      | `validationAttrs({ invalid, required, errormessage })`                                                                                        |
-| `interactiveStateAttrs()`         | Interactive element states                  | `interactiveStateAttrs({ disabled, pressed, expanded, checked, selected, current })`                                                          |
-| `widgetAttrs()`                   | Complex widget attributes                   | `widgetAttrs({ controls, haspopup, live, orientation, valuemin, valuemax, valuenow, valuetext, posinset, setsize, level, activedescendant })` |
-| `mergeAttrs()`                    | Combine multiple ARIA objects               | `mergeAttrs(labelAttrs(...), interactiveStateAttrs(...))`                                                                                     |
-| `trap(node)` / `focusFirst(node)` | Focus management (from `$utils/a11y/focus`) | Modal/Popover/Lightbox dialogs                                                                                                                |
+| Utility                           | Purpose                                         | Example                                                                                                                                       |
+| --------------------------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `labelAttrs()`                    | Label/description associations                  | `labelAttrs({ label, labelledby, describedby })`                                                                                              |
+| `validationAttrs()`               | Form validation states                          | `validationAttrs({ invalid, required, errormessage })`                                                                                        |
+| `interactiveStateAttrs()`         | Interactive element states                      | `interactiveStateAttrs({ disabled, pressed, expanded, checked, selected, current })`                                                          |
+| `widgetAttrs()`                   | Complex widget attributes                       | `widgetAttrs({ controls, haspopup, live, orientation, valuemin, valuemax, valuenow, valuetext, posinset, setsize, level, activedescendant })` |
+| `mergeAttrs()`                    | Combine multiple ARIA objects                   | `mergeAttrs(labelAttrs(...), interactiveStateAttrs(...))`                                                                                     |
+| `trap(node)` / `focusFirst(node)` | Focus management (from `#lib/utils/a11y/focus`) | Modal/Popover/Lightbox dialogs                                                                                                                |
 
-ARIA value types live in `$types/index.ts` and are derived from `svelte/elements` AriaAttributes — never redeclare literal unions. Pattern: `type AriaAttrValue<K> = NonNullable<AriaAttrs[K]>` → `AriaBoolean`, `AriaTristate`, `AriaHaspopup`, `AriaLive`, `AriaCurrent`, `AriaRelevant`, `AriaOrientation`.
+ARIA value types live in `#lib/types/index.ts` and are derived from `svelte/elements` AriaAttributes — never redeclare literal unions. Pattern: `type AriaAttrValue<K> = NonNullable<AriaAttrs[K]>` → `AriaBoolean`, `AriaTristate`, `AriaHaspopup`, `AriaLive`, `AriaCurrent`, `AriaRelevant`, `AriaOrientation`.
 
 ### Pattern for All Components
 
 ```svelte
 <script lang="ts">
-	import { labelAttrs, interactiveStateAttrs, widgetAttrs, mergeAttrs } from '$utils/a11y/index.js';
+	import {
+		labelAttrs,
+		interactiveStateAttrs,
+		widgetAttrs,
+		mergeAttrs
+	} from '#lib/utils/a11y/index.js';
 
 	let ariaAttrs: Record<string, string> = $derived(
 		mergeAttrs(
@@ -385,25 +390,25 @@ ARIA value types live in `$types/index.ts` and are derived from `svelte/elements
 
 ## Dependencies
 
-### Production Dependencies
+See the `package.json` files. Notes:
 
-- `svelte` ^5.55.2 - Svelte 5 with runes mode
-- `@sveltejs/kit` ^2.57.0 - SvelteKit framework
-- `phosphor-svelte` ^3.1.0 - Icon library
-- `@floating-ui/dom` ^1.7.6 - Positioning engine (for overlays)
-- `runed` ^0.37.1 - Svelte 5 utilities library
-- `@internationalized/date` - Locale/timezone-aware date math (Calendar, DatePicker, DateRange, DateRangePicker)
+- `typescript` pinned to 6: `svelte-check`, `@sveltejs/package`, `typescript-eslint` don't support 7 yet.
+- Bump: `ncu --workspaces --root -u --reject typescript` then `pnpm install`.
+- Date components use `@internationalized/date`; overlays use `@floating-ui/dom`; listeners use `runed`.
 
-### Development Dependencies
+---
 
-- `tailwindcss` ^4.2.2 - Utility-first CSS framework
-- `@tailwindcss/vite` ^4.2.2 - Tailwind Vite plugin
-- `vitest` ^4.1.3 - Unit testing framework
-- `@vitest/browser-playwright` ^4.1.3 - Browser testing for Vitest
-- `vitest-browser-svelte` ^2.1.0 - Svelte utilities for Vitest browser testing
-- `typescript` ^6.0.2 - TypeScript compiler
-- `eslint` + `prettier` - Code quality tools
-- `@sveltejs/adapter-netlify` ^6.0.4 - Netlify deployment adapter
+## Releasing (two npm packages)
+
+| Package       | Dir                  | Tag      | Release                                                                   |
+| ------------- | -------------------- | -------- | ------------------------------------------------------------------------- |
+| `alus-ui`     | `packages/alus`      | `v*`     | `pnpm release` there, then `gh workflow run publish.yml --ref vX.Y.Z`     |
+| `alus-ui-mcp` | `packages/mcp-stdio` | `mcp-v*` | `pnpm release` there, then `gh workflow run publish.yml --ref mcp-vX.Y.Z` |
+
+- **Release both when both changed.** The MCP bundles library component source + demos (`packages/mcp-server` `bundle:data`), so any change to `packages/alus/src` or `src/routes/components` also needs an MCP release.
+- `release-it` only bumps, updates CHANGELOG, tags, pushes. `publish.yml` publishes (npm trusted publishing, OIDC + provenance, env `npm`) and creates the GitHub release via `scripts/release-notes.sh`.
+- npm takes ~3 min to show a new version after publish.
+- Showcase: `deploy.yml` deploys to Cloudflare (`alus.lkmn.link`) on every push to `main` (env `production`).
 
 ---
 
@@ -413,13 +418,14 @@ ARIA value types live in `$types/index.ts` and are derived from `svelte/elements
 - **Runes Mode**: All components use `$props`, `$derived`, `$state` runes instead of the old API
 - **No `onMount`/`onDestroy`**: Use `$effect(() => { ...; return cleanup; })` instead. `onMount` was purged repo-wide.
 - **No raw `addEventListener` on `document`/`window`**: Use `useEventListener` from `runed` with a gated target getter (`() => (open ? document : null)`) so attach/detach is reactive to open state. Listeners on a local node inside an `Attachment` may stay inline.
+- **Child registries**: never push into a `$state` array from a child's attachment/`$effect` (reads + writes `length`, giving `effect_update_depth_exceeded`). Use a plain array or `untrack`; expose live props on the entry via getters so the attachment reads no props and registers once.
 - **VisuallyHidden over inline `sr-only` blocks**: Use `<VisuallyHidden>` (utility primitive) for screen-reader-only content — never inline `style="position:absolute;width:1px;…"` or Tailwind `sr-only`. The library must stay unstyled; inline CSS only allowed for functional positioning (floating-ui, slider mechanics, etc.).
 - **Tailwind**: Never use `!important` (no `!` prefix). For chrome strips on `[type='text'|email|…]`, rely on `@layer base` overrides — no escape hatches.
 - **Focus indicators**: Do not stack `outline` + `border` on form controls. Border-color is the single focus indicator; the global `*:focus-visible` outline is suppressed for inputs/checkboxes/radios.
 - **`--cream` background**: Never use `--cream` as a background for elements that contain white text (SubMenu incident). Prefer `--charcoal/10` or `--indigo-dye/10`.
 - **Unstyled Components**: The library provides structure and accessibility only - styling is left to the application
 - **Monorepo**: Changes to library components require `pnpm dev` in library package for hot reload. **Do not run `pnpm build`** — `svelte-package` watch handles HMR.
-- **Type Safety**: Always maintain proper TypeScript types for all components and props. ARIA value types come from `svelte/elements` (see `$types/index.ts`) — never re-author them.
+- **Type Safety**: Always maintain proper TypeScript types for all components and props. ARIA value types come from `svelte/elements` (see `#lib/types/index.ts`) — never re-author them.
 - **Accessibility First**: Every component must be WCAG 2.1 AA compliant with proper keyboard navigation. Roving tabindex for composite widgets; `aria-setsize`/`aria-posinset` for virtualized lists and stepper steps.
 
 ---

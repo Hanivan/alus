@@ -4,11 +4,23 @@ name: Deploy showcase
 on:
   push:
     branches: [main]
+    # Non-code pushes (docs, editor/agent config, lint/format config, release tooling, the
+    # stdio MCP package the showcase doesn't use) skip the deploy; run it by hand if needed.
     paths-ignore:
       - '**.md'
       - 'docs/**'
       - '.claude/**'
       - '.remember/**'
+      - '.codegraph/**'
+      - '.vscode/**'
+      - '.mcp.json'
+      - '.prettierrc'
+      - '.prettierignore'
+      - 'eslint.config.js'
+      - 'scripts/**'
+      - '.github/workflows/publish.yml'
+      - 'packages/mcp-stdio/**'
+      - 'packages/*/.release-it.json'
   workflow_dispatch:
 
 permissions:
